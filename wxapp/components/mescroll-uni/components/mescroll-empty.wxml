@@ -1,0 +1,7 @@
+<view class="{{['mescroll-empty',option.fixed?'empty-fixed':'']}}" style="{{'background-color:#FFFFFF;'+'z-index:'+option.zIndex+';'+'top:'+option.top+';'}}">
+    <view>
+        <image class="empty-icon" mode="widthFix" src="{{icon}}" wx:if="{{icon}}"></image>
+    </view>
+    <view class="empty-tip" wx:if="{{tip}}">{{tip}}</view>
+    <view bindtap="__e" class="empty-btn" data-event-opts="{{[ [ 'tap',[ [ 'emptyClick',['$event'] ] ] ] ]}}" wx:if="{{option.btnText}}">{{option.btnText}}</view>
+</view>

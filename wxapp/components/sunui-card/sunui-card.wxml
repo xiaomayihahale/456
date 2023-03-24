@@ -1,0 +1,18 @@
+<view class="sunui-card data-v-7fe90104">
+    <view class="sunui-card-header data-v-7fe90104">
+        <text class="sunui-card-label data-v-7fe90104">{{label}}</text>
+        <view bindtap="__e" class="sunui-card-more data-v-7fe90104" data-event-opts="{{[ [ 'tap',[ [ 'toMore',['$event'] ] ] ] ]}}" wx:if="{{showMore}}">
+            <slot name="more" wx:if="{{$slots.more}}"></slot>
+            <block wx:else>
+                <text class="data-v-7fe90104">{{moreText}}</text>
+                <text class="sunuicell icon-youjiantou data-v-7fe90104"></text>
+            </block>
+        </view>
+    </view>
+    <view class="sunui-card-container data-v-7fe90104">
+        <slot></slot>
+    </view>
+    <view class="sunui-card-footer data-v-7fe90104" wx:if="{{$slots.footer}}">
+        <slot name="footer"></slot>
+    </view>
+</view>

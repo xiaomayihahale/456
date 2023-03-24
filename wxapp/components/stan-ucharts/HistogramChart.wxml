@@ -1,0 +1,4 @@
+<view class="histogram_chart data-v-105c0564">
+    <canvas bindtouchend="__e" bindtouchmove="__e" bindtouchstart="__e" canvasId="{{canvasId}}" class="aa data-v-105c0564" data-event-opts="{{[ [ 'touchstart',[ [ 'touchstart',['$event'] ] ] ],[ 'touchmove',[ [ 'touchmove',['$event'] ] ] ],[ 'touchend',[ [ 'touchend',['$event'] ] ] ] ]}}" disableScroll="true" id="canvasId" style="{{'width:'+cWidth+'px'+';'+'height:'+cHeight+'px'+';'}}"></canvas>
+    <slot></slot>
+</view>

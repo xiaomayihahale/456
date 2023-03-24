@@ -1,0 +1,19 @@
+<view class="uni-combox flex-align-center data-v-3f89a4e7">
+    <view class="uni-combox__label data-v-3f89a4e7" style="{{labelStyle}}" wx:if="{{label}}">
+        <text class="data-v-3f89a4e7">{{label}}</text>
+    </view>
+    <view class="uni-combox__input-box flex-align-center data-v-3f89a4e7">
+        <input bindblur="__e" bindfocus="__e" bindinput="__e" class="uni-combox__input data-v-3f89a4e7" data-event-opts="{{[ [ 'input',[ [ '__set_model',[ '','inputVal','$event',[] ] ],[ 'onInput',['$event'] ] ] ],[ 'focus',[ [ 'onFocus',['$event'] ] ] ],[ 'blur',[ [ 'onBlur',['$event'] ] ] ] ]}}" disabled="{{isDisabled}}" placeholder="{{placeholder}}" type="text" value="{{inputVal}}"></input>
+        <icon bindtap="__e" class="iconS data-v-3f89a4e7" data-event-opts="{{[ [ 'tap',[ [ 'clearInputValue',['$event'] ] ] ] ]}}" size="16" type="clear" wx:if="{{!isDisabled}}"></icon>
+        <view class="uni-combox__selector data-v-3f89a4e7" wx:if="{{showSelector}}">
+            <scroll-view class="uni-combox__selector-scroll data-v-3f89a4e7" scrollY="true">
+                <view class="uni-combox__selector-empty data-v-3f89a4e7" wx:if="{{filterCandidatesLength===0}}">
+                    <text class="data-v-3f89a4e7">{{emptyTips}}</text>
+                </view>
+                <view bindtap="__e" class="uni-combox__selector-item data-v-3f89a4e7" data-event-opts="{{[ [ 'tap',[ [ 'onSelectorClick',[index,'$0'],[ [ ['filterCandidates','',index] ] ] ] ] ] ]}}" style="{{item.m0?'color:'+selectColor+';background-color:'+selectBgColor+';':'color:'+color+';'}}" wx:for="{{$root.l0}}" wx:key="index">
+                    <text class="data-v-3f89a4e7">{{isJSON?item.$orig[keyName]:item.$orig}}</text>
+                </view>
+            </scroll-view>
+        </view>
+    </view>
+</view>

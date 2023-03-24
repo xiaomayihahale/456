@@ -1,0 +1,4 @@
+<view bindtap="__e" class="sunui-cell" data-event-opts="{{[ [ 'tap',[ [ 'onClick',['$event'] ] ] ] ]}}" hoverClass="{{hover?'sunui-cell-hover':''}}" hoverStayTime="{{time}}" style="{{cellStyle}}">
+    <slot></slot>
+    <text class="sunuicell icon-youjiantou" hidden="{{!arrow}}" style="{{arrowStyle}}"></text>
+</view>

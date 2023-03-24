@@ -1,0 +1,37 @@
+<view class="calendar-content data-v-d02a74c8" wx:if="{{show}}">
+    <view bindtap="__e" class="data-v-d02a74c8" data-event-opts="{{[ [ 'tap',[ [ 'close',['$event'] ] ] ] ]}}" style="height:100%;"></view>
+    <view class="calendar-body data-v-d02a74c8">
+        <view class="calendar-header data-v-d02a74c8">
+            <view bindtap="__e" class="{{['data-v-d02a74c8',pickerArray[0]==null?'not-clear':'',pickerArray[0]!=null?'clear':'']}}" data-event-opts="{{[ [ 'tap',[ [ 'clear',['$event'] ] ] ] ]}}">清除</view>
+            <view class="title data-v-d02a74c8">
+                <text class="data-v-d02a74c8" wx:if="{{pickerArray.length==0}}">选择日期</text>
+                <block wx:else>
+                    <text class="data-v-d02a74c8" wx:if="{{pickerArray.length==1&&multi==false}}">{{$root.g0+'日'}}</text>
+                    <view class="date-range data-v-d02a74c8" wx:else>
+                        <text class="data-v-d02a74c8" hidden="{{!(pickerArray[0]!=null)}}">{{$root.g1+'日'}}</text>
+                        <text class="data-v-d02a74c8">-</text>
+                        <view class="data-v-d02a74c8" hidden="{{!(pickerArray[1]==null)}}" style="color:#8F8F94;">结束日期</view>
+                        <text class="data-v-d02a74c8" wx:if="{{pickerArray[1]!=null}}">{{$root.g2+'日'}}</text>
+                    </view>
+                </block>
+            </view>
+            <view bindtap="__e" class="{{['data-v-d02a74c8',true?'not-confirm':'',pickerArray[0]!=null&&multi==false||pickerArray[1]!=null&&multi==true?'confirm':'']}}" data-event-opts="{{[ [ 'tap',[ [ 'save',['$event'] ] ] ] ]}}">保存</view>
+        </view>
+        <view class="calendar-picker data-v-d02a74c8">
+            <view class="calendar-week data-v-d02a74c8">
+                <view class="week data-v-d02a74c8" wx:for="{{weekArray}}" wx:for-index="i" wx:for-item="v" wx:key="i">{{''+v+''}}</view>
+            </view>
+            <scroll-view class="calendar-scroll data-v-d02a74c8" scrollY="{{true}}">
+                <block wx:for="{{$root.l2}}" wx:for-item="v" wx:key="index">
+                    <view class="monthAndyear data-v-d02a74c8">{{v.$orig[3]+'年'+v.$orig[2]+'月'}}</view>
+                    <view class="calendar-days-content data-v-d02a74c8">
+                        <view class="calendar-empty-day data-v-d02a74c8" wx:for="{{v.l0}}" wx:for-index="__i0__" wx:for-item="e" wx:key="id"></view>
+                        <view bindtap="__e" class="calendar-day-content data-v-d02a74c8" data-event-opts="{{[ [ 'tap',[ [ 'picker',[ [v.$orig[3],v.$orig[2],i+1] ] ] ] ] ]}}" wx:if="{{d.m0||date<=15}}" wx:for="{{v.l1}}" wx:for-index="i" wx:for-item="d" wx:key="i">
+                            <view class="{{['data-v-d02a74c8',true?'calendar-day':'',v.$orig[3]+'/'+d.m1+'/'+d.m2<today?'calendar-disable-day':'',v.$orig[3]+'/'+d.m3+'/'+d.m4==today?'calendar-today':'',d.m5?'calendar-picker-start':'',d.m6?'calendar-picker-day':'',v.$orig[3]+'/'+d.m7+'/'+d.m8==pickerArray[1]?'calendar-picker-end':'',d.m9?'calnedar-picker-single':'']}}">{{''+i+1+''}}</view>
+                        </view>
+                    </view>
+                </block>
+            </scroll-view>
+        </view>
+    </view>
+</view>

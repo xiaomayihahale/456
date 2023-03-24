@@ -1,0 +1,24 @@
+<view bindtouchcancel="{{wxsBiz.touchendEvent}}" bindtouchend="{{wxsBiz.touchendEvent}}" bindtouchmove="{{wxsBiz.touchmoveEvent}}" bindtouchstart="{{wxsBiz.touchstartEvent}}" change:prop="{{wxsBiz.propObserver}}" class="{{['mescroll-body','mescroll-render-touch',sticky?'mescorll-sticky':'']}}" prop="{{wxsProp}}" style="{{'min-height:'+minHeight+';'+'padding-top:'+padTop+';'+'padding-bottom:'+padBottom+';'}}">
+    <view class="mescroll-topbar" style="{{'height:'+statusBarHeight+'px'+';'+'background:'+topbar+';'}}" wx:if="{{topbar&&statusBarHeight}}"></view>
+    <view change:prop="{{wxsBiz.callObserver}}" class="mescroll-body-content mescroll-wxs-content" prop="{{callProp}}" style="{{'transform:'+translateY+';'+'transition:'+transition+';'}}">
+        <view class="mescroll-downwarp" style="{{'background:'+mescroll.optDown.bgColor+';'+'color:'+mescroll.optDown.textColor+';'}}" wx:if="{{mescroll.optDown.use}}">
+            <view class="downwarp-content">
+                <view class="{{['downwarp-progress','mescroll-wxs-progress',isDownLoading?'mescroll-rotate':'']}}" style="{{'border-color:'+mescroll.optDown.textColor+';'+'transform:'+downRotate+';'}}"></view>
+                <view class="downwarp-tip">{{downText}}</view>
+            </view>
+        </view>
+        <slot></slot>
+        <mescroll-empty bind:__l="__l" bind:emptyclick="__e" data-event-opts="{{[ [ '^emptyclick',[ ['emptyClick'] ] ] ]}}" option="{{mescroll.optUp.empty}}" vueId="440ed908-1" wx:if="{{isShowEmpty}}"></mescroll-empty>
+        <view class="mescroll-upwarp" style="{{'background:'+mescroll.optUp.bgColor+';'+'color:'+mescroll.optUp.textColor+';'}}" wx:if="{{mescroll.optUp.use&&!isDownLoading&&upLoadType!==3}}">
+            <view hidden="{{!(upLoadType===1)}}">
+                <view class="upwarp-progress mescroll-rotate" style="{{'border-color:'+mescroll.optUp.textColor+';'}}"></view>
+                <view class="upwarp-tip">{{mescroll.optUp.textLoading}}</view>
+            </view>
+            <view class="upwarp-nodata" wx:if="{{upLoadType===2}}">{{mescroll.optUp.textNoMore}}</view>
+        </view>
+    </view>
+    <view class="mescroll-safearea" wx:if="{{safearea}}"></view>
+    <mescroll-top bind:__l="__l" bind:click="__e" bind:input="__e" data-event-opts="{{[ [ '^click',[ ['toTopClick'] ] ],[ '^input',[ [ '__set_model',[ '','isShowToTop','$event',[] ] ] ] ] ]}}" option="{{mescroll.optUp.toTop}}" value="{{isShowToTop}}" vueId="440ed908-2"></mescroll-top>
+    <view change:prop="{{renderBiz.propObserver}}" prop="{{wxsProp}}"></view>
+</view>
+<wxs module="wxsBiz" src="wxs/wxs.wxs" />

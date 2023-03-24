@@ -1,0 +1,29 @@
+<view class="QS-navbar data-v-dfc727ee vue-ref" data-ref="QS-navbar">
+    <view animation="{{navbarAnimation}}" class="{{['data-v-dfc727ee','vue-ref',$root.m0==='true'?'QS-navbar--fixed':'']}}" data-ref="background" style="{{'z-index:'+zIndex+';'}}">
+        <view class="QS-navbar-statusBar data-v-dfc727ee" style="{{'height:'+statusBarHeight+';'}}" wx:if="{{$root.m1==='true'}}"></view>
+        <view class="QS-navbar-header data-v-dfc727ee">
+            <view catchtap="__e" class="QS-navbar-item data-v-dfc727ee" data-event-opts="{{[ [ 'tap',[ [ '_click',['$event'] ] ] ] ]}}" data-index="{{index}}" style="{{'width:'+item.m2*wW+'rpx'+';'+'background-color:'+item.$orig.backgroundColor+';'+'border-style:'+item.$orig.borderStyle+';'+'border-width:'+item.$orig.borderWidth+';'+'border-color:'+item.$orig.borderColor+';'+'border:'+item.$orig.border+';'+'border-radius:'+(item.$orig.borderBottomLeftRadius||item.$orig.borderBottomRightRadius||item.$orig.borderTopLeftRadius||item.$orig.borderTopRightRadius?'':item.$orig.borderRadius||'')+';'+'border-bottom-left-radius:'+(item.$orig.borderBottomLeftRadius||'')+';'+'border-bottom-right-radius:'+(item.$orig.borderBottomRightRadius||'')+';'+'border-top-left-radius:'+(item.$orig.borderTopLeftRadius||'')+';'+'border-top-right-radius:'+(item.$orig.borderTopRightRadius||'')+';'+'padding:'+item.$orig.padding+';'+'justify-content:'+(item.$orig.layout==='left'?'flex-start':item.$orig.layout==='right'?'flex-end':'center')+';'}}" wx:for="{{$root.l0}}" wx:key="index">
+                <view class="QS-navbar-item--search data-v-dfc727ee" wx:if="{{item.$orig&&item.$orig.type==='search'}}"></view>
+                <block wx:else>
+                    <block wx:if="{{item.$orig&&item.$orig.type==='icon'}}"></block>
+                    <block wx:else>
+                        <image class="data-v-dfc727ee" mode="{{item.$orig.mode||'aspectFill'}}" src="{{item.$orig.src}}" style="{{'border-radius:'+(item.$orig.itemBorderRadius||'8rpx')+';'+'background-color:'+(item.$orig.itemBackgroundColor||'rgba(255,255,255,0)')+';'+'width:'+(item.$orig.itemWidth||'100%')+';'+'height:'+(item.$orig.itemHeight||'100%')+';'}}" wx:if="{{item.$orig&&item.$orig.type==='image'}}"></image>
+                        <block wx:else>
+                            <text class="text_overflow_ellipsis data-v-dfc727ee" style="{{'border-radius:'+(item.$orig.itemBorderRadius||'8rpx')+';'+'background-color:'+(item.$orig.itemBackgroundColor||'rgba(255,255,255,0)')+';'+'width:'+(item.$orig.itemWidth||'100%')+';'+'height:'+(item.$orig.itemHeight||'100%')+';'+'font-size:'+(item.$orig.fontSize||'16px')+';'+'color:'+(item.$orig.color||'#000')+';'+'text-align:'+(item.$orig.textAlign||'center')+';'+'font-weight:'+(item.$orig.weight||'0')+';'}}" wx:if="{{item.$orig&&item.$orig.type==='text'}}">{{item.$orig.text}}</text>
+                            <block wx:else>
+                                <view class="colImageText data-v-dfc727ee" style="{{'width:'+(item.$orig.itemWidth||'100%')+';'+'height:'+(item.$orig.itemHeight||'100%')+';'+'border-radius:'+(item.$orig.itemBorderRadius||'8rpx')+';'+'background-color:'+(item.$orig.itemBackgroundColor||'rgba(255,255,255,0)')+';'+'font-size:'+(item.$orig.fontSize||'12px')+';'+'color:'+(item.$orig.color||'#000')+';'+'font-weight:'+(item.$orig.weight||'0')+';'}}" wx:if="{{item.$orig&&item.$orig.type==='colImageText'}}">
+                                    <image class="colImageText-image data-v-dfc727ee" mode="{{item.$orig.mode||'aspectFill'}}" src="{{item.$orig.src}}" style="{{'border-radius:'+(item.$orig.imageBorderRadius||'4px')+';'}}"></image>
+                                    <text class="colImageText-text data-v-dfc727ee">{{item.$orig.text}}</text>
+                                </view>
+                            </block>
+                        </block>
+                    </block>
+                </block>
+            </view>
+        </view>
+    </view>
+    <block wx:if="{{$root.m3}}">
+        <view class="QS-navbar-statusBar data-v-dfc727ee" style="{{'height:'+statusBarHeight+';'}}" wx:if="{{$root.m4}}"></view>
+        <view class="QS-navbar--fixed--placherholder data-v-dfc727ee" wx:if="{{$root.m5==='true'}}"></view>
+    </block>
+</view>

@@ -1,0 +1,4 @@
+<view class="arcbar_chart">
+    <canvas canvasId="{{canvasId}}" id="canvasId" style="{{'width:'+cWidth+'px'+';'+'height:'+cHeight+'px'+';'}}"></canvas>
+    <slot></slot>
+</view>

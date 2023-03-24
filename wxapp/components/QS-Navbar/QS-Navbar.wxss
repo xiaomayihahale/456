@@ -1,0 +1,92 @@
+view.data-v-dfc727ee,scroll-view.data-v-dfc727ee,swiper.data-v-dfc727ee,swiper-item.data-v-dfc727ee,cover-view.data-v-dfc727ee,cover-image.data-v-dfc727ee,icon.data-v-dfc727ee,text.data-v-dfc727ee,rich-text.data-v-dfc727ee,progress.data-v-dfc727ee,button.data-v-dfc727ee,checkbox.data-v-dfc727ee,form.data-v-dfc727ee,input.data-v-dfc727ee,label.data-v-dfc727ee,radio.data-v-dfc727ee,slider.data-v-dfc727ee,switch.data-v-dfc727ee,textarea.data-v-dfc727ee,navigator.data-v-dfc727ee,audio.data-v-dfc727ee,camera.data-v-dfc727ee,image.data-v-dfc727ee,video.data-v-dfc727ee,picker-view.data-v-dfc727ee,picker-view-column.data-v-dfc727ee {
+    box-sizing: border-box;
+}
+
+.QS-navbar.data-v-dfc727ee {
+    width: 750rpx;
+}
+
+.QS-navbar-statusBar.data-v-dfc727ee {
+    width: 750rpx;
+    height: 20px;
+}
+
+.QS-navbar--fixed.data-v-dfc727ee {
+    position: fixed;
+}
+
+.QS-navbar-header.data-v-dfc727ee {
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    flex-direction: row;
+    -webkit-box-align: center;
+    align-items: center;
+    width: 750rpx;
+    height: 44px;
+    padding: 5px 15rpx;
+    flex-wrap: nowrap;
+    overflow: hidden;
+}
+
+.QS-navbar--fixed--placherholder.data-v-dfc727ee {
+    width: 750rpx;
+    height: 44px;
+}
+
+.QS-navbar-item.data-v-dfc727ee {
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    flex-direction: row;
+    -webkit-box-align: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.QS-navbar-item--search.data-v-dfc727ee {
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    flex-direction: row;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    padding: 3px 8px;
+}
+
+.QS-navbar-text.data-v-dfc727ee {
+    font-size: 30rpx;
+}
+
+.text_overflow_ellipsis.data-v-dfc727ee {
+    word-break: break-all;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.colImageText.data-v-dfc727ee {
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+}
+
+.colImageText-image.data-v-dfc727ee {
+    height: 20px;
+    width: 20px;
+}
+
+.colImageText-text.data-v-dfc727ee {
+    height: 14px;
+    width: 100%;
+    font-size: 10px;
+    margin-top: 1px;
+    text-align: center;
+}
