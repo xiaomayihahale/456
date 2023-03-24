@@ -1,0 +1,149 @@
+page {
+    background-color: #f1f1f1;
+}
+
+.orderNumber {
+    background-color: #fff;
+    padding: 20rpx 40rpx;
+    border-bottom: 2rpx solid #f1f1f1;
+    margin-top: 20rpx;
+}
+
+.orderNumber2 {
+    background-color: #fff;
+    padding: 20rpx 40rpx;
+}
+
+.ico-Image {
+    width: 36rpx;
+    height: 36rpx;
+    margin-right: 18rpx;
+}
+
+.roomColor {
+    margin-right: 30rpx;
+}
+
+.roomColor text {
+    margin-left: 30rpx;
+}
+
+.roomColor2 {
+    font-weight: 700;
+}
+
+.redColor {
+    color: #eb0d3e;
+}
+
+.v-margin {
+    margin-right: 30rpx;
+}
+
+.roomUse {
+    background-color: #fff;
+    padding: 20rpx 40rpx 20rpx 100rpx;
+}
+
+.roomUse2 {
+    background-color: #fff;
+    padding: 20rpx 40rpx 20rpx 100rpx;
+    margin-top: 20rpx;
+}
+
+.price {
+    font-size: 48rpx;
+    color: #eb0d3e;
+}
+
+.v-width {
+    width: 750rpx;
+    margin-top: 60rpx;
+}
+
+.confirm {
+    width: 370rpx;
+    height: 90rpx;
+    line-height: 90rpx;
+    color: #fff;
+    font-size: 32rpx;
+    border-radius: 10rpx;
+    background-color: #ff7658;
+}
+
+.toplists {
+    background-color: #fff;
+    border-bottom: 2rpx solid #f9f9f9;
+    padding: 20rpx 40rpx;
+}
+
+.views {
+    border: 2rpx solid #f1f1f1;
+    border-radius: 36rpx;
+    width: 130rpx;
+    height: 50rpx;
+}
+
+.uni-numbox--disabled.uni-numbox__minus {
+    color: #666!important;
+    border: 1rpx solid #fff;
+}
+
+.uni-numbox--disabled {
+    color: #666!important;
+    background-color: initial!important;
+    border: 2rpx solid #999!important;
+}
+
+.uni-numbox {
+    display: -webkit-inline-box;
+    display: -webkit-inline-flex;
+    display: inline-flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    flex-direction: row;
+    -webkit-box-pack: start;
+    justify-content: flex-start;
+    height: 42rpx;
+    position: relative;
+}
+
+.uni-numbox__minus,.uni-numbox__plus {
+    margin: 0;
+    background-color: #f8f8f8;
+    width: 48rpx;
+    font-size: 40rpx;
+    height: 100%;
+    line-height: 42rpx;
+    text-align: center;
+    display: -webkit-inline-box;
+    display: -webkit-inline-flex;
+    display: inline-flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    color: #333;
+    position: relative;
+}
+
+.uni-numbox__minus {
+    color: #d7d7d7!important;
+    border: 1rpx solid #d7d7d7;
+    background-color: #fff;
+}
+
+.uni-numbox__plus {
+    color: #d7d7d7!important;
+    border: 1rpx solid #d7d7d7;
+}
+
+.uni-numbox__value {
+    position: relative;
+    background-color: #fff;
+    width: 70rpx;
+    height: 100%;
+    text-align: center;
+    padding: 0;
+    line-height: 42rpx;
+}

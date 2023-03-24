@@ -1,0 +1,41 @@
+<view>
+    <view style="background-color:#FFFFFF;margin:20rpx;padding-bottom:10rpx;">
+        <view class="refund-outer" wx:for="{{orderGoods}}" wx:key="index">
+            <view class="refund-img">
+                <image class="refund-img" src="{{item.img}}" style="width:160rpx;height:160rpx;margin:20rpx;border-radius:5rpx;"></image>
+            </view>
+            <view class="refund-middle-level">
+                <view class="refund-nexine-1 text-overflow">{{item.room_name}}</view>
+                <view class="flex-between" style="width:474rpx;margin-top:14rpx;">
+                    <view class="refund-bottom-1">
+                        <text style="color:#A7A7A7;">{{'￥'+order.real_payment}}</text>
+                    </view>
+                    <view class="refund-bottom-2">
+                        <text style="color:#A7A7A7;">x1</text>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="flex-columns item-info">
+            <view style="width:300rpx;padding-top:20rpx;">退款原因</view>
+            <view class="textarea-box">
+                <textarea bindinput="__e" data-event-opts="{{[ [ 'input',[ [ '__set_model',[ '','text','$event',[] ] ],[ 'descInput',['$event'] ] ] ] ]}}" maxlength="300" placeholder="请填写您的备注信息" value="{{text}}"></textarea>
+                <view class="textarea-color">{{remnant+'/300'}}</view>
+            </view>
+        </view>
+        <view class="refund-hint">
+            <view style="padding:20rpx 30rpx;">
+                <text>温馨提示</text>
+            </view>
+            <view style="margin:0rpx 30rpx;font-size:29rpx;color:#999999;">
+                <view>
+                    <text>1.订单一旦取消且无法恢复</text>
+                </view>
+                <view>
+                    <text>2.商品出库后可能拦截不成功，商品返回商家后才能退款</text>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view bindtap="__e" class="refund flex" data-event-opts="{{[ [ 'tap',[ ['refundOrders'] ] ] ]}}">申请退款</view>
+</view>

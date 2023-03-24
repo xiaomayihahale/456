@@ -1,0 +1,40 @@
+<view>
+    <block wx:if="{{lat==''&&lng==''}}">
+        <image src="{{address2}}" style="width:750rpx;height:750rpx;"></image>
+        <view class="aa2">请打开定位</view>
+    </block>
+    <view wx:else>
+        <map latitude="{{lat}}" longitude="{{lng}}" markers="{{list}}" style="width:100%;height:300px;"></map>
+        <view style="padding-top:26rpx;">
+            <mescroll-body bind:__l="__l" bind:down="__e" bind:init="__e" bind:up="__e" class="vue-ref" data-event-opts="{{[ [ '^init',[ ['mescrollInit'] ] ],[ '^down',[ ['downCallback'] ] ],[ '^up',[ ['upCallback'] ] ] ]}}" data-ref="mescrollRef" down="{{downOption}}" vueId="797aaeba-1" vueSlots="{{['default']}}">
+                <view class="flex" style="width:100%;" wx:for="{{list}}" wx:key="index">
+                    <view class="store">
+                        <view bindtap="__e" data-event-opts="{{[ [ 'tap',[ [ 'store',['$0'],[ [ ['list','',index] ] ] ] ] ] ]}}">
+                            <view class="flex-between">
+                                <view class="lickName flex-align-center">
+                                    <image src="{{item.store_logo}}"></image>
+                                    <view class="font-overflow">{{item.store_name}}</view>
+                                </view>
+                                <view class="km flex-align-center">{{'距我'+item.juli+'KM'}}</view>
+                            </view>
+                            <view style="display:flex;">
+                                <view class="text font-overflow2" style="margin:8rpx 24rpx 28rpx;">
+                                    <label class="aa _span">地址：</label>{{''+item.store_addres+''}}</view>
+                            </view>
+                        </view>
+                        <view class="flex-between" style="margin:0rpx 24rpx;padding-bottom:22rpx;">
+                            <view class="text flex-align-center">
+                                <view>电话：</view>
+                                <view>{{item.store_phone}}</view>
+                            </view>
+                            <view bindtap="__e" class="navigation flex" data-event-opts="{{[ [ 'tap',[ [ 'address',['$0'],[ [ ['list','',index] ] ] ] ] ] ]}}">
+                                <text class="iconfont icon-daohang" style="color:#689CEB;margin-right:10rpx;"></text>
+                                <view>导航</view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </mescroll-body>
+        </view>
+    </view>
+</view>

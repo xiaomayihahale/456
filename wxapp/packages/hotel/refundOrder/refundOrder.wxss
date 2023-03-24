@@ -1,0 +1,146 @@
+.textarea-box {
+    width: 670rpx;
+    background: #f1f1f1;
+    margin: 20rpx;
+    padding: 20rpx;
+}
+
+.addressaa {
+    width: 628rpx;
+    font-size: 24rpx;
+    color: #999;
+    margin: 16rpx 0rpx 30rpx 42rpx;
+}
+
+.addressaas {
+    font-size: 24rpx;
+    color: #999;
+    margin-left: 12rpx;
+}
+
+.textarea-color {
+    color: #999;
+}
+
+.refund-outer {
+    margin-top: 20rpx;
+    display: flex;
+    width: 700rpx;
+    border-bottom: #f1f1f1 solid 2rpx;
+}
+
+.refund-middle-level {
+    margin-top: 20rpx;
+    margin-right: rpx;
+}
+
+.refund-nexine-1 {
+    margin-right: 20rpx;
+    font-size: 30rpx;
+}
+
+.refund-nexine-2 {
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    margin-right: 20rpx;
+    margin-top: 40rpx;
+}
+
+.refund-bottom-1 {
+    font-size: 35rpx;
+}
+
+.refund-bottom-2 {
+    font-size: 30rpx;
+}
+
+.refund-cause {
+    display: flex;
+    width: 700rpx;
+    height: 80rpx;
+    border-bottom: #f1f1f1 solid 2rpx;
+}
+
+.refund-cause-1 {
+    margin: 20rpx;
+    display: flex;
+}
+
+.refund-user {
+    display: flex;
+    width: 700rpx;
+    height: 80rpx;
+    border-bottom: #f1f1f1 solid 2rpx;
+}
+
+.item-info>view:first-child {
+    color: #333;
+    font-size: 30rpx;
+    font-weight: 700;
+    padding-left: 20rpx;
+}
+
+.item-info .price {
+    font-size: 24rpx;
+    color: #999;
+    padding: 20rpx;
+    width: 610rpx;
+    height: 250rpx;
+    background-color: #f5f5f5;
+    margin-left: 30rpx;
+    margin-bottom: 20rpx;
+}
+
+.refund-user-1 {
+    margin: 20rpx;
+    display: flex;
+}
+
+.refund-tel {
+    display: flex;
+    width: 700rpx;
+    height: 80rpx;
+    border-bottom: #f1f1f1 solid 2rpx;
+}
+
+.refund-tel-1 {
+    margin: 20rpx;
+    display: flex;
+}
+
+.refund-hint {
+    width: 670rpx;
+    padding-bottom: 20rpx;
+    background-color: #f5f5f5;
+    margin-left: 20rpx;
+    margin-bottom: 20rpx;
+}
+
+.text-buyyon {
+    color: #fff;
+}
+
+.refund {
+    margin: 70rpx;
+    height: 90rpx;
+    background-image: -webkit-gradient(linear,left top,right top,from(#ff5d43),to(#ff895d));
+    background-image: -webkit-linear-gradient(left,#ff5d43,#ff895d);
+    background-image: linear-gradient(90deg,#ff5d43,#ff895d);
+    border-radius: 50rpx;
+    width: 610rpx;
+    color: #fff;
+    font-size: 32rpx;
+}
+
+.text-overflow {
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+}
+
+page {
+    background-color: #f7f7f7;
+}

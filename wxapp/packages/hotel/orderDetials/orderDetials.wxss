@@ -1,0 +1,124 @@
+page {
+    background: #f0f0f0;
+}
+
+.top {
+    margin: 22rpx 20rpx;
+    padding: 54rpx 42rpx 54rpx 38rpx;
+    background: #fff;
+    border-radius: 20rpx;
+    width: 710rpx;
+    height: 220rpx;
+}
+
+.topstart {
+    font-size: 36rpx;
+    color: #333;
+    margin-bottom: 22rpx;
+}
+
+.prices {
+    font-size: 40rpx;
+    color: red;
+    font-weight: 700;
+}
+
+.hotel {
+    margin: 0rpx 20rpx;
+    margin-bottom: 20rpx;
+    padding: 34rpx 46rpx 52rpx 36rpx;
+    background: #fff;
+    border-radius: 20rpx;
+    width: 710rpx;
+    height: 326rpx;
+}
+
+.names {
+    margin-right: 58rpx;
+    width: 116rpx;
+    font-weight: 700;
+    color: #333;
+}
+
+.names3 {
+    margin-right: 58rpx;
+    width: 116rpx;
+    font-weight: 700;
+    color: #333;
+}
+
+.v-margin {
+    margin-bottom: 52rpx;
+}
+
+.copy {
+    margin-left: 8rpx;
+    color: #bebebe;
+    width: 60rpx;
+    height: 32rpx;
+    border: 2rpx solid #bebebe;
+    font-size: 20rpx;
+}
+
+.names2 {
+    margin-right: 58rpx;
+    width: 150rpx;
+    font-weight: 700;
+    color: #333;
+}
+
+.guige view {
+    font-size: 24rpx;
+    margin-right: 48rpx;
+}
+
+.detail {
+    padding: 34rpx 36rpx 30rpx;
+    margin: 0rpx 20rpx;
+    background: #fff;
+    border-radius: 20rpx;
+    width: 710rpx;
+    height: auto;
+    margin-bottom: 164rpx;
+}
+
+.erwm {
+    width: 300rpx;
+    height: 300rpx;
+    margin-bottom: 32rpx;
+}
+
+.btnAll {
+    width: 750rpx;
+    height: 108rpx;
+    background-color: #fff;
+    position: fixed;
+    bottom: 0;
+    padding-right: 60rpx;
+    z-index: 999;
+}
+
+.detele {
+    background: #fff;
+    border: 2rpx solid red;
+    border-radius: 68rpx;
+    width: 242rpx;
+    height: 80rpx;
+    color: red;
+    font-size: 32rpx;
+    margin-right: 42rpx;
+}
+
+.align,.payments {
+    width: 288rpx;
+    height: 80rpx;
+    color: #999;
+    border: 2rpx solid #999;
+    border-radius: 68rpx;
+    font-size: 32rpx;
+}
+
+.payments {
+    color: red;
+    border: 2rpx solid red;
+}

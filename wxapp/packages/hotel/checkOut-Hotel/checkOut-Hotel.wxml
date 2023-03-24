@@ -1,0 +1,61 @@
+<view>
+    <form bindsubmit="__e" data-event-opts="{{[ [ 'submit',[ [ 'confirms',['$event'] ] ] ] ]}}">
+        <view class="orderNumber flex-between">
+            <view>订单编号</view>
+            <view>{{order.order_number}}</view>
+        </view>
+        <view class="flex-between toplists">
+            <view class="flex-column">
+                <view>入住</view>
+                <view class="redColor">{{$root.g0[1]+'-'+$root.g1[2]+' 周'+startDate}}</view>
+            </view>
+            <text class="views flex">{{'共'+order.reserve_number+'晚'}}</text>
+            <view class="flex-column">
+                <view>离店</view>
+                <view class="redColor">{{$root.g2[1]+'-'+$root.g3[2]+' 周'+endDate}}</view>
+            </view>
+        </view>
+        <view class="flex-between orderNumber" wx:for="{{orderGoods}}" wx:key="index">
+            <view>房型房号</view>
+            <view class="flex-align-center">
+                <view class="roomColor">{{''+item.room_name+''}}<text>1205</text>
+                </view>
+                <view class="redColor">{{'￥'+item.unit_price}}</view>
+            </view>
+        </view>
+        <view class="flex-between orderNumber2">
+            <view>押金</view>
+            <view class="redColor">{{'￥'+order.deposit}}</view>
+        </view>
+        <view>
+            <view class="flex-between orderNumber" style="padding:20rpx 26rpx 20rpx 40rpx;">
+                <view>房间消耗品</view>
+                <switch bindchange="__e" checked="{{checked}}" color="#FF7658" data-event-opts="{{[ [ 'change',[ [ 'switch1Change',['$event'] ] ] ] ]}}" style="zoom:0.8;"></switch>
+            </view>
+            <view class="flex-between orderNumber2" wx:for="{{getthingByRidInfo}}" wx:key="index">
+                <view class="flex-align-center">
+                    <image class="ico-Image" src="{{item.ico}}"></image>
+                    <view>{{item.c_name}}</view>
+                </view>
+                <view class="flex-align-center">
+                    <view class="redColor v-margin">{{'￥'+item.price}}</view>
+                    <view class="uni-numbox">
+                        <text bindtap="__e" class="{{['uni-numbox__minus',item.temp_num>0?'uni-numbox--disabled':'']}}" data-event-opts="{{[ [ 'tap',[ [ 'jian',['$0'],[ [ ['getthingByRidInfo','',index] ] ] ] ] ] ]}}">-</text>
+                        <text class="uni-numbox__value">{{item.temp_num}}</text>
+                        <text bindtap="__e" class="{{['uni-numbox__plus',item.temp_num<item.num?'uni-numbox--disabled':'']}}" data-event-opts="{{[ [ 'tap',[ [ 'add',['$0'],[ [ ['getthingByRidInfo','',index] ] ] ] ] ] ]}}">+</text>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="flex-between orderNumber">
+            <view class="roomColor2">退款总额</view>
+            <view class="price">{{'￥'+order.deposit}}</view>
+        </view>
+        <view class="flex v-width" wx:if="{{sum>0}}">
+            <button class="confirm" formType="submit" hoverClass="sunui-hover" style="color:#ffffff;background-color:#ff7658;" type="default">确定</button>
+        </view>
+        <view class="flex v-width" wx:else>
+            <button bindtap="__e" class="confirm" data-event-opts="{{[ [ 'tap',[ ['notSubmit'] ] ] ]}}" hoverClass="sunui-hover" style="color:#ffffff;background-color:#AEAEAE;" type="default">暂不可退</button>
+        </view>
+    </form>
+</view>

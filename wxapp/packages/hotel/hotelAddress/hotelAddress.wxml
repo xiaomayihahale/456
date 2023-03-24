@@ -1,0 +1,37 @@
+<view>
+    <mescroll-empty bind:__l="__l" vueId="014c0ef4-1" wx:if="{{addressList.length==0}}"></mescroll-empty>
+    <radio-group bindchange="__e" data-event-opts="{{[ [ 'change',[ [ 'radioChange',['$event'] ] ] ] ]}}" name="apply">
+        <view class="address " wx:for="{{$root.l0}}" wx:key="index">
+            <view bindtap="__e" class="flex-align-center" data-event-opts="{{[ [ 'tap',[ [ 'setDefaults',['$0'],[ [ ['addressList','',index,'id'] ] ] ] ] ] ]}}" style="width:750rpx;border-bottom:2rpx solid #EDEDED;">
+                <view class="address_img flex">{{item.g0}}</view>
+                <view style="width:75%;margin-left:36rpx;">
+                    <view class="flex-between" style="{{is_card!=0?'height:134rpx':'padding-top:26rpx'}}">
+                        <text class="realname">{{item.$orig.person_name}}</text>
+                        <text style="margin-left:20rpx;">{{item.$orig.person_mobile}}</text>
+                    </view>
+                    <view class="address_text font-overflow" wx:if="{{is_card==0}}">{{'身份证号：'+item.$orig.person_card}}</view>
+                </view>
+            </view>
+            <view class="flex-between" style="padding:30rpx 24rpx;">
+                <label bindtap="__e" class="sunui-margin-r10" data-event-opts="{{[ [ 'tap',[ [ 'setDefaults',['$0'],[ [ ['addressList','',index,'id'] ] ] ] ] ] ]}}">
+                    <radio checked="{{item.$orig.is_default==1?'':'checked'}}" color="#494949" style="transform:scale(0.7);" value="1"></radio>
+                    <text style="font-size:24rpx;color:#333333;">默认地址</text>
+                </label>
+                <view class="flex-align-center">
+                    <view bindtap="__e" class="flex-align-center" data-event-opts="{{[ [ 'tap',[ [ 'addressIndex',['$0'],[ [ ['addressList','',index,'id'] ] ] ] ] ] ]}}" style="margin-right:48rpx;">
+                        <text class="iconfont icon-bianji" style="font-size:26rpx;color:#999999;margin-right:10rpx;"></text>
+                        <view style="font-size:24rpx;color:#999999;">编辑</view>
+                    </view>
+                    <view bindtap="__e" class="flex-align-center" data-event-opts="{{[ [ 'tap',[ [ 'deleteAddress',['$0'],[ [ ['addressList','',index,'id'] ] ] ] ] ] ]}}">
+                        <text class="iconfont icon-shanchu" style="font-size:26rpx;color:#999999;margin-right:10rpx;"></text>
+                        <view style="font-size:24rpx;color:#999999;">删除</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </radio-group>
+    <view style="height:160rpx;"></view>
+    <view class="button_address flex">
+        <button bindtap="__e" class="address_btn" data-event-opts="{{[ [ 'tap',[ ['addressAign'] ] ] ]}}">新增联系方式</button>
+    </view>
+</view>

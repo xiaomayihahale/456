@@ -1,0 +1,27 @@
+<view>
+    <view>
+        <view class="address flex-align-center">
+            <view class="view_margin" style="letter-spacing:2rpx;">联 系 人</view>
+            <input bindinput="__e" class="input font-overflow" data-event-opts="{{[ [ 'input',[ [ '__set_model',[ '','realname','$event',[] ] ] ] ] ]}}" placeholder="收货人姓名" value="{{realname}}"></input>
+        </view>
+        <view class="address flex-align-center">
+            <view class="view_margin" style="letter-spacing:2rpx;">手 机 号</view>
+            <input bindinput="__e" class="input font-overflow" data-event-opts="{{[ [ 'input',[ [ '__set_model',[ '','mobile','$event',[] ] ] ] ] ]}}" maxlength="11" placeholder="收货人手机号" type="number" value="{{mobile}}"></input>
+        </view>
+        <view class="address flex-align-center" wx:if="{{is_card==0}}">
+            <view class="view_margin">身份证号</view>
+            <input bindinput="__e" class="font-overflow input" data-event-opts="{{[ [ 'input',[ [ '__set_model',[ '','idCard','$event',[] ] ] ] ] ]}}" maxlength="18" placeholder="请输入身份证号" value="{{idCard}}"></input>
+        </view>
+    </view>
+    <view class="view_bg"></view>
+    <view class="view2">
+        <view class="flex-between">
+            <view>设为默认</view>
+            <view class="switch">
+                <switch bindchange="__e" checked="{{checked}}" color="#FFBA64" data-event-opts="{{[ [ 'change',[ [ 'switch1Change',['$event'] ] ] ] ]}}" style="zoom:0.8;"></switch>
+            </view>
+        </view>
+        <view bindtap="__e" data-event-opts="{{[ [ 'tap',[ ['addressClick'] ] ] ]}}" style="margin-top:30rpx;color:#FF9534;">清空联系方式</view>
+        <view bindtap="__e" class="determine_btn" data-event-opts="{{[ [ 'tap',[ ['determine'] ] ] ]}}">保存</view>
+    </view>
+</view>

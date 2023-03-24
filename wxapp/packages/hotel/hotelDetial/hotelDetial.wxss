@@ -1,0 +1,337 @@
+page {
+    background: #f0f0f0;
+}
+
+.v-width {
+    width: 750rpx;
+    border-radius: 20rpx;
+}
+
+.img {
+    border-radius: 20rpx;
+    width: 700rpx;
+    height: 480rpx;
+}
+
+.roomDetial {
+    padding: 0rpx 0rpx 56rpx 26rpx;
+    margin: 20rpx 26rpx;
+    background-color: #fff;
+    width: 700rpx;
+    border-radius: 20rpx;
+}
+
+.roomDetial2 {
+    padding: 0rpx 0rpx 20rpx 26rpx;
+    margin: 20rpx 26rpx;
+    background-color: #fff;
+    width: 700rpx;
+    border-radius: 20rpx;
+}
+
+.title {
+    font-size: 32rpx;
+    font-weight: 700;
+    margin-bottom: 16rpx;
+    padding: 32rpx 20rpx 0rpx 0rpx;
+}
+
+.price {
+    color: red;
+    margin-bottom: 20rpx;
+}
+
+.price text {
+    font-size: 40rpx;
+    font-weight: 700;
+}
+
+.price2 {
+    margin-left: 14rpx;
+    margin-bottom: 20rpx;
+}
+
+.price2 text {
+    text-decoration: line-through;
+}
+
+.guige {
+    margin-bottom: 32rpx;
+}
+
+.specRight {
+    font-size: 24rpx;
+    margin-right: 48rpx;
+}
+
+.feiyong {
+    color: #999;
+    width: 124rpx;
+}
+
+.detail {
+    width: 520rpx;
+    color: #333;
+    margin: 0rpx 58rpx 0rpx 30rpx;
+}
+
+.tl-card {
+    height: 128rpx;
+    overflow: hidden;
+}
+
+.on {
+    height: auto;
+}
+
+.tl-mgs {
+    padding-top: 20rpx;
+    color: #666;
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    align-content: center;
+}
+
+.allbtn {
+    background: #fff;
+    border: 2rpx solid #e9e9e9;
+    border-radius: 44rpx;
+    width: 208rpx;
+    height: 62rpx;
+    color: #333;
+    font-size: 24rpx;
+    margin: 44rpx 26rpx 0rpx 0rpx;
+}
+
+.allbtn3 {
+    width: 750rpx;
+    height: 98rpx;
+    background: #fff;
+}
+
+.you {
+    color: #674400;
+    font-weight: 700;
+    padding: 0rpx 28rpx 0rpx 0rpx;
+}
+
+.quan {
+    border: 2rpx solid #ff8484;
+    box-sizing: border-box;
+    border-radius: 52rpx;
+    display: inline-block;
+    line-height: 56rpx;
+    height: 56rpx;
+    color: #f40009;
+    font-size: 24rpx;
+    padding: 0rpx 14rpx 0rpx 14rpx;
+}
+
+.getl {
+    color: #a06b04;
+    font-size: 24rpx;
+    padding: 32rpx 40rpx 26rpx;
+}
+
+.time {
+    margin: 0rpx 0rpx 24rpx;
+    padding: 40rpx 84rpx 20rpx;
+    background: #ffebd3;
+    border-radius: 20rpx;
+    width: 704rpx;
+    height: 154rpx;
+}
+
+.time view {
+    font-size: 32rpx;
+    color: #333;
+}
+
+.time text {
+    color: #999;
+    font-size: 24rpx;
+    margin-top: 16rpx;
+}
+
+.time2 {
+    color: #999;
+}
+
+.time2 .views {
+    background: #ffebd3;
+    border: 2rpx solid #999;
+    border-radius: 36rpx;
+    color: #333;
+    font-size: 24rpx;
+    width: 74rpx;
+    height: 36rpx;
+    margin: 0rpx 4rpx;
+}
+
+.v-bottom {
+    margin-bottom: 30rpx;
+}
+
+.realname {
+    width: 230rpx;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.address_text {
+    color: #a1a1a1;
+    font-size: 24rpx;
+    margin: 14rpx 0rpx 30rpx;
+}
+
+.addMessage {
+    color: #a1a1a1;
+    text-align: center;
+    margin: 0rpx 24rpx 26rpx;
+    padding: 20rpx;
+    border: 2rpx dashed #a1a1a1;
+}
+
+.personnel {
+    background-color: #fff;
+    width: 700rpx;
+    border-radius: 20rpx;
+}
+
+.personnelInformation {
+    font-weight: 700;
+    font-size: 32rpx;
+}
+
+.p-color {
+    color: #a1a1a1;
+}
+
+.personnelInformation2 {
+    font-weight: 700;
+    font-size: 32rpx;
+    padding: 26rpx 24rpx;
+}
+
+.message {
+    color: #999;
+    width: 106rpx;
+    margin: 24rpx;
+}
+
+.discounts {
+    color: red;
+}
+
+.rightEnd {
+    width: 700rpx;
+    display: flex;
+    -webkit-box-pack: end;
+    justify-content: flex-end;
+}
+
+.discounted {
+    color: #fff;
+    background: linear-gradient(90.48deg,#c4c4c4 .34%,#ff3d00 .35%,#ec0000 96.24%);
+    border-radius: 12rpx;
+    height: 44rpx;
+    display: -webkit-inline-box;
+    display: -webkit-inline-flex;
+    display: inline-flex;
+    padding: 0rpx 10rpx;
+    margin: 26rpx 20rpx 22rpx;
+}
+
+.inputs {
+    width: 558rpx;
+    color: #333;
+    border-bottom: 2rpx solid #eee;
+    padding: 24rpx 0rpx;
+}
+
+.money {
+    z-index: 29;
+    position: fixed;
+    bottom: 0;
+    width: 750rpx;
+    background-color: #fff;
+    padding: 18rpx 30rpx 26rpx 16rpx;
+}
+
+.item-info>view:first-child {
+    color: #333;
+    font-size: 32rpx;
+}
+
+.item-info .price {
+    text-align: right;
+    font-size: 24rpx;
+    color: #999;
+}
+
+.apply-radio radio {
+    transform: scale(.8);
+}
+
+.priceall view {
+    color: red;
+}
+
+.priceall text {
+    color: red;
+    font-size: 36rpx;
+    font-weight: 700;
+}
+
+.youhui {
+    color: #999;
+    font-size: 20rpx;
+}
+
+.youhui view {
+    color: red;
+    margin-right: 20rpx;
+    margin-left: 10rpx;
+}
+
+.youhui2 {
+    color: #999;
+    font-size: 20rpx;
+}
+
+.youhui2 view {
+    color: red;
+    margin-left: 10rpx;
+}
+
+.zhifu {
+    color: #fff;
+    font-size: 32rpx;
+    font-weight: 700;
+    background: -webkit-gradient(linear,left top,right top,color-stop(31.25%,#ff7a00),to(#ff0303));
+    background: -webkit-linear-gradient(left,#ff7a00 31.25%,#ff0303);
+    background: linear-gradient(90deg,#ff7a00 31.25%,#ff0303);
+    border-radius: 68rpx;
+    width: 200rpx;
+    height: 80rpx;
+}
+
+.height3 {
+    height: 128rpx;
+}
+
+.material {
+    font-size: 36rpx;
+    font-weight: 700;
+    color: #555;
+    margin: 36rpx 0rpx 30rpx;
+}
+
+.wansh {
+    color: #ca9a3e;
+    height: 98rpx;
+    width: 100%;
+    border-top: 1px solid #f3f3f3;
+}

@@ -1,0 +1,90 @@
+page {
+    background: #f0f0f0;
+}
+
+.all {
+    margin-top: 20rpx;
+    background: #fff;
+    border-radius: 20rpx;
+    width: 700rpx;
+}
+
+.dts {
+    padding: 20rpx 38rpx 34rpx 22rpx;
+}
+
+.names {
+    font-size: 32rpx;
+    color: #333;
+}
+
+.starts {
+    font-weight: 700;
+    color: #26c341;
+    font-size: 24rpx;
+}
+
+.img {
+    width: 176rpx;
+    height: 176rpx;
+    margin-right: 22rpx;
+}
+
+.details {
+    width: 460rpx;
+}
+
+.textname {
+    font-size: 32rpx;
+    font-weight: 700;
+    margin-bottom: 4rpx;
+}
+
+.time {
+    font-size: 24rpx;
+    color: #999;
+    margin-bottom: 10rpx;
+}
+
+.price {
+    margin-bottom: 16rpx;
+    color: red;
+}
+
+.price text {
+    font-size: 36rpx;
+    font-weight: 700;
+}
+
+.align,.payments {
+    color: #999;
+    font-size: 24rpx;
+    background: #fff;
+    border: 2rpx solid #999;
+    border-radius: 68rpx;
+    width: 156rpx;
+    height: 58rpx;
+}
+
+.payments {
+    color: red;
+    border: 2rpx solid red;
+}
+
+.align {
+    margin-right: 30rpx;
+}
+
+.material {
+    font-size: 36rpx;
+    font-weight: 700;
+    color: #555;
+    margin: 36rpx 0rpx 30rpx;
+}
+
+.wansh {
+    color: #ca9a3e;
+    height: 98rpx;
+    width: 100%;
+    border-top: 1px solid #f3f3f3;
+}

@@ -1,0 +1,83 @@
+<view>
+    <view class="flex" style="width:100%;">
+        <view class="PackageCard">
+            <sunui-navbar activeColor="#FF9800" activeLineBg="#ff6145" activeLineHeight="4rpx" activeLineWidth="100%" autoLeft="list" bind:__l="__l" bind:change="__e" currentIndex="{{currentIndex2}}" data-event-opts="{{[ [ '^change',[ ['getChange'] ] ] ]}}" isCenter="{{true}}" items="{{indexarr2}}" keyId="id" keyName="title" lineHeight="80rpx" margin="{{10}}" padding="20rpx" size="{{160}}" textAlign="center" vueId="0b13ca50-1"></sunui-navbar>
+            <view class="PackageCard2 flex-column">
+                <view wx:if="{{currentIndex2==0}}">
+                    <image mode="aspectFit" src="{{couponsss}}" style="width:750rpx;" wx:if="{{couponLengths==0||couponList.length==0}}"></image>
+                    <block wx:else>
+                        <view style="position:relative;margin:40rpx 26rpx 0rpx;" wx:for="{{$root.l0}}" wx:for-index="j" wx:for-item="i" wx:key="j">
+                            <block wx:if="{{i.$orig.sub_c_type==2}}">
+                                <view class="all2">
+                                    <view class="left flex-columns" style="{{'background-size:cover;'+'background-image:'+'url('+youhui1+')'+';'}}">
+                                        <view>
+                                            <text style="font-size:32rpx;color:#FFFFFF;">￥</text>{{''+i.g0+''}}</view>
+                                        <text>无门槛使用</text>
+                                    </view>
+                                    <view class="flex-betweens" style="width:492rpx;">
+                                        <view class="zhong flex-columns">
+                                            <view>无门槛福利优惠券</view>
+                                            <text>{{'到期时间：'+i.$orig.end_time}}</text>
+                                        </view>
+                                        <view bindtap="__e" class="use flex" data-event-opts="{{[ [ 'tap',[ ['use'] ] ] ]}}">去使用</view>
+                                    </view>
+                                </view>
+                                <view class="dikou flex-align-center" style="{{'background-size:cover;'+'background-image:'+'url('+youhui2+')'+';'}}">
+                                    <view class="dikou5">{{i.$orig.store_name+'，该酒店全场可用'}}</view>
+                                </view>
+                            </block>
+                        </view>
+                    </block>
+                </view>
+                <view wx:if="{{currentIndex2==1}}">
+                    <image mode="aspectFit" src="{{couponsss}}" style="width:750rpx;" wx:if="{{couponLengths==0||couponList.length==0}}"></image>
+                    <block wx:else>
+                        <view style="position:relative;margin:40rpx 26rpx 0rpx;" wx:if="{{i.$orig.sub_c_type==2}}" wx:for="{{$root.l1}}" wx:for-index="j" wx:for-item="i" wx:key="j">
+                            <view class="all2">
+                                <view class="left flex-columns" style="{{'background-size:cover;'+'background-image:'+'url('+youhui11+')'+';'}}">
+                                    <view>
+                                        <text style="font-size:32rpx;color:#FFFFFF;">￥</text>{{''+i.g1+''}}</view>
+                                    <text>无门槛使用</text>
+                                </view>
+                                <view class="flex-betweens" style="width:492rpx;">
+                                    <view class="zhong2 flex-columns">
+                                        <view>无门槛福利优惠券</view>
+                                        <text>{{'到期时间：'+i.$orig.end_time}}</text>
+                                    </view>
+                                    <view class="use2 flex">已使用</view>
+                                </view>
+                            </view>
+                            <view class="dikou flex-align-center" style="{{'background-size:cover;'+'background-image:'+'url('+youhui2+')'+';'}}">
+                                <view class="dikou6">{{i.$orig.store_name+'，该酒店全场可用'}}</view>
+                            </view>
+                        </view>
+                    </block>
+                </view>
+                <view wx:if="{{currentIndex2==2}}">
+                    <image mode="aspectFit" src="{{couponsss}}" style="width:750rpx;" wx:if="{{couponLengths==0||couponList.length==0}}"></image>
+                    <block wx:else>
+                        <view style="position:relative;margin:40rpx 26rpx 0rpx;" wx:if="{{i.$orig.sub_c_type==2}}" wx:for="{{$root.l2}}" wx:for-index="j" wx:for-item="i" wx:key="j">
+                            <view class="all2">
+                                <view class="left flex-columns" style="{{'background-size:cover;'+'background-image:'+'url('+youhui11+')'+';'}}">
+                                    <view>
+                                        <text style="font-size:32rpx;color:#FFFFFF;">￥</text>{{''+i.g2+''}}</view>
+                                    <text>无门槛使用</text>
+                                </view>
+                                <view class="flex-betweens" style="width:492rpx;">
+                                    <view class="zhong2 flex-columns">
+                                        <view>无门槛福利优惠券</view>
+                                        <text>{{'到期时间：'+i.$orig.end_time}}</text>
+                                    </view>
+                                    <view class="use2 flex">已过期</view>
+                                </view>
+                            </view>
+                            <view class="dikou flex-align-center" style="{{'background-size:cover;'+'background-image:'+'url('+youhui2+')'+';'}}">
+                                <view class="dikou6">{{i.$orig.store_name+'，该酒店全场可用'}}</view>
+                            </view>
+                        </view>
+                    </block>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

@@ -1,0 +1,173 @@
+<view>
+    <view style="margin-bottom:168rpx;">
+        <view class="v-width flex">
+            <swiper autoplay="true" circular="true" class="img" duration="{{1000}}" interval="{{2000}}" vertical="{{vertical}}">
+                <swiper-item bindtap="__e" data-event-opts="{{[ [ 'tap',[ [ 'previewImage',[index] ] ] ] ]}}" style="border-radius:20rpx;" wx:for="{{roomInfo.carousel}}" wx:key="index">
+                    <image class="img" src="{{item}}"></image>
+                </swiper-item>
+            </swiper>
+        </view>
+        <view class="{{[roomInfo.price_desc.length>32?'roomDetial':'roomDetial2']}}">
+            <view class="title font-overflow3">{{roomInfo.room_name}}</view>
+            <view class="flex-align-center">
+                <view class="price">￥<text>{{roomInfo.discount_prcie}}</text>
+                </view>
+            </view>
+            <view class="flex-align-center" style="width:700rpx;flex-wrap:wrap;">
+                <view wx:for="{{roomInfo.spec}}" wx:key="index">
+                    <view class="{{['specRight',roomInfo.price_desc.length>48?'guige':'']}}">{{item}}</view>
+                </view>
+            </view>
+            <view class="{{['flex-align-center',isShow?'on tl-card':'tl-card']}}">
+                <view class="feiyong">费用政策</view>
+                <view class="{{['detail','flex-columns',!isShow&&roomInfo.price_desc.length>48?'height3':'']}}">
+                    <view>{{roomInfo.price_desc}}</view>
+                </view>
+            </view>
+            <view class="flex" style="width:674rpx;">
+                <view bindtap="__e" class="allbtn flex" data-event-opts="{{[ [ 'tap',[ [ 'toChange',['$event'] ] ] ] ]}}" wx:if="{{!isShow&&roomInfo.price_desc.length>48}}">查看全部 ></view>
+                <view bindtap="__e" class="allbtn flex" data-event-opts="{{[ [ 'tap',[ [ 'toChange',['$event'] ] ] ] ]}}" wx:if="{{isShow}}">收起 ></view>
+            </view>
+            <view class="flex-between" style="{{roomInfo.price_desc.length>48?'margin-top: 20rpx;':''}}" wx:if="{{$root.m0>0}}">
+                <view class="flex-align-center">
+                    <view class="you">优惠</view>
+                    <view class="quan">{{'￥'+$root.g0+'优惠券'}}</view>
+                </view>
+                <view bindtap="__e" class="getl" data-event-opts="{{[ [ 'tap',[ ['hotelCoupon'] ] ] ]}}">领取 ></view>
+            </view>
+        </view>
+        <view bindtap="__e" class="flex-column" data-event-opts="{{[ [ 'tap',[ ['show'] ] ] ]}}" style="width:750rpx;">
+            <view class="time flex-between">
+                <view class="flex-column">
+                    <view style="font-weight:bold;">{{$root.g1[1]+'月'+$root.g2[2]+'日'}}</view>
+                    <text>到店时间</text>
+                </view>
+                <view class="time2 flex-align-center">
+                    <view style="color:#999;">—</view>
+                    <view class="views flex">{{tianshu+'晚'}}</view>
+                    <view style="color:#999;">—</view>
+                </view>
+                <view class="flex-column">
+                    <view style="font-weight:bold;" wx:if="{{timeNow}}">{{$root.g3[1]+'月'+$root.g4[2]+'日'}}</view>
+                    <view style="font-weight:bold;" wx:else>请选择 ></view>
+                    <text>离店时间</text>
+                </view>
+            </view>
+        </view>
+        <beauty-calendar autoChoose="{{autoChoose}}" autoClear="{{autoClear}}" bind:__l="__l" bind:change="__e" class="vue-ref" data-event-opts="{{[ [ '^change',[ ['change'] ] ] ]}}" data-ref="calendar" endDate="{{endDate}}" multi="{{multi}}" range="{{rang}}" startDate="{{startDate}}" vueId="bfac4bcc-1"></beauty-calendar>
+        <view class="flex" style="width:750rpx;">
+            <view class="personnel">
+                <view class="flex-between" style="padding:26rpx 24rpx;">
+                    <view class="personnelInformation">人员信息</view>
+                    <view bindtap="__e" data-event-opts="{{[ [ 'tap',[ ['hotelDetials'] ] ] ]}}" wx:if="{{getDefaultInfo}}">去修改信息 ></view>
+                    <view bindtap="__e" data-event-opts="{{[ [ 'tap',[ ['addressAign'] ] ] ]}}" wx:else>去完善信息 ></view>
+                </view>
+                <view bindtap="__e" class="flex-align-center" data-event-opts="{{[ [ 'tap',[ ['hotelDetials'] ] ] ]}}" style="padding:0rpx 24rpx;" wx:if="{{getDefaultInfo}}">
+                    <view style="width:100%;">
+                        <view class="{{['flex-between',!idCard?'v-bottom':'']}}">
+                            <text class="realname">{{getDefaultInfo.person_name}}</text>
+                            <text>{{getDefaultInfo.person_mobile}}</text>
+                        </view>
+                        <view class="address_text font-overflow" wx:if="{{is_card==0}}">{{'身份证号：'+getDefaultInfo.person_card}}</view>
+                    </view>
+                </view>
+                <view bindtap="__e" class="flex-align-center" data-event-opts="{{[ [ 'tap',[ ['addressAign'] ] ] ]}}" style="width:750rpx;padding:0rpx 24rpx;" wx:else>
+                    <view style="width:92%;">
+                        <view class="{{['flex-between',idCard!=0||!getDefaultInfo?'v-bottom':'']}}">
+                            <text class="realname">{{userInfo.nickname}}</text>
+                            <text>{{userInfo.phone}}</text>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="flex" style="width:750rpx;margin-top:20rpx;">
+            <view class="personnel">
+                <view class="flex-between" style="padding:26rpx 24rpx;">
+                    <view class="personnelInformation">选择房间号</view>
+                    <view style="width:300rpx;text-align:right;" wx:if="{{roomInfo.apply_room_count!=0&&roomInfo.apply_room_count}}">
+                        <picker bindchange="__e" data-event-opts="{{[ [ 'change',[ [ 'selectRoom',['$event'] ] ] ] ]}}" mode="selector" range="{{roomAll}}" rangeKey="seat_no">{{before_school?before_school:roomMessage}}</picker>
+                    </view>
+                    <view wx:else>暂无房间号</view>
+                </view>
+            </view>
+        </view>
+        <view class="flex" style="width:750rpx;margin-top:20rpx;">
+            <view class="personnel">
+                <view class="personnelInformation2">优惠信息</view>
+                <view class="flex-between" style="margin:20rpx 28rpx 0rpx;">
+                    <view>会员优惠</view>
+                    <view class="discounts" wx:if="{{userInfo.curDiscount==0}}">暂无优惠</view>
+                    <view class="discounts" wx:else>{{'享受'+$root.g5+'折优惠'}}</view>
+                </view>
+                <view class="flex-between" style="margin:48rpx 0rpx 0rpx 28rpx;">
+                    <view>优惠券</view>
+                    <view class="discounts flex-align-center" wx:if="{{less}}">{{'-￥'+$root.g6+''}}<radio-group bindchange="__e" data-event-opts="{{[ [ 'change',[ [ 'handleApplyType2',['$event'] ] ] ] ]}}" name="apply">
+                            <label class="sunui-margin-r10">
+                                <radio bindtap="__e" checked="{{checked}}" color="#FF6145" data-event-opts="{{[ [ 'tap',[ ['checkedOn'] ] ] ]}}" style="transform:scale(0.8);padding-left:12rpx;" value="1"></radio>
+                            </label>
+                        </radio-group>
+                    </view>
+                    <view class="discounts" style="padding-right:28rpx;" wx:else>暂无优惠券</view>
+                </view>
+                <view class="flex-between" style="margin:48rpx 28rpx 0rpx;" wx:if="{{deposit!=0&&deposit!=0&&deposit!=0&&deposit!=''&&deposit!=undefined}}">
+                    <view>押金</view>
+                    <view class="discounts">{{'￥'+$root.g7}}</view>
+                </view>
+                <view class="rightEnd">
+                    <view class="discounted" wx:if="{{allDiscount&&allDiscount!=0}}">{{'已优惠:'+allDiscount}}</view>
+                    <view class="discounted" wx:else>已优惠:0</view>
+                </view>
+            </view>
+        </view>
+        <view class="coupon">
+            <sunui-cell bind:__l="__l" cellStyle="border-radius:20rpx;margin:24rpx;width:700rpx" vueId="bfac4bcc-2" vueSlots="{{['default']}}">
+                <view class="sunui-flex-space-between sunui-w100 item-info" style="margin:4rpx 20rpx;">
+                    <view>支付方式</view>
+                    <view class="apply-radio">
+                        <radio-group bindchange="__e" data-event-opts="{{[ [ 'change',[ [ 'handleApplyType',['$event'] ] ] ] ]}}" name="apply">
+                            <label class="sunui-margin-r10">
+                                <radio checked="{{true}}" color="#FF6145" value="1"></radio>
+                                <text>微信支付</text>
+                            </label>
+                            <label>
+                                <radio color="#FF6145" value="2"></radio>
+                                <text>余额支付</text>
+                            </label>
+                        </radio-group>
+                    </view>
+                </view>
+            </sunui-cell>
+        </view>
+    </view>
+    <view class="flex-between money">
+        <view class="flex-columns">
+            <view class="priceall flex-align-center">实际支付<view>￥<text>{{$root.g8}}</text>
+                </view>
+            </view>
+            <view class="font-overflow" style="width:496rpx;">
+                <view class="youhui flex-align-center" wx:if="{{less&&discountPrice}}">
+                    <block wx:if="{{checked==true}}">优惠券已减<view wx:if="{{less}}">{{'￥'+$root.g9}}</view>
+                        <view wx:else>￥0</view>
+                    </block>{{''+userInfo.curMember_name+'再减'}}<view>{{'￥'+$root.g10}}</view>
+                </view>
+                <view class="youhui2 flex-align-center" wx:if="{{!less&&discountPrice}}">{{''+userInfo.curMember_name+'减'}}<view>{{'￥'+$root.g11}}</view>
+                </view>
+            </view>
+            <block wx:if="{{checked==true}}">
+                <view class="youhui flex-align-center" wx:if="{{less&&!discountPrice}}">优惠券已减<view>{{'￥'+less}}</view>
+                </view>
+            </block>
+        </view>
+        <view bindtap="__e" class="zhifu flex" data-event-opts="{{[ [ 'tap',[ ['zhifus'] ] ] ]}}">去支付</view>
+    </view>
+    <sunui-popup bind:__l="__l" class="vue-ref" data-ref="pop" vueId="bfac4bcc-3" vueSlots="{{['content']}}">
+        <view slot="content">
+            <view class="flex">
+                <view class="material">完善资料</view>
+            </view>
+            <view style="padding-bottom:68rpx;margin:0rpx 28rpx;">欢迎新用户到来，请您马上完善资料感谢您配合。</view>
+            <view bindtap="__e" class="flex wansh" data-event-opts="{{[ [ 'tap',[ ['wansh'] ] ] ]}}">去完善</view>
+        </view>
+    </sunui-popup>
+</view>

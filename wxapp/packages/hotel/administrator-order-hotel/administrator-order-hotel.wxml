@@ -1,0 +1,28 @@
+<view>
+    <view style="margin-top:6rpx;">
+        <sunui-navbar activeColor="#000" activeDirection="center" activeFontSize="32rpx" activeLineBg="#fff" activeLineHeight="4rpx" activeLineWidth="60%" autoLeft="list" bind:__l="__l" bind:change="__e" currentIndex="{{navIndex3}}" data-event-opts="{{[ [ '^change',[ ['navChange3'] ] ] ]}}" isCenter="{{false}}" items="{{navItem3}}" keyId="id" keyName="title" lineHeight="80rpx" margin="{{10}}" padding="24rpx" size="{{180}}" textAlign="center" vueId="79fa659a-1"></sunui-navbar>
+    </view>
+    <mescroll-body bind:__l="__l" bind:down="__e" bind:init="__e" bind:up="__e" class="vue-ref" data-event-opts="{{[ [ '^init',[ ['mescrollInit'] ] ],[ '^down',[ ['downCallback'] ] ],[ '^up',[ ['upCallback'] ] ] ]}}" data-ref="mescrollRef" down="{{downOption}}" vueId="79fa659a-2" vueSlots="{{['default']}}">
+        <view class="flex" style="width:750rpx;" wx:for="{{orderList}}" wx:key="index">
+            <view bindtap="__e" class="all" data-event-opts="{{[ [ 'tap',[ [ 'detialNext',['$0'],[ [ ['orderList','',index,'id'] ] ] ] ] ] ]}}">
+                <view class="flex-columns dts" wx:for="{{item.goods}}" wx:for-index="j" wx:for-item="i" wx:key="j">
+                    <view class="flex-align-center">
+                        <image class="img" src="{{i.cover}}"></image>
+                        <view class="details">
+                            <view class="textname font-overflow">{{i.room_name}}</view>
+                            <view class="flex-between">
+                                <view class="price">￥<text>{{item.real_payment}}</text>
+                                </view>
+                            </view>
+                            <view style="font-size:24rpx;">拒绝原因：哒哒哒</view>
+                        </view>
+                    </view>
+                    <view class="flex-between" style="padding:20rpx 0rpx;">
+                        <view class="names font-overflow">{{item.store_name}}</view>
+                        <view bindtap="__e" class="payments flex" data-event-opts="{{[ [ 'tap',[ [ 'checkOut',['$0','$1'],[ [ ['orderList','',index] ],[ ['orderList','',index],['goods','',j,'goods_id'] ] ] ] ] ] ]}}">退房</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </mescroll-body>
+</view>

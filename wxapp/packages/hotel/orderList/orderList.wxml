@@ -1,0 +1,42 @@
+<view>
+    <view style="margin-top:6rpx;">
+        <sunui-navbar activeColor="#000" activeDirection="center" activeFontSize="32rpx" activeLineBg="#fff" activeLineHeight="4rpx" activeLineWidth="60%" autoLeft="list" bind:__l="__l" bind:change="__e" currentIndex="{{navIndex3}}" data-event-opts="{{[ [ '^change',[ ['navChange3'] ] ] ]}}" isCenter="{{false}}" items="{{navItem3}}" keyId="id" keyName="title" lineHeight="80rpx" margin="{{10}}" padding="24rpx" size="{{180}}" textAlign="center" vueId="9654d028-1"></sunui-navbar>
+    </view>
+    <mescroll-body bind:__l="__l" bind:down="__e" bind:init="__e" bind:up="__e" class="vue-ref" data-event-opts="{{[ [ '^init',[ ['mescrollInit'] ] ],[ '^down',[ ['downCallback'] ] ],[ '^up',[ ['upCallback'] ] ] ]}}" data-ref="mescrollRef" down="{{downOption}}" vueId="9654d028-2" vueSlots="{{['default']}}">
+        <view class="flex" style="width:750rpx;" wx:for="{{$root.l0}}" wx:key="index">
+            <view class="all">
+                <view bindtap="__e" class="flex-between" data-event-opts="{{[ [ 'tap',[ [ 'detialNext',['$0'],[ [ ['orderList','',index,'id'] ] ] ] ] ] ]}}" style="padding:34rpx 28rpx 0rpx 22rpx;">
+                    <view class="names">{{item.$orig.store_name}}</view>
+                    <view class="starts">{{item.m0}}</view>
+                </view>
+                <view class="flex-align-center dts" wx:for="{{item.$orig.goods}}" wx:for-index="j" wx:for-item="i" wx:key="j">
+                    <image bindtap="__e" class="img" data-event-opts="{{[ [ 'tap',[ [ 'detialNext',['$0'],[ [ ['orderList','',index,'id'] ] ] ] ] ] ]}}" src="{{i.cover}}"></image>
+                    <view class="details">
+                        <view bindtap="__e" data-event-opts="{{[ [ 'tap',[ [ 'detialNext',['$0'],[ [ ['orderList','',index,'id'] ] ] ] ] ] ]}}">
+                            <view class="textname">{{i.room_name}}</view>
+                            <view class="flex-between">
+                                <view class="price">￥<text>{{item.$orig.real_payment}}</text>
+                                </view>
+                            </view>
+                        </view>
+                        <view class="flex-end" style="margin-top:10rpx;">
+                            <view bindtap="__e" class="align flex" data-event-opts="{{[ [ 'tap',[ [ 'reserveAlign',['$0','$1'],[ [ ['orderList','',index] ],[ ['orderList','',index],['goods','',j,'goods_id'] ] ] ] ] ] ]}}" wx:if="{{item.$orig.status!=1}}">再次预定</view>
+                            <view bindtap="__e" class="payments flex" data-event-opts="{{[ [ 'tap',[ [ 'getSystem',['$0'],[ [ ['orderList','',index,'id'] ] ] ] ] ] ]}}" wx:if="{{item.$orig.status==2}}">退款</view>
+                            <view catchtap="__e" class="align flex" data-event-opts="{{[ [ 'tap',[ [ 'handleOperate',['$0','cancel'],[ [ ['orderList','',index] ] ] ] ] ] ]}}" wx:if="{{item.$orig.status==1}}">取消付款</view>
+                            <view bindtap="__e" class="payments flex" data-event-opts="{{[ [ 'tap',[ [ 'checkOut',['$0','$1'],[ [ ['orderList','',index] ],[ ['orderList','',index],['goods','',j,'goods_id'] ] ] ] ] ] ]}}" wx:if="{{item.$orig.status==3||item.$orig.status==4}}">退房</view>
+                            <view catchtap="__e" class="payments flex" data-event-opts="{{[ [ 'tap',[ [ 'handleOperate',['$0','pay'],[ [ ['orderList','',index] ] ] ] ] ] ]}}" wx:if="{{item.$orig.status==1}}">立即付款</view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </mescroll-body>
+    <sunui-popup bind:__l="__l" class="vue-ref" data-ref="pop" vueId="9654d028-3" vueSlots="{{['content']}}">
+        <view slot="content">
+            <view class="flex">
+                <view class="material">请选择酒店</view>
+            </view>
+            <view bindtap="__e" class="flex wansh" data-event-opts="{{[ [ 'tap',[ ['wansh2'] ] ] ]}}">去选择</view>
+        </view>
+    </sunui-popup>
+</view>

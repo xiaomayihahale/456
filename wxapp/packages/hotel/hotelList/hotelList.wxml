@@ -1,0 +1,38 @@
+<view>
+    <view class="topall flex-align-center">
+        <view bindtap="__e" class="flex-column hoteldate" data-event-opts="{{[ [ 'tap',[ ['show'] ] ] ]}}">
+            <view class="zhu">{{'住 '+$root.g0}}</view>
+            <view>{{'离 '+$root.g1}}</view>
+        </view>
+        <view class="sousuo flex-align-center">
+            <view>{{districts+' >'}}</view>
+            <text>|</text>
+            <input bindconfirm="__e" bindinput="__e" class="font-overflow" data-event-opts="{{[ [ 'input',[ [ '__set_model',[ '','realname','$event',[] ] ],[ 'changeInput',['$event'] ] ] ],[ 'confirm',[ [ 'changeSearch',['$event'] ] ] ] ]}}" placeholder="搜索酒店" placeholderStyle="color: #999999;" value="{{realname}}"></input>
+        </view>
+    </view>
+    <beauty-calendar autoChoose="{{autoChoose}}" autoClear="{{autoClear}}" bind:__l="__l" bind:change="__e" class="vue-ref" data-event-opts="{{[ [ '^change',[ ['change'] ] ] ]}}" data-ref="calendar" endDate="{{endDate}}" multi="{{multi}}" range="{{rang}}" startDate="{{startDate}}" vueId="94e2bfc0-1"></beauty-calendar>
+    <view class="daohang flex-align-center">
+        <view wx:for="{{daohang}}" wx:key="index">
+            <text bindtap="__e" class="{{[tabIndex==index?'titles2':'titles']}}" data-event-opts="{{[ [ 'tap',[ [ 'boxs',[index,'$0'],[ [ ['daohang','',index] ] ] ] ] ] ]}}">{{item.title}}</text>
+        </view>
+    </view>
+    <mescroll-body bind:__l="__l" bind:down="__e" bind:init="__e" class="vue-ref" data-event-opts="{{[ [ '^init',[ ['mescrollInit'] ] ],[ '^down',[ ['downCallback'] ] ] ]}}" data-ref="mescrollRef" down="{{downOption}}" vueId="94e2bfc0-2" vueSlots="{{['default']}}">
+        <view class="flex-column" style="width:750rpx;">
+            <view bindtap="__e" data-event-opts="{{[ [ 'tap',[ [ 'dianpu',['$0'],[ [ ['list','',index] ] ] ] ] ] ]}}" style="margin-bottom:20rpx;" wx:for="{{list}}" wx:key="index">
+                <view class="detail flex-align-center">
+                    <image class="imgcover" src="{{item.store_logo}}"></image>
+                    <view class="zong">
+                        <view class="flex-columns" style="position:absolute;top:20rpx;">
+                            <view class="flex-align-center ">
+                                <image src="{{ditu}}" style="width:20rpx;height:24rpx;margin-right:8rpx;"></image>
+                                <view class="font-overflow2 text3">{{item.store_name}}</view>
+                            </view>
+                            <view class="juli font-overflow" style="width:378rpx;">{{'距离你'+item.juli+'km'}}</view>
+                        </view>
+                        <view class="juli2 font-overflow">{{item.store_addres}}</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </mescroll-body>
+</view>

@@ -1,0 +1,136 @@
+<view>
+    <q-s-navbar backgroundColor="#ffffff" bind:__l="__l" navbarItems="{{navbarItems_1}}" vueId="5dab24e0-1"></q-s-navbar>
+    <view class="inaver _30f2b4d">
+        <view catchtap="goBack" class="left _30f2b4d">
+            <text bindtap="__e" class="icon _30f2b4d iconfont icon-shouye2" data-event-opts="{{[ [ 'tap',[ [ 'indeax',['$event'] ] ] ] ]}}"></text>
+        </view>
+    </view>
+    <view>
+        <view class="imagetop" wx:if="{{system.carousel}}">
+            <image class="imagetop" src="{{system.carousel}}"></image>
+        </view>
+        <view class="imagetop" wx:else>
+            <image class="imagetop" mode="aspectFill" src="{{hotelindex}}"></image>
+        </view>
+        <view style="position:absolute;top:150px;margin-bottom:150rpx;">
+            <view class="flex-column top">
+                <view class="all">
+                    <view class="flex-between toplist">
+                        <view>{{district}}</view>
+                        <view class="flex-align-center">
+                            <image class="addressimg" src="{{ditu}}"></image>
+                            <text>当前位置</text>
+                        </view>
+                    </view>
+                    <view bindtap="__e" class="flex-between toplists" data-event-opts="{{[ [ 'tap',[ ['show'] ] ] ]}}">
+                        <view class="flex-align-center">
+                            <view class="uni-input">{{$root.g0[1]+'月'+$root.g1[2]+'日'}}</view>
+                        </view>
+                        <text class="views flex">{{tianshu+'晚'}}</text>
+                        <view class="flex-align-center">
+                            <view class="uni-input" wx:if="{{timeNow}}">{{$root.g2[1]+'月'+$root.g3[2]+'日'}}</view>
+                            <view class="uni-input" wx:else>请选择 ></view>
+                        </view>
+                    </view>
+                    <beauty-calendar autoChoose="{{autoChoose}}" autoClear="{{autoClear}}" bind:__l="__l" bind:change="__e" class="vue-ref" data-event-opts="{{[ [ '^change',[ ['change'] ] ] ]}}" data-ref="calendar" endDate="{{endDate}}" multi="{{multi}}" range="{{rang}}" startDate="{{startDate}}" vueId="5dab24e0-2"></beauty-calendar>
+                    <view bindtap="__e" class="yudi" data-event-opts="{{[ [ 'tap',[ ['yuding'] ] ] ]}}">
+                        <view class="btn flex">查找酒店</view>
+                        <view class="btn2s flex" wx:if="{{userInfo.curDiscount}}">{{'享'+$root.g4+'折优惠'}}</view>
+                        <view class="btn2s flex" wx:else>暂无优惠</view>
+                    </view>
+                </view>
+            </view>
+            <view class="flex-between rooms" wx:if="{{list.length!=0}}">
+                <view class="title">特惠房间</view>
+                <view bindtap="__e" class="flex-align-center" data-event-opts="{{[ [ 'tap',[ ['getIndexRoom'] ] ] ]}}" style="padding:0rpx 20rpx;" wx:if="{{list.length>4}}">
+                    <image class="zhuanhuan" src="{{zhuanhaun}}"></image>
+                    <view class="changes">换一换</view>
+                </view>
+            </view>
+            <view class="specialRoom" wx:if="{{list.length!=0}}">
+                <view bindtap="__e" class="hotels flex-align-center" data-event-opts="{{[ [ 'tap',[ [ 'hotelDetial',['$0'],[ [ ['list','',index] ] ] ] ] ] ]}}" wx:if="{{item.$orig.top_type==1&&index<4}}" wx:for="{{$root.l0}}" wx:key="index">
+                    <view class="flex-columns wid">
+                        <view style="position:relative;height:370rpx;">
+                            <image class="imgHotel" mode="aspectFill" src="{{item.$orig.img}}"></image>
+                            <view class="imgBJ" wx:if="{{item.g5!=0}}">
+                                <view class="flex-columns">
+                                    <view class="imgbj2">可省</view>
+                                    <view class="imgbj2 flex-align-center">￥<text style="font-size:28rpx;">{{item.g6}}</text>
+                                    </view>
+                                </view>
+                                <image class="imgBJ3" src="{{indexbj2}}"></image>
+                            </view>
+                        </view>
+                        <view style="margin:0rpx 16rpx;">
+                            <view class="font-overflow" style="padding:2rpx 0rpx;">{{item.$orig.room_name}}</view>
+                            <view class="couponIndex flex" wx:if="{{item.$orig.coupon_money!=''&&item.g7!=0}}">{{''+item.$orig.coupon_money+'优惠券'}}</view>
+                            <view class="couponIndex2 flex" wx:else></view>
+                            <view style="padding:14rpx 0px 10rpx;width:300rpx;">
+                                <view class="flex-between">
+                                    <view class="flex-align-center">
+                                        <text class="moneys">￥</text>
+                                        <view class="price">{{item.g8}}</view>
+                                    </view>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view style="margin:0rpx 30rpx;">
+                <view class="title" wx:if="{{lists.length!=0}}">人气房间</view>
+            </view>
+            <view bindtap="__e" class="flex-columns" data-event-opts="{{[ [ 'tap',[ [ 'hotelDetial',['$0'],[ [ ['lists','',j] ] ] ] ] ] ]}}" style="margin:0rpx 30rpx;" wx:if="{{i.top_type==2&&j<1&&lists.length!=0}}" wx:for="{{lists}}" wx:for-index="j" wx:for-item="i" wx:key="j">
+                <image class="popularImg" mode="aspectFill" src="{{i.img}}"></image>
+                <view class="flex-between popularRoom">
+                    <view class="flex-columns">
+                        <view style="width:480rpx;">{{i.room_name}}</view>
+                    </view>
+                    <view class="flex-column">
+                        <view class="popularPrice">￥<text>{{i.discount_prcie}}</text>起</view>
+                    </view>
+                </view>
+            </view>
+            <view class="specialRoom">
+                <view bindtap="__e" class="hotels flex-align-center" data-event-opts="{{[ [ 'tap',[ [ 'hotelDetial',['$0'],[ [ ['lists','',indexs] ] ] ] ] ] ]}}" wx:if="{{items.$orig.top_type==2&&indexs>=1}}" wx:for="{{$root.l1}}" wx:for-index="indexs" wx:for-item="items" wx:key="indexs">
+                    <view class="flex-columns wid">
+                        <view style="position:relative;height:370rpx;">
+                            <image class="imgHotel" mode="aspectFill" src="{{items.$orig.img}}"></image>
+                            <view class="imgBJ" wx:if="{{items.g9!=0}}">
+                                <view class="flex-columns">
+                                    <view class="imgbj2">可省</view>
+                                    <view class="imgbj2 flex-align-center">￥<text style="font-size:28rpx;">{{items.g10}}</text>
+                                    </view>
+                                </view>
+                                <image class="imgBJ3" src="{{indexbj2}}"></image>
+                            </view>
+                        </view>
+                        <view style="margin:0rpx 16rpx;">
+                            <view class="font-overflow" style="padding:2rpx 0rpx;">{{items.$orig.room_name}}</view>
+                            <view class="couponIndex flex" wx:if="{{items.$orig.coupon_money!=''&&items.g11!=0}}">{{''+items.$orig.coupon_money+'优惠券'}}</view>
+                            <view class="couponIndex2 flex" wx:else></view>
+                            <view style="width:300rpx;padding:14rpx 0px 10rpx;">
+                                <view class="flex-between">
+                                    <view class="flex-align-center">
+                                        <text class="moneys">￥</text>
+                                        <view class="price">{{items.g12}}</view>
+                                    </view>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <sunui-popup bind:__l="__l" class="vue-ref" data-ref="popmend" vueId="5dab24e0-3" vueSlots="{{['content']}}">
+        <view slot="content">
+            <view class="flex">
+                <view class="material">请选择酒店</view>
+            </view>
+            <view bindtap="__e" class="flex wansh" data-event-opts="{{[ [ 'tap',[ ['wansh2'] ] ] ]}}">去选择</view>
+        </view>
+    </sunui-popup>
+    <view style="height:120rpx;"></view>
+    <iew-tabbar bind:__l="__l" current="{{0}}" ids="{{1}}" tabbarHeight="{{120}}" type="{{2}}" vueId="5dab24e0-4"></iew-tabbar>
+</view>

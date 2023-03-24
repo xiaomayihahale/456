@@ -1,0 +1,54 @@
+<view>
+    <image class="img" src="{{storeDetail.store_logo}}"></image>
+    <view class="huizong flex-columns">
+        <view class="covcard">
+            <view style="padding-left:28rpx;">
+                <view class="juli flex-align-center">
+                    <image src="{{diwei2}}" style="width:20rpx;height:24rpx;margin-right:10rpx;"></image>{{'距离你'+storeDetail.juli+'km'}}</view>
+                <view class="hots">{{storeDetail.store_name}}</view>
+            </view>
+            <view class="textarea" wx:if="{{storeDetail.store_desc_addres}}">{{''+storeDetail.store_desc_addres+''}}</view>
+            <view class="allphones flex-between">
+                <view class="flex-align-center">
+                    <image class="addressimg" src="{{ditu}}"></image>
+                    <view class="lu font-overflow2">{{storeDetail.store_addres}}</view>
+                </view>
+                <view class="flex-align-center">
+                    <view bindtap="__e" class="flex-column" data-event-opts="{{[ [ 'tap',[ [ 'address',['$0'],['storeDetail'] ] ] ] ]}}">
+                        <image src="{{dingwei}}"></image>
+                        <view>导航</view>
+                    </view>
+                    <view class="zj">|</view>
+                    <view bindtap="__e" class="flex-column" data-event-opts="{{[ [ 'tap',[ [ 'callPhone',['$0'],['storeDetail.store_phone'] ] ] ] ]}}" style="margin-right:26rpx;">
+                        <image src="{{calles}}"></image>
+                        <view>电话</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view>
+            <view style="background:#F0F0F0;height:20rpx;width:750rpx;"></view>
+            <view bindtap="__e" class="flex-align-center" data-event-opts="{{[ [ 'tap',[ [ 'destine',['$0'],[ [ ['list','',index,'id'] ] ] ] ] ] ]}}" wx:for="{{$root.l0}}" wx:key="index">
+                <image class="covers" src="{{item.$orig.img}}"></image>
+                <view style="width:492rpx;">
+                    <view class="title">{{item.$orig.room_name}}</view>
+                    <view class="guige">{{item.$orig.spec}}</view>
+                    <view class="flex-between">
+                        <view class="flex-columns">
+                            <view class="flex-align-center">
+                                <view class="guige2">{{'￥'+item.$orig.price}}</view>
+                                <view class="save flex-align-center">
+                                    <view>￥</view>
+                                    <text>{{item.$orig.discount_prcie}}</text>
+                                </view>
+                            </view>
+                            <view class="save flex-align-center" wx:if="{{item.m0>0}}">{{'为您节省了'+item.g0+''}}</view>
+                        </view>
+                        <view class="ydbtn flex" wx:if="{{item.$orig.apply_room_count&&item.$orig.apply_room_count!=0}}">立即预定</view>
+                        <view class="ydbtn2 flex" wx:else>暂无空房</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

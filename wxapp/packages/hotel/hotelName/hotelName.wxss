@@ -1,0 +1,185 @@
+.img {
+    width: 750rpx;
+    height: 620rpx;
+    background-color: #000;
+}
+
+.huizong {
+    position: relative;
+    top: -58rpx;
+}
+
+.covcard {
+    width: 750rpx;
+    background: #fff;
+    border-radius: 40rpx 40rpx 0rpx 0rpx;
+    z-index: 99;
+}
+
+.juli,.youhui {
+    margin: 28rpx 20rpx 16rpx 0rpx;
+    color: #1bbcd0;
+    font-size: 24rpx;
+    height: 54rpx;
+    background: #e0f8fb;
+    border-radius: 38rpx;
+    padding: 0rpx 16rpx;
+    display: -webkit-inline-box;
+    display: -webkit-inline-flex;
+    display: inline-flex;
+}
+
+.youhui {
+    color: #fd6a04;
+    background: #faeef3;
+}
+
+.hots {
+    font-size: 36rpx;
+    font-weight: 700;
+}
+
+.textarea {
+    font-size: 24rpx;
+    background: #f8f9fd;
+    border-radius: 20rpx;
+    width: 690rpx;
+    height: auto;
+    padding: 24rpx 20rpx;
+    margin: 28rpx 0rpx 0rpx 28rpx;
+}
+
+.allphones {
+    background: linear-gradient(269.91deg,#dfdfdf .06%,hsla(0,0%,100%,0) 89.26%);
+    width: 750rpx;
+    height: 110rpx;
+    margin-top: 26rpx;
+}
+
+.allphones image {
+    width: 40rpx;
+    height: 40rpx;
+    border-radius: 50%;
+    margin-bottom: 6rpx;
+}
+
+.allphones view {
+    color: #6f7f9d;
+    font-size: 24rpx;
+}
+
+.allphones .zj {
+    color: #aea6a6;
+    margin: 0rpx 26rpx 0rpx 30rpx;
+}
+
+.allphones .lu {
+    max-width: 500rpx;
+    font-size: 24rpx;
+    color: #000;
+    margin-left: 14rpx;
+}
+
+.allphones .addressimg {
+    width: 20rpx;
+    height: 24rpx;
+    margin-left: 28rpx;
+}
+
+.allbtn {
+    width: 750rpx;
+    height: 98rpx;
+    background: #fff;
+}
+
+.you {
+    color: #674400;
+    font-weight: 700;
+    padding: 0rpx 28rpx 0rpx 34rpx;
+}
+
+.quan {
+    border: 2rpx solid #ff8484;
+    box-sizing: border-box;
+    border-radius: 52rpx;
+    display: inline-block;
+    line-height: 56rpx;
+    height: 56rpx;
+    color: #f40009;
+    font-size: 24rpx;
+    padding: 0rpx 14rpx 0rpx 14rpx;
+}
+
+.getl {
+    color: #a06b04;
+    font-size: 24rpx;
+    width: 170rpx;
+    text-align: right;
+    padding: 26rpx 26rpx 18rpx;
+}
+
+.covers {
+    width: 200rpx;
+    height: 200rpx;
+    margin: 26rpx 20rpx 24rpx 18rpx;
+    border-radius: 20rpx;
+}
+
+.covers:nth-child(n+2) {
+    width: 200rpx;
+    height: 200rpx;
+    margin: 0rpx 20rpx 24rpx 18rpx;
+}
+
+.title {
+    font-size: 32rpx;
+    font-weight: 700;
+    margin-bottom: 6rpx;
+}
+
+.guige {
+    font-size: 24rpx;
+    margin-bottom: 30rpx;
+    color: #c4c4c4;
+}
+
+.guige2 {
+    color: #c4c4c4;
+    font-size: 24rpx;
+    text-decoration: line-through;
+    margin-right: 20rpx;
+}
+
+.save {
+    color: #ffb658;
+    font-size: 24rpx;
+    margin-right: 16rpx;
+}
+
+.save view {
+    color: #ff0303;
+    font-weight: 700;
+}
+
+.save text {
+    color: #ff0303;
+    font-weight: 700;
+    font-size: 36rpx;
+    margin-left: 6rpx;
+}
+
+.ydbtn {
+    background: #ef3618;
+    border-radius: 48rpx;
+    width: 154rpx;
+    height: 60rpx;
+    color: #fff;
+}
+
+.ydbtn2 {
+    background: #999;
+    border-radius: 48rpx;
+    width: 154rpx;
+    height: 60rpx;
+    color: #fff;
+}

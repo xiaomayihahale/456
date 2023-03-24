@@ -1,0 +1,81 @@
+<view>
+    <view class="flex-between top">
+        <view class="flex-columns" wx:if="{{order.status==0}}">
+            <view class="topstart">已退款</view>
+            <view style="color:#999;">您的订单已退款</view>
+        </view>
+        <view class="flex-columns" wx:if="{{order.status==1}}">
+            <view class="topstart">待支付</view>
+            <view style="color:#999;">您的订单暂未支付，期待您的入住</view>
+        </view>
+        <view class="flex-columns" wx:if="{{order.status==2}}">
+            <view class="topstart" wx:if="{{order.status==2}}">待入住</view>
+            <view style="color:#999;">您的订单已支付，期待您的入住</view>
+        </view>
+        <view class="flex-columns" wx:if="{{order.status==3}}">
+            <view class="topstart" wx:if="{{order.status==3}}">已入住</view>
+            <view style="color:#999;">您的订单已入住</view>
+        </view>
+        <view class="flex-columns" wx:if="{{order.status==4}}">
+            <view class="topstart" wx:if="{{order.status==4}}">已完成</view>
+            <view style="color:#999;">您的订单已完成</view>
+        </view>
+        <view class="prices">{{'￥'+order.real_payment}}</view>
+    </view>
+    <block wx:for="{{orderGoods}}" wx:key="index">
+        <view class="hotel">
+            <view class="flex-align-center" style="margin-bottom:42rpx;">
+                <view class="names">酒店名称</view>
+                <view style="color:#333;">{{order.store_name}}</view>
+            </view>
+            <view class="flex-align-center" style="margin-bottom:42rpx;">
+                <view class="names">酒店地址</view>
+                <view style="color:#333;width:472rpx;">{{order.store_addres}}</view>
+            </view>
+            <view class="guige flex-align-center">
+                <view>{{item.spec}}</view>
+            </view>
+        </view>
+        <view class="detail flex-columns" style="{{options.index==2?'margin-bottom: 20rpx;':''}}">
+            <view class="flex-align-center v-margin">
+                <view class="names">入住人</view>
+                <view style="color:#333;">{{item.name}}</view>
+            </view>
+            <view class="flex-align-center v-margin">
+                <view class="names">手机号</view>
+                <view>{{item.mobile}}</view>
+            </view>
+            <view class="flex-align-center v-margin">
+                <view class="names">订房时间</view>
+                <view>{{$root.g0[1]+'-'+$root.g1[2]+' 到 '+$root.g2[1]+'-'+$root.g3[2]+'（共'+order.reserve_number+'晚）'}}</view>
+            </view>
+            <view class="flex-align-center v-margin" wx:if="{{order.status==3&&order.ship_time}}">
+                <view class="names">到店时间</view>
+                <view style="color:#333;">{{order.ship_time}}</view>
+            </view>
+            <view class="flex-align-center">
+                <view class="names">订单号</view>
+                <view style="color:#333;">{{order.order_number}}</view>
+                <view bindtap="__e" class="copy flex" data-event-opts="{{[ [ 'tap',[ ['paste'] ] ] ]}}">复制</view>
+            </view>
+        </view>
+        <view class="detail flex-columns" wx:if="{{options.index==2}}">
+            <view class="flex-align-center">
+                <view class="names3">退款说明</view>
+                <view style="color:#333;">
+                    <view class="_p">{{'1.提前'+system.free_hour+'小时免费;'}}</view>
+                    <view class="_p">{{'2.违约金额:'+system.promise_money+'元;'}}</view>
+                    <view class="_p">{{'3.违约每过一小时加收金额:'+system.promise_add_money+'元;'}}</view>
+                    <view class="_p">{{'4.违约截止时间：'+system.back_hour+'小时'}}</view>
+                </view>
+            </view>
+        </view>
+        <view class="btnAll flex-end">
+            <view bindtap="__e" class="align flex" data-event-opts="{{[ [ 'tap',[ [ 'bookAgain',['$0'],[ [ ['orderGoods','',index,'goods_id'] ] ] ] ] ] ]}}" style="margin-right:54rpx;" wx:if="{{order.status==2||order.status==3}}">再次预定</view>
+            <view bindtap="__e" class="payments flex" data-event-opts="{{[ [ 'tap',[ [ 'refundOrders',['$0'],['order.id'] ] ] ] ]}}" wx:if="{{order.status==2}}">退款</view>
+            <view bindtap="__e" class="payments flex" data-event-opts="{{[ [ 'tap',[ [ 'checkOut',['$0','$1'],[ 'order',[ ['orderGoods','',index,'goods_id'] ] ] ] ] ] ]}}" wx:if="{{order.status==3||order.status==4}}">退房</view>
+            <view catchtap="__e" class="align flex" data-event-opts="{{[ [ 'tap',[ [ 'handleOperate',['$0','cancel'],['order'] ] ] ] ]}}" style="margin-right:54rpx;" wx:if="{{order.status==1}}">取消付款</view>
+            <view catchtap="__e" class="payments flex" data-event-opts="{{[ [ 'tap',[ [ 'handleOperate',['$0','pay'],['order'] ] ] ] ]}}" wx:if="{{order.status==1}}">立即付款</view>
+        </view>
+    </block>
+</view>
