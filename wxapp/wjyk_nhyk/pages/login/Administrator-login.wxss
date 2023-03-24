@@ -1,0 +1,108 @@
+page {
+    margin: 0;
+    padding: 0;
+    font-family: montserrat;
+    background-image: -webkit-gradient(linear,left top,right top,from(#ffedd7),color-stop(#74d5ff),color-stop(#ffd2f7),to(#aae7da));
+    background-image: -webkit-linear-gradient(left,#ffedd7,#74d5ff,#ffd2f7,#aae7da);
+    background-image: linear-gradient(90deg,#ffedd7,#74d5ff,#ffd2f7,#aae7da);
+    background-size: 400%;
+    animation: bganimation 15s infinite;
+}
+
+@-webkit-keyframes bganimation {
+    0% {
+        background-position: 0 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0 50%;
+    }
+}
+
+@keyframes bganimation {
+    0% {
+        background-position: 0 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0 50%;
+    }
+}
+
+.text {
+    color: #fff;
+    text-align: center;
+    text-transform: uppercase;
+    margin: 300px 0;
+    font-size: 22px;
+}
+
+.box-uni {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    margin: auto;
+    width: 600rpx;
+    height: 660rpx;
+}
+
+.uni-logo {
+    width: 88rpx;
+    height: 88rpx;
+    margin: auto;
+    border-radius: 50%;
+}
+
+.uni-name {
+    color: #fff;
+    font-size: 32rpx;
+    margin-top: 30rpx;
+}
+
+.top {
+    margin: auto;
+    text-align: center;
+}
+
+.uni-zhanghao {
+    height: 78rpx;
+    background: #fff;
+    margin: 20rpx;
+}
+
+.uni-input {
+    height: 520rpx;
+    position: relative;
+}
+
+.uni-button {
+    background: #1b8ce6!important;
+    position: absolute;
+    bottom: 0;
+    width: 94%;
+    font-size: 28rpx;
+    padding: 10rpx 20rpx;
+}
+
+.uni-box {
+    padding-top: 100rpx;
+}
+
+.box-input {
+    width: 100%;
+    position: relative;
+    z-index: 10;
+    height: 78rpx;
+    line-height: 78rpx;
+    padding-left: 20rpx;
+}

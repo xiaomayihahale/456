@@ -1,0 +1,23 @@
+<view>
+    <view class="box-uni">
+        <view class="top">
+            <view class="uni-logo">
+                <image mode src="{{system.logo}}" style="height:100%;"></image>
+            </view>
+            <view class="uni-name">{{system.name}}</view>
+        </view>
+        <view class="uni-input">
+            <view class="uni-box">
+                <view class="uni-zhanghao">
+                    <input class="box-input" placeholder="请输入账号" type="text" value=""></input>
+                </view>
+                <view class="uni-zhanghao">
+                    <input class="box-input" placeholder="请输入密码" type="password" value=""></input>
+                </view>
+            </view>
+            <view bindtap="__e" data-event-opts="{{[ [ 'tap',[ ['login'] ] ] ]}}" style="margin:0px 20rpx;">
+                <button class="uni-button" type="default">确定登陆</button>
+            </view>
+        </view>
+    </view>
+</view>

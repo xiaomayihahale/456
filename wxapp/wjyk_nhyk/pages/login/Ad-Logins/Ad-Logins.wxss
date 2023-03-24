@@ -1,0 +1,150 @@
+.tabbarActive.data-v-6aaab849 {
+    color: #000!important;
+}
+
+.tabbar.data-v-6aaab849 {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-around;
+    -webkit-box-align: center;
+    align-items: center;
+    width: 100%;
+    height: 110rpx;
+    background-color: #fff;
+}
+
+.tabbar .tabbar-item.data-v-6aaab849 {
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    height: 100rpx;
+}
+
+.tabbar .tabbar-item .item-img.data-v-6aaab849 {
+    margin-bottom: 4rpx;
+    width: 56rpx;
+    height: 56rpx;
+}
+
+.tabbar .tabbar-item .item-name.data-v-6aaab849 {
+    font-size: 26rpx;
+    color: #a3a3a3;
+}
+
+button::after {
+    border: none;
+    outline: none;
+}
+
+.button-hover {
+    color: #fff!important;
+}
+
+.img {
+    width: 750rpx;
+    height: 542rpx;
+    z-index: 1;
+}
+
+.all {
+    height: 930rpx;
+    width: 750rpx;
+    background-color: #fff;
+    box-shadow: 0rpx 8rpx 8rpx rgba(0,0,0,.06);
+    border-radius: 20rpx;
+    margin-top: -36rpx;
+    position: relative;
+    z-index: 9;
+    padding: 30rpx 0rpx;
+}
+
+.box-uni {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    margin: auto;
+    width: 600rpx;
+    height: 660rpx;
+}
+
+.uni-logo {
+    width: 88rpx;
+    height: 88rpx;
+    margin: auto;
+    border-radius: 50%;
+}
+
+.uni-name {
+    color: #fff;
+    font-size: 32rpx;
+    margin-top: 30rpx;
+}
+
+.top {
+    margin: auto;
+    text-align: center;
+}
+
+.uni-zhanghao {
+    height: 78rpx;
+    background: #f1f1f1;
+    width: 700rpx;
+    border-radius: 80rpx;
+}
+
+.remember-psw {
+    margin-top: 30rpx;
+}
+
+.uni-input {
+    position: relative;
+}
+
+.button {
+    background: #e53c39!important;
+    margin-top: 100rpx;
+    width: 630rpx;
+    height: 96rpx;
+    font-size: 32rpx;
+    font-weight: 700;
+    border-radius: 50rpx;
+    box-shadow: 0rpx 4rpx 4rpx 2rpx #c77978;
+    line-height: 96rpx;
+    text-align: center;
+}
+
+.uni-box {
+    padding-top: 100rpx;
+}
+
+.zhangh {
+    font-size: 32rpx;
+    font-weight: 700;
+    margin-left: 44rpx;
+    margin-bottom: 20rpx;
+}
+
+.pass {
+    font-size: 32rpx;
+    font-weight: 700;
+    margin: 66rpx 0rpx 20rpx 44rpx;
+}
+
+.box-input {
+    width: 100%;
+    position: relative;
+    z-index: 10;
+    height: 78rpx;
+    line-height: 78rpx;
+    padding-left: 24rpx;
+}

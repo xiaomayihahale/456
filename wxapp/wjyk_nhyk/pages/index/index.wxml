@@ -1,0 +1,281 @@
+<view>
+    <view class="all" style="{{indexMealLists?'height: 874rpx;':'height: 580rpx;'}}">
+        <view class="flex-between">
+            <view bindtap="__e" class="flex-align-center" data-event-opts="{{[ [ 'tap',[ ['handleLogin'] ] ] ]}}" wx:if="{{!uid}}">
+                <image class="imgtop" src="{{avatar}}"></image>
+                <view class="flex-columns">
+                    <view class="flex-align-center">
+                        <view class="nicknames sunui-ellipsis-1">微信用户</view>
+                    </view>
+                </view>
+            </view>
+            <view class="flex-align-center" wx:else>
+                <image class="imgtop" src="{{userInfo.avatar}}"></image>
+                <view class="flex-columns">
+                    <view class="flex-align-center">
+                        <view class="nicknames sunui-ellipsis-1">{{userInfo.nickname}}</view>
+                        <image class="vipdj" mode="aspectFill" src="{{userInfo.curMember_logo}}"></image>
+                    </view>
+                    <view class="phone" wx:if="{{userInfo.phone}}">{{''+userInfo.phone+''}}<text bindtap="__e" data-event-opts="{{[ [ 'tap',[ ['bindphones'] ] ] ]}}" style="color:#D9B776;margin-left:20rpx;" wx:if="{{userInfo.status==0}}">去绑定 ></text>
+                    </view>
+                </view>
+            </view>
+            <view bindtap="__e" class="flex-column" data-event-opts="{{[ [ 'tap',[ ['erwm'] ] ] ]}}" style="margin-right:34rpx;">
+                <view class="iconfont icon-erweima" style="font-size:50rpx;color:#FFFFFF;"></view>
+                <view class="erwm">会员码</view>
+            </view>
+        </view>
+        <swiper autoplay="{{false}}" bindchange="__e" circular="true" class="swiper-block" current="{{$root.m0}}" data-event-opts="{{[ [ 'change',[ [ 'swiperChange',['$event'] ] ] ] ]}}" duration="{{700}}" interval="{{1000}}" nextMargin="90rpx" previousMargin="90rpx">
+            <swiper-item class="swiper-item" wx:for="{{$root.l0}}" wx:key="index">
+                <view class="{{[currentIndex===index?'active':'slide-image']}}" mode="aspectFill" style="{{'background-image:'+'url('+item.$orig.member_back_logo+')'+';'}}">
+                    <view class="flex-between" style="padding:20rpx 24rpx 0rpx;">
+                        <view class="flex-align-center" style="margin-left:58rpx;">
+                            <view class="hy">{{item.$orig.member_name}}</view>
+                            <image class="vipdj2 flex" mode="aspectFill" src="{{item.$orig.member_logo}}"></image>
+                        </view>
+                        <view bindtap="__e" class="czhi" data-event-opts="{{[ [ 'tap',[ ['money2'] ] ] ]}}">去充值 ></view>
+                    </view>
+                    <view class="card" wx:if="{{userInfo.member_no}}">{{'卡号：'+userInfo.member_no}}</view>
+                    <view class="card2" wx:else></view>
+                    <view class="flex">
+                        <progress activeColor="#504D4E" backgroundColor="#E3E3E3" borderRadius="100" fontSize="24rpx" percent="{{100}}" showInfo="{{true}}" strokeWidth="4" style="width:94%;margin-top:16rpx;color:#FFFFFF;font-size:28rpx!important;" wx:if="{{$root.m1>=item.m2}}"></progress>
+                        <progress activeColor="#504D4E" backgroundColor="#E3E3E3" borderRadius="100" percent="{{item.g0}}" showInfo="{{true}}" strokeWidth="4" style="width:94%;margin-top:16rpx;color:#FFFFFF;font-size:28rpx!important;" wx:else></progress>
+                    </view>
+                    <view class="xfBtn flex-align-center">
+                        <view wx:if="{{item.$orig.nextLevelId==-1}}">{{'升级'+item.$orig.nextMember_name+'，享全场'}}<text style="color:#ffe500;">{{item.g1}}</text>折</view>
+                        <view wx:else>再消费<text style="color:#fff700;">{{item.$orig.nextMoney}}</text>{{'元升级'+item.$orig.nextMember_name+'，享全场'}}<text style="color:#ffe500;">{{item.g2}}</text>折</view>
+                    </view>
+                </view>
+            </swiper-item>
+        </swiper>
+        <view wx:if="{{indexMealLists}}">
+            <view class="huiyuan">会员权益</view>
+            <scroll-view scrollX="true">
+                <view class="flex-align-center">
+                    <view bindtap="__e" class="srfl flex-column" data-event-opts="{{[ [ 'tap',[ [ 'jump',['$0'],[ [ ['indexMealLists','',index] ] ] ] ] ] ]}}" wx:for="{{indexMealLists}}" wx:key="index">
+                        <image src="{{item.icon}}"></image>
+                        <view>{{item.meau_name}}</view>
+                    </view>
+                </view>
+            </scroll-view>
+        </view>
+        <view class="flex v-margin" style="{{indexMealLists?'margin-top: 30rpx;':'margin-top: 50rpx;'}}">
+            <view class="money">
+                <view class="flex-between qd">
+                    <block wx:if="{{userInfo.sign_date==date}}">
+                        <view style="color:#999999;">{{'已连续签到'+userInfo.sign_count+'天'}}</view>
+                        <view class="flex-align-center">
+                            <view bindtap="__e" class="qiandao2 flex" data-event-opts="{{[ [ 'tap',[ ['qiandao'] ] ] ]}}">签到记录</view>
+                        </view>
+                    </block>
+                    <block wx:else>
+                        <view>今天尚未签到</view>
+                        <view class="flex-align-center">
+                            <view bindtap="__e" class="qiandao flex" data-event-opts="{{[ [ 'tap',[ ['qiandao'] ] ] ]}}">去签到</view>
+                        </view>
+                    </block>
+                </view>
+                <view class="flex-align-center" style="width:100%;">
+                    <view bindtap="__e" class="zong flex-column" data-event-opts="{{[ [ 'tap',[ ['money'] ] ] ]}}">
+                        <view class="flex height2">
+                            <view class="iconfont icon-yue flex" style="font-size:44rpx;"></view>
+                        </view>
+                        <view style="font-size:32rpx;margin-bottom:4rpx;" wx:if="{{userInfo.money}}">{{$root.g3}}</view>
+                        <view>钱包</view>
+                    </view>
+                    <view bindtap="__e" class="zong flex-column" data-event-opts="{{[ [ 'tap',[ ['jf'] ] ] ]}}">
+                        <view class="flex height2">
+                            <view class="iconfont icon-jifen flex" style="font-size:50rpx;"></view>
+                        </view>
+                        <view style="font-size:32rpx;margin-bottom:4rpx;" wx:if="{{userInfo.integral}}">{{$root.g4}}</view>
+                        <view>积分</view>
+                    </view>
+                    <view bindtap="__e" class="zong flex-column" data-event-opts="{{[ [ 'tap',[ ['coupon'] ] ] ]}}">
+                        <view class="flex height2">
+                            <view class="iconfont icon-youhuiquan1 flex" style="font-size:56rpx;margin-bottom:4rpx;"></view>
+                        </view>
+                        <view style="font-size:32rpx;" wx:if="{{uid}}">{{userInfo.couponCount}}</view>
+                        <view>优惠券</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view style="margin-top:16rpx;padding:10rpx 10rpx;">
+            <sunui-card bind:__l="__l" bind:more="__e" data-event-opts="{{[ [ '^more',[ [ 'handleOrderList2',[0] ] ] ] ]}}" label="我的订单" moreText="全部订单" showMore="{{true}}" vueId="12313323-1" vueSlots="{{['default']}}">
+                <view class="sunui-layout-seesaw">
+                    <view bindtap="__e" class="sunui-hover" data-event-opts="{{[ [ 'tap',[ [ 'handleOrderList2',[1] ] ] ] ]}}">
+                        <image src="/static/images/group1.png" style="width:58rpx;height:58rpx;"></image>
+                        <view class="fuk2 flex" wx:if="{{$root.m3}}">99+</view>
+                        <block wx:else>
+                            <view class="fuk flex" wx:if="{{daifuCount!=0&&uid}}">{{daifuCount}}</view>
+                        </block>
+                        <view class="title">待付款</view>
+                    </view>
+                    <view bindtap="__e" class="sunui-hover" data-event-opts="{{[ [ 'tap',[ [ 'handleOrderList2',[2] ] ] ] ]}}">
+                        <image src="/static/images/group22.png" style="width:58rpx;height:58rpx;"></image>
+                        <view class="fuk2 flex" wx:if="{{$root.m4}}">99+</view>
+                        <block wx:else>
+                            <view class="fuk flex" wx:if="{{daiHuCount!=0&&uid}}">{{daiHuCount}}</view>
+                        </block>
+                        <view class="title">待发货</view>
+                    </view>
+                    <view bindtap="__e" class="sunui-hover" data-event-opts="{{[ [ 'tap',[ [ 'handleOrderList2',[3] ] ] ] ]}}">
+                        <image src="/static/images/group3.png" style="width:58rpx;height:58rpx;"></image>
+                        <view class="fuk2 flex" wx:if="{{$root.m5}}">99+</view>
+                        <block wx:else>
+                            <view class="fuk flex" wx:if="{{userInfo.daiShCount!=0&&uid}}">{{userInfo.daiShCount}}</view>
+                        </block>
+                        <view class="title">待收货</view>
+                    </view>
+                    <view bindtap="__e" class="sunui-hover" data-event-opts="{{[ [ 'tap',[ [ 'handleOrderList2',[4] ] ] ] ]}}">
+                        <image src="/static/images/group4.png" style="width:58rpx;height:58rpx;"></image>
+                        <view class="title">已完成</view>
+                    </view>
+                </view>
+            </sunui-card>
+        </view>
+        <view style="padding:30rpx;">
+            <view wx:if="{{uid}}">
+                <block wx:if="{{couponInfos.length!=0}}">
+                    <view class="titleCard">购买套餐 超值惊喜</view>
+                    <scroll-view class="sc_contain" scrollX="true">
+                        <view class="view_sc_1" style="{{'background-image:'+'url('+item.meal_back_img+')'+';'}}" wx:for="{{couponInfos}}" wx:key="index">
+                            <view class="font-overflow" style="font-weight:bold;">{{item.meal_name}}</view>
+                            <view style="font-size:24rpx;margin:16rpx 0rpx 22rpx;">{{'优惠次数 '+item.meal_count+'/次'}}</view>
+                            <view class="flex-between">
+                                <view class="flex-align-center">
+                                    <text>￥</text>
+                                    <view style="font-size:40rpx;font-weight:bold;">{{item.meal_money}}</view>
+                                </view>
+                                <view bindtap="__e" class="buy flex" data-event-opts="{{[ [ 'tap',[ [ 'AddMealCoupons',['$0'],[ [ ['couponInfos','',index] ] ] ] ] ] ]}}">立即购买</view>
+                            </view>
+                        </view>
+                    </scroll-view>
+                </block>
+            </view>
+            <view wx:else>
+                <block wx:if="{{system.mealLists.length!=0}}">
+                    <view class="titleCard">购买套餐 超值惊喜</view>
+                    <scroll-view class="sc_contain" scrollX="true">
+                        <view wx:for="{{system.mealLists}}" wx:key="index">
+                            <view class="view_sc_1" style="{{'background-image:'+'url('+item.meal_back_img+')'+';'}}">
+                                <view class="font-overflow" style="font-weight:bold;">{{item.meal_name}}</view>
+                                <view style="font-size:24rpx;margin:16rpx 0rpx 22rpx;">{{'全场享受'+item.meal_discount*10+'折 优惠次数 '+item.meal_count+'/次'}}</view>
+                                <view class="flex-between">
+                                    <view class="flex-align-center">
+                                        <text>￥</text>
+                                        <view style="font-size:40rpx;font-weight:bold;">{{item.meal_money}}</view>
+                                    </view>
+                                    <view bindtap="__e" class="buy flex" data-event-opts="{{[ [ 'tap',[ [ 'handleLogin',['$event'] ] ] ] ]}}">立即购买</view>
+                                </view>
+                            </view>
+                        </view>
+                    </scroll-view>
+                </block>
+            </view>
+        </view>
+        <view style="margin-top:16rpx;padding:0rpx 10rpx 10rpx;">
+            <sunui-card bind:__l="__l" label="常用工具" vueId="12313323-2" vueSlots="{{['default']}}">
+                <view class="sunui-layout-seesaw flex-align-center">
+                    <view bindtap="__e" class="sunui-hover" data-event-opts="{{[ [ 'tap',[ [ 'editInfo',['$0'],['userInfo.pid'] ] ] ] ]}}">
+                        <image src="{{ziliao}}" style="width:64rpx;height:58rpx;"></image>
+                        <view class="title">编辑资料</view>
+                    </view>
+                    <view bindtap="__e" class="sunui-hover" data-event-opts="{{[ [ 'tap',[ ['addressInfo'] ] ] ]}}">
+                        <image src="{{dizhi}}" style="width:60rpx;height:58rpx;"></image>
+                        <view class="title">编辑地址</view>
+                    </view>
+                    <view bindtap="__e" class="sunui-hover" data-event-opts="{{[ [ 'tap',[ ['zhangdans'] ] ] ]}}">
+                        <image src="{{zhangdan}}" style="width:58rpx;height:58rpx;"></image>
+                        <view class="title">我的账单</view>
+                    </view>
+                    <view bindtap="__e" class="sunui-hover" data-event-opts="{{[ [ 'tap',[ ['fenx'] ] ] ]}}">
+                        <image src="{{fenxiao}}" style="width:62rpx;height:58rpx;"></image>
+                        <view class="title">分销推广</view>
+                    </view>
+                    <view bindtap="__e" class="sunui-hover" data-event-opts="{{[ [ 'tap',[ ['packageCard'] ] ] ]}}" style="margin-top:27rpx;">
+                        <image src="/static/ktv/tckIndex.png" style="width:56rpx;height:54rpx;"></image>
+                        <view class="title">套餐卡</view>
+                    </view>
+                    <view bindtap="__e" class="sunui-hover" data-event-opts="{{[ [ 'tap',[ ['tckSale'] ] ] ]}}" style="margin-top:27rpx;">
+                        <image src="{{orderSale}}" style="width:56rpx;height:54rpx;"></image>
+                        <view class="title">套餐消费</view>
+                    </view>
+                </view>
+            </sunui-card>
+        </view>
+        <view style="margin-top:16rpx;padding:10rpx 10rpx;" wx:if="{{system.plugin!=''}}">
+            <sunui-card bind:__l="__l" label="快捷通道" vueId="12313323-3" vueSlots="{{['default']}}">
+                <view class="sunui-layout-seesaw">
+                    <view bindtap="__e" class="sunui-hover" data-event-opts="{{[ [ 'tap',[ ['yuyueeat'] ] ] ]}}" wx:if="{{eatPlugin==2}}">
+                        <image src="{{eataa}}" style="width:66rpx;height:58rpx;"></image>
+                        <view class="title">预约订餐</view>
+                    </view>
+                    <view bindtap="__e" class="sunui-hover" data-event-opts="{{[ [ 'tap',[ ['hotels'] ] ] ]}}" wx:if="{{hotelPlugin==2}}">
+                        <image src="{{hotelse}}" style="width:58rpx;height:58rpx;"></image>
+                        <view class="title">入住酒店</view>
+                    </view>
+                    <view bindtap="__e" class="sunui-hover" data-event-opts="{{[ [ 'tap',[ ['getKtv'] ] ] ]}}" wx:if="{{ktvPlugin==2}}">
+                        <image src="{{ktv}}" style="width:48rpx;height:48rpx;padding-top:10rpx;"></image>
+                        <view class="title">KTV</view>
+                    </view>
+                </view>
+            </sunui-card>
+        </view>
+        <view style="height:150rpx;" wx:if="{{tabbarsss.length!=0||tabbarsss!=''}}"></view>
+    </view>
+    <sunui-popup bind:__l="__l" class="vue-ref" data-ref="pop" vueId="12313323-4" vueSlots="{{['content']}}">
+        <view slot="content">
+            <view class="flex">
+                <view class="material">完善资料</view>
+            </view>
+            <view style="padding-bottom:68rpx;margin:0rpx 28rpx;">欢迎新用户到来，请您马上完善资料感谢您配合。</view>
+            <view bindtap="__e" class="flex wansh" data-event-opts="{{[ [ 'tap',[ ['wansh'] ] ] ]}}">去完善</view>
+        </view>
+    </sunui-popup>
+    <sunui-popup bind:__l="__l" class="vue-ref" data-ref="popphone" vueId="12313323-5" vueSlots="{{['content']}}">
+        <view slot="content">
+            <view class="flex">
+                <view class="material">绑定手机号</view>
+            </view>
+            <view style="padding-bottom:44rpx;margin:0rpx 28rpx;text-align:center;">
+                <input bindinput="__e" class="font-overflow" data-event-opts="{{[ [ 'input',[ [ '__set_model',[ '','mobile','$event',[] ] ] ] ] ]}}" maxlength="11" placeholder="点击输入手机号" type="number" value="{{mobile}}"></input>
+            </view>
+            <view bindtap="__e" class="flex wansh" data-event-opts="{{[ [ 'tap',[ ['bindUser'] ] ] ]}}">确认绑定</view>
+        </view>
+    </sunui-popup>
+    <sunui-popup bind:__l="__l" class="vue-ref" data-ref="pops" vueId="12313323-6" vueSlots="{{['content']}}">
+        <view slot="content">
+            <view style="{{'background-size:cover;width:692rpx;height:680rpx;position:relative;'+'background-image:'+'url('+fl+')'+';'}}">
+                <view class="flex">
+                    <view class="birthday flex-align-center">
+                        <view class="flex-column" style="width:222rpx;">
+                            <view style="font-size:32rpx;">{{'￥'+br_coupon.less}}</view>
+                            <view style="font-size:24rpx;">生日当天可用</view>
+                        </view>
+                        <view class="flex-columns" style="margin-left:26rpx;">
+                            <view style="font-size:32rpx;color:#FD8D05;">生日福利优惠券</view>
+                            <view style="font-size:24rpx;color:#999999;">{{'到期时间：'+br_coupon.end_time}}</view>
+                        </view>
+                    </view>
+                </view>
+                <view class="flex">
+                    <view bindtap="__e" class="buttons flex" data-event-opts="{{[ [ 'tap',[ [ 'closeModals',['$0'],['br_coupon.id'] ] ] ] ]}}">确认收下</view>
+                </view>
+            </view>
+            <view bindtap="__e" class="flex" data-event-opts="{{[ [ 'tap',[ ['closeModal'] ] ] ]}}">
+                <text class="iconfont icon-guanbi1" style="font-size:58rpx;color:rgba(255, 255, 255, 0.87);margin-top:36rpx;"></text>
+            </view>
+        </view>
+    </sunui-popup>
+    <sunui-popup bind:__l="__l" class="vue-ref" data-ref="popmend" vueId="12313323-7" vueSlots="{{['content']}}">
+        <view slot="content">
+            <view class="flex">
+                <view class="material">请选择门店</view>
+            </view>
+            <view style="padding-bottom:68rpx;margin:0rpx 28rpx;">欢迎您的到来，请选择门店，感谢您配合。</view>
+            <view bindtap="__e" class="flex wansh" data-event-opts="{{[ [ 'tap',[ ['wansh2'] ] ] ]}}">选择门店</view>
+        </view>
+    </sunui-popup>
+    <iew-tabbar bind:__l="__l" current="{{index}}" list="{{tabbarsss}}" vueId="12313323-8" wx:if="{{tabbarsss.length!=0||tabbarsss!=''}}"></iew-tabbar>
+</view>

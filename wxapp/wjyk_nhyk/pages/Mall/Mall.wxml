@@ -1,0 +1,141 @@
+<view>
+    <view bindtap="__e" class="inaver _30f2b4d" data-event-opts="{{[ [ 'tap',[ ['gwc'] ] ] ]}}" wx:if="{{shopCartList.length!=0}}">
+        <view class="left _30f2b4d">
+            <view class="number2 flex" wx:if="{{$root.m0}}">99+</view>
+            <block wx:else>
+                <view class="number flex" wx:if="{{uid&&stores.store_name&&gwcSumNumber}}">{{gwcSumNumber}}</view>
+                <view class="number flex" wx:else>0</view>
+            </block>
+            <view class="icon _30f2b4d flex" style="box-shadow:0px 2rpx 10px rgba(0, 0, 0, 0.12);">
+                <text class="iconfont icon-shangpin" style="font-size:44rpx;"></text>
+            </view>
+        </view>
+    </view>
+    <u-navbar bind:__l="__l" isBack="{{false}}" vueId="8f70c3ee-1" vueSlots="{{['default']}}">
+        <view bindtap="__e" class="slot-wrap" data-event-opts="{{[ [ 'tap',[ ['store'] ] ] ]}}">
+            <text class="iconfont icon-mendian1" style="margin-left:32rpx;"></text>
+            <text style="margin:0rpx 8rpx;" wx:if="{{stores.store_name}}">{{stores.store_name}}</text>
+            <text style="margin:0rpx 8rpx;" wx:else>请选择门店</text>
+            <text class="iconfont icon-qiehuan"></text>
+        </view>
+    </u-navbar>
+    <swiper autoplay="{{autoplay}}" circular="{{circular}}" class="swiper" duration="{{duration}}" indicatorDots="{{indicatorDots}}" interval="{{interval}}">
+        <swiper-item bindtap="__e" data-event-opts="{{[ [ 'tap',[ [ 'swiperIndex',['$0'],[ [ ['system.link_carousel','',index] ] ] ] ] ] ]}}" wx:for="{{system.link_carousel}}" wx:key="index">
+            <image class="topimg" src="{{item.img}}"></image>
+        </swiper-item>
+    </swiper>
+    <view style="display:flex;flex-wrap:wrap;background-color:#FFFFFF;padding:0rpx 20rpx 30rpx;">
+        <view bindtap="__e" class="flex-column sort" data-event-opts="{{[ [ 'tap',[ [ 'sort',['$0'],[ [ ['cateList','',index,'id'] ] ] ] ] ] ]}}" wx:for="{{cateList}}" wx:key="index">
+            <image mode="aspectFill" src="{{item.ico}}" style="width:88rpx;height:88rpx;border-radius:50%;"></image>
+            <view class="font-overflow" style="margin-top:22rpx;">{{item.c_name}}</view>
+        </view>
+    </view>
+    <view class="image">
+        <view bindtap="__e" class="left" data-event-opts="{{[ [ 'tap',[ ['GoodDaily'] ] ] ]}}">
+            <u-image bind:__l="__l" height="382" lazyLoad="{{true}}" src="{{system.mei_img}}" vueId="8f70c3ee-2" width="300"></u-image>
+        </view>
+        <view class="ruelt">
+            <view bindtap="__e" data-event-opts="{{[ [ 'tap',[ ['integralMails'] ] ] ]}}">
+                <u-image bind:__l="__l" height="176" lazyLoad="{{true}}" src="{{system.dui_img}}" vueId="8f70c3ee-3" width="370"></u-image>
+            </view>
+            <view bindtap="__e" class="sa" data-event-opts="{{[ [ 'tap',[ ['memberGoods'] ] ] ]}}">
+                <u-image bind:__l="__l" height="176" lazyLoad="{{true}}" src="{{system.member_img}}" vueId="8f70c3ee-4" width="370"></u-image>
+            </view>
+        </view>
+    </view>
+    <view class="xin" wx:if="{{newGoodsList}}">
+        <view class="tltie">新品专区<text class="xiangxi">New product</text>
+        </view>
+        <u-image bind:__l="__l" height="176" lazyLoad="{{true}}" src="{{system.new_good_img}}" vueId="8f70c3ee-5" width="700"></u-image>
+        <view class="shangBox">
+            <view bindtap="__e" class="sjamshwe" data-event-opts="{{[ [ 'tap',[ [ 'commdty',['$0'],['newGoodsList'] ] ] ] ]}}">
+                <view class="left">
+                    <u-image bind:__l="__l" height="240" lazyLoad="{{true}}" src="{{newGoodsList.cover}}" vueId="8f70c3ee-6" width="240"></u-image>
+                </view>
+                <view class="you">
+                    <view class="sunui-ellipsis-2" style="height:84rpx;">{{newGoodsList.goods_name}}</view>
+                    <view class="jiege">
+                        <text style="font-size:32rpx;color:red;">{{'￥'+newGoodsList.original_price}}</text>
+                        <text style="font-size:26rpx;color:#999;">{{'销量：'+newGoodsList.sales}}</text>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="tlties" wx:if="{{likeGoods.length!=0}}">猜你喜欢<text class="xiangxi">Guess what you like</text>
+    </view>
+    <view class="like" wx:if="{{likeGoods.length!=0}}">
+        <view bindtap="__e" class="likebox" data-event-opts="{{[ [ 'tap',[ [ 'commdty',['$0'],[ [ ['likeGoods','',index] ] ] ] ] ] ]}}" wx:for="{{likeGoods}}" wx:key="index">
+            <view>
+                <u-image bind:__l="__l" height="340" lazyLoad="{{true}}" src="{{item.cover}}" vueId="{{'8f70c3ee-7-'+index}}" width="340"></u-image>
+            </view>
+            <view class="shag">
+                <view class="sunui-ellipsis-2" style="height:92rpx;">{{item.goods_name}}</view>
+                <view class="xiaoliang">{{'销量：'+item.sales}}</view>
+                <view class="pricebox">
+                    <text class="price">{{'￥'+item.original_price}}</text>
+                </view>
+            </view>
+        </view>
+    </view>
+    <sunui-popup bind:__l="__l" class="vue-ref" data-ref="pop" style="background-color:#FFFFFF;" vueId="8f70c3ee-8" vueSlots="{{['content']}}">
+        <view slot="content">
+            <view class="flex-between" style="margin:24rpx 34rpx 40rpx 20rpx;" wx:if="{{shopCartList.length!=0}}">
+                <checkbox-group bindchange="__e" class="sunui-checkbox-group sunui-flex-align-center" data-event-opts="{{[ [ 'change',[ [ 'changeAll',['$event'] ] ] ] ]}}">
+                    <label class="{{['sunui-chekcbox-label',isAllChecked?'sunui-checkbox-checkd':'']}}">
+                        <checkbox checked="{{isAllChecked}}" color="#FF5D5D" value="all"></checkbox>
+                        <text class="iconfont icon-check" hidden="{{!isAllChecked}}"></text>
+                    </label>
+                    <view>全选</view>
+                </checkbox-group>
+                <view bindtap="__e" data-event-opts="{{[ [ 'tap',[ [ 'handleClearShop',['$event'] ] ] ] ]}}" style="color:#999999;" wx:if="{{shopCartList.length}}">
+                    <text class="iconfont icon-shanchu" style="font-size:32rpx;margin-right:8rpx;"></text>删除</view>
+            </view>
+            <view wx:if="{{shopCartList.length==0}}">
+                <view class="flex" style="width:750rpx;height:200rpx;">
+                    <text>暂无购物车商品~</text>
+                </view>
+            </view>
+            <scroll-view scrollY="{{true}}" style="height:720rpx;" wx:else>
+                <view class="commodity2 flex-align-center" wx:for="{{shopCartList}}" wx:for-item="p" wx:key="index">
+                    <label class="sunui-chekcbox-label">
+                        <checkbox bindtap="__e" checked="{{p.checked}}" class="p.checked==true?'checked':''" color="#FF5D5D" data-event-opts="{{[ [ 'tap',[ [ 'checkeBox',['$0'],[ [ ['shopCartList','',index,'id'] ] ] ] ] ] ]}}" value="all"></checkbox>
+                    </label>
+                    <view class="view_img">
+                        <image class="order_img" src="{{p.cover}}"></image>
+                    </view>
+                    <view class="guige">
+                        <view class="font-overflow2">{{p.goods_name}}</view>
+                        <view class="spe">{{'规格：'+p.spec}}</view>
+                        <view class="flex-between">
+                            <view class="group_price">{{'￥'+p.spec_price}}</view>
+                            <view class="uni-numbox">
+                                <text bindtap="__e" class="{{['uni-numbox__minus',p.num<=1?'uni-numbox--disabled':'']}}" data-event-opts="{{[ [ 'tap',[ [ 'jian',['$0'],[ [ ['shopCartList','',index] ] ] ] ] ] ]}}">-</text>
+                                <text class="uni-numbox__value">{{p.num}}</text>
+                                <text bindtap="__e" class="{{['uni-numbox__plus',p.num>=p.stock?'uni-numbox--disabled':'']}}" data-event-opts="{{[ [ 'tap',[ [ 'add',['$0'],[ [ ['shopCartList','',index] ] ] ] ] ] ]}}" style="color:#333;">+</text>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </scroll-view>
+            <view class="flex-between" style="margin:8rpx 24rpx;" wx:if="{{shopCartList.length!=0}}">
+                <view class="mid">
+                    <text>{{'￥'+$root.g0}}</text>
+                </view>
+                <button bindtap="__e" class="buy-btn" data-event-opts="{{[ [ 'tap',[ ['cauSum'] ] ] ]}}" hoverClass="sunui-hover" style="background:linear-gradient(to right, #FFBA64 0%, #FF6600 92.27%);box-shadow:0rpx 8rpx 8rpx rgba(255, 165, 75, 0.21);color:#FFFFFF;border-radius:52rpx;" type="default">结算</button>
+            </view>
+            <view style="height:150rpx;" wx:if="{{tabbarsss.length!=0||tabbarsss!=''}}"></view>
+        </view>
+    </sunui-popup>
+    <sunui-popup bind:__l="__l" class="vue-ref" data-ref="pops" vueId="8f70c3ee-9" vueSlots="{{['content']}}">
+        <view slot="content">
+            <view class="flex">
+                <view class="material">请选择门店</view>
+            </view>
+            <view style="padding-bottom:68rpx;margin:0rpx 28rpx;">欢迎您的到来，请选择门店，感谢您配合。</view>
+            <view bindtap="__e" class="flex wansh" data-event-opts="{{[ [ 'tap',[ ['wansh'] ] ] ]}}">选择门店</view>
+        </view>
+    </sunui-popup>
+    <view style="height:150rpx;" wx:if="{{tabbarsss.length!=0||tabbarsss!=''}}"></view>
+    <iew-tabbar bind:__l="__l" current="{{index}}" list="{{tabbarsss}}" vueId="8f70c3ee-10" wx:if="{{tabbarsss.length!=0}}"></iew-tabbar>
+</view>

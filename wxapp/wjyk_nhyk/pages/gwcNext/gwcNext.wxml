@@ -1,0 +1,11 @@
+<view>
+    <view style="position:relative;">
+        <image mode class="invite-friends-bg" src="{{poster}}"></image>
+        <image mode class="qr-code" src="{{qrcode}}"></image>
+    </view>
+    <view class="function-button">
+        <view bindtap="__e" class="button-code" data-event-opts="{{[ [ 'tap',[ [ 'openPost',['$event'] ] ] ] ]}}">
+            <text class="iconfont icon-46 font-weight_bold"></text>生成海报</view>
+    </view>
+    <poster bind:__l="__l" bind:closePost="__e" class="vue-ref" data-event-opts="{{[ [ '^closePost',[ ['closePost'] ] ] ]}}" data-ref="poster" vueId="76d4d37b-1" wx:if="{{posterShow}}"></poster>
+</view>

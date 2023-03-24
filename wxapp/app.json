@@ -1,0 +1,222 @@
+{
+  "pages": [
+    "wjyk_nhyk/pages/index/index",
+    "wjyk_nhyk/pages/Mall/Mall",
+    "wjyk_nhyk/pages/login/Administrator-login",
+    "wjyk_nhyk/pages/Mall/MaillDetails/MaillDetails",
+    "wjyk_nhyk/pages/NearbyStores/NearbyStores",
+    "wjyk_nhyk/pages/login/login",
+    "wjyk_nhyk/pages/login/Ad-Logins/Ad-Logins",
+    "wjyk_nhyk/pages/gwcNext/gwcNext",
+    "components/tabbar",
+    "custom-tab-bar/tabbar/tabbar",
+    "components/sunui-tabbars/sunui-tabbars"
+  ],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "uni-app",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8"
+  },
+  "tabBar": {
+    "color": "#aaa",
+    "selectedColor": "#000000",
+    "borderStyle": "black",
+    "backgroundColor": "#fff",
+    "list": [
+      {
+        "pagePath": "wjyk_nhyk/pages/index/index",
+        "text": "会员",
+        "iconPath": "static/index1.png",
+        "selectedIconPath": "static/index11.png"
+      },
+      {
+        "pagePath": "wjyk_nhyk/pages/NearbyStores/NearbyStores",
+        "text": "附近门店",
+        "iconPath": "static/index2.png",
+        "selectedIconPath": "static/index22.png"
+      },
+      {
+        "pagePath": "wjyk_nhyk/pages/Mall/Mall",
+        "text": "商城",
+        "iconPath": "static/index3.png",
+        "selectedIconPath": "static/index33.png"
+      },
+      {
+        "pagePath": "wjyk_nhyk/pages/login/Ad-Logins/Ad-Logins",
+        "text": "管理员",
+        "iconPath": "static/index4.png",
+        "selectedIconPath": "static/index44.png"
+      }
+    ]
+  },
+  "subPackages": [
+    {
+      "root": "packages/index/",
+      "pages": [
+        "DistributionManagement/DistributionManagement",
+        "distribution/distribution",
+        "DistributionManagement/myTeam/myTeam",
+        "DistributionManagement/myGold/myGold",
+        "DistributionManagement/withdrawalsRecord/withdrawalsRecord",
+        "DistributionManagement/money/money",
+        "DistributionManagement/WithdrawMoney/WithdrawMoney",
+        "erwmIndex/erwmCoupon/erwmCoupon",
+        "erwmIndex/erwmIndex",
+        "MemberCentreMoney/MemberCentreMoney",
+        "my/editProfile",
+        "my/my",
+        "my-coupon/my-coupon",
+        "Mymoney/MyBill/MyBill",
+        "Mymoney/billDetailXS/billDetailXS",
+        "Mymoney/BillDetail/BillDetail",
+        "Mymoney/Mymoney",
+        "myOrder/myOrder",
+        "orderDetails/orderDetails",
+        "qiandao/qiandao",
+        "coupon/coupon",
+        "distribution-Audit/distribution-Audit",
+        "scanCodeRreceive/scanCodeRreceive",
+        "packageCardtc/packageCardtc"
+      ]
+    },
+    {
+      "root": "packages/login/",
+      "pages": [
+        "Administrator-Index/AdminChargeMoney2/AdminChargeMoney2",
+        "Administrator-Index/Administrator-Index",
+        "Administrator-Index/dianzhangIndex",
+        "Administrator-Index/AdminChargeMoney/AdminChargeMoney",
+        "Administrator-Index/SummaryRecord/SummaryRecord",
+        "Administrator-Index/RechargeRecord/RechargeRecord",
+        "Administrator-Index/DetailedRecord/DetailedRecord",
+        "Administrator-Index/RechargeRecord/detailedRecord1/detailedRecord1",
+        "Administrator-Index/RechargeRecord/detailedRecord2/detailedRecord2",
+        "Administrator-Index/codeIndex",
+        "Administrator-Index/tcCard/tcCard",
+        "clerkManagement/clerkManagement",
+        "clerkRevise/clerkRevise",
+        "Administrator-Index/SummaryRecord/RechargeRecord2",
+        "clerkRevise/tckCardlList",
+        "clerkRevise/dzhydaichongList",
+        "Administrator-Index/AdminChargeMoney2/addCardtck",
+        "administratorIndex/administratorIndex",
+        "administratorIndex/storeManagement",
+        "administratorIndex/modifyStore",
+        "administratorIndex/changeStoreManager",
+        "administratorIndex/storeSwitching",
+        "administratorIndex/tckCardlDeduction/tckCardlDeduction",
+        "administratorIndex/dzhydaichongListx/dzhydaichongListx",
+        "koukuanDetail/koukuanDetail",
+        "tckDetial/tckDetial",
+        "administratorIndex/summaryRecord2/summaryRecord2",
+        "Administrator-Index/login-gift-Coupon/login-gift-Coupon",
+        "Administrator-Index/gift-Coupon-Index/gift-Coupon-Index",
+        "Administrator-Index/dianzhangSale"
+      ]
+    },
+    {
+      "root": "packages/Mall/",
+      "pages": [
+        "NearbyStores/NearbyStores",
+        "address/address",
+        "address/addressNext",
+        "classifaction/classifaction",
+        "confirm-order/confirm-order",
+        "ExchangeArea/ExchangeArea",
+        "integralMail/GoodDailys/GoodDailys",
+        "integralMail/MemberGoods/MemberGoods",
+        "integralMail/integralMail",
+        "succes/succes"
+      ]
+    },
+    {
+      "root": "packages/takeawayOrder/",
+      "pages": [
+        "my/my",
+        "index/index",
+        "orderEat/orderEat",
+        "detials/detials",
+        "voucher/voucher",
+        "voucherDetail/voucherDetail",
+        "classification/classification",
+        "orderMessage/orderMessage",
+        "addSpeak/addSpeak",
+        "confirm-order2/confirm-order2",
+        "myVip/myVip",
+        "myVip/memberBenefits/memberBenefits",
+        "myVip/rechargeRecord/rechargeRecord",
+        "NearbyStores/NearbyStores",
+        "myCoupon/myCoupon",
+        "storePickupModify/storePickupModify",
+        "seat/seat",
+        "getVoucher/getVoucher",
+        "loginNext/loginNext",
+        "scanCodePage/scanCodePage",
+        "scanCodeOder/scanCodeOder",
+        "scanCodeConfirmOrder/scanCodeConfirmOrder",
+        "link/link",
+        "administrator-order-meal/administrator-order-meal",
+        "administrator-order-classification/administrator-order-classification",
+        "successOrder/successOrder"
+      ]
+    },
+    {
+      "root": "packages/hotel/",
+      "pages": [
+        "index/index",
+        "hotelList/hotelList",
+        "hotelName/hotelName",
+        "hotelDetial/hotelDetial",
+        "succesOrder/succesOrder",
+        "orderList/orderList",
+        "orderDetials/orderDetials",
+        "my/my",
+        "hotelNearbyStores/hotelNearbyStores",
+        "hotelCoupon/hotelCoupon",
+        "hotelAddress/hotelAddress",
+        "hotelAddressNext/hotelAddressNext",
+        "administrator-order-hotel/administrator-order-hotel",
+        "refundOrder/refundOrder",
+        "checkOut-Hotel/checkOut-Hotel"
+      ]
+    },
+    {
+      "root": "packages/ktv/",
+      "pages": [
+        "index/index",
+        "my/my",
+        "superMarket/superMarket",
+        "reservation/reservation",
+        "reservationDetial/reservationDetial",
+        "confirm-order/confirm-order",
+        "packageCard/packageCard",
+        "confirm-order-card/confirm-order-card",
+        "saveWine/saveWine",
+        "orderList/orderList",
+        "orderListDetail/orderListDetail",
+        "unsubscribe/unsubscribe",
+        "superMarketDetial/superMarketDetial",
+        "confirm-order-shoppingCart/confirm-order-shoppingCart",
+        "ktvNearbyStores/ktvNearbyStores",
+        "myCoupon/myCoupon",
+        "wineRecord/wineRecord",
+        "administrator-save-Wine/administrator-save-Wine",
+        "administator_wineRecord/administator_wineRecord",
+        "administator_fetch_Wine/administator_fetch_Wine",
+        "administator-saveWines/administator-saveWines",
+        "myCardDetial/myCardDetial",
+        "ktv_erwmCoupon/ktv_erwmCoupon",
+        "tckCards/tckCards",
+        "administator_saveWinesAll/administator_saveWinesAll",
+        "saveWineAll/saveWineAll",
+        "fetch_Wine/fetch_Wine",
+        "saveWineDeital/saveWineDeital",
+        "fetchWineDetial/fetchWineDetial"
+      ]
+    }
+  ],
+  "lazyCodeLoading":"requiredComponents",
+  "sitemapLocation": "sitemap.json"
+  
+}
