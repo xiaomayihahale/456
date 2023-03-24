@@ -1,0 +1,368 @@
+<?php
+
+namespace app\admin\controller;
+
+use think\Controller;
+
+class User extends Controller
+{
+    public function index(){
+        global $_W;
+        $_W['version'] = IMS_VERSION;
+        $memlevels =  pdo_getall("wjyk_nhyk_memlevel",array("uniacid"=>$_W['uniacid']));
+        return view('user/index', [
+            '_W' => $_W,            'levels'=>$memlevels
+        ]);
+    } 
+    
+    public function import_index(){
+        global $_W;
+        $_W['version'] = IMS_VERSION;
+        return view('user/import_index', [
+            '_W' => $_W
+        ]);
+    }
+    
+   public function reload_qrcode(){
+       global $_W;
+       $id = input('id');
+       $type = input('type');
+       if(empty($id) && empty($type)){
+           return ;
+       }
+  
+       if($type == 2){
+           $url = 'wjyk_nhyk/pages/index/index';
+           $code_path = get_qrcode($id,$url,'user',2);
+       }else if($type == 1){
+           
+           
+           $user = pdo_get("wjyk_nhyk_user",array("id"=>$id),array("member_no","id"));
+           $url = $user['member_no'];
+           $code_path = get_qrcode($id,$url,'user',1);
+       }
+       
+       echo json_encode(['code'=>'0','msg'=>'','data'=>$code_path]);
+   }
+    
+   public function user_list(){
+       global $_W;
+         $limit = input('limit');
+        $page = input('page');
+
+        $page = max(1, intval($page));
+        $limit = empty($limit) ? 0 : intval($limit);
+
+        $condition = " a.uniacid = :uniacid";
+        $params['uniacid'] = $_W['uniacid'];
+
+        if (! empty(input('nickname'))) {
+            $nickname = input('nickname');
+            $condition .= " AND a.nickname LIKE '%{$nickname}%'";
+        }                
+        if (! empty(input('levelId'))) {                    
+            $levelId = input('levelId');                    
+            $condition .= " AND a.member_level  = {$levelId} ";               
+        } 
+        
+        if (! empty(input('mobile'))) {
+            $mobile = input('mobile');
+            $condition .= " AND a.mobile LIKE '%{$mobile}%'";
+        }
+        
+
+
+
+
+        $data = pdo_fetchall("SELECT b.nickname pname,b.mobile pphone,b.avatar pavatar,a.pid,a.id,a.gender sex,a.com_money credit4,a.money credit2,a.nickname,a.avatar,a.member_no,c.member_name,a.createtime,a.mobile FROM ".tablename("wjyk_nhyk_user")." as a LEFT JOIN ".tablename("wjyk_nhyk_user")." as b on a.pid = b.id LEFT JOIN ".tablename("wjyk_nhyk_memlevel")." as c on a.member_level = c.id WHERE " . $condition ." order by a.createtime desc LIMIT ". ($page - 1) * $limit . ',' . $limit ,$params);          
+        foreach ($data as $k => $v) {
+            if($v['sex']==1){
+                $data[$k]['sex'] = "未知";
+            } elseif($v['sex']==2){
+                $data[$k]['sex'] = "男";
+            }else{
+                $data[$k]['sex'] = "女";
+            }          
+            $down_users = pdo_fetchall("SELECT DATA.id,ID.level, DATA.nickname,DATA.avatar,DATA.createtime FROM( SELECT @ids as _ids, ( SELECT @ids := GROUP_CONCAT(id) FROM " .
+                tablename('wjyk_nhyk_user') . " WHERE FIND_IN_SET(pid, @ids) ) as cids,            @l := @l+1 as level            FROM " .
+                tablename('wjyk_nhyk_user') . ",            (SELECT @ids :=" . $v['id'] . ", @l := 0 ) b            WHERE @ids IS NOT NULL            ) as ID, " . 
+                tablename('wjyk_nhyk_user') . " DATA            WHERE FIND_IN_SET(DATA.id, ID._ids)  and id!=" . $v['id'] . " and level<=3 ORDER BY id desc");      
+            $down_count = 0;
+            if($down_users){ 
+                $down_count = count($down_users); 
+            }
+            $v['down_count'] = $down_count;
+            $v['down_user'] = $down_users;        
+            $data[$k] = $v; 
+        } 
+        $count = pdo_fetchcolumn("SELECT COUNT(*) as count FROM ".tablename('wjyk_nhyk_user')." as a WHERE " . $condition , $params);
+            
+
+        echo json_encode(['code'=>'0','msg'=>'','count'=>$count,'data'=>$data]);
+
+    }    
+    
+    public function user_import_list(){
+        global $_W;
+        $limit = input('limit');
+        $page = input('page');
+    
+        $page = max(1, intval($page));
+        $limit = empty($limit) ? 0 : intval($limit);
+    
+        $condition = " a.uniacid = :uniacid";
+        $params['uniacid'] = $_W['uniacid'];
+    
+        if (! empty(input('nickname'))) {
+            $nickname = input('nickname');
+            $condition .= " AND a.nickname LIKE '%{$nickname}%'";
+        }
+     
+    
+        if (! empty(input('mobile'))) {
+            $mobile = input('mobile');
+            $condition .= " AND a.mobile LIKE '%{$mobile}%'";
+        }
+    
+    
+    
+    
+    
+        $data = pdo_fetchall("SELECT a.* FROM ".tablename("wjyk_nhyk_user_import")." as a WHERE " . $condition ." order by a.createtime desc LIMIT ". ($page - 1) * $limit . ',' . $limit ,$params);
+    
+        $count = pdo_fetchcolumn("SELECT COUNT(*) as count FROM ".tablename('wjyk_nhyk_user_import')." as a WHERE " . $condition , $params);
+    
+    
+        echo json_encode(['code'=>'0','msg'=>'','count'=>$count,'data'=>$data]);
+    
+    }
+    
+    public function user_meal_list(){ 
+        global $_W;
+        $type = input("type");
+        $id = input("id");
+        if($type == 1){
+            return view('user/user_meal_index', [
+            '_W' => $_W,            'id'=>$id
+        ]);  
+        }else{
+            
+            
+            
+        $limit = input('limit');
+        $page = input('page');
+
+        $page = max(1, intval($page));
+        $limit = empty($limit) ? 0 : intval($limit);
+
+        $condition = " a.uniacid = :uniacid and a.uid = :uid";
+        $params['uniacid'] = $_W['uniacid'];
+        $params['uid'] = $id;
+        $data = pdo_fetchall("select a.id,a.rel_count,a.sum_count,b.meal_type,b.meal_name,a.meal_discount,a.qrcode from ".tablename('wjyk_nhyk_my_meal')." as a LEFT JOIN ".tablename("wjyk_nhyk_meal")." as b on a.meal_id = b.id where " . $condition ." order by a.createtime desc LIMIT ". ($page - 1) * $limit . ',' . $limit ,$params);
+        
+            $count = pdo_fetchcolumn("SELECT COUNT(*) as count FROM ".tablename('wjyk_nhyk_meal')." as a WHERE " . $condition , $params);
+            
+     echo json_encode(['code'=>'0','msg'=>'','count'=>$count,'data'=>$data]);
+        }              
+    }
+    
+    public function meal_hx_index(){ 
+        global $_W;
+        $type = input("type");
+        $id = input("id");
+        if($type == 1){
+            return view('user/meal_hx_index', [
+            '_W' => $_W,            'id'=>$id
+        ]);  
+        }else{
+            
+            
+            
+        $limit = input('limit');
+        $page = input('page');
+
+        $page = max(1, intval($page));
+        $limit = empty($limit) ? 0 : intval($limit);
+
+        $condition = " a.uniacid = :uniacid and a.meal_id = :meal_id";
+        $params['uniacid'] = $_W['uniacid'];
+        $params['meal_id'] = $id;
+        $data = pdo_fetchall("select a.rel_count,a.sum_count,a.createtime,c.store_name,b.username from ".tablename('wjyk_nhyk_meal_log')." as a 
+            LEFT JOIN ".tablename("wjyk_nhyk_merch_account")." as b on a.oper_id = b.id LEFT JOIN ".tablename("wjyk_nhyk_store")." as c on b.store_id  = c.id where " . $condition ." order by a.createtime desc LIMIT ". ($page - 1) * $limit . ',' . $limit ,$params);
+        
+            $count = pdo_fetchcolumn("SELECT COUNT(*) as count FROM ".tablename('wjyk_nhyk_meal_log')." as a WHERE " . $condition , $params);
+            
+     echo json_encode(['code'=>'0','msg'=>'','count'=>$count,'data'=>$data]);
+        }              
+    }
+
+    public function user_statis(){
+        global $_W;
+
+        $dateList = array();
+        $totalList = array();
+        for($i = 6;$i >= 0;$i --){
+            $date = date('Y-m-d',intval(strtotime('-'.$i.' day')));
+
+            $total = pdo_fetchcolumn("SELECT COUNT(u.id) AS total FROM ".tablename('wjyk_nhyk_user')." AS u WHERE DATE_FORMAT(FROM_UNIXTIME(u.createtime),'%Y-%m-%d') = '{$date}' ");
+
+            array_push($dateList,$date);
+            array_push($totalList,$total);
+        }
+
+
+        echo json_encode(['code'=>'0','data'=>[
+            'dateList' => $dateList,
+            'totalList' => $totalList
+        ]]);
+    }        public function edit_pwd(){        global $_W;        if($_SERVER['REQUEST_METHOD'] == 'POST'){            $old_pwd =  input('old_pwd');            $new_pwd =  input('new_pwd');            $re_pwd =  input('re_pwd');            $merch_acc = pdo_get("wjyk_nhyk_merch_account",array(                'uniacid' => $_W['uniacid'],                'id' => input('id')            ));            if($merch_acc['pwd'] != $old_pwd){                echo json_encode(['code'=>-1,'msg'=>'旧密码错误 。请重新输入']);                return ;            }            if($new_pwd != $re_pwd){                echo json_encode(['code'=>-1,'msg'=>'两次密码输入不一致 。请重新输入']);                return ;            }            $data = [                'pwd' => $new_pwd,            ];            pdo_update('wjyk_nhyk_merch_account',$data,array(                'id' => input('id')            ));            echo json_encode(['code'=>'0','msg'=>'操作成功']);        }else{             $merch_acc = pdo_get("wjyk_nhyk_merch_account",array(                'uniacid' => $_W['uniacid'],                'id' => input('id')            ));            $_W['version'] = IMS_VERSION;            return view('user/edit_pwd', [                '_W' => $_W,                'srdb'  => $merch_acc            ]);        }    }
+
+    public function edit_user(){
+        global $_W;
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $data = [
+                'uniacid' => $_W['uniacid'],
+                'money' => input('credit2'),
+                'com_money' => input('credit4'),
+                'integral' => input('integral'),
+                'member_level' => input('member_level'),
+                'gender' => input('gender'),
+                'mobile' => input('mobile'),
+                
+                'qrcode' => input('qrcode'),
+                'member_qrcode' => input('member_qrcode')
+            ];
+            if(!empty(input('br_day'))){
+                $br_day  = input('br_day');
+                $br_arr =  explode('-',$br_day);
+              
+                $data['birthyear'] = intval($br_arr[0]);
+                $data['birthmonth'] = intval($br_arr[1]);
+                $data['birthday'] = intval($br_arr[2]);
+            }
+       
+            pdo_update('wjyk_nhyk_user',$data,array(
+                'id' => input('id')
+            ));
+
+            echo json_encode(['code'=>'0','msg'=>'操作成功']);
+        }else{
+            $srdb= pdo_get("wjyk_nhyk_user",array(
+                'uniacid' => $_W['uniacid'],
+                'id' => input('id')
+            ));
+            
+            if($srdb){
+                if($srdb['birthyear']==0){
+                    $srdb['br_day'] = "";
+                }else{
+                    $srdb['br_day'] = $srdb['birthyear']."-".$srdb['birthmonth']."-".$srdb['birthday'];
+                }
+                
+            }
+            
+            $levels = pdo_getall("wjyk_nhyk_memlevel",array(
+                'uniacid' => $_W['uniacid']
+            ));
+            
+            $_W['version'] = IMS_VERSION;
+
+            return view('user/edit_user', [
+                '_W' => $_W,
+                'srdb'  => $srdb,
+                'levels' =>$levels
+            ]);
+        }
+    }
+
+
+    public function del_user(){
+        global $_W;
+        $id = intval(input('id'));
+     
+        $temp = pdo_delete('wjyk_nhyk_user',array(
+            'uniacid' => $_W['uniacid'],
+            'id' => $id
+        ));
+        if($temp){
+            $this->success("删除成功");
+        }else{
+            $this->error("删除失败");
+        }
+
+    }
+    
+    public function del_import_user(){
+        global $_W;
+        $id = intval(input('id'));
+         
+        $temp = pdo_delete('wjyk_nhyk_user_import',array(
+            'uniacid' => $_W['uniacid'],
+            'id' => $id
+        ));
+        if($temp){
+            $this->success("删除成功");
+        }else{
+            $this->error("删除失败");
+        }
+    
+    }
+    
+    public function del_import_alluser(){
+        global $_W;
+        $temp = pdo_delete('wjyk_nhyk_user_import',array(
+            'uniacid' => $_W['uniacid'],
+        ));
+        if($temp){
+            $this->success("删除成功");
+        }else{
+            $this->error("删除失败");
+        }
+    
+    }
+    
+    
+    public function user_log_list_export()
+    {
+        global $_W;
+        $condition = " a.uniacid = :uniacid";
+        $params['uniacid'] = $_W['uniacid'];
+    
+        $nickname = input('nickname');
+        $mobile = input('mobile');
+        $level_id = input('level_id');
+        
+
+        if (! empty($nickname)) {
+            $condition .= " AND a.nickname LIKE '%{$nickname}%'";
+        }                
+        if (! empty($level_id)) {                           
+            $condition .= " AND a.member_level  = {$level_id} ";                
+        }
+        if (! empty($mobile)) {
+            $condition .= " AND a.mobile LIKE '%{$mobile}%'";
+        }
+        
+        $data = pdo_fetchall("SELECT a.nickname,a.mobile,a.gender sex,a.money,a.integral,a.commission,FROM_UNIXTIME(a.createtime,'%Y-%m-%d %H:%i:%s') createtime   FROM ".tablename("wjyk_nhyk_user")." as a  WHERE " . $condition ." order by a.createtime desc " ,$params);
+        
+        
+        foreach ($data as $k => $v) {
+            if($v['sex']==1){
+                $v['sex'] = "男";
+            } elseif($v['sex']==2){
+               $v['sex'] = "女";
+            }else{
+               $v['sex'] = "暂无";
+            }
+            $data[$k] = $v;
+        }
+        echo json_encode([
+            'code' => '0',
+            'msg' => '',
+            'data' => $data
+        ]);
+    }
+
+
+}
+
