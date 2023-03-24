@@ -1,0 +1,43 @@
+<view>
+    <view class="all">
+        <view class="flex-align-center" style="padding:28rpx 32rpx 40rpx 22rpx;">
+            <text class="iconfont icon-mendian1" style="margin-right:12rpx;font-size:32rpx;"></text>
+            <view>
+                <view>{{orderInfo2.store_name}}</view>
+            </view>
+        </view>
+        <view class="flex-between commodity">
+            <scroll-view scrollX="{{true}}" style="width:532rpx;">
+                <view class="flex-align-center">
+                    <view class="flex-columns" wx:for="{{roderGoods}}" wx:key="index">
+                        <image class="img" src="{{item.foods_img}}"></image>
+                        <view class="font-overflow" style="font-size:24rpx;width:150rpx;text-align:center;">{{item.foods_name}}</view>
+                    </view>
+                </view>
+            </scroll-view>
+            <view class="flex-column" style="padding-left:18rpx;">
+                <view class="price">￥<text>{{orderInfo2.real_payment}}</text>
+                </view>
+                <view style="font-size:24rpx;">{{'共计'+addNumber+'件>'}}</view>
+            </view>
+        </view>
+    </view>
+    <view class="zongs">
+        <view class="flex-align-center" style="margin-bottom:46rpx;">
+            <view class="speak">商品评价</view>
+            <sunui-star bind:__l="__l" bind:changeStar="__e" class="sunui-star" data-event-opts="{{[ [ '^changeStar',[ ['changeStar'] ] ] ]}}" defaultStar="{{defaultStar}}" maxStar="{{5}}" starSize="1.6em" vueId="dcd31ebe-1"></sunui-star>
+        </view>
+        <view class="coupon">
+            <view class="textarea-box">
+                <textarea bindinput="__e" data-event-opts="{{[ [ 'input',[ [ '__set_model',[ '','text','$event',[] ] ],[ 'descInput',['$event'] ] ] ] ]}}" maxlength="50" placeholder="对此菜品有什么评价" style="height:200rpx;" value="{{text}}"></textarea>
+                <view class="textarea-color">{{remnant+'/50'}}</view>
+            </view>
+        </view>
+        <view style="width:700rpx;display:flex;margin:32rpx 0rpx 80rpx 28rpx;">
+            <sunui-upimg1 bind:__l="__l" bind:change="__e" bind:uploaded="__e" btnName="上传图片" class="vue-ref" data-event-opts="{{[ [ '^uploaded',[ ['imgLoaded1'] ] ],[ '^change',[ ['imgsChange1'] ] ] ]}}" data-ref="selectimgandupload1" maxFileNumber="{{3}}" uploadServerUrl="{{upPicUrl}}" vueId="dcd31ebe-2"></sunui-upimg1>
+        </view>
+        <view class="flex" style="width:750rpx;">
+            <view bindtap="__e" class="addSpeak flex" data-event-opts="{{[ [ 'tap',[ ['addSpeakss'] ] ] ]}}">提交评价</view>
+        </view>
+    </view>
+</view>

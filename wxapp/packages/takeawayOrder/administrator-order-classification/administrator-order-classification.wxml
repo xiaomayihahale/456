@@ -1,0 +1,135 @@
+<view>
+    <view class="flex-between stores2" wx:if="{{scanCode==1||personnelCode==1}}">
+        <view class="flex-align-center">
+            <image src="{{storeListInfo.store_logo}}" style="margin-right:10rpx;width:38rpx;height:46rpx;"></image>
+            <view>{{storeListInfo.store_name}}</view>
+        </view>
+    </view>
+    <view class="flex-between stores2" wx:if="{{scanCode==2&&personnelCode!=1}}">
+        <view bindtap="__e" class="flex-align-center" data-event-opts="{{[ [ 'tap',[ ['store'] ] ] ]}}">
+            <text class="iconfont icon-mendian1" style="margin-right:10rpx;font-size:32rpx;"></text>
+            <view wx:if="{{storeName}}">{{storeName}}</view>
+            <text wx:else>请选择门店</text>
+            <text class="iconfont icon-qiehuan" style="margin-left:10rpx;"></text>
+        </view>
+        <view class="flex-align-center" style="background-color:#E3E3E3;border-radius:54rpx;">
+            <view bindtap="__e" data-event-opts="{{[ [ 'tap',[ [ 'moneydata1',[index] ] ] ] ]}}" wx:for="{{leixing}}" wx:key="index">
+                <view class="{{[actives==index?'leix2 flex':'leix3 flex']}}">{{item.title}}</view>
+            </view>
+        </view>
+    </view>
+    <view class="sunui-flex-container">
+        <scroll-view class="left" enableFlex="true" scrollWithAnimation="true" scrollY="true">
+            <view bindtap="__e" class="{{['left-title','flex-column',current==index?'active-title':'un-active-title']}}" data-event-opts="{{[ [ 'tap',[ [ 'box',[index] ] ] ] ]}}" wx:for="{{categoryList}}" wx:key="id">
+                <view>
+                    <image src="{{item.ico}}" style="width:50rpx;height:50rpx;margin-top:30rpx;border-radius:50%;"></image>
+                    <view class="left-items-title">{{item.c_name}}</view>
+                </view>
+            </view>
+        </scroll-view>
+        <view class="right">
+            <swiper autoplay="true" circular="true" class="swiperclass" duration="{{1000}}" interval="{{2000}}" vertical="{{vertical}}" wx:if="{{adarr.cate_carousel}}">
+                <swiper-item class="sunui-swiper-item" wx:for="{{adarr.cate_carousel}}" wx:key="index">
+                    <image src="{{item}}" style="height:234rpx;width:540rpx;"></image>
+                </swiper-item>
+            </swiper>
+            <sunui-navbar activeColor="#000000" activeLineBg="#D9B776" activeLineHeight="4rpx" activeLineWidth="100%" bgColor="#fff" bind:__l="__l" bind:change="__e" class="{{[navIndex?'aa':'bb']}}" currentIndex="{{navIndex}}" data-event-opts="{{[ [ '^change',[ ['getChange'] ] ] ]}}" isCenter="{{true}}" items="{{tabList}}" lineHeight="80rpx" margin="{{10}}" padding="20rpx" size="{{180}}" textAlign="center" vueId="657735a1-1"></sunui-navbar>
+            <mescroll-uni bind:__l="__l" bind:down="__e" bind:init="__e" bind:up="__e" class="vue-ref" data-event-opts="{{[ [ '^init',[ ['mescrollInit'] ] ],[ '^down',[ ['downCallback'] ] ],[ '^up',[ ['upCallback'] ] ] ]}}" data-ref="mescrollRef" down="{{downOption}}" fixed="{{false}}" height="1200rpx" style="padding-bottom:130rpx;" up="{{upOption}}" vueId="657735a1-2" vueSlots="{{['default']}}">
+                <view wx:for="{{list}}" wx:key="index">
+                    <view bindtap="__e" class="goods" data-event-opts="{{[ [ 'tap',[ [ 'toDetails',['$0'],[ [ ['list','',index] ] ] ] ] ] ]}}">
+                        <view class="img">
+                            <image class="goods-img" src="{{item.foods_img}}"></image>
+                            <view class="leix flex" wx:if="{{item.is_new==0}}">新品</view>
+                        </view>
+                        <view class="goods-tltle">
+                            <view class="goods-name sunui-ellipsis-1">{{item.foods_name}}</view>
+                            <view class="goods-sold sunui-ellipsis-1" wx:if="{{item.summary}}">{{item.summary}}</view>
+                            <view class="goods-price flex-between">
+                                <text>{{'￥'+item.original_price}}</text>
+                                <view class="guigexz flex">选规格</view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </mescroll-uni>
+        </view>
+        <view class="bottoms" wx:if="{{shopCartList.length>0&&shopCartList.length!=''&&item.$orig.store_id==stores}}" wx:for="{{$root.l0}}" wx:key="index">
+            <view class="bottoms">
+                <view class="flex-between">
+                    <view bindtap="__e" data-event-opts="{{[ [ 'tap',[ ['gwc'] ] ] ]}}">
+                        <view class="imgbottm flex">
+                            <image class="images" src="{{wmgwc}}"></image>
+                            <view class="numbersa2 flex" wx:if="{{item.m0}}">99+</view>
+                            <block wx:else>
+                                <view class="numbersa flex" wx:if="{{gwcSumNumber}}">{{gwcSumNumber}}</view>
+                            </block>
+                        </view>
+                        <view class="priceAll">{{'￥'+item.g0}}</view>
+                    </view>
+                    <view bindtap="__e" class="zhifubtn flex" data-event-opts="{{[ [ 'tap',[ ['cauSum'] ] ] ]}}">选好了</view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <sunui-popup bind:__l="__l" class="vue-ref" data-ref="pop" style="background-color:#FFFFFF;" vueId="657735a1-3" vueSlots="{{['content']}}">
+        <view slot="content">
+            <view class="flex-between" style="margin:24rpx 34rpx 40rpx 20rpx;">
+                <checkbox-group bindchange="__e" class="checkall sunui-checkbox-group sunui-flex-align-center" data-event-opts="{{[ [ 'change',[ [ 'changeAll',['$event'] ] ] ] ]}}">
+                    <label class="{{['sunui-chekcbox-label',isAllChecked?'sunui-checkbox-checkd':'']}}">
+                        <checkbox checked="{{isAllChecked}}" color="#FF5D5D" value="all"></checkbox>
+                        <text class="iconfont icon-check" hidden="{{!isAllChecked}}"></text>
+                    </label>
+                    <view>全选</view>
+                </checkbox-group>
+                <view bindtap="__e" data-event-opts="{{[ [ 'tap',[ [ 'handleClearShop',['$event'] ] ] ] ]}}" style="color:#999999;" wx:if="{{shopCartList.length}}">
+                    <text class="iconfont icon-shanchu" style="font-size:32rpx;margin-right:8rpx;"></text>删除</view>
+            </view>
+            <view wx:if="{{shopCartList.length==0}}">
+                <view class="flex" style="width:750rpx;height:200rpx;">
+                    <text>暂无购物车商品~</text>
+                </view>
+            </view>
+            <scroll-view scrollY="{{true}}" style="height:720rpx;" wx:else>
+                <view class="commodity2 flex-align-center" wx:for="{{shopCartList}}" wx:for-item="p" wx:key="index">
+                    <label class="sunui-chekcbox-label">
+                        <checkbox bindtap="__e" checked="{{p.checked}}" class="p.checked==true?'checked':''" color="#FF5D5D" data-event-opts="{{[ [ 'tap',[ [ 'checkeBox',['$0'],[ [ ['shopCartList','',index,'id'] ] ] ] ] ] ]}}" value="all"></checkbox>
+                    </label>
+                    <view class="view_img">
+                        <image class="order_img" src="{{p.cover}}"></image>
+                    </view>
+                    <view class="guige">
+                        <view class="flex-columns">
+                            <view class="group_text font-overflow2">{{p.foods_name}}</view>
+                            <view class="spe" wx:if="{{p.spec}}">{{'规格：'+p.spec}}</view>
+                        </view>
+                        <view class="flex-between">
+                            <view class="view_price">
+                                <view class="group_price">{{'￥'+p.spec_price}}</view>
+                            </view>
+                            <view class="uni-numbox">
+                                <text bindtap="__e" class="{{['uni-numbox__minus',p.num<=1?'uni-numbox--disabled':'']}}" data-event-opts="{{[ [ 'tap',[ [ 'jian',['$0'],[ [ ['shopCartList','',index] ] ] ] ] ] ]}}">-</text>
+                                <text class="uni-numbox__value">{{p.num}}</text>
+                                <text bindtap="__e" class="{{['uni-numbox__plus',p.num>=p.stock?'uni-numbox--disabled':'']}}" data-event-opts="{{[ [ 'tap',[ [ 'add',['$0'],[ [ ['shopCartList','',index] ] ] ] ] ] ]}}" style="color:#333;">+</text>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </scroll-view>
+            <view class="flex-between" style="margin:8rpx 24rpx;">
+                <view class="mid">
+                    <text>{{'￥'+$root.g1}}</text>
+                </view>
+                <button bindtap="__e" class="buy-btn" data-event-opts="{{[ [ 'tap',[ ['cauSum'] ] ] ]}}" hoverClass="sunui-hover" style="background:linear-gradient(to right, #FFBA64 0%, #FF6600 92.27%);box-shadow:0rpx 8rpx 8rpx rgba(255, 165, 75, 0.21);color:#FFFFFF;border-radius:52rpx;" type="default">结算</button>
+            </view>
+        </view>
+    </sunui-popup>
+    <sunui-popup bind:__l="__l" class="vue-ref" data-ref="pops" vueId="657735a1-4" vueSlots="{{['content']}}">
+        <view slot="content">
+            <view class="flex">
+                <view class="material">请选择门店</view>
+            </view>
+            <view style="padding-bottom:68rpx;margin:0rpx 28rpx;">欢迎您的到来，请选择门店，感谢您配合。</view>
+            <view bindtap="__e" class="flex wansh" data-event-opts="{{[ [ 'tap',[ ['wansh'] ] ] ]}}">选择门店</view>
+        </view>
+    </sunui-popup>
+</view>

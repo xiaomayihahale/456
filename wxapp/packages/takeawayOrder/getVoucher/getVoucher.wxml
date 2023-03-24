@@ -1,0 +1,26 @@
+<view>
+    <view style="margin:40rpx;">
+        <view class="all" style="{{'background-size:cover;'+'background-image:'+'url('+voucherList.img+')'+';'}}">
+            <view class="voucherName">{{voucherList.name}}</view>
+        </view>
+        <view class="flex-align-center" style="background-color:#fff;padding-top:40rpx;">
+            <view class="three flex-column">
+                <view>赠送人</view>
+                <view class="detail">{{options.nickname}}</view>
+            </view>
+            <view class="three flex-column">
+                <view>赠送时间</view>
+                <view class="details">{{options.date}}</view>
+            </view>
+            <view class="three flex-column">
+                <view>卡劵面值</view>
+                <view class="details">{{'￥'+voucherList.only}}</view>
+            </view>
+        </view>
+    </view>
+    <view class="flex-column" style="width:750rpx;">
+        <button bindtap="__e" class="btn" data-event-opts="{{[ [ 'tap',[ ['getVoucher2'] ] ] ]}}" disabled="{{disabled}}" wx:if="{{voucherList.transfer_uid!=''&&voucherList.transfer_uid!=null}}">已领取</button>
+        <button bindtap="__e" class="btn2" data-event-opts="{{[ [ 'tap',[ ['getVoucher'] ] ] ]}}" disabled="{{disabled}}" wx:else>{{getVoucherText}}</button>
+        <view bindtap="__e" data-event-opts="{{[ [ 'tap',[ ['index'] ] ] ]}}" style="color:#999;">返回首页</view>
+    </view>
+</view>

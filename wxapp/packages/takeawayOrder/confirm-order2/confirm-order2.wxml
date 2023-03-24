@@ -1,0 +1,218 @@
+<view>
+    <view class="require-order-page">
+        <form bindsubmit="__e" data-event-opts="{{[ [ 'submit',[ [ 'chongzhi',['$event'] ] ] ] ]}}">
+            <view class="flex-column alltop">
+                <view class="stores">
+                    <view class="flex-between stores2">
+                        <view bindtap="__e" class="flex-align-center" data-event-opts="{{[ [ 'tap',[ ['store'] ] ] ]}}">
+                            <text class="iconfont icon-mendian1" style="margin-right:10rpx;font-size:32rpx;"></text>
+                            <view wx:if="{{storeName}}">{{storeName}}</view>
+                            <text wx:else>请选择门店</text>
+                            <text class="iconfont icon-qiehuan" style="margin-left:10rpx;"></text>
+                        </view>
+                        <view class="flex-align-center" style="background-color:#E3E3E3;border-radius:54rpx;" wx:if="{{scanCode==2}}">
+                            <view bindtap="__e" data-event-opts="{{[ [ 'tap',[ [ 'moneydata1',[index] ] ] ] ]}}" wx:for="{{leixing}}" wx:key="index">
+                                <view class="{{[actives==index?'leix2 flex':'leix flex']}}">{{item.title}}</view>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="receipt-address" wx:if="{{actives==0}}">
+                        <view class="flex-align-center" style="margin:16rpx 0rpx 30rpx;" wx:if="{{scanCode==2}}">
+                            <image src="{{ditu}}" style="width:20rpx;height:24rpx;"></image>
+                            <view class="addressaas sunui-ellipsis-2" wx:if="{{storeJuli}}">{{'距离你'+storeJuli+'km，请确认门店后下单'}}</view>
+                            <view class="addressaas sunui-ellipsis-2" wx:else>请确认门店后下单</view>
+                        </view>
+                        <view bindtap="__e" class="flex-between" data-event-opts="{{[ [ 'tap',[ ['modifys'] ] ] ]}}">
+                            <view class="flex-align-center">
+                                <text class="sunui-padding-l10 uphone" wx:if="{{phoneInfo}}">{{'电话：'+phoneInfo}}</text>
+                                <text class="sunui-padding-l10 uphone" wx:else>暂无手机号，请添加</text>
+                                <view style="margin:0rpx 20rpx;">|</view>
+                                <text>{{'人数：'+peopleAll+'人'}}</text>
+                            </view>
+                            <view class="messages flex">修改信息</view>
+                        </view>
+                    </view>
+                    <view bindtap="__e" class="receipt-address" data-event-opts="{{[ [ 'tap',[ [ 'handleChooseAddress',['$event'] ] ] ] ]}}" wx:if="{{actives==1}}">
+                        <view class="flex-align-center" wx:if="{{address.realname}}">
+                            <image src="{{ditu}}" style="width:20rpx;height:24rpx;"></image>
+                            <view class="uinfo flex-align-center">
+                                <text class="uname sunui-ellipsis-1">{{address.realname}}</text>
+                                <text class="sunui-padding-l10 uphone">{{address.mobile}}</text>
+                            </view>
+                        </view>
+                        <view class="addressaa sunui-ellipsis-2" wx:if="{{address.province}}">{{''+address.province+' '+address.city+' '+address.district+' '+address.address+''}}</view>
+                        <text class="sunui-padding-l10 uphone" wx:else>亲，还没有收货地址信息，请添加</text>
+                    </view>
+                </view>
+            </view>
+            <view class="shopinfo">
+                <view class="dingcan flex-columns">
+                    <view>订餐信息</view>
+                    <text>确认好订单信息后，提交支付</text>
+                </view>
+                <view class="content sunui-flex" wx:for="{{orderList}}" wx:key="index">
+                    <image mode class="shopimg sunui-margin-r20" src="{{item.cover}}"></image>
+                    <view style="flex:1;margin-top:20rpx;">
+                        <view class="flex-between">
+                            <view class="sunui-ellipsis-2" style="color:#333;">{{item.foods_name}}</view>
+                            <view class="price">{{'￥'+item.spec_price}}</view>
+                        </view>
+                        <view class="end flex-between">
+                            <view class="spec sunui-ellipsis-1" wx:if="{{item.spec}}">{{'规格：'+item.spec}}</view>
+                            <view class="spec">{{'x'+item.num}}</view>
+                        </view>
+                    </view>
+                </view>
+                <sunui-cell bind:__l="__l" bind:click="__e" cellStyle="padding:20rpx 0;" data-event-opts="{{[ [ '^click',[ ['handleCoupon'] ] ] ]}}" vueId="69347fbe-1" vueSlots="{{['default']}}">
+                    <view class="sunui-flex-space-between sunui-w100 item-info">
+                        <view>优惠券</view>
+                        <view class="price">{{coupons}}</view>
+                    </view>
+                </sunui-cell>
+                <sunui-cell bind:__l="__l" cellStyle="padding:20rpx 0;" vueId="69347fbe-2" vueSlots="{{['default']}}">
+                    <view class="sunui-flex-space-between sunui-w100 item-info">
+                        <view style="width:300rpx;">备注</view>
+                        <input bindinput="__e" bindtap="__e" class="font-overflow price" data-event-opts="{{[ [ 'tap',[ ['beizhus'] ] ],[ 'input',[ [ '__set_model',[ '','beizhu','$event',[] ] ] ] ] ]}}" placeholder="请输入备注信息 " value="{{beizhu}}"></input>
+                    </view>
+                </sunui-cell>
+                <sunui-cell bind:__l="__l" bind:click="__e" cellStyle="padding:20rpx 0;" data-event-opts="{{[ [ '^click',[ ['voucherList'] ] ] ]}}" vueId="69347fbe-3" vueSlots="{{['default']}}">
+                    <view class="sunui-flex-space-between sunui-w100 item-info">
+                        <view>代金券</view>
+                        <view class="price">{{''+vouchers+''}}</view>
+                    </view>
+                </sunui-cell>
+                <sunui-cell bind:__l="__l" cellStyle="padding:20rpx 0;" vueId="69347fbe-4" vueSlots="{{['default']}}">
+                    <view class="sunui-flex-space-between sunui-w100 item-info">
+                        <view>{{userInfo.curMember_name}}</view>
+                        <view class="price">
+                            <text class="price" wx:if="{{$root.m0}}">{{$root.g0+'折'}}</text>
+                            <text class="price" wx:else>无折扣</text>
+                        </view>
+                    </view>
+                </sunui-cell>
+                <view class="flex-end">
+                    <view style="color:#666;">{{'共'+numa+'件商品'}}</view>
+                    <view class="fukuans">总付款</view>
+                    <view class="realPrices">{{'￥'+$root.g1+''}}</view>
+                </view>
+            </view>
+            <view class="coupon">
+                <sunui-cell bind:__l="__l" cellStyle="border-radius:20rpx;" vueId="69347fbe-5" vueSlots="{{['default']}}">
+                    <view class="sunui-flex-space-between sunui-w100 item-info" style="margin:4rpx 20rpx;">
+                        <view>支付方式</view>
+                        <view class="apply-radio">
+                            <radio-group bindchange="__e" data-event-opts="{{[ [ 'change',[ [ 'handleApplyType',['$event'] ] ] ] ]}}" name="apply">
+                                <label class="sunui-margin-r10">
+                                    <radio checked="{{true}}" color="#FF6145" value="1"></radio>
+                                    <text>微信支付</text>
+                                </label>
+                                <label>
+                                    <radio color="#FF6145" value="2"></radio>
+                                    <text>余额支付</text>
+                                </label>
+                            </radio-group>
+                        </view>
+                    </view>
+                </sunui-cell>
+            </view>
+            <view style="height:100rpx;"></view>
+            <view class="order-detail-operate sunui-box-shadow">
+                <view class="priceAll flex-align-center">实付款<view wx:if="{{$root.m1<0}}">0.00</view>
+                    <view wx:else>{{'￥'+$root.g2+''}}</view>
+                </view>
+                <view class="flex">
+                    <button class="order-submit-btn" formType="submit" hoverClass="sunui-hover" style="background:#FF6145;color:#FFFFFF;" type="default">去支付</button>
+                </view>
+            </view>
+        </form>
+    </view>
+    <sunui-popup bind:__l="__l" class="vue-ref" data-ref="popseat" style="background-color:#FFFFFF;z-index:1999;" vueId="69347fbe-6" vueSlots="{{['content']}}">
+        <view slot="content" style="padding:30rpx 0rpx;">
+            <view class="share_view3 flex">选择座位号</view>
+            <scroll-view scrollY="{{true}}" style="max-height:700rpx;">
+                <mescroll-body bind:__l="__l" bind:down="__e" bind:init="__e" bind:up="__e" class="vue-ref" data-event-opts="{{[ [ '^init',[ ['mescrollInit'] ] ],[ '^down',[ ['downCallback'] ] ],[ '^up',[ ['upCallback'] ] ] ]}}" data-ref="mescrollRef" down="{{downOption}}" vueId="{{'69347fbe-7'+','+'69347fbe-6'}}" vueSlots="{{['default']}}">
+                    <view class="flex-between seatStyle" wx:for="{{list}}" wx:key="index">
+                        <view bindtap="__e" class="{{[item.seatInfo?'zongAll':'zongAll2']}}" data-event-opts="{{[ [ 'tap',[ [ 'seatcheckeBox',['$0'],[ [ ['list','',index,'id'] ] ] ] ] ] ]}}">{{item.name+' '+item.seat_number}}</view>
+                    </view>
+                </mescroll-body>
+            </scroll-view>
+        </view>
+    </sunui-popup>
+    <sunui-popup bind:__l="__l" class="vue-ref" data-ref="pops" style="background-color:#FFFFFF;z-index:1999;" vueId="69347fbe-8" vueSlots="{{['content']}}">
+        <view slot="content">
+            <view class="share_view flex">选择代金券</view>
+            <view class="flex" style="height:320rpx;" wx:if="{{myMealList.length==0}}">暂无代金券可用</view>
+            <scroll-view scrollY="{{true}}" style="height:440rpx;" wx:else>
+                <view class="flex-between" style="margin:0rpx 20rpx 0rpx 12rpx;" wx:if="{{item.status==1}}" wx:for="{{myMealList}}" wx:key="index">
+                    <view class="PackageCard flex-column">
+                        <view class="all2 flex-columns" style="{{'background-image:'+'url('+item.img+')'+';'}}">
+                            <view class="card flex-columns">
+                                <text>{{item.name}}</text>
+                                <view>{{'面值：'+item.only+''}}</view>
+                            </view>
+                        </view>
+                    </view>
+                    <radio-group name="apply">
+                        <label class="sunui-margin-r10 flex-align-center">
+                            <radio bindtap="__e" checked="{{item.checkMyMeal}}" color="#494949" data-event-opts="{{[ [ 'tap',[ [ 'checkeBox2',['$0'],[ [ ['myMealList','',index,'id'] ] ] ] ] ] ]}}" style="padding:12rpx;" value="{{item.value}}"></radio>
+                        </label>
+                    </radio-group>
+                </view>
+            </scroll-view>
+        </view>
+    </sunui-popup>
+    <sunui-popup bind:__l="__l" class="vue-ref" data-ref="pop" style="background-color:#FFFFFF;z-index:1999;" vueId="69347fbe-9" vueSlots="{{['content']}}">
+        <view slot="content">
+            <view class="share_view flex">选择优惠券</view>
+            <block wx:if="{{classify==0}}">
+                <view class="flex" style="height:320rpx;" wx:if="{{couponList.length==0}}">暂无优惠券可用</view>
+                <scroll-view scrollY="{{true}}" style="height:440rpx;" wx:else>
+                    <view class="flex-between" style="position:relative;margin:0rpx 20rpx 40rpx 12rpx;" wx:for="{{$root.l0}}" wx:for-item="i" wx:key="index">
+                        <view>
+                            <view class="all">
+                                <view class="left flex-columns" style="{{'background-size:cover;'+'background-image:'+'url('+youhui1+')'+';'}}">
+                                    <view>
+                                        <text style="font-size:32rpx;color:#FFFFFF;">￥</text>{{''+i.g3+''}}</view>
+                                    <text wx:if="{{i.$orig.region==2}}">仅商城可用</text>
+                                    <text wx:if="{{i.$orig.region==3}}">无门槛使用</text>
+                                </view>
+                                <view wx:if="{{i.$orig.c_type==1}}">
+                                    <view class="zhong flex-columns" wx:if="{{i.$orig.type==1}}">
+                                        <view>{{'满'+i.$orig.full+'减'+i.$orig.less}}</view>
+                                        <text>{{'到期时间：'+i.$orig.end_time}}</text>
+                                    </view>
+                                    <view class="zhong flex-columns" wx:if="{{i.$orig.type==2}}">
+                                        <view>无门槛福利优惠券</view>
+                                        <text>{{'到期时间：'+i.$orig.end_time}}</text>
+                                    </view>
+                                </view>
+                                <view wx:if="{{i.$orig.c_type==2}}">
+                                    <view class="zhong flex-columns" wx:if="{{i.$orig.type==1}}">
+                                        <view>{{'满'+i.$orig.full+'减'+i.$orig.less}}</view>
+                                        <text>{{'到期时间：'+i.$orig.end_time}}</text>
+                                    </view>
+                                    <view class="zhong flex-columns" wx:if="{{i.$orig.type==2}}">
+                                        <view>无门槛福利优惠券</view>
+                                        <text>{{'到期时间：'+i.$orig.end_time}}</text>
+                                    </view>
+                                </view>
+                            </view>
+                            <view class="dikou flex-align-center" style="{{'background-size:cover;'+'background-image:'+'url('+youhui2+')'+';'}}" wx:if="{{i.$orig.c_type==1}}">
+                                <view class="dikou5" wx:if="{{i.$orig.region==2}}">会员商品，积分商品不可使用该优惠券</view>
+                                <view class="dikou5" wx:if="{{i.$orig.region==3}}">全场可用，抵扣任何商品</view>
+                            </view>
+                            <view class="dikou flex-align-center" style="{{'background-size:cover;'+'background-image:'+'url('+youhui2+')'+';'}}" wx:if="{{i.$orig.c_type==2}}">【生日福利】<view class="dikou5" wx:if="{{i.$orig.region==2}}">会员商品，积分商品不可使用该优惠券</view>
+                                <view class="dikou5" wx:if="{{i.$orig.region==3}}">全场可用，抵扣任何商品</view>
+                            </view>
+                        </view>
+                        <radio-group name="apply">
+                            <label class="sunui-margin-r10 flex-align-center">
+                                <radio bindtap="__e" checked="{{i.$orig.checkCoupon}}" color="#494949" data-event-opts="{{[ [ 'tap',[ [ 'checkeBox',['$0'],[ [ ['couponList','',index,'id'] ] ] ] ] ] ]}}" style="padding:12rpx;" value="{{i.$orig.value}}"></radio>
+                            </label>
+                        </radio-group>
+                    </view>
+                </scroll-view>
+            </block>
+        </view>
+    </sunui-popup>
+</view>

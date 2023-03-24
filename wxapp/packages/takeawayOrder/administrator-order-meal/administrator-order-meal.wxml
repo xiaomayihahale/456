@@ -1,0 +1,35 @@
+<view class="flex-column i-width">
+    <view class="i-width i-z-index flex">
+        <view class="flex-around v-width">
+            <view class="flex-align-center">
+                <view>可选</view>
+                <image class="img on" src="/static/eat/chooseSeat.png"></image>
+            </view>
+            <view class="flex-align-center">
+                <view>已占</view>
+                <image class="img on" src="/static/eat/occupySeat.png"></image>
+            </view>
+            <view class="flex-align-center">
+                <view>选中</view>
+                <image class="img on" src="/static/eat/selectSeat.png"></image>
+            </view>
+        </view>
+    </view>
+    <mescroll-body bind:__l="__l" bind:down="__e" bind:init="__e" bind:up="__e" class="vue-ref" data-event-opts="{{[ [ '^init',[ ['mescrollInit'] ] ],[ '^down',[ ['downCallback'] ] ],[ '^up',[ ['upCallback'] ] ] ]}}" data-ref="mescrollRef" down="{{downOption}}" vueId="3b746f81-1" vueSlots="{{['default']}}">
+        <view class="flex-align-center i-width i-margin">
+            <view class="center flex-align-center" wx:for="{{list}}" wx:key="index">
+                <view bindtap="__e" class="{{[tabIndex==index?'seat-width-bg2 flex-column':'seat-width flex-column']}}" data-event-opts="{{[ [ 'tap',[ [ 'boxs',[index,'$0'],[ [ ['list','',index] ] ] ] ] ] ]}}" wx:if="{{item.status==0}}">
+                    <image class="img" src="{{tabIndex==index?'/static/eat/selectSeat.png':'/static/eat/chooseSeat.png'}}"></image>
+                    <text>{{item.seat_number}}</text>
+                    <view>{{item.name}}</view>
+                </view>
+                <view bindtap="__e" class="seat-width-bg flex-column" data-event-opts="{{[ [ 'tap',[ [ 'boxs2',[index,'$0'],[ [ ['list','',index] ] ] ] ] ] ]}}" wx:else>
+                    <image class="img" src="/static/eat/occupySeat.png"></image>
+                    <text>{{item.seat_number}}</text>
+                    <view>{{item.name}}</view>
+                </view>
+            </view>
+        </view>
+    </mescroll-body>
+    <view bindtap="__e" class="btn_Select flex" data-event-opts="{{[ [ 'tap',[ ['selectSeats'] ] ] ]}}" wx:if="{{seatAll}}">已选好</view>
+</view>

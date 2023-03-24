@@ -1,0 +1,477 @@
+button::after {
+    border: none;
+}
+
+page {
+    background: #f0f0f0;
+}
+
+.coupon-list {
+    background-color: #f7f7f7;
+}
+
+.sunui-coupons-margin {
+    padding: 20rpx;
+}
+
+.sunui-coupons-margin>.sunui-coupons {
+    margin-bottom: 30rpx;
+}
+
+.sunui-coupons {
+    display: flex;
+    flex-wrap: nowrap;
+    border-top-left-radius: 10rpx;
+    border-bottom-left-radius: 10rpx;
+}
+
+.sunui-coupons .left {
+    width: 100%;
+    height: 150rpx;
+    padding-right: 10rpx;
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    align-items: center;
+    border-radius: 8rpx;
+    position: relative;
+    background-color: #fff;
+    height: 180rpx;
+}
+
+.sunui-coupons .left .number {
+    width: 66%;
+    display: flex;
+    flex-wrap: wrap;
+    border-right: 1px dashed #d2d2d2;
+}
+
+.sunui-coupons .left .number .show {
+    font-size: 50rpx;
+    font-weight: 700;
+    line-height: 66rpx;
+    text-align: center;
+    width: 100%;
+}
+
+.sunui-coupons .left .number text {
+    color: #828282;
+    font-weight: 400;
+    font-size: 50rpx;
+}
+
+.sunui-coupons .left .number .txt {
+    line-height: 26rpx;
+    font-size: 22rpx;
+    text-align: center;
+    width: 100%;
+}
+
+.sunui-coupons .left .body {
+    width: 62%;
+    margin-left: 4%;
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+}
+
+.sunui-coupons .left .status {
+    display: inline-block;
+    color: #fff;
+    padding: 0 10px;
+    height: 36rpx;
+    line-height: 36rpx;
+    font-size: 20rpx;
+    position: absolute;
+    z-index: 1;
+    right: 6px;
+    top: 8px;
+    border-radius: 36rpx;
+}
+
+.sunui-coupons .left .body .title {
+    width: 100%;
+    font-size: 30rpx;
+    line-height: 46rpx;
+}
+
+.sunui-coupons .left .body .desc {
+    color: #999;
+    margin-top: 3px;
+    font-size: 24rpx;
+    line-height: 36rpx;
+}
+
+.sunui-coupons .right {
+    width: 150rpx;
+    height: 150rpx;
+    flex-shrink: 0;
+    font-size: 30rpx;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    color: #fff;
+}
+
+.sunui-coupons .sawtooth {
+    width: 8px;
+    height: 150rpx;
+    overflow: hidden;
+    position: relative;
+    flex-shrink: 0;
+}
+
+.sunui-coupons .sawtooth .circular {
+    width: 10px;
+    margin: 5px;
+    height: 10px;
+    border-radius: 10px;
+    background: #f9f9f9;
+}
+
+.aaa {
+    width: 33%;
+    height: 80rpx;
+    text-align: center;
+    padding: 0rpx 50rpx;
+    color: #a0cfff;
+    display: inline-block;
+    position: relative;
+    font-size: 28rpx;
+}
+
+.nav-item {
+    width: 33%;
+    height: 80rpx;
+    text-align: center;
+    padding: 0rpx 50rpx;
+    color: #fff;
+    display: inline-block;
+    position: relative;
+    font-size: 28rpx;
+}
+
+.nav-item .title {
+    line-height: 90rpx;
+    border-bottom: 4rpx solid #fff;
+    padding-bottom: 10rpx;
+    font-weight: 700;
+}
+
+.nav-item:after {
+    content: "";
+    width: 0;
+    height: 0;
+    border-bottom: 6rpx solid #fff;
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    transition: .3s;
+}
+
+.big {
+    font-size: 28rpx;
+}
+
+.current {
+    color: #2ea0d1;
+}
+
+.current:after {
+    width: 50%;
+}
+
+.top {
+    width: 750rpx;
+    height: 254rpx;
+    background: #ffb660;
+    border-radius: 0rpx 0rpx 116rpx 116rpx;
+}
+
+.PackageCard2 {
+    width: 720rpx;
+    height: auto;
+    background: #fff;
+    border-radius: 20rpx;
+    padding: 0rpx 0rpx 26rpx;
+}
+
+.couponss {
+    height: 300rpx;
+    font-size: 23rpx;
+    color: #9e9e9e;
+}
+
+.PackageCard {
+    margin-top: 16rpx;
+    width: 720rpx;
+    height: auto;
+    background: #fff;
+    border-radius: 20rpx;
+    padding: 36rpx 0rpx;
+}
+
+.PackageCard3 {
+    margin-top: 16rpx;
+    width: 720rpx;
+    height: auto;
+    background: #fff;
+    border-radius: 20rpx;
+    padding: 10rpx 0rpx;
+}
+
+.sunui-tab {
+    selectcolor: #f000ee;
+}
+
+.all {
+    background-color: #d0cece;
+    background-size: cover;
+}
+
+.all:nth-child(n+2) {
+    margin-top: 36rpx;
+}
+
+.card text {
+    color: #fff;
+    font-size: 32rpx;
+    font-weight: 700;
+    margin-top: 30rpx;
+}
+
+.card view {
+    padding-top: 18rpx;
+    color: #fff;
+    font-size: 24rpx;
+}
+
+.endAll {
+    width: 670rpx;
+    background-color: #fff;
+    padding: 14rpx 0rpx 14rpx 20rpx;
+    box-shadow: 0rpx 4rpx 8rpx rgba(0,0,0,.07);
+}
+
+.endtimes {
+    color: #333;
+    font-size: 24rpx;
+}
+
+.giftFriend {
+    color: #ca9a3e;
+    font-size: 24rpx;
+    background: #fff;
+    border: 2rpx solid #ca9a3e;
+    border-radius: 40rpx;
+    width: 130rpx;
+    height: 56rpx;
+}
+
+.img {
+    width: 20rpx;
+    height: 24rpx;
+}
+
+.all2 {
+    width: 668rpx;
+    height: 212rpx;
+    background: #fff;
+    display: flex;
+}
+
+.all2:nth-child(n+2) {
+    width: 668rpx;
+    height: 212rpx;
+    background: #fff;
+    display: flex;
+}
+
+.left {
+    padding-top: 14rpx;
+    text-align: center;
+    background-color: #a0cfff;
+    width: 176rpx;
+    height: 212rpx;
+}
+
+.left view {
+    color: #fff;
+    font-size: 48rpx;
+    font-weight: 700;
+}
+
+.left text {
+    font-size: 24rpx;
+    color: #fff;
+}
+
+.left2 {
+    padding-top: 14rpx;
+    text-align: center;
+    width: 176rpx;
+    height: 212rpx;
+}
+
+.left2 view {
+    color: #689ceb;
+    font-size: 24rpx;
+    font-weight: 700;
+}
+
+.text {
+    width: 140rpx;
+    height: 44rpx;
+    background: #d9b776;
+    font-size: 24rpx;
+    color: #fff;
+    margin-bottom: 20rpx;
+}
+
+.zhong {
+    margin: 20rpx 0rpx 0rpx 20rpx;
+}
+
+.zhong view {
+    color: #d9b776;
+    font-size: 32rpx;
+    margin-bottom: 16rpx;
+}
+
+.zhong text {
+    color: #999;
+    font-size: 24rpx;
+}
+
+.use {
+    margin-top: 44rpx;
+    margin-right: 10rpx;
+    color: #fff;
+    font-size: 24rpx;
+    width: 128rpx;
+    height: 46rpx;
+    background: #ffce54;
+    border-radius: 40rpx;
+}
+
+.dikou {
+    color: #d9b776;
+    font-size: 24rpx;
+    width: 100%;
+    height: 52rpx;
+    text-align: left;
+    padding-left: 16rpx;
+    position: absolute;
+    bottom: 0rpx;
+}
+
+.dikou5 {
+    color: #d9b776;
+    font-size: 24rpx;
+    padding-left: 6rpx;
+}
+
+.dikou6 {
+    color: #999;
+    font-size: 24rpx;
+    padding-left: 6rpx;
+}
+
+.dikou2 {
+    color: #d9b776;
+    font-size: 24rpx;
+    width: 100%;
+    height: 64rpx;
+    text-align: left;
+    padding-left: 16rpx;
+    position: absolute;
+    bottom: 0rpx;
+}
+
+.left3 {
+    padding-top: 14rpx;
+    text-align: center;
+    width: 176rpx;
+    height: 212rpx;
+}
+
+.left3 view {
+    color: #727272;
+    font-size: 24rpx;
+    font-weight: 700;
+}
+
+.left4 {
+    background-color: #999;
+    padding-top: 14rpx;
+    text-align: center;
+    width: 176rpx;
+    height: 212rpx;
+}
+
+.left4 view {
+    color: #fff;
+    font-size: 48rpx;
+    font-weight: 700;
+}
+
+.text2 {
+    width: 140rpx;
+    height: 44rpx;
+    background: #d7d7d7;
+    font-size: 24rpx;
+    color: #fff;
+    margin-bottom: 20rpx;
+}
+
+.zhong2 {
+    margin: 20rpx 0rpx 0rpx 20rpx;
+}
+
+.zhong2 view {
+    color: #727272;
+    font-size: 32rpx;
+    margin-bottom: 16rpx;
+}
+
+.zhong2 text {
+    color: #999;
+    font-size: 24rpx;
+}
+
+.use2 {
+    margin-top: 44rpx;
+    margin-right: 10rpx;
+    color: #fff;
+    font-size: 24rpx;
+    width: 128rpx;
+    height: 46rpx;
+    background: #999;
+    border-radius: 40rpx;
+}
+
+.dikou4 {
+    color: #999;
+    font-size: 24rpx;
+    width: 100%;
+    height: 52rpx;
+    text-align: left;
+    padding-left: 16rpx;
+    position: absolute;
+    bottom: 0rpx;
+}
+
+.dikou3 {
+    color: #999;
+    font-size: 24rpx;
+    width: 100%;
+    height: 52rpx;
+    text-align: left;
+    padding-left: 16rpx;
+    position: absolute;
+    bottom: 0rpx;
+}

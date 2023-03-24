@@ -1,0 +1,57 @@
+<view>
+    <view class="my-vip-page">
+        <view class="user-info">
+            <view class="sunui-flex-align-center user-info-margin">
+                <image mode class="sunui-avatar-small sunui-radius50per" src="{{userInfo.avatar}}"></image>
+                <view class="sunui-padding-l10">
+                    <view class="username sunui-flex-space-between" style="width:520rpx;">
+                        <view>
+                            <text class="mobile">{{userInfo.nickname}}</text>
+                        </view>
+                    </view>
+                    <view class="balace">
+                        <view class="sunui-flex-align-center">
+                            <text class="iconfont icon-zhanghuyue sunui-margin-r10"></text>
+                            <view class="sunui-margin-r10">
+                                <text class="sunui-margin-r10">余额</text>{{'￥'+userInfo.money+''}}</view>
+                            <view bindtap="__e" class="sunui-tag sunui-transparent record" data-event-opts="{{[ [ 'tap',[ ['rechargeRecord'] ] ] ]}}">充值记录</view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view class="sunui-border-b"></view>
+            <view class="sunui-flex-center" style="padding:20rpx;">
+                <view class="user-vip">
+                    <view class="grade">
+                        <text class="num">{{userInfo.curMember_name}}</text>
+                        <text class="desc">（当前等级）</text>
+                    </view>
+                    <view class="tip" wx:if="{{userInfo.nextMoney&&userInfo.nextMember_name}}">{{'累计消费'+userInfo.nextMoney+'元可升级'+userInfo.nextMember_name}}</view>
+                    <view class="discount">
+                        <text wx:if="{{$root.m0}}">{{userInfo.curDiscount+'折'}}</text>
+                        <text wx:else>无折扣</text>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="vip-recharge">
+            <form bindsubmit="__e" data-event-opts="{{[ [ 'submit',[ [ 'rechargeSubmit',['$event'] ] ] ] ]}}">
+                <sunui-cell bind:__l="__l" cellStyle="padding:10rpx 0;" vueId="a8b74a46-1" vueSlots="{{['default']}}">
+                    <view class="sunui-flex-space-between sunui-w100">
+                        <view class="sunui-text-weight">会员充值</view>
+                        <view></view>
+                    </view>
+                </sunui-cell>
+                <radio-group bindchange="__e" class="sunui-radio-group" data-event-opts="{{[ [ 'change',[ [ 'rechargeChange',['$event'] ] ] ] ]}}" name="recharge">
+                    <label class="{{['sunui-radio-label','sunui-ellipsis-1',item.$orig.checked?'sunui-radio-checkd':'']}}" wx:for="{{$root.l0}}" wx:key="index">
+                        <radio checked="{{item.$orig.checked}}" value="{{item.g0}}"></radio>
+                        <text>{{'充'+item.$orig.money+'元送'+item.$orig.only}}</text>
+                    </label>
+                </radio-group>
+                <view style="padding:16rpx;">
+                    <button class="active-submit-btn" formType="submit" hoverClass="sunui-hover">确认充值</button>
+                </view>
+            </form>
+        </view>
+    </view>
+</view>

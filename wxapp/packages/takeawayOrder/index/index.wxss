@@ -1,0 +1,188 @@
+page {
+    background: #f0f0f0;
+}
+
+.inaver._30f2b4d {
+    position: fixed;
+    right: 28rpx;
+    bottom: 200rpx;
+    z-index: 90;
+}
+
+.inaver .left._30f2b4d {
+    width: 70rpx;
+    height: 100rpx;
+    margin: 8rpx;
+}
+
+.inaver .left .icon._30f2b4d {
+    padding: 14rpx;
+    margin: 0rpx;
+    font-size: 45rpx;
+    background: #fff;
+    border-radius: 50%;
+}
+
+.swiper {
+    width: 750rpx;
+    height: 384rpx;
+}
+
+.topimg {
+    width: 750rpx;
+    height: 384rpx;
+}
+
+.zong {
+    width: 720rpx;
+    height: auto;
+    background-color: #fff;
+    border-radius: 16rpx;
+}
+
+.img {
+    width: 166rpx;
+    height: 150rpx;
+}
+
+.piesong {
+    font-size: 32rpx;
+    color: #333;
+    font-weight: 700;
+    margin: 26rpx 0rpx 14rpx;
+}
+
+.text1 {
+    font-size: 24rpx;
+    color: #999;
+}
+
+.indexs {
+    font-size: 32rpx;
+    color: #fff;
+    position: fixed;
+    top: 102rpx;
+    z-index: 99;
+    left: 30rpx;
+}
+
+.imgtop {
+    height: 96rpx;
+    width: 96rpx;
+    border-radius: 50%;
+    margin: 30rpx 22rpx;
+}
+
+.nicknames {
+    font-weight: 700;
+    font-size: 32rpx;
+    color: #333;
+    margin-right: 16rpx;
+}
+
+.vip {
+    width: 26rpx;
+    height: 24rpx;
+}
+
+.vipText {
+    color: #d9b776;
+    font-size: 24rpx;
+}
+
+.vipTexts {
+    color: #d9b776;
+    font-size: 32rpx;
+}
+
+.vipdj {
+    width: 54rpx;
+    height: 32rpx;
+}
+
+.phone {
+    margin-top: 6rpx;
+    color: #333;
+    font-size: 24rpx;
+}
+
+.ewmImg {
+    width: 44rpx;
+    height: 44rpx;
+}
+
+.eatSacn {
+    margin-right: 34rpx;
+    position: relative;
+    top: 30rpx;
+}
+
+.erwm {
+    font-size: 24rpx;
+    color: #333;
+}
+
+.all {
+    padding: 26rpx 0rpx 36rpx;
+    width: calc(99% / 2);
+}
+
+.total {
+    background-color: #fff;
+    width: 228rpx;
+    height: 318rpx;
+    border-radius: 12rpx;
+    padding: 40rpx 0rpx 8rpx;
+    margin: 22rpx 0rpx 20rpx;
+    margin-right: 18rpx;
+}
+
+.totals {
+    background-color: #fff;
+    width: 228rpx;
+    height: 318rpx;
+    border-radius: 12rpx;
+    padding: 40rpx 0rpx 8rpx;
+    margin: 22rpx 0rpx 20rpx;
+}
+
+.titles {
+    font-size: 32rpx;
+}
+
+.details {
+    color: #999;
+    font-size: 24rpx;
+    margin: 10rpx 0rpx 34rpx;
+}
+
+.images {
+    width: 148rpx;
+    height: 148rpx;
+}
+
+.imgcenter {
+    width: 720rpx;
+    height: 166rpx;
+}
+
+.jifen {
+    margin: 16rpx 0rpx 22rpx;
+    width: 720rpx;
+    height: 120rpx;
+    background: #fff;
+}
+
+.material {
+    font-size: 36rpx;
+    font-weight: 700;
+    color: #555;
+    margin: 36rpx 0rpx 30rpx;
+}
+
+.wansh {
+    color: #ca9a3e;
+    height: 98rpx;
+    width: 100%;
+    border-top: 1px solid #f3f3f3;
+}

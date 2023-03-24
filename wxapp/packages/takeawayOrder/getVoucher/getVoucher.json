@@ -1,0 +1,12 @@
+{
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "领取会员卡",
+    "enablePullDownRefresh": false,
+    "usingComponents": {
+        "mescroll-body": "/components/mescroll-uni/mescroll-body",
+        "mescroll-empty": "/components/mescroll-uni/components/mescroll-empty",
+        "mescroll-uni": "/components/mescroll-uni/mescroll-uni",
+        "poster": "/components/zywPosterSmall/zywPosterSmall"
+    }
+}

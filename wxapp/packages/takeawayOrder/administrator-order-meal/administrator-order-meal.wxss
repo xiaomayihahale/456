@@ -1,0 +1,118 @@
+.i-margin {
+    margin-bottom: 250rpx;
+    flex-wrap: wrap;
+}
+
+.i-width {
+    width: 750rpx;
+}
+
+.i-z-index {
+    padding: 60rpx 0rpx;
+    z-index: 99;
+    background-color: #fff;
+}
+
+.v-width {
+    width: 580rpx;
+}
+
+.on {
+    margin-left: 20rpx;
+}
+
+.img {
+    width: 38rpx;
+    height: 38rpx;
+}
+
+.center {
+    margin-left: 34rpx;
+    margin-bottom: 34rpx;
+}
+
+.seat-width {
+    border-radius: 20rpx;
+    border: 2rpx solid #999;
+    width: 210rpx;
+    padding: 20rpx 0rpx;
+}
+
+.seat-width view {
+    color: #333;
+}
+
+.seat-width text {
+    font-size: 32rpx;
+    font-weight: 700;
+    color: #333;
+    margin: 16rpx 0rpx 12rpx;
+}
+
+.seat-width-bg {
+    border-radius: 20rpx;
+    width: 210rpx;
+    padding: 20rpx 0rpx;
+    background-color: #eee;
+}
+
+.seat-width-bg view {
+    color: #999;
+}
+
+.seat-width-bg text {
+    font-size: 32rpx;
+    font-weight: 700;
+    color: #999;
+    margin: 16rpx 0rpx 12rpx;
+}
+
+.seat-width-bg2 {
+    border-radius: 20rpx;
+    border: 2rpx solid #49b0ff;
+    width: 210rpx;
+    padding: 20rpx 0rpx;
+}
+
+.seat-width-bg2 view {
+    color: #49b0ff;
+}
+
+.seat-width-bg2 text {
+    font-size: 32rpx;
+    font-weight: 700;
+    color: #49b0ff;
+    margin: 16rpx 0rpx 12rpx;
+}
+
+.seat {
+    font-size: 32rpx;
+    font-weight: 700;
+    color: #333;
+    margin: 16rpx 0rpx 12rpx;
+}
+
+.seatNone {
+    font-size: 32rpx;
+    font-weight: 700;
+    color: #999;
+    margin: 16rpx 0rpx 12rpx;
+}
+
+.getSeat {
+    font-size: 32rpx;
+    font-weight: 700;
+    color: #49b0ff;
+    margin: 16rpx 0rpx 12rpx;
+}
+
+.btn_Select {
+    position: fixed;
+    bottom: 140rpx;
+    background-color: #49b0ff;
+    font-size: 34rpx;
+    color: #fff;
+    width: 508rpx;
+    height: 100rpx;
+    border-radius: 50rpx;
+}

@@ -1,0 +1,15 @@
+<view class="sunui-auth">
+    <view class="sunui-auth-logo">
+        <image mode src="{{system.logo}}"></image>
+        <view class="sunui-auth-name">{{system.name}}</view>
+    </view>
+    <view class="sunui-auth-line"></view>
+    <view class="sunui-auth-tip">
+        <view>申请获取以下权限</view>
+        <view>获得你的公开信息(昵称、头像、地区等)</view>
+    </view>
+    <view class="sunui-auth-btn">
+        <button bindtap="__e" data-event-opts="{{[ [ 'tap',[ [ 'getUserProfile',['$event'] ] ] ] ]}}" hoverClass="sunui-hover">授权登录</button>
+        <button bindtap="__e" data-event-opts="{{[ [ 'tap',[ [ 'handleUnAuth',['$event'] ] ] ] ]}}" hoverClass="sunui-hover" type="default">暂不授权</button>
+    </view>
+</view>

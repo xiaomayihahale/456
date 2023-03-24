@@ -1,0 +1,100 @@
+<view>
+    <q-s-navbar backgroundColor="#ffffff" bind:__l="__l" navbarItems="{{navbarItems_1}}" vueId="424da64a-1"></q-s-navbar>
+    <view class="inaver _30f2b4d">
+        <view catchtap="goBack" class="left _30f2b4d">
+            <text bindtap="__e" class="icon _30f2b4d iconfont icon-shouye2" data-event-opts="{{[ [ 'tap',[ [ 'indeax',['$event'] ] ] ] ]}}"></text>
+        </view>
+    </view>
+    <view>
+        <swiper autoplay="{{autoplay}}" circular="{{circular}}" class="swiper" duration="{{duration}}" indicatorDots="{{indicatorDots}}" interval="{{interval}}">
+            <swiper-item bindtap="__e" data-event-opts="{{[ [ 'tap',[ [ 'carousel',['$0'],[ [ ['system.link_carousel','',index] ] ] ] ] ] ]}}" wx:for="{{system.link_carousel}}" wx:key="index">
+                <image class="topimg" src="{{item.img}}"></image>
+            </swiper-item>
+        </swiper>
+        <view class="flex-between">
+            <view bindtap="__e" class="flex-align-center" data-event-opts="{{[ [ 'tap',[ ['handleLogin'] ] ] ]}}" wx:if="{{!uid}}">
+                <image class="imgtop" src="{{avatar}}"></image>
+                <view class="flex-columns">
+                    <view class="flex-align-center">
+                        <view class="nicknames sunui-ellipsis-1">微信用户</view>
+                    </view>
+                </view>
+            </view>
+            <view class="flex-align-center" wx:else>
+                <image class="imgtop" src="{{userInfo.avatar}}"></image>
+                <view class="flex-columns">
+                    <view class="flex-align-center">
+                        <view class="nicknames sunui-ellipsis-1">{{userInfo.nickname}}</view>
+                        <image class="vipdj" mode="aspectFill" src="{{userInfo.curMember_logo}}"></image>
+                    </view>
+                    <view class="phone" wx:if="{{userInfo.phone}}">{{userInfo.phone}}</view>
+                </view>
+            </view>
+            <view bindtap="__e" class="flex-column eatSacn" data-event-opts="{{[ [ 'tap',[ ['erwm'] ] ] ]}}">
+                <view class="iconfont icon-sao" style="font-size:50rpx;position:absolute;bottom:24rpx;"></view>
+                <view class="erwm">扫码点餐</view>
+            </view>
+        </view>
+        <view class="flex" style="width:750rpx;">
+            <view class="flex-align-center zong">
+                <view bindtap="__e" class="all flex-column" data-event-opts="{{[ [ 'tap',[ ['waimai'] ] ] ]}}">
+                    <image class="img" mode="aspectFit" src="{{system.wm_img}}"></image>
+                    <view class="piesong">外卖配送</view>
+                    <text class="text1">{{system.wm_text}}</text>
+                </view>
+                <view style="border-right:2rpx solid #F5F5F5;width:4rpx;height:230rpx;"></view>
+                <view bindtap="__e" class="all flex-column" data-event-opts="{{[ [ 'tap',[ ['storeEat'] ] ] ]}}">
+                    <image class="img" mode="aspectFit" src="{{system.jiu_img}}"></image>
+                    <view class="piesong">门店就餐</view>
+                    <text class="text1">{{system.jiu_text}}</text>
+                </view>
+            </view>
+        </view>
+        <view class="flex" style="width:750rpx;">
+            <view bindtap="__e" class="total flex-column" data-event-opts="{{[ [ 'tap',[ ['goumai'] ] ] ]}}">
+                <view class="titles">购买代金券</view>
+                <view class="details">购物更划算</view>
+                <image class="images" mode="aspectFit" src="{{system.buy_img}}"></image>
+            </view>
+            <view bindtap="__e" class="total flex-column" data-event-opts="{{[ [ 'tap',[ ['chongzhi'] ] ] ]}}">
+                <view class="titles">充值有礼</view>
+                <view class="details">充的多，送的多</view>
+                <image class="images" mode="aspectFit" src="{{system.cj_img}}"></image>
+            </view>
+            <view bindtap="__e" class="totals flex-column" data-event-opts="{{[ [ 'tap',[ ['jifen'] ] ] ]}}">
+                <view class="titles">积分商城</view>
+                <view class="details">兑换商城好礼</view>
+                <image class="images" mode="aspectFit" src="{{system.jf_img}}"></image>
+            </view>
+        </view>
+        <view class="flex" style="width:750rpx;">
+            <image class="imgcenter" mode="aspectFill" src="{{system.mei_img}}"></image>
+        </view>
+        <view class="flex" style="width:750rpx;">
+            <view class="jifen flex-between">
+                <view class="flex-columns" style="padding-left:22rpx;">
+                    <view class="flex-align-center">
+                        <text class="titles" style="margin:0rpx 10rpx 10rpx 0rpx;">我的积分</text>
+                        <view>{{userInfo.integral}}</view>
+                    </view>
+                    <text class="text1">可兑换商城礼品</text>
+                </view>
+                <view bindtap="__e" class="flex-column" data-event-opts="{{[ [ 'tap',[ ['erwm2'] ] ] ]}}" style="padding-right:20rpx;top:28rpx;position:relative;">
+                    <view class="iconfont icon-erweima" style="font-size:50rpx;color:#333;position:absolute;bottom:28rpx;"></view>
+                    <view style="color:#333;font-size:24rpx;">会员码</view>
+                </view>
+            </view>
+        </view>
+        <view style="height:120rpx;"></view>
+    </view>
+    <iew-tabbar bind:__l="__l" current="{{0}}" ids="{{1}}" tabbarHeight="{{120}}" type="{{1}}" vueId="424da64a-2"></iew-tabbar>
+    <sunui-popup bind:__l="__l" class="vue-ref" data-ref="popNew" vueId="424da64a-3" vueSlots="{{['content']}}">
+        <view slot="content">
+            <view class="flex">
+                <view class="material">完善资料</view>
+            </view>
+            <view style="padding-bottom:68rpx;margin:0rpx 28rpx;">欢迎新用户到来，请您马上完善资料感谢您配合。</view>
+            <view bindtap="__e" class="flex wansh" data-event-opts="{{[ [ 'tap',[ ['wanshs'] ] ] ]}}">去完善</view>
+        </view>
+    </sunui-popup>
+</view>

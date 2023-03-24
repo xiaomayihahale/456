@@ -1,0 +1,60 @@
+page {
+    background: #f0f0f0;
+}
+
+button::after {
+    border: none;
+}
+
+.all {
+    width: 670rpx;
+    height: 364rpx;
+    background: rgba(51,51,51,.15);
+}
+
+.voucherName {
+    padding: 36rpx;
+    color: #fff;
+    font-size: 32rpx;
+    font-weight: 700;
+}
+
+.three {
+    width: calc(100% / 3);
+    border-right: 2rpx solid #eee;
+}
+
+.btn {
+    background: #999;
+    border-radius: 64rpx;
+    width: 308rpx;
+    height: 96rpx;
+    line-height: 96rpx;
+    color: #fff;
+    font-size: 32rpx;
+    margin-top: 80rpx;
+    margin-bottom: 28rpx;
+}
+
+.btn2 {
+    background: #f60;
+    border-radius: 64rpx;
+    width: 308rpx;
+    height: 96rpx;
+    line-height: 96rpx;
+    color: #fff;
+    font-size: 32rpx;
+    margin-top: 80rpx;
+    margin-bottom: 28rpx;
+}
+
+.detail {
+    color: #f60;
+    font-size: 32rpx;
+    margin-top: 22rpx;
+}
+
+.details {
+    color: #f60;
+    margin-top: 22rpx;
+}

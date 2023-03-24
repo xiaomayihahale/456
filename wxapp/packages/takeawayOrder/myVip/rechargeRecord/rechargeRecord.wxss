@@ -1,0 +1,35 @@
+page {
+    background-color: #f7f7f7;
+}
+
+.my-recharge-details-page .list {
+    background-color: #fff;
+    margin: 20rpx;
+    padding: 20rpx;
+    border-radius: 20rpx;
+}
+
+.my-recharge-details-page .list>view {
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    align-items: center;
+}
+
+.my-recharge-details-page .list>view .desc {
+    font-size: 32rpx;
+    font-weight: 700;
+}
+
+.my-recharge-details-page .list>view .date {
+    color: #a1a1a1;
+}
+
+.my-recharge-details-page .list>view .money {
+    font-size: 40rpx;
+}
+
+.my-recharge-details-page .list>view .give {
+    color: #ff6145;
+}

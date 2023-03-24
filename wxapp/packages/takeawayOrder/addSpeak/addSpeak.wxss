@@ -1,0 +1,107 @@
+page {
+    background: #f0f0f0;
+}
+
+.sunui-star {
+    margin-left: 40rpx;
+}
+
+.sunui-stars {
+    width: 70%;
+    display: inline-block;
+}
+
+.sunui-m {
+    flex-wrap: nowrap!important;
+}
+
+.sunui-m>view {
+    margin-right: 20rpx!important;
+}
+
+.coupon {
+    margin: 0rpx 28rpx 20rpx;
+}
+
+.textarea-box {
+    width: 694rpx;
+    padding: 28rpx;
+    background: #e8e8e8;
+    border-radius: 12px;
+}
+
+.textarea-color {
+    color: #999;
+}
+
+.addSpeak {
+    background: #c4c4c4;
+    width: 614rpx;
+    height: 88rpx;
+    font-size: 32rpx;
+    color: #666;
+}
+
+.all {
+    width: 750rpx;
+    height: auto;
+    background: #fff;
+    border-radius: 20rpx 20rpx 0rpx 0rpx;
+    margin-top: 24rpx;
+    padding-bottom: 24rpx;
+}
+
+.zongs {
+    padding-bottom: 80rpx;
+    background-color: #fff;
+    border-radius: 0rpx 0rpx 20rpx 20rpx;
+}
+
+.starts {
+    font-size: 24rpx;
+    color: #4ec27a;
+}
+
+.commodity {
+    padding: 0rpx 32rpx 46rpx 20rpx;
+}
+
+.img {
+    width: 168rpx;
+    height: 168rpx;
+    margin-right: 12rpx;
+    margin-bottom: 10rpx;
+}
+
+.price {
+    margin-bottom: 16rpx;
+    font-size: 24rpx;
+    font-weight: 700;
+}
+
+.price text {
+    font-size: 32rpx;
+}
+
+.require,.look {
+    color: #4ec27a;
+    font-size: 24rpx;
+    border: 2rpx solid #4ec27a;
+    border-radius: 146rpx;
+    width: 130rpx;
+    height: 56rpx;
+    margin-right: 20rpx;
+    margin-bottom: 20rpx;
+}
+
+.look {
+    color: #999;
+    border: 2rpx solid #999;
+}
+
+.speak {
+    font-size: 32rpx;
+    font-weight: 700;
+    color: #333;
+    padding: 0rpx 32rpx 0rpx 20rpx;
+}

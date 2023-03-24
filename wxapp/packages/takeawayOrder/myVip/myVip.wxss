@@ -1,0 +1,126 @@
+page {
+    background-color: #f7f7f7;
+}
+
+.active-submit-btn {
+    margin-top: 40rpx;
+    background-image: linear-gradient(45deg,#ff895d,#ff5d43 270%);
+}
+
+.my-vip-page .sunui-radio-label,.my-vip-page .sunui-chekcbox-label {
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    font-size: 28rpx;
+    padding: 10rpx 20rpx;
+    margin: 12rpx;
+    margin-left: 0;
+    text-align: center;
+    background-color: #f7f7f7;
+    border-radius: 10rpx;
+    width: 264rpx;
+    height: 98rpx;
+    border: 1rpx solid transparent;
+}
+
+.my-vip-page .sunui-radio-checkd,.my-vip-page .sunui-checkbox-checkd {
+    color: #ff6145;
+    border: 1rpx solid #ff6145;
+}
+
+.my-vip-page .sunui-radio-group,.my-vip-page .sunui-checkbox-group {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.my-vip-page .sunui-radio-group radio,.my-vip-page .sunui-checkbox-group checkbox {
+    display: none;
+}
+
+.my-vip-page .sunui-avatar-small {
+    width: 100rpx;
+    height: 100rpx;
+}
+
+.my-vip-page .user-info,.my-vip-page .vip-recharge {
+    background-color: #fff;
+    margin: 20rpx;
+    border-radius: 20rpx;
+}
+
+.my-vip-page .vip-recharge {
+    padding: 32rpx 30rpx;
+}
+
+.my-vip-page .user-vip {
+    background-image: url(https://vkceyugu.cdn.bspapp.com/VKCEYUGU-mdk/d2cca4c0-3853-11eb-8a36-ebb87efcf8c0.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 650rpx;
+    height: 304rpx;
+    padding: 48rpx;
+    color: #fff;
+    position: relative;
+    border-radius: 34rpx;
+}
+
+.my-vip-page .user-vip .tip {
+    font-size: 24rpx;
+}
+
+.my-vip-page .user-vip .grade .num {
+    font-size: 38rpx;
+    font-weight: 700;
+    color: #fff;
+}
+
+.my-vip-page .user-vip .grade .desc {
+    font-size: 24rpx;
+    color: #fff;
+}
+
+.my-vip-page .user-vip .end {
+    position: absolute;
+    bottom: 40rpx;
+    color: #ead8b7;
+    font-size: 24rpx;
+}
+
+.my-vip-page .user-vip .discount {
+    position: absolute;
+    right: 40rpx;
+    bottom: 10rpx;
+    font-size: 80rpx;
+    color: #ead8b7;
+}
+
+.my-vip-page .user-info .vip-interests {
+    padding: 10rpx 20rpx;
+}
+
+.my-vip-page .user-info-margin {
+    padding: 32rpx 30rpx;
+    margin-bottom: 20rpx;
+}
+
+.my-vip-page .user-info .balace {
+    line-height: 1;
+    color: #757575;
+}
+
+.my-vip-page .user-info .balace .icon-zhanghuyue {
+    color: #ffb75a;
+}
+
+.my-vip-page .user-info .mobile {
+    margin-left: 10rpx;
+    font-size: 32rpx;
+}
+
+.my-vip-page .user-info .record {
+    border: 1rpx solid #ff6145;
+    color: #ff6145;
+    border-radius: 16rpx;
+}

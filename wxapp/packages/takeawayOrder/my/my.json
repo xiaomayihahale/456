@@ -1,0 +1,18 @@
+{
+    "navigationBarTitleText": "首页",
+    "enablePullDownRefresh": false,
+    "navigationBarBackgroundColor": "#09AF81",
+    "navigationBarTextStyle": "white",
+    "navigationStyle": "custom",
+    "usingComponents": {
+        "sunui-card": "/components/sunui-card/sunui-card",
+        "sunui-cell": "/components/sunui-cell/sunui-cell",
+        "sunui-popup": "/components/sunui-popup/sunui-popup",
+        "iew-tabbar": "/components/cjnewTabbar",
+        "q-s-navbar": "/components/QS-Navbar/QS-Navbar",
+        "mescroll-body": "/components/mescroll-uni/mescroll-body",
+        "mescroll-empty": "/components/mescroll-uni/components/mescroll-empty",
+        "mescroll-uni": "/components/mescroll-uni/mescroll-uni",
+        "poster": "/components/zywPosterSmall/zywPosterSmall"
+    }
+}

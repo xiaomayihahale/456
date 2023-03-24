@@ -1,0 +1,51 @@
+.sunui-auth {
+    padding: 40rpx;
+}
+
+.sunui-auth-btn button {
+    background-color: #fa5e50;
+    border-radius: 50rpx;
+}
+
+.sunui-auth-btn button:last-child {
+    background-color: initial;
+    margin-top: 20rpx;
+    color: #61607e;
+}
+
+.sunui-auth-tip {
+    padding: 40rpx 10rpx;
+}
+
+.sunui-auth-tip>view {
+    padding: 10rpx 0;
+}
+
+.sunui-auth-tip>view:last-child {
+    color: #9b9b9b;
+}
+
+.sunui-auth-line {
+    border-bottom: 4rpx solid #eee;
+}
+
+.sunui-auth-name {
+    text-align: center;
+    font-size: 48rpx;
+    font-weight: 600;
+    width: 100%;
+}
+
+.sunui-auth-logo {
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 100rpx 40rpx;
+}
+
+.sunui-auth-logo image {
+    width: 200rpx;
+    height: 200rpx;
+    border-radius: 50%;
+}

@@ -1,0 +1,15 @@
+{
+    "navigationBarTitleText": "订单",
+    "enablePullDownRefresh": false,
+    "navigationStyle": "custom",
+    "usingComponents": {
+        "sunui-navbar": "/components/sunui-navbar/sunui-navbar",
+        "mescroll-uni": "/components/mescroll-uni/mescroll-uni",
+        "sunui-popup": "/components/sunui-popup/sunui-popup",
+        "iew-tabbar": "/components/cjnewTabbar",
+        "q-s-navbar": "/components/QS-Navbar/QS-Navbar",
+        "mescroll-body": "/components/mescroll-uni/mescroll-body",
+        "mescroll-empty": "/components/mescroll-uni/components/mescroll-empty",
+        "poster": "/components/zywPosterSmall/zywPosterSmall"
+    }
+}

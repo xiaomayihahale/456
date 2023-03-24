@@ -1,0 +1,66 @@
+<view style="padding-bottom:264rpx;">
+    <swiper autoplay="true" circular="true" class="img" duration="{{1000}}" interval="{{2000}}" vertical="{{vertical}}">
+        <swiper-item class="sunui-swiper-item" wx:for="{{foods.carousel}}" wx:key="index">
+            <image src="{{item}}" style="height:100%;width:100%;"></image>
+        </swiper-item>
+    </swiper>
+    <view style="margin-left:32rpx;">
+        <view class="text1">{{foods.foods_name}}</view>
+        <view class="flex-align-center">
+            <view wx:for="{{toplist}}" wx:key="index">
+                <view bindtap="__e" class="{{[tabIndex==index?'jiange':'jiange2']}}" data-event-opts="{{[ [ 'tap',[ [ 'boxs',[index,'$0'],[ [ ['toplist','',index] ] ] ] ] ] ]}}">{{item.title}}</view>
+            </view>
+        </view>
+        <view class="express" style="font-size:24rpx;color:#333;" wx:if="{{foods.desc}}">{{foods.desc}}</view>
+        <view wx:for="{{norms}}" wx:key="id">
+            <view class="text2">{{item.name}}</view>
+            <view class="flex-align-center guige2">
+                <view wx:for="{{item.datas}}" wx:for-index="indexs" wx:for-item="items" wx:key="id">
+                    <view bindtap="__e" class="{{[items.checked?'zongAll':'zongAll2']}}" data-event-opts="{{[ [ 'tap',[ [ 'handleClick',['$0','$1'],[ [ ['norms','id',item.id] ],[ ['norms','id',item.id],['datas','id',items.id] ] ] ] ] ] ]}}">{{items.name}}</view>
+                </view>
+            </view>
+        </view>
+        <view class="text2" wx:if="{{comment.length}}">{{'评价：('+comment.length+')'}}</view>
+        <view wx:for="{{$root.l1}}" wx:key="index">
+            <view class="flex-align-center" style="margin-top:26rpx;">
+                <image class="avatar" src="{{item.$orig.avatar}}"></image>
+                <view class="flex-columns">
+                    <view class="names">{{item.$orig.nickname}}</view>
+                    <view class="flex-between" style="width:628rpx;">
+                        <view class="flex-align-center">
+                            <view class="sunui-stars-items" data-value="{{indexs}}" wx:for="{{item.l0}}" wx:for-index="indexs" wx:for-item="items" wx:key="indexs">
+                                <text class="iconfont icon-xingxing" style="color:#FFCC00;"></text>
+                            </view>
+                        </view>
+                        <view class="time2">{{item.$orig.createtime}}</view>
+                    </view>
+                </view>
+            </view>
+            <view class="textareas">{{item.$orig.content}}</view>
+            <view class="flex-align-center" style="margin-left:90rpx;">
+                <view bindtap="__e" data-event-opts="{{[ [ 'tap',[ [ 'showBigImg',['$0','$1'],[ [ ['comment','',index],['img','',j] ],[ ['comment','',index,'img'] ] ] ] ] ] ]}}" wx:for="{{item.$orig.img}}" wx:for-index="j" wx:for-item="k" wx:key="j">
+                    <image class="speakimg" mode="aspectFill" src="{{k}}"></image>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="bottm">
+        <view>
+            <view class="flex-between">
+                <view class="flex-columns">
+                    <view class="priceAll">{{'￥'+$root.g0}}</view>
+                    <view style="color:#999;margin-left:42rpx;">{{pushName}}</view>
+                </view>
+                <view class="muns">
+                    <text bindtap="__e" class="mun-jian flex" data-event-opts="{{[ [ 'tap',[ [ 'jian',['$event'] ] ] ] ]}}">-</text>
+                    <text class="munsasa">{{nums}}</text>
+                    <text bindtap="__e" class="mun-add flex" data-event-opts="{{[ [ 'tap',[ [ 'add',['$event'] ] ] ] ]}}" style="color:#333;">+</text>
+                </view>
+            </view>
+            <view class="flex" style="width:750rpx;">
+                <view bindtap="__e" class="gwcAdd2 flex " data-event-opts="{{[ [ 'tap',[ ['addgwc'] ] ] ]}}" wx:if="{{foods.stock<=0}}">库存不足</view>
+                <view bindtap="__e" class="gwcAdd flex" data-event-opts="{{[ [ 'tap',[ ['addgwc'] ] ] ]}}" wx:else>加入购物车</view>
+            </view>
+        </view>
+    </view>
+</view>
