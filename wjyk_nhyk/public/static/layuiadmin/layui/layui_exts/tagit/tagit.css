@@ -1,0 +1,98 @@
+.tagit {
+	margin: 0;
+	padding: 0px 5px;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #dce3e8;
+	background: inherit;
+}
+
+.tagit::after {
+	content: '';
+	display: block;
+	clear: both;
+}
+
+.tagit li {
+	list-style-type: none;
+	position: relative;
+	display: block;
+	float: left;
+	margin: 5px 5px;
+	padding: 4px 20px 4px 6px;
+	transition: all 0.2s ease 0s;
+	text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.15);
+	background-color: #009688;
+	line-height: 19px;
+}
+
+.tagit .tagit-choice span {
+	font-size: 14px;
+	font-weight: 500;
+	color: #fff;
+}
+
+.tagit .tagit-choice .close {
+	position: absolute;
+	right: 0.3em;
+	font-size: 16px;
+	line-height: 16px;
+	color: #fff;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+.tagit .tagit-choice .close:hover {
+	color: #ffb800;
+}
+
+.tagit .tagit-new {
+	padding: 0;
+	margin: 4px 5px 4px 0;
+	position: relative;
+}
+
+.tagit .tagit-new input[type="text"] {
+	border: none;
+	padding: 0 3px 0;
+	font-size: 14px;
+	width: 170px;
+	line-height: 29px;
+	box-shadow: none;
+	box-sizing: border-box;
+}
+
+.tagit .tagit-new .tagit-autocomplete {
+	width: 200px;
+	max-height: 200px;
+	overflow-y: scroll;
+	position: absolute;
+	z-index: 99;
+	background: #FFFFFF;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #dce3e8;
+	top: 33px;
+	left: 0;
+}
+
+.tagit .tagit-new .tagit-autocomplete li {
+	width: 100%;
+	float: left;
+	background: #FFFFFF;
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	text-shadow: none;
+}
+
+.tagit .tagit-new .tagit-autocomplete li a {
+	text-decoration: none;
+	display: block;
+	padding: 0.3em 0.4em;
+	line-height: 1.5;
+}
+
+.tagit .tagit-new .tagit-autocomplete li a:hover {
+	background: #dce3e8;
+}
