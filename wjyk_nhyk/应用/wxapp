@@ -1,0 +1,710 @@
+<?php
+defined('IN_IA') or exit('Access Denied');
+
+class Wjyk_recycleModuleWxapp extends WeModuleWxapp
+{
+    
+    public function doPageGoods(){
+        $this->__app("goods");
+    }
+    
+    public function doPageAddress(){
+        $this->__app("address");
+    }
+    
+    public function doPageCommission(){
+        $this->__app("commission");
+    }
+    
+    public function doPageReserve(){
+        $this->__app("reserve");
+    }
+    
+    public function doPageInfo(){
+        $this->__app("info");
+    }
+    
+    public function doPageUser(){
+        $this->__app("user");
+    }
+    
+    public function doPageCollector(){
+        $this->__app("collector");
+    }
+    
+    public function __app($action)
+    {
+        require 'inc/app/' . $action . '.inc.php';
+    }
+    
+    /**
+     * 助通云-短信验证
+     * https://b59.admin168.net/app/index.php?i=2&c=entry&a=wxapp&do=sendMobile&m=wjyk_recycle
+     *
+     * @param
+     *            integer telphone(电话号码)
+     */
+    public function doPageSendMobile()
+    {
+        global $_W, $_GPC;
+    
+        $note = pdo_get('wjyk_recycle_note', array(
+            'uniacid' => $_W['uniacid']
+        ));
+        if($note){
+            $smsapi = "http://api.mix2.zthysms.com/v2/sendSms"; // 短信网关
+            $user = $note['user']; // 短信平台帐号
+            $pass = $note['pass']; // 短信平台密码
+            $message = $note['message']; // 短信模板
+    
+        }else{
+            return self::result(- 1, '请在管理平台设置短信有关信息！');
+        }
+    
+        $number = self::getRandNumber(1,9,6);
+        $message = str_replace("******",$number,$message);
+    
+        $url     = $smsapi;
+        $tKey     = time();
+        $password = md5(md5($pass) . $tKey);
+    
+        $data     = array(
+            'content' => $message, // 要发送的短信内容
+            'mobile'  => $_GPC['telphone'],
+            'username'  => $user, //用户名
+            'password'  => $password, //密码
+            'tKey'      => $tKey
+        );
+        $ret = $this->httpPost($url, $data);
+        $json = json_decode($ret,true);
+        if($json['code'] == 200){
+            return self::result(0, 'success',$number);
+        }else{
+            return self::result(-1, $json);
+        } 
+    
+    }
+    
+    /**
+     * 系统设置
+     * https://b59.admin168.net/app/index.php?i=2&c=entry&a=wxapp&do=system&m=wjyk_recycle
+     */
+    public function doPageSystem(){
+        global $_GPC, $_W;
+        $system = pdo_get('wjyk_recycle_system', array(
+            'uniacid' => $_W['uniacid']
+        ));
+        
+        $system['top'] = unserialize($system['top']);
+        
+        $note =  pdo_get('wjyk_recycle_note', array(
+            'uniacid' => $_W['uniacid']
+        ));
+        
+        $system['is_open'] = $note['is_open'];
+        
+        return self::result(0, 'success',$system);
+    }
+    
+    /**
+     * 首页分类展示
+     * https://b59.admin168.net/app/index.php?i=2&c=entry&a=wxapp&do=indexCate&m=wjyk_recycle
+     */
+    public  function doPageIndexCate(){
+        global $_GPC, $_W;
+        
+        $condition = " uniacid = :uniacid ";
+        $params[':uniacid'] = $_W['uniacid'];
+        
+        $cateList = pdo_fetchall("SELECT id,name FROM ".tablename('wjyk_recycle_category')." WHERE pid = 0 AND is_display = 1 AND type = 1 AND " . $condition ." order by sort desc  ",$params);
+        foreach ($cateList as $k => $v) {
+            $secondSql = "SELECT  id,name,pic_url FROM " . tablename('wjyk_recycle_category') . " WHERE pid = {$v['id']} AND  uniacid = :uniacid AND is_display = 1  order by sort asc " ;
+            $cateList[$k]['children'] = pdo_fetchall($secondSql, $params);
+        }
+        
+        
+        return self::result(0, 'success',$cateList);
+    }
+    
+    
+    
+    /**
+     * 垃圾分类
+     * https://b59.admin168.net/app/index.php?i=2&c=entry&a=wxapp&do=cateList&m=wjyk_recycle
+     * @param
+     *           type  1-可回收   2-不可回收 
+     */
+    public function doPageCateList(){
+        global $_GPC, $_W;
+        
+        $condition = " uniacid = :uniacid ";
+        $params[':uniacid'] = $_W['uniacid'];
+        
+        
+        if (! empty($_GPC['type'])) {
+            $type = $_GPC['type'];
+            $condition .= " AND type = {$type} ";
+        }
+        
+        $cateList = pdo_fetchall("SELECT id,name FROM ".tablename('wjyk_recycle_category')." WHERE pid = 0 AND is_display = 1 AND " . $condition ." order by sort desc  ",$params);
+        foreach ($cateList as $k => $v) {
+            $secondSql = "SELECT  id,name,pic_url FROM " . tablename('wjyk_recycle_category') . " WHERE pid = {$v['id']} AND  uniacid = :uniacid AND is_display = 1  order by sort asc " ;
+            $cateList[$k]['children'] = pdo_fetchall($secondSql, $params);
+        }
+        
+        
+        return self::result(0, 'success',$cateList);
+    }
+    
+    /**
+     * 定时任务    根据定期回收记录生成预约回收订单
+     * https://b59.admin168.net/app/index.php?i=2&c=entry&a=wxapp&do=timing&m=wjyk_recycle
+     */
+    public function doPageTiming(){
+        
+        global $_GPC, $_W;
+        
+        $nowtime = date('Y-m-d',time());
+        
+        $logList = pdo_getall('wjyk_recycle_reserve_log',array(
+            'uniacid' => $_W['uniacid']
+        ));
+        foreach ($logList as $k => $v) {
+            if($v['reservetime'] == $nowtime){
+                $interval = intval($v['interval']);
+                $date = strtotime($v['reservetime']);
+                $newDate = date('Y-m-d', strtotime("+{$interval} day", $date));
+                
+                
+                $log = array(
+                    'uid' => $v['uid'],
+                    'type' =>2,
+                    'uniacid' => $_W['uniacid'],
+                    'addressid' => $v['addressid'],
+                    'content' =>  $v['content'],
+                    'reservetime' => $newDate,
+                    'interval' => $v['interval'],
+                    'pic_url' => $v['pic_url'],
+                    'logno' => $this->getPayNo('RE'),
+                    'is_status' => 1,
+                    'createtime' => time()
+                );
+                pdo_insert('wjyk_recycle_reserve_order',$log);
+                
+                pdo_update('wjyk_recycle_reserve_log',array(
+                    'reservetime' => $newDate
+                ),array(
+                    'uniacid' => $_W['uniacid'],
+                    'id' => $v['id']
+                ));
+            }
+        }
+        
+    }
+    
+    
+    /**
+     * 用户下单成功订阅消息
+     * https://b59.admin168.net/app/index.php?i=2&c=entry&a=wxapp&do=sendSubMessage&m=wjyk_recycle
+     * @param  openid
+     * @param  orderid  订单id
+     */
+    public function doPageSendSubMessage(){
+        global $_W, $_GPC;
+    
+        $orderid = $_GPC['orderid'];
+    
+        $order = pdo_get('wjyk_recycle_reserve_order',array(
+            'uniacid' => $_W['uniacid'],
+            'id' => $orderid
+        ));
+        
+        if($order['type'] == 1){
+            $type = '单次回收';
+        }else if($order['type'] == 2){
+            $type = '定期回收';
+        }
+        
+        $content = unserialize($order['content']);
+        if(count($content) > 1){
+            $name = $content[0]['firstVal'].'-'.$content[0]['secondVal']."等";
+        }else if(count($content) == 1){
+            $name = $content[0]['firstVal'].'-'.$content[0]['secondVal'];
+        }else if(count($content) < 1){
+            $name = '废品回收';
+        }
+    
+        $system = pdo_get('wjyk_recycle_system', array(
+            'uniacid' => $_W['uniacid']
+        ));
+    
+        $account_api = WeAccount::create();
+        $token = $account_api->getAccessToken();
+    
+        $params['touser'] = $_GPC['openid'];
+        $params['template_id'] = $system['userTemplate'];
+    
+        $params['page'] = "";
+    
+        $params['miniprogram_state'] = 'formal';
+    
+        $params['data'] = array(
+            'time5' => array(
+                'value' => date('Y-m-d H:i',$order['createtime']),
+                'color' => '#ff510'
+            ),
+            'phrase4' => array(
+                'value' => '已预约',
+                'color' => '#ff510'
+            ),
+            'thing3' => array(
+                'value' => $type,
+                'color' => '#ff510'
+            ),
+            'thing2' => array(
+                'value' => $name,
+                'color' => '#ff510'
+            ),
+            'character_string1' => array(
+                'value' => $order['logno'],
+                'color' => '#ff510'
+            )
+        );
+    
+        $params = json_encode($params, true);
+    
+        $url = 'https://api.weixin.qq.com/cgi-bin/message/subscribe/send?access_token='.$token;
+        $re = $this->sendCmd($url,$params);
+        return self::result(0, 'success',$re);
+    }
+    
+    /**
+     * 接单成功订阅消息
+     * https://b59.admin168.net/app/index.php?i=2&c=entry&a=wxapp&do=receiveSendSubMessage&m=wjyk_recycle
+     * @param  orderid  订单id
+     */
+    public function doPageReceiveSendSubMessage(){
+        global $_W, $_GPC;
+    
+        $orderid = $_GPC['orderid'];
+    
+        $order = pdo_get('wjyk_recycle_reserve_order',array(
+            'uniacid' => $_W['uniacid'],
+            'id' => $orderid
+        ));
+        
+        $user = pdo_get('wjyk_recycle_user',array(
+            'uniacid' => $_W['uniacid'],
+            'id' => $order['uid']
+        ));
+    
+        $system = pdo_get('wjyk_recycle_system', array(
+            'uniacid' => $_W['uniacid']
+        ));
+    
+        $account_api = WeAccount::create();
+        $token = $account_api->getAccessToken();
+    
+        $params['touser'] = $user['openid'];
+        $params['template_id'] = $system['receiveTemplate'];
+    
+        $params['page'] = "";
+    
+        $params['miniprogram_state'] = 'formal';
+    
+        $params['data'] = array(
+            'phrase1' => array(
+                'value' => '已接单',
+                'color' => '#ff510'
+            ),
+            'date2' => array(
+                'value' => date('Y-m-d H:i',$order['receivetime']),
+                'color' => '#ff510'
+            ),
+            'thing3' => array(
+                'value' => $system['receiveMessage'],
+                'color' => '#ff510'
+            )
+        );
+    
+        $params = json_encode($params, true);
+    
+        $url = 'https://api.weixin.qq.com/cgi-bin/message/subscribe/send?access_token='.$token;
+        $re = $this->sendCmd($url,$params);
+        return self::result(0, 'success',$re);
+    }
+    
+    
+    
+    /**
+     * 七牛云上传
+     * https://b59.admin168.net/app/index.php?i=2&c=entry&a=wxapp&do=upload&m=wjyk_recycle
+     *
+     * @param
+     *           file
+     */
+    public function doPageUpload(){
+    
+        global $_W, $_GPC;
+        require_once (IA_ROOT . '/framework/library/qiniu/autoload.php');
+    
+        $auth = new Qiniu\Auth($_W['setting']['remote']['qiniu']['accesskey'], $_W['setting']['remote']['qiniu']['secretkey']);
+        $bucket= $_W['setting']['remote']['qiniu']['bucket'];
+        $token = $auth->uploadToken($bucket);
+        $uploadMgr = new Qiniu\Storage\UploadManager();
+        $myfile=$_FILES['file'];
+        $filePath = $myfile['tmp_name'];
+    
+        if($myfile['type']=='video/mp4'){
+            $key = 'video'.time().random(4).'.mp4';
+        }elseif($myfile['type']=='audio/mp3'){
+            $key = 'audio'.time().random(4).'.mp3';
+        }else{
+            $key = 'png'.time().random(4).'.png';
+        }
+        list($ret, $err) = $uploadMgr->putFile($token, $key, $filePath);
+        if ($err !== null) {
+            return self::result(-1, "上传失败");
+        } else {
+            $str=$_W['attachurl'].$ret['key'];
+            return $str;
+        }
+    }
+    
+    /**
+     * 微信支付
+     * https://b59.admin168.net/app/index.php?i=3&c=entry&a=wxapp&do=pay&m=wjyk_recycle
+     * @param
+     *        openid
+     * @param
+     *        money  支付金额
+     */
+    public function doPagePay()
+    {
+        global $_W,$_GPC;
+    
+        $openid = input('openid');
+        $money = input('money');
+        $payconfig = pdo_get('wjyk_recycle_payconfig',array(
+            'uniacid' => $_W['uniacid']
+        ));
+        $url = "https://api.mch.weixin.qq.com/pay/unifiedorder";
+        $nonce_str = $this->getNonceStr(32);
+        if ($_W['ispost']) {
+            $send_data = array(
+                'appid' => $payconfig['appid'],
+                'mch_id' => $payconfig['mchid'],
+                'nonce_str' => $nonce_str,
+                'body' => "支付",
+                'out_trade_no' => time() + 3600,
+                'total_fee' => $money * 100,
+                'notify_url' => $_W['siteroot']."wjyk_recycle/pages/index/index",
+                'spbill_create_ip' => $_W['clientip'],
+                'trade_type' => 'JSAPI',
+                'attach' => '支付',
+                'openid' => $openid
+            );
+            $sign = $this->MakeSign($send_data, $payconfig['api_key']);
+    
+            $send_data['sign'] = $sign;
+            $result = $this->FromXml($this->wtw_request($url, $this->ToXml($send_data)));
+    
+            if($result['return_code'] == 'SUCCESS'){
+                echo json_encode($this->sign_pay($result));
+            }else{
+                echo json_encode($result);
+            }
+    
+        }
+    }
+
+    public function sign_pay($arr)
+    {
+        global $_W, $_GPC;
+        $payconfig = pdo_get('wjyk_recycle_payconfig',array(
+            'uniacid' => $_W['uniacid']
+        ));
+        $package = "prepay_id=" . $arr['prepay_id'];
+        $signType = "MD5";
+        $time = (int) time();
+        $array = array(
+            'appId' => $payconfig['appid'],
+            'nonceStr' => $arr['nonce_str'],
+            'package' => $package,
+            'signType' => $signType,
+            'timeStamp' => (string) $time
+        );
+        $sign_str = $this->MakeSign($array, $payconfig['api_key']);
+    
+        $array['paySign'] = $sign_str;
+        return $array;
+    }
+    
+    // 创建随机字符串
+    public function createNoncestr($length = 16) {
+        $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        $str = "";
+        for($i = 0; $i < $length; $i ++) {
+            $str .= substr ( $chars, mt_rand ( 0, strlen ( $chars ) - 1 ), 1 );
+        }
+        return $str;
+    }
+    
+    /**
+     *
+     * 产生随机字符串，不长于32位
+     *
+     * @param int $length
+     * @return 产生的随机字符串
+     */
+    public static function getNonceStr($length = 32)
+    {
+        $chars = "abcdefghijklmnopqrstuvwxyz0123456789";
+        $str = "";
+        for ($i = 0; $i < $length; $i ++) {
+            $str .= substr($chars, mt_rand(0, strlen($chars) - 1), 1);
+        }
+        return $str;
+    }
+    
+    public function FromXml($xml)
+    {
+        // 将XML转为array
+        // 禁止引用外部xml实体
+        libxml_disable_entity_loader(true);
+        $arr = json_decode(json_encode(simplexml_load_string($xml, 'SimpleXMLElement', LIBXML_NOCDATA)), true);
+        return $arr;
+    }
+    
+    public function ToXml($array)
+    {
+    
+        $xml = "<xml>";
+        foreach ($array as $key => $val) {
+            if ($key != 'body') {
+                $xml .= "<" . $key . ">" . $val . "</" . $key . ">";
+            } else {
+                $xml .= "<" . $key . "><![CDATA[" . $val . "]]></" . $key . ">";
+            }
+        }
+        $xml .= "</xml>";
+        return $xml;
+    }
+    
+    public function MakeSign($array, $key)
+    {
+        // 签名步骤一：按字典序排序参数
+        ksort($array);
+        $string = $this->ToUrlParams($array);
+        // 签名步骤二：在string后加入KEY
+        $string = $string . "&key=" . $key;
+        // 签名步骤三：MD5加密
+        $string = md5($string);
+        // 签名步骤四：所有字符转为大写
+        $result = strtoupper($string);
+        return $result;
+    }
+     
+    
+    public function ToUrlParams($arr)
+    {
+        $buff = "";
+        foreach ($arr as $k => $v) {
+            if ($k != "sign" && $v != "" && ! is_array($v)) {
+                $buff .= $k . "=" . $v . "&";
+            }
+        }
+    
+        $buff = trim($buff, "&");
+        return $buff;
+    }
+    
+    /**
+     * [wtw_request description]模版请求
+     *
+     * @param [type] $url
+     *            [description]
+     * @param [type] $data
+     *            [description]
+     * @return [type] [description]
+     */
+    public function wtw_request($url, $data = null)
+    {
+        $curl = curl_init(); // 启动一个CURL会话
+        curl_setopt($curl, CURLOPT_URL, $url); // 要访问的地址
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false); // 对认证证书来源的检查
+        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false); // 从证书中检查SSL加密算法是否存在
+        curl_setopt($curl, CURLOPT_USERAGENT, $_SERVER['HTTP_USER_AGENT']); // 模拟用户使用的浏览器
+        if ($data != null) {
+            curl_setopt($curl, CURLOPT_POST, 1); // 发送一个常规的Post请求
+            curl_setopt($curl, CURLOPT_POSTFIELDS, $data); // Post提交的数据包
+        }
+        curl_setopt($curl, CURLOPT_TIMEOUT, 300); // 设置超时限制防止死循环
+        curl_setopt($curl, CURLOPT_HEADER, 0); // 显示返回的Header区域内容
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1); // 获取的信息以文件流的形式返回
+        $info = curl_exec($curl); // 执行操作
+        if (curl_errno($curl)) {
+            // echo 'Errno:'.curl_getinfo($curl);//捕抓异常
+            // dump(curl_getinfo($curl));
+        }
+        return $info;
+    }
+    
+    
+    function sendCmd($url, $data)
+    {
+        $curl = curl_init(); // 启动一个CURL会话
+        curl_setopt($curl, CURLOPT_URL, $url); // 要访问的地址
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0); // 对认证证书来源的检测
+        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 2); // 从证书中检查SSL加密算法是否存在
+        curl_setopt($curl, CURLOPT_HTTPHEADER, array(
+            'Expect:'
+        )); // 解决数据包大不能提交
+        curl_setopt($curl, CURLOPT_FOLLOWLOCATION, 1); // 使用自动跳转
+        curl_setopt($curl, CURLOPT_AUTOREFERER, 1); // 自动设置Referer
+        curl_setopt($curl, CURLOPT_POST, 1); // 发送一个常规的Post请求
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $data); // Post提交的数据包
+        curl_setopt($curl, CURLOPT_TIMEOUT, 30); // 设置超时限制防止死循
+        curl_setopt($curl, CURLOPT_HEADER, 0); // 显示返回的Header区域内容
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1); // 获取的信息以文件流的形式返回
+    
+        $tmpInfo = curl_exec($curl); // 执行操作
+        if (curl_errno($curl)) {
+            echo 'Errno' . curl_error($curl);
+        }
+        curl_close($curl); // 关键CURL会话
+        return $tmpInfo; // 返回数据
+    }
+    
+    
+    function getRandNumber($start,$end,$length){
+        //初始化变量为0
+        $connt = 0;
+        //建一个新数组
+        $temp = array();
+        while($connt < $length){
+            $temp[] = mt_rand($start, $end);
+            $data = array_flip(array_flip($temp));
+            $connt = count($data);
+        }
+        shuffle($data);
+        $str=implode(",", $data);
+        $number=str_replace(',', '', $str);
+        return $number;
+    }
+    
+    public function getPayNo($text){
+        return  $text . date('Ymd') . substr(implode(NULL, array_map('ord', str_split(substr(uniqid(), 7, 13), 1))), 0, 8);
+    }
+    
+    public function bd_encrypt($gg_lon, $gg_lat)
+    {
+        $x_pi = 3.14159265358979324 * 3000.0 / 180.0;
+        $x = $gg_lon;
+        $y = $gg_lat;
+        $z = sqrt($x * $x + $y * $y) - 0.00002 * sin($y * $x_pi);
+        $theta = atan2($y, $x) - 0.000003 * cos($x * $x_pi);
+        $bd_lon = $z * cos($theta) + 0.0065;
+        $bd_lat = $z * sin($theta) + 0.006;
+        // 保留小数点后六位
+        $data['bd_lon'] = round($bd_lon, 6);
+        $data['bd_lat'] = round($bd_lat, 6);
+        return $data;
+    }
+    
+    //BD-09(百度)坐标转换成GCJ-02(火星，高德)坐标
+    //@param $longitude 百度经度
+    //@param $latitude 百度纬度
+    public function gd_encrypt($longitude,$latitude){
+        $x_pi = 3.14159265358979324 * 3000.0 / 180.0;
+        $x = $longitude - 0.0065;
+        $y = $latitude - 0.006;
+        $z = sqrt($x * $x + $y * $y) - 0.00002 * sin($y * $x_pi);
+        $theta = atan2($y, $x) - 0.000003 * cos($x * $x_pi);
+        $longitude = $z * cos($theta);
+        $latitude = $z * sin($theta);
+        $data['lng'] = round($longitude, 6);
+        $data['lat'] = round($latitude, 6);
+        return $data;
+    }
+    
+    public function refund_request($url, $data = null,$useCert=false)
+    {
+        $curl = curl_init(); // 启动一个CURL会话
+        curl_setopt($curl, CURLOPT_URL, $url); // 要访问的地址
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false); // 对认证证书来源的检查
+        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false); // 从证书中检查SSL加密算法是否存在
+        curl_setopt($curl, CURLOPT_USERAGENT, $_SERVER['HTTP_USER_AGENT']); // 模拟用户使用的浏览器
+        if ($data != null) {
+            curl_setopt($curl, CURLOPT_POST, 1); // 发送一个常规的Post请求
+            curl_setopt($curl, CURLOPT_POSTFIELDS, $data); // Post提交的数据包
+        }
+        curl_setopt($curl, CURLOPT_TIMEOUT, 300); // 设置超时限制防止死循环
+        curl_setopt($curl, CURLOPT_HEADER, 0); // 显示返回的Header区域内容
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1); // 获取的信息以文件流的形式返回
+        if($useCert){
+            $certPath = '../cert/apiclient_cert.pem';//证书路径
+            $keyPath = '../cert/apiclient_key.pem';//证书路径
+    
+            curl_setopt($curl,CURLOPT_SSLCERTTYPE,'PEM');
+            curl_setopt($curl,CURLOPT_SSLCERT, dirname(__FILE__) . '/cert/apiclient_cert.pem');
+    
+            curl_setopt($curl,CURLOPT_SSLKEYTYPE,'PEM');
+            curl_setopt($curl,CURLOPT_SSLKEY, dirname(__FILE__) . '/cert/apiclient_key.pem');
+        }
+    
+        $info = curl_exec($curl); // 执行操作
+        if (curl_errno($curl)) {
+            $error = curl_errno($curl);
+            echo "curl出错，错误码:$error" . "<br>";//捕抓异常
+            curl_close($curl);
+            return false;
+        }
+        return $info;
+    }
+    
+    public function httpPost($url, $data) { // 模拟提交数据函数
+        $curl = curl_init(); // 启动一个CURL会话
+        curl_setopt($curl, CURLOPT_URL, $url); // 要访问的地址
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false); // 对认证证书来源的检查
+        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false); // 从证书中检查SSL加密算法是否存在
+        curl_setopt($curl, CURLOPT_USERAGENT, $_SERVER['HTTP_USER_AGENT']); // 模拟用户使用的浏览器
+        curl_setopt($curl, CURLOPT_POST, true); // 发送一个常规的Post请求
+        curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($data)); // Post提交的数据包
+        curl_setopt($curl, CURLOPT_TIMEOUT, 30); // 设置超时限制防止死循环
+        curl_setopt($curl, CURLOPT_HEADER, 0); // 显示返回的Header区域内容
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true); // 获取的信息以文件流的形式返回
+        curl_setopt($curl, CURLOPT_HTTPHEADER, array(
+            'Content-Type: application/json; charset=utf-8'
+        )); //类型为json
+        $result = curl_exec($curl); // 执行操作
+        if (curl_errno($curl)) {
+            echo 'Error POST' . curl_error($curl);
+        }
+        curl_close($curl); // 关键CURL会话
+        return $result; // 返回数据
+    }
+    
+    function httpGet($url)
+    {
+        // 初始化
+        $ch = curl_init();
+    
+        curl_setopt($ch, CURLOPT_URL, $url);
+        // 执行后不直接打印出来
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HEADER, false);
+        // 跳过证书检查
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        // 不从证书中检查SSL加密算法是否存在
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+    
+        // 执行并获取HTML文档内容
+        $output = curl_exec($ch);
+    
+        // 释放curl句柄
+        curl_close($ch);
+    
+        return $output;
+    }
+}
