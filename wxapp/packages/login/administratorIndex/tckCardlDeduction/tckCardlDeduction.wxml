@@ -1,0 +1,65 @@
+<view>
+    <view style="padding:20rpx 40rpx;background:#FFFFFF;">
+        <view class="flex-align-center search-content">
+            <image class="search-img" src="/static/sousuo.png"></image>
+            <input bindconfirm="__e" bindinput="__e" data-event-opts="{{[ [ 'input',[ [ '__set_model',[ '','searchVal','$event',[] ] ],[ 'changeInput',['$event'] ] ] ],[ 'confirm',[ [ 'changeSearch',['$event'] ] ] ] ]}}" placeholder="输入购买套餐卡的名字" placeholderStyle="font-size:28rpx;color:#999;" style="width:70%;line-height:1em;" value="{{searchVal}}"></input>
+            <image bindtap="__e" class="icon_close" data-event-opts="{{[ [ 'tap',[ [ 'close',['$event'] ] ] ] ]}}" src="/static/delect.png" wx:if="{{searchVal}}"></image>
+        </view>
+    </view>
+    <view class="backimg">
+        <view style="{{'background-size:cover;'+'background-image:'+'url('+fbj12+')'+';'}}">
+            <view style="margin-bottom:50rpx;">
+                <view class="flex-align-center">
+                    <view style="font-size:44rpx;font-weight:bold;">{{yeartime+'-'+monthtime}}</view>
+                </view>
+            </view>
+            <view class="flex-align-center">
+                <view class="flex-columns" style="width:60%;">
+                    <view style="font-size:24rpx;margin-bottom:14rpx;">本月购买金额(元）</view>
+                    <view style="font-size:40rpx;" wx:if="{{deduction.month_money}}">{{'￥'+deduction.month_money}}</view>
+                    <view style="font-size:40rpx;" wx:else>￥0</view>
+                </view>
+                <view class="flex-columns" style="width:30%;">
+                    <view style="font-size:24rpx;margin-bottom:14rpx;">本月购买数量(次）</view>
+                    <view style="font-size:40rpx;" wx:if="{{deduction.month_count}}">{{deduction.month_count}}</view>
+                    <view style="font-size:40rpx;" wx:else>0</view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <mescroll-body bind:__l="__l" bind:down="__e" bind:init="__e" bind:up="__e" class="vue-ref" data-event-opts="{{[ [ '^init',[ ['mescrollInit'] ] ],[ '^down',[ ['downCallback'] ] ],[ '^up',[ ['upCallback'] ] ] ]}}" data-ref="mescrollRef" down="{{downOption}}" vueId="7f53820b-1" vueSlots="{{['default']}}">
+        <view style="margin:24rpx 34rpx 8rpx 20rpx;">
+            <picker bindchange="__e" data-event-opts="{{[ [ 'change',[ [ 'bindDateChange2',['$event'] ] ] ] ]}}" end="{{endDate}}" mode="date" start="{{startDate}}" value="{{date}}">
+                <view class="flex-align-center">
+                    <view class="uni-input">{{date}}</view>
+                    <view class="flex">
+                        <view class="iconfont icon-shouqi" style="margin-left:20rpx;"></view>
+                    </view>
+                </view>
+            </picker>
+            <view class="flex-between yw">
+                <view>
+                    <view wx:if="{{deduction.cur_money}}">{{'营业额(元)：￥'+deduction.cur_money}}</view>
+                    <view wx:else>营业额(元)：￥0</view>
+                </view>
+                <view>
+                    <view wx:if="{{deduction.total}}">{{'成交数：'+deduction.total}}</view>
+                    <view wx:else>成交数：0</view>
+                </view>
+            </view>
+        </view>
+        <view bindtap="__e" class="flex lists" data-event-opts="{{[ [ 'tap',[ [ 'detail1',['$0'],[ [ ['list','',index,'id'] ] ] ] ] ] ]}}" wx:for="{{list}}" wx:key="index">
+            <image class="img" src="{{item.avatar}}"></image>
+            <view style="width:620rpx;">
+                <view class="flex-between" style="margin-right:30rpx;">
+                    <view style="margin-bottom:16rpx;">{{item.meal_name}}</view>
+                </view>
+                <view class="flex-between">
+                    <view style="color:#333333;font-weight:bold;">{{'￥'+item.pay_money}}</view>
+                    <view class="time">{{item.createtime}}</view>
+                </view>
+            </view>
+            <image class="img2" src="{{arrow}}"></image>
+        </view>
+    </mescroll-body>
+</view>

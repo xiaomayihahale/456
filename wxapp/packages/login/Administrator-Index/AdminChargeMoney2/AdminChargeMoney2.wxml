@@ -1,0 +1,85 @@
+<view>
+    <view style="background-color:#FFFFFF;">
+        <view class="flex-align-center">
+            <image class="imgtop" src="{{userInfo.avatar}}"></image>
+            <view class="flex-columns">
+                <view class="flex-align-center">
+                    <view class="nickname sunui-ellipsis-1">{{userInfo.nickname}}</view>
+                    <image class="vipdj" mode="aspectFill" src="{{userInfo.curMember_logo}}"></image>
+                </view>
+                <view class="phone" wx:if="{{userInfo.phone}}">{{userInfo.phone}}</view>
+            </view>
+        </view>
+        <view class="money">请输入该用户扣款消费金额(元)</view>
+        <view style="margin:0rpx 32rpx 60rpx;">
+            <view class="flex-align-center" style="border-bottom:2rpx solid #ECECEC;padding-bottom:10rpx;">
+                <input bindinput="__e" class="input_price" data-event-opts="{{[ [ 'input',[ [ '__set_model',[ '','logno','$event',[] ] ],[ 'changeInput',['$event'] ] ] ] ]}}" placeholder="0" placeholderClass="placeholder-input" type="digit" value="{{logno}}"></input>
+            </view>
+            <view class="flex-between" style="padding:34rpx 0rpx;">
+                <view>优惠券</view>
+                <view bindtap="__e" data-event-opts="{{[ [ 'tap',[ ['coupon'] ] ] ]}}">
+                    <view class="flex-align-center">
+                        <view wx:if="{{couponName}}">{{couponName}}</view>
+                        <view style="color:#999999;" wx:else>{{coupons}}</view>
+                        <image class="img2" src="{{arrow}}"></image>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="flex" style="width:100%;">
+        <view bindtap="__e" class="butn flex" data-event-opts="{{[ [ 'tap',[ ['koukuan'] ] ] ]}}">立即扣款</view>
+    </view>
+    <sunui-popup bind:__l="__l" class="vue-ref" data-ref="pop" style="background-color:#FFFFFF;z-index:1999;" vueId="f921bdbc-1" vueSlots="{{['content']}}">
+        <view slot="content">
+            <view class="share_view flex">选择优惠券</view>
+            <view class="flex" style="height:320rpx;" wx:if="{{couponList.length==0}}">暂无优惠券可用</view>
+            <scroll-view scrollY="{{true}}" style="height:440rpx;" wx:else>
+                <view class="flex-between" style="position:relative;margin:0rpx 20rpx 40rpx 12rpx;" wx:for="{{$root.l0}}" wx:for-item="i" wx:key="index">
+                    <view>
+                        <view class="all">
+                            <view class="left flex-columns" style="{{'background-size:cover;'+'background-image:'+'url('+youhui1+')'+';'}}">
+                                <view>
+                                    <text style="font-size:32rpx;color:#FFFFFF;">￥</text>{{''+i.g0+''}}</view>
+                                <text wx:if="{{i.$orig.region==2}}">仅商城可用</text>
+                                <text wx:if="{{i.$orig.region==3}}">无门槛使用</text>
+                            </view>
+                            <view wx:if="{{i.$orig.c_type==1}}">
+                                <view class="zhong flex-columns" wx:if="{{i.$orig.type==1}}">
+                                    <view>{{'满'+i.$orig.full+'减'+i.$orig.less}}</view>
+                                    <text>{{'到期时间：'+i.$orig.end_time}}</text>
+                                </view>
+                                <view class="zhong flex-columns" wx:if="{{i.$orig.type==2}}">
+                                    <view>无门槛福利优惠券</view>
+                                    <text>{{'到期时间：'+i.$orig.end_time}}</text>
+                                </view>
+                            </view>
+                            <view wx:if="{{i.$orig.c_type==2}}">
+                                <view class="zhong flex-columns" wx:if="{{i.$orig.type==1}}">
+                                    <view>{{'满'+i.$orig.full+'减'+i.$orig.less}}</view>
+                                    <text>{{'到期时间：'+i.$orig.end_time}}</text>
+                                </view>
+                                <view class="zhong flex-columns" wx:if="{{i.$orig.type==2}}">
+                                    <view>无门槛福利优惠券</view>
+                                    <text>{{'到期时间：'+i.$orig.end_time}}</text>
+                                </view>
+                            </view>
+                        </view>
+                        <view class="dikou flex-align-center" style="{{'background-size:cover;'+'background-image:'+'url('+youhui2+')'+';'}}" wx:if="{{i.$orig.c_type==1}}">
+                            <view class="dikou5" wx:if="{{i.$orig.region==2}}">会员商品，积分商品不可使用该优惠券</view>
+                            <view class="dikou5" wx:if="{{i.$orig.region==3}}">全场可用，抵扣任何商品</view>
+                        </view>
+                        <view class="dikou flex-align-center" style="{{'background-size:cover;'+'background-image:'+'url('+youhui2+')'+';'}}" wx:if="{{i.$orig.c_type==2}}">【生日福利】<view class="dikou5" wx:if="{{i.$orig.region==2}}">会员商品，积分商品不可使用该优惠券</view>
+                            <view class="dikou5" wx:if="{{i.$orig.region==3}}">全场可用，抵扣任何商品</view>
+                        </view>
+                    </view>
+                    <radio-group name="apply">
+                        <label class="sunui-margin-r10 flex-align-center">
+                            <radio bindtap="__e" checked="{{i.$orig.checkCoupon}}" color="#494949" data-event-opts="{{[ [ 'tap',[ [ 'checkeBox',['$0'],[ [ ['couponList','',index,'id'] ] ] ] ] ] ]}}" style="padding:12rpx;" value="{{i.$orig.value}}"></radio>
+                        </label>
+                    </radio-group>
+                </view>
+            </scroll-view>
+        </view>
+    </sunui-popup>
+</view>

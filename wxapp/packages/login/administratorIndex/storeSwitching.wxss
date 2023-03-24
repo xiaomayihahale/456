@@ -1,0 +1,53 @@
+page {
+    background: #f0f0f0;
+}
+
+.all {
+    width: 722rpx;
+    height: auto;
+    background: #fff;
+    border-radius: 12rpx;
+}
+
+.images {
+    padding: 24rpx 0rpx 34rpx;
+}
+
+.images image {
+    width: 64rpx;
+    height: 64rpx;
+    border-radius: 50%;
+    margin-right: 18rpx;
+}
+
+.images view {
+    font-size: 32rpx;
+    font-weight: 700;
+}
+
+.text {
+    font-size: 24rpx;
+    color: #666;
+    margin-bottom: 28rpx;
+}
+
+.text2 {
+    font-size: 24rpx;
+    color: #666;
+    padding-bottom: 32rpx;
+    border-bottom: 2rpx solid #f8f8f8;
+}
+
+.text3 {
+    font-size: 24rpx;
+    color: #666;
+    margin-left: 40rpx;
+}
+
+.fenlei view {
+    font-size: 24rpx;
+    color: #999;
+    width: calc(100% / 3);
+    margin: 26rpx 0rpx 20rpx;
+    text-align: center;
+}

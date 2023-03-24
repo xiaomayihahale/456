@@ -1,0 +1,23 @@
+<view>
+    <view class="flex-column" style="width:750rpx;">
+        <image class="img" src="/static/mescroll-totop.png"></image>
+        <view class="storetitle">广州融创LOGO店</view>
+    </view>
+    <view>
+        <view class="flex-columns">
+            <view class="zhangh">账号</view>
+            <view class="uni-zhanghao">
+                <input bindinput="__e" class="box-input" data-event-opts="{{[ [ 'input',[ [ '__set_model',[ '','account','$event',[] ] ] ] ] ]}}" placeholder="请输入该门店新账号" value="{{account}}"></input>
+            </view>
+        </view>
+        <view class="flex-columns">
+            <view class="zhangh">密码</view>
+            <view class="uni-zhanghao">
+                <input bindinput="__e" class="box-input" data-event-opts="{{[ [ 'input',[ [ '__set_model',[ '','password','$event',[] ] ] ] ] ]}}" placeholder="请输入店长修改密码" type="password" value="{{password}}"></input>
+            </view>
+        </view>
+    </view>
+    <view class="flex" style="width:750rpx;">
+        <view class="btn flex">确认修改</view>
+    </view>
+</view>

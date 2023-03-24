@@ -1,0 +1,165 @@
+<view>
+    <sunui-tab bind:__l="__l" bind:navbarTap="__e" data-event-opts="{{[ [ '^navbarTap',[ ['navbarTapHandler'] ] ] ]}}" navArr="{{indexarr3}}" sty="display: flex; justify-content: space-around;background-color:#ffffff;" tabCurrentIndex="{{currentIndex}}" vueId="044f845e-1"></sunui-tab>
+    <view wx:if="{{currentIndex==0}}">
+        <mescroll-body bind:__l="__l" bind:down="__e" bind:init="__e" bind:up="__e" class="vue-ref" data-event-opts="{{[ [ '^init',[ ['mescrollInit'] ] ],[ '^down',[ ['downCallback'] ] ],[ '^up',[ ['upCallback'] ] ] ]}}" data-ref="mescrollRef" down="{{downOption}}" vueId="044f845e-2" vueSlots="{{['default']}}">
+            <view style="{{'margin-top:20rpx;background-color:#FFFFFF;padding:50rpx 0rpx 28rpx 20rpx;background-size:cover;'+'background-image:'+'url('+fbj12+')'+';'}}">
+                <view class="flex-between" style="margin-bottom:50rpx;">
+                    <text style="font-size:44rpx;font-weight:bold;">{{yeartime+'年'}}</text>
+                    <view class="flex-align-center">
+                        <view bindtap="__e" data-event-opts="{{[ [ 'tap',[ [ 'moneydata2',[index] ] ] ] ]}}" wx:for="{{data2}}" wx:key="index">
+                            <view class="{{['flex',active==index?'btun2':'btun']}}">{{item}}</view>
+                        </view>
+                    </view>
+                </view>
+                <view class="flex-align-center">
+                    <view class="flex-columns" style="width:60%;">
+                        <view style="font-size:24rpx;margin-bottom:14rpx;">门店营业额（元）</view>
+                        <view style="font-size:40rpx;" wx:if="{{deduction.year_money}}">{{'￥'+deduction.year_money}}</view>
+                        <view style="font-size:40rpx;" wx:else>￥0</view>
+                    </view>
+                    <view class="flex-columns" style="width:30%;">
+                        <view style="font-size:24rpx;margin-bottom:14rpx;">成交笔数（件）</view>
+                        <view style="font-size:40rpx;" wx:if="{{deduction.year_count}}">{{deduction.year_count}}</view>
+                        <view style="font-size:40rpx;" wx:else>0</view>
+                    </view>
+                </view>
+            </view>
+            <view style="padding:24rpx 0rpx 8rpx 20rpx;">
+                <view>
+                    <picker bindchange="__e" data-event-opts="{{[ [ 'change',[ [ 'bindDateChange2',['$event'] ] ] ] ]}}" end="{{endDate}}" fields="month" mode="date" start="{{startDate}}" value="{{date}}">
+                        <view class="flex-align-center">
+                            <view class="uni-input">{{yeartime+'-'+monthtime}}</view>
+                            <view class="flex">
+                                <view class="iconfont icon-shouqi" style="margin-left:20rpx;"></view>
+                            </view>
+                        </view>
+                    </picker>
+                </view>
+                <view class="flex-between yw">
+                    <view wx:if="{{deduction.month_money}}">{{'营业额(元)：￥'+deduction.month_money}}</view>
+                    <view wx:else>营业额(元)：￥0</view>
+                    <view wx:if="{{deduction.month_count}}">{{'成交数：'+deduction.month_count}}</view>
+                    <view wx:else>成交数：0</view>
+                </view>
+            </view>
+            <view bindtap="__e" class="flex detail" data-event-opts="{{[ [ 'tap',[ [ 'detailRecord',['$0'],[ [ ['list','',index] ] ] ] ] ] ]}}" wx:for="{{list}}" wx:key="index">
+                <view wx:if="{{item.type==1}}">
+                    <image class="img2" src="{{item.cover}}"></image>
+                </view>
+                <block wx:else>
+                    <image class="img" src="{{item.avatar}}" wx:if="{{item.type==4}}"></image>
+                    <view wx:else>
+                        <image class="img2" src="{{item.store_logo}}"></image>
+                    </view>
+                </block>
+                <view style="width:688rpx;margin-left:20rpx;" wx:if="{{item.type==3||item.type==2}}">
+                    <view class="font-overflow" style="width:592rpx;" wx:if="{{item.type==3}}">{{item.meal_name}}</view>
+                    <view class="font-overflow" style="width:592rpx;" wx:if="{{item.type==2}}">
+                        <view wx:if="{{item.only!=0}}">{{'充'+item.money+'送'+item.only+''}}</view>
+                    </view>
+                    <view class="flex-between" style="margin:18rpx 0rpx 14rpx;">
+                        <view>{{'￥'+item.pay_money}}</view>
+                        <image src="{{arrow}}" style="width:24rpx;height:26rpx;"></image>
+                    </view>
+                    <view class="flex-between">
+                        <view class="time">{{item.createtime}}</view>
+                        <view class="time2" wx:if="{{item.cate_type==2}}">{{'收银员：'+item.username}}</view>
+                    </view>
+                </view>
+                <view style="width:608rpx;margin-left:20rpx;" wx:if="{{item.type==4||item.type==1}}">
+                    <view style="margin-bottom:16rpx;" wx:if="{{item.type==4}}">{{item.nickname}}</view>
+                    <view class="font-overflow" style="width:592rpx;" wx:if="{{item.type==1}}">{{item.good_name}}</view>
+                    <view class="flex-between" style="margin:18rpx 0rpx 14rpx;">
+                        <view>{{'￥'+item.pay_money}}</view>
+                        <image src="{{arrow}}" style="width:24rpx;height:26rpx;"></image>
+                    </view>
+                    <view class="flex-between">
+                        <view class="time">{{item.createtime}}</view>
+                        <view class="time2" wx:if="{{item.cate_type==2}}">{{'收银员：'+item.username}}</view>
+                    </view>
+                </view>
+            </view>
+        </mescroll-body>
+    </view>
+    <view wx:if="{{currentIndex==1}}">
+        <mescroll-body bind:__l="__l" bind:down="__e" bind:init="__e" bind:up="__e" class="vue-ref" data-event-opts="{{[ [ '^init',[ ['mescrollInit'] ] ],[ '^down',[ ['downCallback'] ] ],[ '^up',[ ['upCallback'] ] ] ]}}" data-ref="mescrollRef" down="{{downOption}}" vueId="044f845e-3" vueSlots="{{['default']}}">
+            <view style="{{'margin-top:20rpx;background-color:#FFFFFF;padding:50rpx 0rpx 28rpx 20rpx;background-size:cover;'+'background-image:'+'url('+fbj12+')'+';'}}">
+                <view class="flex-between" style="margin-bottom:50rpx;">
+                    <text style="font-size:44rpx;font-weight:bold;">{{monthtime+'月'}}</text>
+                    <view class="flex-align-center">
+                        <view bindtap="__e" data-event-opts="{{[ [ 'tap',[ [ 'moneydata',[index] ] ] ] ]}}" wx:for="{{data2}}" wx:key="index">
+                            <view class="{{['flex',active==index?'btun2':'btun']}}">{{item}}</view>
+                        </view>
+                    </view>
+                </view>
+                <view class="flex-align-center">
+                    <view class="flex-columns" style="width:60%;">
+                        <view style="font-size:24rpx;margin-bottom:14rpx;">门店营业额（元）</view>
+                        <view style="font-size:40rpx;" wx:if="{{deduction.year_money}}">{{'￥'+deduction.year_money}}</view>
+                        <view style="font-size:40rpx;" wx:else>￥0</view>
+                    </view>
+                    <view class="flex-columns" style="width:30%;">
+                        <view style="font-size:24rpx;margin-bottom:14rpx;">成交笔数（件）</view>
+                        <view style="font-size:40rpx;" wx:if="{{deduction.year_count}}">{{deduction.year_count}}</view>
+                        <view style="font-size:40rpx;" wx:else>0</view>
+                    </view>
+                </view>
+            </view>
+            <view style="padding:24rpx 0rpx 8rpx 20rpx;">
+                <view>
+                    <picker bindchange="__e" data-event-opts="{{[ [ 'change',[ [ 'bindDateChange2',['$event'] ] ] ] ]}}" end="{{endDate}}" fields="day" mode="date" start="{{startDate}}" value="{{date}}">
+                        <view class="flex-align-center">
+                            <view class="uni-input">{{yeartime+'-'+monthtime+'-'+day}}</view>
+                            <view class="flex">
+                                <view class="iconfont icon-shouqi" style="margin-left:20rpx;"></view>
+                            </view>
+                        </view>
+                    </picker>
+                </view>
+                <view class="flex-between yw">
+                    <view wx:if="{{deduction.cur_money}}">{{'营业额(元)：￥'+deduction.cur_money}}</view>
+                    <view wx:else>营业额(元)：￥0</view>
+                    <view wx:if="{{deduction.total}}">{{'成交数：'+deduction.total}}</view>
+                    <view wx:else>成交数：0</view>
+                </view>
+            </view>
+            <view bindtap="__e" class="flex detail" data-event-opts="{{[ [ 'tap',[ [ 'detailRecord',['$0'],[ [ ['list','',index] ] ] ] ] ] ]}}" wx:for="{{list}}" wx:key="index">
+                <view wx:if="{{item.type==1}}">
+                    <image class="img2" src="{{item.cover}}"></image>
+                </view>
+                <block wx:else>
+                    <image class="img" src="{{item.avatar}}" wx:if="{{item.type==4}}"></image>
+                    <view wx:else>
+                        <image class="img2" src="{{item.store_logo}}"></image>
+                    </view>
+                </block>
+                <view style="width:688rpx;margin-left:20rpx;" wx:if="{{item.type==3||item.type==2}}">
+                    <view class="font-overflow" style="width:592rpx;" wx:if="{{item.type==3}}">{{item.meal_name}}</view>
+                    <view class="font-overflow" style="width:592rpx;" wx:if="{{item.type==2}}">
+                        <view wx:if="{{item.only!=0}}">{{'充'+item.money+'送'+item.only+''}}</view>
+                    </view>
+                    <view class="flex-between" style="margin:18rpx 0rpx 14rpx;">
+                        <view>{{'￥'+item.pay_money}}</view>
+                        <image src="{{arrow}}" style="width:24rpx;height:26rpx;"></image>
+                    </view>
+                    <view class="flex-between">
+                        <view class="time">{{item.createtime}}</view>
+                        <view class="time2" wx:if="{{item.cate_type==2}}">{{'收银员：'+item.username}}</view>
+                    </view>
+                </view>
+                <view style="width:608rpx;margin-left:20rpx;" wx:if="{{item.type==4||item.type==1}}">
+                    <view style="margin-bottom:16rpx;" wx:if="{{item.type==4}}">{{item.nickname}}</view>
+                    <view class="font-overflow" style="width:592rpx;" wx:if="{{item.type==1}}">{{item.good_name}}</view>
+                    <view class="flex-between" style="margin:18rpx 0rpx 14rpx;">
+                        <view>{{'￥'+item.pay_money}}</view>
+                        <image src="{{arrow}}" style="width:24rpx;height:26rpx;"></image>
+                    </view>
+                    <view class="flex-between">
+                        <view class="time">{{item.createtime}}</view>
+                        <view class="time2" wx:if="{{item.cate_type==2}}">{{'收银员：'+item.username}}</view>
+                    </view>
+                </view>
+            </view>
+        </mescroll-body>
+    </view>
+</view>

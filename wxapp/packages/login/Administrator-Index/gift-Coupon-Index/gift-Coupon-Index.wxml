@@ -1,0 +1,19 @@
+<view>
+    <view style="padding:20rpx 40rpx;background:#FFFFFF;">
+        <view class="flex-align-center search-content">
+            <image class="search-img" src="/static/sousuo.png"></image>
+            <input bindconfirm="__e" bindinput="__e" data-event-opts="{{[ [ 'input',[ [ '__set_model',[ '','searchVal','$event',[] ] ],[ 'changeInput',['$event'] ] ] ],[ 'confirm',[ [ 'changeSearch',['$event'] ] ] ] ]}}" maxlength="11" placeholder="输入赠送用户的手机号" placeholderStyle="font-size:28rpx;color:#999;" style="width:70%;line-height:1em;" value="{{searchVal}}"></input>
+            <image bindtap="__e" class="icon_close" data-event-opts="{{[ [ 'tap',[ [ 'close',['$event'] ] ] ] ]}}" src="/static/delect.png" wx:if="{{searchVal}}"></image>
+        </view>
+    </view>
+    <view class="flex-between lists" wx:if="{{searchInfo.avatar}}">
+        <view class="flex-align-center">
+            <image class="img" src="{{searchInfo.avatar}}"></image>
+            <view class="flex-columns">
+                <view style="margin-bottom:16rpx;">{{searchInfo.nickname}}</view>
+                <view class="time">{{searchInfo.mobile}}</view>
+            </view>
+        </view>
+        <view bindtap="__e" class="setCoupon flex" data-event-opts="{{[ [ 'tap',[ ['transCoupon'] ] ] ]}}">赠送</view>
+    </view>
+</view>

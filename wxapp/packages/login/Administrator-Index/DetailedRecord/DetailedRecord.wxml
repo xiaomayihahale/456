@@ -1,0 +1,72 @@
+<view>
+    <view class="flex-column" style="background-color:#FFFFFF;">
+        <image class="img" mode="aspectFill" src="{{order.avatar}}"></image>
+        <view>{{order.nickname}}</view>
+        <view class="czPrice">扣款金额</view>
+        <view class="price">{{'￥'+order.real_payment}}</view>
+    </view>
+    <view style="background-color:#FFFFFF;">
+        <view class="flex-between all">
+            <view>交易时间：</view>
+            <view class="time2">{{order.createtime}}</view>
+        </view>
+        <view class="flex-between all">
+            <view class="content">交易内容：</view>
+            <view bindtap="__e" class="font-overflow2 contents" data-event-opts="{{[ [ 'tap',[ ['detials'] ] ] ]}}" wx:if="{{plugin_type==0}}">{{orderGoods[0].goods_name}}</view>
+            <view bindtap="__e" class="font-overflow2 contents" data-event-opts="{{[ [ 'tap',[ ['detials'] ] ] ]}}" wx:if="{{plugin_type==1}}">{{orderGoods[0].foods_name}}</view>
+            <view bindtap="__e" class="font-overflow2 contents" data-event-opts="{{[ [ 'tap',[ ['detials'] ] ] ]}}" wx:if="{{plugin_type==2}}">{{orderGoods[0].room_name}}</view>
+        </view>
+        <view class="flex-between all">
+            <view>交易数量：</view>
+            <view wx:if="{{plugin_type==2}}">1</view>
+            <view wx:else>{{num}}</view>
+        </view>
+    </view>
+    <view class="message flex-align-center">付款人信息</view>
+    <view style="background-color:#FFFFFF;">
+        <view class="flex-between all2">
+            <view>用户昵称：</view>
+            <view class="time2">{{order.nickname}}</view>
+        </view>
+        <view class="flex-between all2">
+            <view>会员卡号：</view>
+            <view class="flex-align-center">
+                <view class="time2">{{order.member_no}}</view>
+                <view bindtap="__e" class="copy flex" data-event-opts="{{[ [ 'tap',[ ['copy2'] ] ] ]}}">复制</view>
+            </view>
+        </view>
+        <view class="flex-between all2">
+            <view>手机号：</view>
+            <view class="time2">{{order.mobile}}</view>
+        </view>
+    </view>
+    <sunui-popup bind:__l="__l" class="vue-ref" data-ref="pop" style="background-color:#FFFFFF;" vueId="591661ae-1" vueSlots="{{['content']}}">
+        <view slot="content">
+            <view class="flex" style="width:750rpx;">
+                <text class="record">交易记录</text>
+            </view>
+            <view class="flex-align-center" style="margin:0rpx 26rpx 38rpx;" wx:for="{{orderGoods}}" wx:key="index">
+                <image class="image2" src="{{item.cover}}" wx:if="{{plugin_type==0}}"></image>
+                <image class="image2" src="{{item.foods_img}}" wx:if="{{plugin_type==1}}"></image>
+                <image class="image2" src="{{item.img}}" wx:if="{{plugin_type==2}}"></image>
+                <view style="margin-left:18rpx;width:500rpx;">
+                    <view class="font-overflow2" wx:if="{{plugin_type==0}}">{{item.goods_name}}</view>
+                    <view class="font-overflow2" wx:if="{{plugin_type==1}}">{{item.foods_name}}</view>
+                    <view class="font-overflow2" wx:if="{{plugin_type==2}}">{{item.room_name}}</view>
+                    <view class="guige">{{'规格：'+item.spec}}</view>
+                    <view class="flex-between">
+                        <view style="color:#333333;">{{'￥'+item.unit_price}}</view>
+                        <view wx:if="{{plugin_type==2}}">数量：1</view>
+                        <view style="color:#666666;font-size:24rpx;" wx:else>{{'数量：'+item.num}}</view>
+                    </view>
+                </view>
+            </view>
+            <view class="flex-align-center">
+                <view class="allmoney">总金额￥<text style="font-size:38rpx;">{{order.real_payment}}</text>
+                </view>
+                <view style="color:#666666;font-size:24rpx;" wx:if="{{plugin_type!=2}}">{{'总计'+num+'件商品'}}</view>
+            </view>
+            <view bindtap="__e" class="share_view2 flex" data-event-opts="{{[ [ 'tap',[ [ 'closeDialog',['$event'] ] ] ] ]}}">关闭</view>
+        </view>
+    </sunui-popup>
+</view>

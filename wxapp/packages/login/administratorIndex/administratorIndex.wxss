@@ -1,0 +1,157 @@
+.logo {
+    padding: 30rpx 0rpx;
+    border-bottom: 3rpx solid #f2f2f2;
+}
+
+.img {
+    border-radius: 50%;
+    width: 40rpx;
+    height: 40rpx;
+    margin-right: 18rpx;
+}
+
+.price {
+    font-weight: 700;
+    font-size: 40rpx;
+    margin: 18rpx 0rpx 4rpx;
+}
+
+.imgtop {
+    height: 96rpx;
+    width: 96rpx;
+    border-radius: 50%;
+    margin: 30rpx 22rpx;
+}
+
+.nickname {
+    font-size: 28rpx;
+    margin: 30rpx 22rpx;
+}
+
+.vip {
+    width: 26rpx;
+    height: 24rpx;
+}
+
+.phone {
+    margin-top: 6rpx;
+    font-size: 24rpx;
+}
+
+.btun {
+    font-size: 24rpx;
+    color: #2d6bc8;
+    background: #fff;
+    border: 2rpx solid #689ceb;
+    width: 92rpx;
+    height: 48rpx;
+    margin-right: 18rpx;
+}
+
+.btun2 {
+    font-size: 24rpx;
+    color: #fff;
+    background: #689ceb;
+    width: 92rpx;
+    height: 48rpx;
+    margin-right: 18rpx;
+}
+
+.btn2 {
+    width: 16rpx;
+    height: 16rpx;
+    background: #689ceb;
+}
+
+.btn3 {
+    width: 16rpx;
+    height: 16rpx;
+    background: #4ec27a;
+}
+
+.ewmImg {
+    width: 44rpx;
+    height: 44rpx;
+}
+
+.erwm {
+    font-size: 24rpx;
+    color: #9f9f9f;
+}
+
+.yangs {
+    width: calc(100%/3);
+    margin-bottom: 20rpx;
+}
+
+.Summary {
+    width: 226rpx;
+    height: 226rpx;
+    background-color: #fff;
+    border: 2rpx solid #eee;
+}
+
+.Summary view {
+    font-size: 24rpx;
+}
+
+.Summary2 {
+    width: 280rpx;
+    height: 280rpx;
+    background-color: #fff;
+    border: 2rpx solid #eee;
+    margin-right: 66rpx;
+}
+
+.text2 {
+    font-size: 32rpx;
+    font-weight: 700;
+    margin-bottom: 46rpx;
+    margin-top: 24rpx;
+}
+
+.view_price {
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    align-items: center;
+    margin-top: 36rpx;
+}
+
+.share_view {
+    margin: 24rpx 0rpx;
+    font-size: 32rpx;
+    font-weight: 700;
+}
+
+.share_yq {
+    background-color: #fff;
+    border-bottom: 2rpx solid #f1f1f1;
+}
+
+.share_view2 {
+    margin: 24rpx 0rpx;
+    font-size: 32rpx;
+}
+
+.share_content {
+    padding-bottom: 20rpx;
+    background-color: #fff;
+    border-bottom: 2rpx solid #f1f1f1;
+}
+
+.share_content view {
+    width: calc(100% / 3);
+    text-align: center;
+}
+
+.view_share {
+    margin: 30rpx 0rpx;
+}
+
+.share_img {
+    height: 81rpx;
+    width: 81rpx;
+    margin: 15rpx;
+}

@@ -1,0 +1,46 @@
+<view>
+    <view class="flex-column" style="background-color:#FFFFFF;">
+        <image class="img" mode="aspectFill" src="{{singleInfo.avatar}}"></image>
+        <view>{{singleInfo.nickname}}</view>
+        <view class="czPrice">代充金额</view>
+        <view class="price">{{'￥'+singleInfo.money}}</view>
+    </view>
+    <view style="background-color:#FFFFFF;">
+        <view class="flex-between all">
+            <view>交易时间：</view>
+            <view class="time2">{{singleInfo.createtime}}</view>
+        </view>
+        <view class="flex-between all1">
+            <view>交易内容：</view>
+            <view>充值到余额</view>
+        </view>
+        <view class="flex-between all2">
+            <view>会员卡号：</view>
+            <view class="flex-align-center">
+                <view style="color:#333333;">{{singleInfo.member_no}}</view>
+                <view bindtap="__e" class="copy flex" data-event-opts="{{[ [ 'tap',[ ['copy'] ] ] ]}}">复制</view>
+            </view>
+        </view>
+        <view class="flex-between all3" wx:if="{{singleInfo.mobile}}">
+            <view>手机号：</view>
+            <view style="color:#999999;">{{singleInfo.mobile}}</view>
+        </view>
+    </view>
+    <block wx:if="{{singleInfo.type==2}}">
+        <view class="message flex-align-center">代充员信息</view>
+        <view style="background-color:#FFFFFF;">
+            <view class="flex-between all4" wx:if="{{singleInfo.username}}">
+                <view>用户昵称：</view>
+                <view>{{singleInfo.username}}</view>
+            </view>
+            <view class="flex-between all4" wx:if="{{singleInfo.oper_uid}}">
+                <view>工号：</view>
+                <view style="color:#494949;font-size:24rpx;">{{singleInfo.oper_uid}}</view>
+            </view>
+            <view class="flex-between all3" wx:if="{{singleInfo.oper_mobile}}">
+                <view>手机号：</view>
+                <view style="color:#999999;">{{singleInfo.oper_mobile}}</view>
+            </view>
+        </view>
+    </block>
+</view>

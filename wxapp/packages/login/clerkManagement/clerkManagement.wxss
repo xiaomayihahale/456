@@ -1,0 +1,60 @@
+page {
+    background: #f0f0f0;
+}
+
+.all {
+    padding: 20rpx;
+    background-color: #fff;
+}
+
+.all:nth-child(n+2) {
+    border-top: 2rpx solid #f0f0f0;
+}
+
+.imgtop {
+    width: 96rpx;
+    height: 96rpx;
+    border-radius: 50%;
+    margin-right: 18rpx;
+}
+
+.dianyuan {
+    width: 300rpx;
+    font-size: 32rpx;
+    font-weight: 700;
+}
+
+.phone {
+    color: #999;
+    font-size: 24rpx;
+    margin-top: 12rpx;
+}
+
+.revise {
+    width: 132rpx;
+    height: 56rpx;
+    background: #4ec27a;
+    border-radius: 78rpx;
+    font-size: 24rpx;
+    color: #fff;
+}
+
+.del {
+    width: 92rpx;
+    height: 56rpx;
+    background: #e62323;
+    border-radius: 78rpx;
+    margin-left: 20rpx;
+    font-size: 24rpx;
+    color: #fff;
+}
+
+.look {
+    background: #fff;
+    height: 88rpx;
+    border-top: 1px solid #eee;
+    text-align: center;
+    line-height: 88rpx;
+    color: #999;
+    font-size: 24rpx;
+}

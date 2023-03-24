@@ -1,0 +1,29 @@
+<view>
+    <view style="padding:24rpx 34rpx 24rpx 20rpx;background-color:#fff;margin-top:30rpx;">
+        <picker bindchange="__e" data-event-opts="{{[ [ 'change',[ [ 'bindDateChange2',['$event'] ] ] ] ]}}" end="{{endDate}}" mode="date" start="{{startDate}}" value="{{date}}">
+            <view class="flex-align-center">
+                <view class="uni-input">{{date}}</view>
+                <view class="flex">
+                    <view class="iconfont icon-shouqi" style="margin-left:20rpx;"></view>
+                </view>
+            </view>
+        </picker>
+    </view>
+    <mescroll-body bind:__l="__l" bind:down="__e" bind:init="__e" bind:up="__e" class="vue-ref" data-event-opts="{{[ [ '^init',[ ['mescrollInit'] ] ],[ '^down',[ ['downCallback'] ] ],[ '^up',[ ['upCallback'] ] ] ]}}" data-ref="mescrollRef" down="{{downOption}}" vueId="d26ad8c8-1" vueSlots="{{['default']}}">
+        <view class="flex-between lists" wx:for="{{list}}" wx:key="index">
+            <view class="flex-align-center">
+                <image class="img" src="{{item.avatar}}"></image>
+                <view class="flex-columns">
+                    <view style="margin-bottom:16rpx;">{{item.meal_name}}</view>
+                    <view class="time">{{item.createtime}}</view>
+                </view>
+            </view>
+            <view class="flex-align-center">
+                <view class="flex-columns" style="margin-right:20rpx;">
+                    <view style="color:#333333;font-weight:bold;">{{'用户：'+item.nickname}}</view>
+                    <view style="color:#333333;font-size:24rpx;">{{'代充员：'+item.username}}</view>
+                </view>
+            </view>
+        </view>
+    </mescroll-body>
+</view>

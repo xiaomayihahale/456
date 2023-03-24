@@ -1,0 +1,49 @@
+.img {
+    width: 96rpx;
+    height: 96rpx;
+    margin: 38rpx 0rpx 34rpx;
+}
+
+.storetitle {
+    font-size: 32rpx;
+    font-weight: 700;
+    margin-bottom: 74rpx;
+}
+
+.box-input {
+    width: 100%;
+    position: relative;
+    z-index: 10;
+    height: 96rpx;
+    line-height: 96rpx;
+    padding-left: 40rpx;
+}
+
+.uni-zhanghao {
+    height: 96rpx;
+    background: #f1f1f1;
+    margin-left: 54rpx;
+    margin-bottom: 20rpx;
+    border-radius: 20rpx;
+    width: 654rpx;
+}
+
+.zhangh {
+    font-size: 32rpx;
+    font-weight: 700;
+    margin-left: 54rpx;
+    margin-bottom: 36rpx;
+}
+
+.btn {
+    width: 620rpx;
+    height: 96rpx;
+    background: #3287ff;
+    box-shadow: 0 4px 8px 1px rgba(50,135,255,.33);
+    border-radius: 108rpx;
+    font-size: 32rpx;
+    color: #fff;
+    margin-bottom: 40rpx;
+    position: absolute;
+    bottom: 160rpx;
+}

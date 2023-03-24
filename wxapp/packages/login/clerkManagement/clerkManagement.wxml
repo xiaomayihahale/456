@@ -1,0 +1,19 @@
+<view>
+    <mescroll-body bind:__l="__l" bind:down="__e" bind:init="__e" bind:up="__e" class="vue-ref" data-event-opts="{{[ [ '^init',[ ['mescrollInit'] ] ],[ '^down',[ ['downCallback'] ] ],[ '^up',[ ['upCallback'] ] ] ]}}" data-ref="mescrollRef" down="{{downOption}}" vueId="9ee12a82-1" vueSlots="{{['default']}}">
+        <view style="margin:20rpx 0rpx;" wx:for="{{list}}" wx:key="index">
+            <view class="flex-between all">
+                <view class="flex-align-center">
+                    <image class="imgtop" src="{{avatar}}"></image>
+                    <view class="flex-columns">
+                        <view class="font-overflow dianyuan">{{item.username}}</view>
+                        <view class="phone" wx:if="{{item.mobile!=null}}">{{item.mobile}}</view>
+                    </view>
+                </view>
+                <view class="flex-align-center">
+                    <view bindtap="__e" class="revise flex" data-event-opts="{{[ [ 'tap',[ [ 'revises',['$0'],[ [ ['list','',index] ] ] ] ] ] ]}}">修改密码</view>
+                    <view bindtap="__e" class="del flex" data-event-opts="{{[ [ 'tap',[ [ 'detial',['$0'],[ [ ['list','',index] ] ] ] ] ] ]}}">删除</view>
+                </view>
+            </view>
+        </view>
+    </mescroll-body>
+</view>

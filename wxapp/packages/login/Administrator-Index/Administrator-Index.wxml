@@ -1,0 +1,80 @@
+<view>
+    <view class="logo flex">
+        <image class="img" src="{{storeListInfo.store_logo}}"></image>
+        <view style="font-weight:bold;">{{storeListInfo.store_name}}</view>
+    </view>
+    <view class="flex-between">
+        <view class="flex-columns" style="margin-left:22rpx;">
+            <view class="nickname sunui-ellipsis-1">{{'管理员 '+login.username}}</view>
+        </view>
+        <view bindtap="__e" class="flex-column" data-event-opts="{{[ [ 'tap',[ ['scanIt'] ] ] ]}}" style="margin-right:34rpx;">
+            <view class="iconfont icon-sao" style="font-size:40rpx;"></view>
+            <view class="erwm">扫一扫</view>
+        </view>
+    </view>
+    <view class="flex-between" style="padding:36rpx 40rpx 36rpx 54rpx;">
+        <view class="flex-align-center">
+            <view bindtap="__e" data-event-opts="{{[ [ 'tap',[ [ 'moneydata',[index] ] ] ] ]}}" wx:for="{{data2}}" wx:key="index">
+                <view class="{{['flex',active==index?'btun2':'btun']}}">{{item}}</view>
+            </view>
+        </view>
+        <view class="uni-input">{{date}}</view>
+    </view>
+    <view class="line">
+        <line-chart bind:__l="__l" canvasId="index_line_2" class="vue-ref" data-ref="lineData2" dataAs="{{lineData2}}" vueId="17dc308b-1"></line-chart>
+    </view>
+    <view bindtap="__e" class="Summary3 ontop flex-between" data-event-opts="{{[ [ 'tap',[ ['money'] ] ] ]}}">
+        <view class="text2">今日充值（元）</view>
+        <view class="flex-align-center">
+            <view class="text2" wx:if="{{getStore.rech_cur_money}}">{{getStore.rech_cur_money}}</view>
+            <view class="text2" wx:else>0</view>
+            <view style="margin-left:20rpx;">查看全部 ></view>
+        </view>
+    </view>
+    <view bindtap="__e" class="Summary3 flex-between" data-event-opts="{{[ [ 'tap',[ ['orderMeal'] ] ] ]}}" wx:if="{{eatPlugin==2}}">
+        <view class="text2">预约订餐</view>
+        <view class="flex-align-center">
+            <view style="margin-left:20rpx;">去订餐 ></view>
+        </view>
+    </view>
+    <view bindtap="__e" class="Summary3 flex-between" data-event-opts="{{[ [ 'tap',[ ['setCoupon'] ] ] ]}}">
+        <view class="text2">赠送卡券</view>
+        <view class="flex-align-center">
+            <view style="margin-left:20rpx;">去赠送 ></view>
+        </view>
+    </view>
+    <view bindtap="__e" class="Summary2 flex-between" data-event-opts="{{[ [ 'tap',[ ['saveWine'] ] ] ]}}" wx:if="{{ktvPlugin==2}}">
+        <view class="text2">酒库管理</view>
+        <view class="flex-align-center">
+            <view style="margin-left:20rpx;">去管理 ></view>
+        </view>
+    </view>
+    <sunui-popup bind:__l="__l" class="vue-ref" data-ref="pop" style="background-color:#FFFFFF;z-index:19999 !important;" vueId="17dc308b-2" vueSlots="{{['content']}}">
+        <view slot="content">
+            <view class="share_view flex">扫码方式</view>
+            <view class="share_content flex-align-center">
+                <view bindtap="__e" class="flex-column v-width" data-event-opts="{{[ [ 'tap',[ ['daichong'] ] ] ]}}">
+                    <image class="share_img" src="{{daichongs}}"></image>
+                    <view>代充</view>
+                </view>
+                <view bindtap="__e" class="flex-column v-width" data-event-opts="{{[ [ 'tap',[ ['tcCardssAdd'] ] ] ]}}">
+                    <image class="share_img" src="{{tckCard2}}"></image>
+                    <view>套餐加次</view>
+                </view>
+                <view bindtap="__e" class="flex-column v-width" data-event-opts="{{[ [ 'tap',[ [ 'tcCardss',['$event'] ] ] ] ]}}">
+                    <image class="share_img" src="{{tcCard}}"></image>
+                    <view>套餐扣次</view>
+                </view>
+                <view bindtap="__e" class="flex-column v-width" data-event-opts="{{[ [ 'tap',[ ['kkmoney'] ] ] ]}}">
+                    <image class="share_img" src="{{koukuan}}"></image>
+                    <view>扣款</view>
+                </view>
+                <view bindtap="__e" class="flex-column v-width" data-event-opts="{{[ [ 'tap',[ ['writeOff'] ] ] ]}}" wx:if="{{ktvPlugin==2}}">
+                    <image class="share_img" src="{{hexiao}}"></image>
+                    <view>核销</view>
+                </view>
+            </view>
+            <view bindtap="__e" class="share_view2 flex" data-event-opts="{{[ [ 'tap',[ [ 'closeDialog',['$event'] ] ] ] ]}}">关闭</view>
+        </view>
+    </sunui-popup>
+</view>

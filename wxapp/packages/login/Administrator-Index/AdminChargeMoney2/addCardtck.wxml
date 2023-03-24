@@ -1,0 +1,29 @@
+<view>
+    <view style="background-color:#FFFFFF;">
+        <view class="flex-align-center">
+            <image class="imgtop" src="{{userInfo.avatar}}"></image>
+            <view class="flex-columns">
+                <view class="flex-align-center">
+                    <view class="nickname sunui-ellipsis-1">{{userInfo.nickname}}</view>
+                    <image class="vipdj" mode="aspectFill" src="{{userInfo.member_logo}}"></image>
+                </view>
+                <view class="phone" wx:if="{{userInfo.mobile}}">{{userInfo.mobile}}</view>
+            </view>
+        </view>
+        <view class="money" style="margin-top:10rpx;">请输入该用户套餐卡(次数)</view>
+        <view style="margin:0rpx 32rpx 60rpx;">
+            <view class="flex-align-center" style="border-bottom:2rpx solid #ECECEC;padding-bottom:10rpx;">
+                <input bindinput="__e" class="input_price" data-event-opts="{{[ [ 'input',[ [ '__set_model',[ '','logno','$event',[] ] ],[ 'changeInput',['$event'] ] ] ] ]}}" placeholder="0" placeholderClass="placeholder-input" type="number" value="{{logno}}"></input>
+            </view>
+        </view>
+        <view class="money">请输入该用户套餐卡(金额)</view>
+        <view style="padding:0rpx 32rpx 60rpx;">
+            <view class="flex-align-center" style="border-bottom:2rpx solid #ECECEC;padding-bottom:10rpx;">
+                <input bindinput="__e" class="input_price" data-event-opts="{{[ [ 'input',[ [ '__set_model',[ '','money','$event',[] ] ],[ 'changeInput2',['$event'] ] ] ] ]}}" placeholder="0" placeholderClass="placeholder-input" type="number" value="{{money}}"></input>
+            </view>
+        </view>
+    </view>
+    <view class="flex" style="width:100%;">
+        <view bindtap="__e" class="butn flex" data-event-opts="{{[ [ 'tap',[ ['addNum'] ] ] ]}}">增加次数</view>
+    </view>
+</view>

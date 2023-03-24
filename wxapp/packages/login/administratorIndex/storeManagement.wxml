@@ -1,0 +1,19 @@
+<view>
+    <view class="flex" style="width:750rpx;" wx:for="{{store}}" wx:key="index">
+        <view class="all">
+            <view class="flex-between">
+                <view class="flex-align-center">
+                    <image class="img" src="{{item.store_logo}}"></image>
+                    <view class="font-overflow title">{{item.store_name}}</view>
+                </view>
+                <view bindtap="__e" class="delete flex" data-event-opts="{{[ [ 'tap',[ [ 'deteles',['$0'],[ [ ['store','',index,'id'] ] ] ] ] ] ]}}">删除</view>
+            </view>
+            <view class="text" style="margin:32rpx 0rpx 28rpx;">{{'地址：'+item.store_addres+''}}</view>
+            <view class="flex-between">
+                <view class="text">{{'店长：'+item.username}}<text style="margin-left:40rpx;" wx:if="{{item.store_phone}}">{{'电话：'+item.store_phone}}</text>
+                </view>
+                <view bindtap="__e" class="edit flex" data-event-opts="{{[ [ 'tap',[ [ 'modify',['$0'],[ [ ['store','',index,'id'] ] ] ] ] ] ]}}">修改资料</view>
+            </view>
+        </view>
+    </view>
+</view>

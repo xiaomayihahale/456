@@ -1,0 +1,60 @@
+<view>
+    <view class="logo flex">
+        <image class="img" src="{{system.logo}}"></image>
+        <view style="font-weight:bold;">{{system.name}}</view>
+    </view>
+    <view class="flex-between">
+        <view class="flex-columns" style="margin-left:22rpx;">
+            <view class="nickname sunui-ellipsis-1">{{'总管理员 '+login.username}}</view>
+        </view>
+        <view bindtap="__e" class="flex-column" data-event-opts="{{[ [ 'tap',[ ['edit'] ] ] ]}}" style="margin-right:34rpx;">
+            <image src="{{edits}}" style="width:32rpx;height:32rpx;"></image>
+            <view class="erwm">修改密码</view>
+        </view>
+    </view>
+    <view class="flex-between" style="padding:36rpx 40rpx 36rpx 54rpx;">
+        <view class="flex-align-center">
+            <view bindtap="__e" data-event-opts="{{[ [ 'tap',[ [ 'moneydata',[index] ] ] ] ]}}" wx:for="{{data2}}" wx:key="index">
+                <view class="{{['flex',active==index?'btun2':'btun']}}">{{item}}</view>
+            </view>
+        </view>
+        <view class="uni-input">{{date}}</view>
+    </view>
+    <view class="line">
+        <line-chart bind:__l="__l" canvasId="index_line_2" class="vue-ref" data-ref="lineData2" dataAs="{{lineData2}}" vueId="502b3ede-1"></line-chart>
+    </view>
+    <view class="flex-align-center" style="margin:80rpx 0rpx;display:flex;flex-wrap:wrap;width:750rpx;">
+        <view class="flex yangs">
+            <view bindtap="__e" class="Summary flex-column" data-event-opts="{{[ [ 'tap',[ ['SummaryAll'] ] ] ]}}">
+                <view>门店管理（个）</view>
+                <view class="text2" wx:if="{{storeSum.store_count==null}}">0</view>
+                <view class="text2" wx:else>{{storeSum.store_count}}</view>
+                <view class="text3">查看全部 ></view>
+            </view>
+        </view>
+        <view class="flex yangs">
+            <view bindtap="__e" class="Summary flex-column" data-event-opts="{{[ [ 'tap',[ ['money'] ] ] ]}}">
+                <view>营业额（元）</view>
+                <view class="text2" wx:if="{{storeSum.sum_money==null}}">0</view>
+                <view class="text2" wx:else>{{storeSum.sum_money}}</view>
+                <view class="text3">查看年汇总 ></view>
+            </view>
+        </view>
+        <view class="flex yangs">
+            <view bindtap="__e" class="Summary flex-column" data-event-opts="{{[ [ 'tap',[ ['tckCard'] ] ] ]}}">
+                <view>套餐卡购买（元）</view>
+                <view class="text2" wx:if="{{storeSum.meal_sum_money==null||storeSum.meal_sum_money==false}}">0</view>
+                <view class="text2" wx:else>{{storeSum.meal_sum_money}}</view>
+                <view class="text3">查看详情 ></view>
+            </view>
+        </view>
+        <view class="flex yangs">
+            <view bindtap="__e" class="Summary flex-column" data-event-opts="{{[ [ 'tap',[ ['daichong'] ] ] ]}}">
+                <view>会员卡代充（元）</view>
+                <view class="text2" wx:if="{{storeSum.charge_sum_money==null}}">0</view>
+                <view class="text2" wx:else>{{storeSum.charge_sum_money}}</view>
+                <view class="text3">查看店员 ></view>
+            </view>
+        </view>
+    </view>
+</view>

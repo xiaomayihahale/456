@@ -1,0 +1,30 @@
+<view>
+    <view class="flex-between">
+        <view class="flex-align-center">
+            <image class="imgtop" src="{{store.store_logo}}"></image>
+            <view class="flex-columns">
+                <view class="flex-align-center">
+                    <view class="nickname sunui-ellipsis-1">{{'店长：'+store.username}}</view>
+                </view>
+                <view class="phone" wx:if="{{store.user_mobile}}">{{'手机号：'+store.user_mobile}}</view>
+            </view>
+        </view>
+    </view>
+    <view>
+        <view class="flex-columns" style="margin-top:54rpx;">
+            <view class="zhangh">门店昵称</view>
+            <view class="uni-zhanghao">
+                <input bindinput="__e" class="box-input" data-event-opts="{{[ [ 'input',[ [ '__set_model',[ '','storenames','$event',[] ] ] ] ] ]}}" placeholder="请输入门店昵称" value="{{storenames}}"></input>
+            </view>
+        </view>
+        <view class="flex-columns">
+            <view class="zhangh">修改门店电话</view>
+            <view class="uni-zhanghao">
+                <input bindinput="__e" class="box-input" data-event-opts="{{[ [ 'input',[ [ '__set_model',[ '','storephone','$event',[] ] ] ] ] ]}}" maxlength="11" placeholder="请输入门店电话" type="number" value="{{storephone}}"></input>
+            </view>
+        </view>
+    </view>
+    <view bindtap="__e" class="flex" data-event-opts="{{[ [ 'tap',[ ['confirm'] ] ] ]}}" style="width:750rpx;position:absolute;bottom:200rpx;">
+        <view class="btn flex">确认修改</view>
+    </view>
+</view>

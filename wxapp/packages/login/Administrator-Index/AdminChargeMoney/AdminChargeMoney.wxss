@@ -1,0 +1,98 @@
+.imgtop {
+    height: 96rpx;
+    width: 96rpx;
+    border-radius: 50%;
+    margin: 30rpx 22rpx;
+}
+
+.nickname {
+    font-size: 32rpx;
+    margin-right: 16rpx;
+}
+
+.vipdj {
+    width: 54rpx;
+    height: 32rpx;
+}
+
+.vip {
+    width: 26rpx;
+    height: 24rpx;
+}
+
+.vipText {
+    color: #d9b776;
+    font-size: 24rpx;
+}
+
+.vipTexts {
+    color: #d9b776;
+    font-size: 32rpx;
+}
+
+.phone {
+    margin-top: 6rpx;
+    font-size: 24rpx;
+}
+
+.money {
+    font-size: 24rpx;
+    margin: 0rpx 0rpx 50rpx 32rpx;
+}
+
+.input_price {
+    font-size: 44rpx;
+    color: #000;
+    padding-left: 6rpx;
+}
+
+.placeholder-input {
+    font-size: 44rpx;
+    color: #000;
+}
+
+.czPrice {
+    margin: 48rpx 0rpx 8rpx;
+}
+
+.je {
+    display: flex;
+    margin: 0rpx 16rpx;
+    flex-wrap: wrap;
+}
+
+.all2 {
+    margin: 28rpx 0rpx;
+    width: calc(100% / 3);
+}
+
+.yuan {
+    background-color: #f0f0f0;
+    width: 218rpx;
+    height: 140rpx;
+}
+
+.yuan view {
+    color: #333;
+}
+
+.yuan2 {
+    background: #3287ff;
+    width: 218rpx;
+    height: 140rpx;
+}
+
+.yuan2 view {
+    color: #fff;
+}
+
+.butn {
+    width: 620rpx;
+    height: 96rpx;
+    background-color: #3287ff;
+    border-radius: 108px;
+    box-shadow: 0 4px 8px 1px rgba(50,135,255,.33);
+    font-size: 32rpx;
+    color: #fff;
+    margin: 80rpx 0rpx 104rpx;
+}

@@ -1,0 +1,99 @@
+page {
+    background-color: #f0f0f0;
+}
+
+.storeall {
+    background-color: #fff;
+    padding: 30rpx 42rpx 30rpx 16rpx;
+    margin-bottom: 2rpx;
+}
+
+.imgtop {
+    width: 56rpx;
+    height: 56rpx;
+    border-radius: 50%;
+    margin-right: 20rpx;
+}
+
+.text2 {
+    font-weight: 700;
+    color: #333;
+}
+
+.storeqh {
+    color: #fdc27e;
+    font-size: 24rpx;
+    margin-right: 16rpx;
+}
+
+.image2 {
+    width: 36rpx;
+    height: 30rpx;
+}
+
+.img {
+    width: 68rpx;
+    height: 68rpx;
+    margin-left: 24rpx;
+}
+
+.text {
+    font-size: 24rpx;
+    color: #999;
+}
+
+.yw {
+    margin-top: 16rpx;
+    margin-right: 26rpx;
+}
+
+.yw view {
+    font-size: 24rpx;
+}
+
+.img3 {
+    width: 84rpx;
+    height: 84rpx;
+    border-radius: 50%;
+}
+
+.img2 {
+    width: 48rpx;
+    height: 48rpx;
+    margin: 10rpx;
+    border-radius: 50%;
+}
+
+.time {
+    font-size: 24rpx;
+    color: #999;
+}
+
+.btun {
+    margin-right: 26rpx;
+    color: #999;
+}
+
+.btun2 {
+    margin-right: 26rpx;
+    color: #333;
+    font-weight: 700;
+}
+
+.time2 {
+    font-size: 24rpx;
+    color: #333;
+}
+
+.bottom {
+    height: 90rpx;
+    background-color: #fff;
+    padding-left: 30rpx;
+    font-size: 32rpx;
+}
+
+.detail {
+    padding: 24rpx 22rpx;
+    border-bottom: 2rpx solid #f5f5f5;
+    background-color: #fff;
+}
