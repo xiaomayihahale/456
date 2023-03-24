@@ -1,0 +1,340 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>服务记录</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="__PUBLIC__/static/layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="__PUBLIC__/static/layuiadmin/style/admin.css" media="all">
+</head>
+<style>
+    .layui-table-cell, .layui-table-tool-panel li {
+        height: auto;
+    }
+
+</style>
+<body>
+
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <div class="layui-card-header">商城订单</div>
+                <div class="layui-card-body">
+					<div class="demoTable" style="margin-bottom:10px;display: flex;">
+
+			            <div class="layui-form" action="">
+				            <div class="layui-input-inline">
+				            	<label class="layui-form-label">订单状态</label>
+							    <div class="layui-input-block">
+							      <select  lay-verify="" id="is_status">
+					              	<option value="0">请选择订单状态</option>
+							        <option value="2">待发货</option>
+							        <option value="3">已发货</option>
+							        <option value="4">已完成</option>
+							      </select>
+							    </div>
+						  	</div>
+					  </div>
+					  <div class="layui-inline">
+					      <label class="layui-form-label">取货码</label>
+					      <div class="layui-input-inline">
+					        <input type="text" class="layui-input" name="pickup_code" >
+					      </div>
+					    </div>
+			            <div class="layui-inline">
+					      <label class="layui-form-label">时间范围</label>
+					      <div class="layui-input-inline">
+					        <input type="text" class="layui-input" id="test10" placeholder=" - " readonly style="width: 280px;">
+					      </div>
+					    </div>
+					     
+			            <button class="layui-btn" style="margin-left:20px;" data-type="reload">搜索</button>
+
+					</div>
+					
+
+                    <table class="layui-hide" id="test-table-operate" lay-filter="test-table-operate"></table>
+					<script type="text/html" id="test-table-operate-barDemo">
+						{{#  if(d.receipt_type == 1){ }}
+							{{#  if(d.status == 2){ }}
+								<a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="pcode">会员取货</a>
+  							{{#  } }}
+						{{#  } else { }}						
+							{{#  if(d.status == 2){ }}
+								<a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="check">发货</a>
+  							{{#  } }}
+						{{#  } }}
+
+						
+                        <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 表单弹框 -->
+<script  type="text/html" id="form">
+<form class="layui-form" style="margin-top:21px;">
+  <input type="hidden" name="id" id="id">
+
+  <div class="layui-form-item">
+    <label class="layui-form-label">快递编号</label>
+    <div class="layui-input-block">
+      <input type="text" name="express_no" id = "express_no" required lay-verify="required" placeholder="请输入快递编号" autocomplete="off" class="layui-input" >
+    </div>
+  </div>
+
+<div class="layui-form-item">
+    <label class="layui-form-label">快递公司</label>
+    <div class="layui-input-block">
+      <input type="text" name="express_name" id = "express_name" required lay-verify="required" placeholder="请输入快递公司" autocomplete="off" class="layui-input" >
+    </div>
+  </div>
+  
+  <div class="layui-form-item">
+    <div class="layui-input-block">
+      <button class="layui-btn" lay-submit lay-filter="demo1">立即提交</button>
+    </div>
+  </div>
+</form>
+</script>
+<script src="__PUBLIC__/static/layuiadmin/layui/layui.js"></script>
+<script>
+    layui.config({
+        base: '__PUBLIC__/static/layuiadmin/' //静态资源所在路径
+    }).extend({
+        index: 'lib/index' //主入口模块
+        ,excel: '../layui/layui_exts/excel/excel',
+    }).use(['jquery','index', 'table', 'excel','laydate','form'], function(){
+        var $ = layui.$
+        	,table = layui.table
+            ,admin = layui.admin
+            ,excel = layui.excel
+            ,form = layui.form
+            ,laydate = layui.laydate;
+        	
+
+            
+        laydate.render({
+            elem: '#test10'
+           	,range: true
+           	,trigger: 'click'
+   	    	,type: 'datetime'
+   	    	,format: 'yyyy/MM/d HH:mm:ss'
+          });
+        	
+
+        table.render({
+            elem: '#test-table-operate'
+            ,url:"{:siteUrl('admin/goodsOrder/order_list','','web')}&id=<?= $id; ?>"
+           	,cellMinWidth: 80
+           	,cols: [[
+                 {field:'goods_name', width:'19%', title: '商品信息',templet:function(d){
+                        return d.goods;
+                    }}
+                 ,{field:'order_number', width:'8%', title: '订单号', sort: true}
+                 ,{field:'uid',width:'11%', title: '用户信息',templet:function(d){
+                 	return "<img style='max-width:25px;' src='"+d.avatar+"'></img>"+d.nickname;
+                 }}
+                 ,{field:'remark',width:'11%', title: '备注'},
+                  {field:'store_name',width:'9%',title:'门店'}
+                 ,{field:'real_payment',width:'6%', title: '实付金额(元)', sort: true}
+                 ,{field:'status', width:'11%',title: '订单状态', sort: true,templet:function(d){
+                	if(d.receipt_type == 1){
+                		if(d.status == 2){
+                       		return "待取货<br>"+"取货码:"+d.pickup_code;
+                       	}else if(d.status == 4){
+                       		return "已完成<br>"+"取货码:"+d.pickup_code;
+                       	}
+                	}else{
+                		if(d.status == 2){
+                       		return "待发货";
+                       	}else if(d.status == 3){
+                       		return "已发货";
+                       	}else if(d.status == 4){
+                       		return "已完成";
+                       	}
+                	}
+                 }}
+                 ,{field:'createtime',width:'11%', title: '提交时间', sort: true ,templet:function(d){
+                 	return layui.util.toDateString(d.createtime*1000, "yyyy-MM-dd HH:mm");
+                 }}
+                 ,{width:'15%',align:'center', toolbar: '#test-table-operate-barDemo'}
+             ]]
+            ,page: true
+        });
+        
+      //监听工具条
+        table.on('tool(test-table-operate)', function(obj){
+            var data = obj.data;
+            if(obj.event === 'detail'){
+            	
+            	layer.open({
+                    type:2,
+                    area: ['1200px', '600px'],
+                    title:"订单详情",
+                    
+                    content:"{:siteUrl('admin/goodsOrder/edit_order','','web')}&id="+data.id,
+                    success:function(){
+                    	
+                    }  
+                });
+            	
+            	//window.location.href="{:siteUrl('admin/goodsOrder/edit_order','','web')}&id="+data.id;
+            } else if(obj.event === 'check'){
+            	layer.open({
+                    title : '<i class="fa fa-plus"></i>&nbsp;订单发货',
+                    type : 1,
+                    fix : false,
+                    skin : 'layui-layer-rim',
+                    // 加上边框
+                    area : [ '650px', '250px' ],
+                    // 宽高
+                    content : $('#form').html(),
+                    success: function (layero, index) {
+                        $('#id').val(data.id);
+                    }
+                });
+            } else if(obj.event === 'finish'){
+                layer.confirm('确定完成该订单吗？', function(index){
+                	window.location.href="{:siteUrl('admin/goodsOrder/finish_order','','web')}&id="+data.id;
+                    layer.close(index);
+                });
+            } else if(obj.event === 'pcode'){
+            	layer.confirm('确定核销取货码？', function(index){
+                	window.location.href="{:siteUrl('admin/goodsOrder/finish_code','','web')}&id="+data.id;
+                    layer.close(index);
+                });
+            } 
+        });
+      
+        form.on('submit(demo1)', function(data){
+            var admin = layui.admin
+
+            $.ajax({
+                url:"{:siteUrl('admin/goodsOrder/deliver_order','','web')}",
+                data:data.field,
+                type:"POST",
+                success: function(res){
+                	
+                	if(res.code == 1 ){
+                		layer.msg(res.msg,{icon: 1,time:2000},function(){
+                			window.location.href="{:siteUrl('admin/goodsOrder/index','','web')}";
+                		});
+                	}else{
+                		layer.msg(res.msg,{icon: 2,time:2000},function(){
+                			window.location.href="{:siteUrl('admin/goodsOrder/index','','web')}";
+                		});
+                	}
+                }
+            })
+            return false
+  
+        });
+        
+        $('#exportExcel').on('click', function(){
+        	var demoReload = $('#test-table-demoReload');
+            var status = $('#is_status');
+            var con_time = $('#test10');
+			// 模拟从后端接口读取需要导出的数据
+			$.ajax({
+				url: "{:siteUrl('admin/goodsOrder/order_list_export','','web')}"
+				,data :{
+					'realname': demoReload.val(),
+                    'is_status': status.val(),
+                    'con_time': con_time.val()
+				}
+				,dataType: 'json'
+				,success(res) {
+					var data = res.data;
+					console.log(data);
+					// 重点！！！如果后端给的数据顺序和映射关系不对，请执行梳理函数后导出
+					data = excel.filterExportData(data, [
+					    'logno'
+						,'realname'
+						,'itemName'
+						,'payment'
+						,'paymentType'
+						,'amount_payable'
+						,'total'
+						,'coupon'
+						,'createtime'
+					]);
+					// 重点2！！！一般都需要加一个表头，表头的键名顺序需要与最终导出的数据一致
+					data.unshift({ 
+						logno: "订单编号"
+						, realname: "技师名称"
+						, itemName: "项目名称"
+						, payment: "支付方式"
+						, amount_payable: "应付金额（元）"
+						, total: "实付金额（元）"
+						, coupon: "优惠券"
+						, createtime:"提交时间"
+					});
+
+					var timestart = Date.now();
+					excel.exportExcel(data, '技师服务记录.xlsx', 'xlsx');
+				//	var timeend = Date.now();
+
+				//	var spent = (timeend - timestart) / 1000;
+				//	layer.alert('单纯导出耗时 '+spent+' s');
+				}
+				,error() {
+					layer.alert('获取数据失败，请检查是否部署在本地服务器环境下');
+				}
+			});
+		  }); 	
+        
+        
+        var $ = layui.$, active = {
+            getCheckData: function(){ //获取选中数据
+                var checkStatus = table.checkStatus('test-table-operate')
+                    ,data = checkStatus.data;
+                layer.alert(JSON.stringify(data));
+            }
+        };
+
+        $('.test-table-operate-btn .layui-btn').on('click', function(){
+            var type = $(this).data('type');
+            active[type] ? active[type].call(this) : '';
+        });
+        
+        var $ = layui.$, active = {
+             reload: function(){
+                 var demoReload = $('#test-table-demoReload');
+                 var status = $('#is_status');
+                 var con_time = $('#test10');
+                 var pickup_code = $("input[name='pickup_code']");
+                 //执行重载 --id
+                 table.reload('test-table-operate', {
+                   page: {
+                     curr: 1 //重新从第 1 页开始
+                   }
+                   ,where: {
+                     'realname': demoReload.val(),
+                     'status': status.val(),
+                     'con_time': con_time.val(),
+                     'pickup_code':pickup_code.val()
+                   }
+                 });
+               }
+         };
+
+         $('.demoTable .layui-btn').on('click', function(){
+             var type = $(this).data('type');
+             active[type] ? active[type].call(this) : '';
+         });
+
+    });
+</script>
+</body>
+<div class="layui-footer" style="margin-top:20px;display: flex;justify-content: center;align-items: flex-end;">
+	{include file='../addons/wjyk_nhyk/application/admin/view/index/footer.html' /}
+</div>
+</html>

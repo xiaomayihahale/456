@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>编辑门店</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="__PUBLIC__/static/layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="__PUBLIC__/static/layuiadmin/style/admin.css" media="all">
+    <link rel="stylesheet" href="__PUBLIC__/static/layuiadmin/layui/css/modules/inputTags/tag.css">
+    
+    <style>
+        form{
+            padding-right:15px ;
+        }
+		.layui-form-label{
+			width:115px;
+        }
+		.layui-input-block{
+			margin-left:145px;
+		}
+    </style>
+</head>
+<body>
+<div class="layui-fluid">
+<form class="layui-form" style="margin-top:21px;">
+
+	<input type="hidden" name="id" value="{$srdb['id']}">
+
+  <div class="layui-form-item">
+    <label class="layui-form-label">商品名称</label>
+    <div class="layui-input-block">
+      <input type="text" name="goods_name" required lay-verify="required" placeholder="请输入商品名称" autocomplete="off" class="layui-input" value="{$srdb['goods_name']}">
+    </div>
+  </div>
+  
+  <div class="layui-form-item">
+    <label class="layui-form-label">商品分类</label>
+    <div class="layui-input-block">
+      <select name="cid">
+      	{if empty($cateList)}
+	      	<option value="">暂无分类</option>
+	    {else}
+	    	{foreach  $cateList as $v}
+	        <option value="{$v.id}" {eq name="$srdb.cid" value="$v.id"} selected="" {/eq}>{$v.c_name}</option>
+	        {/foreach}
+	    {/if}
+      </select>
+    </div>
+  </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">封面图</label>
+        <div class="layui-form-mid layui-word-aux">建议上传100px * 100px尺寸</div>
+        <button type="button" class="layui-btn" id="test1">上传图片</button>
+        <div class="layui-input-block">
+            <img class="layui-upload-img" id="demo1" style="margin-top: 10px;height: 100px;width: 100px" {if $srdb['cover']==''}{else}src="{$srdb['cover']}"{/if}">
+            <input type="hidden" name="cover" id="cover" value="{$srdb['cover']}">
+        </div>
+    </div>
+
+  <!--   <div class="layui-form-item">
+        <label class="layui-form-label">轮播图</label>
+        <button type="button" class="layui-btn" id="test2">图片上传</button>
+        <div class="layui-form-mid layui-word-aux">图片建议尺寸375px * 400px</div>
+        <div class="layui-input-block">
+            <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;">
+                预览图：
+                <div class="layui-upload-list" id="demo2" style="display: flex;">
+                    {if is_array($srdb['carousel'])}
+                    {foreach $srdb['carousel'] as $key=>$vo }
+                    <div style="position: relative;">
+                        <div class="delete-css">
+                            <div class="store_img layui-btn layui-btn-danger layui-btn-xs del_img">删除</div>
+                        </div>
+                        <img src="{$vo}" alt="" class="layui-upload-img" style="width: 185px; margin:10px">
+                        <input type="hidden" name="carousel[]" value="{$vo}">
+                    </div>
+                    {/foreach}
+                    {/if}
+                </div>
+            </blockquote>
+        </div>
+    </div> -->
+    
+ 
+  
+  <div class="layui-form-item">
+    <label class="layui-form-label">商品价格</label>
+    <div class="layui-input-inline">
+      <input type="number" name="original_price"   placeholder="请输入商品价格" autocomplete="off" class="layui-input" value="{$srdb['original_price']}">
+    </div>
+    <div class="layui-form-mid layui-word-aux">单位：元</div>
+  </div>
+  
+  
+
+   
+
+  
+   
+  
+  
+  <div class='type1' {if $srdb['is_freight'] != '2' }style="display:none"{/if}>
+	  <div class="layui-form-item">
+	    <label class="layui-form-label">运费</label>
+	    <div class="layui-input-inline">
+	      <input type="number" name="freight"   placeholder="请输入运费" autocomplete="off" class="layui-input" value="{$srdb['freight']}">
+	    </div>
+	    <div class="layui-form-mid layui-word-aux">单位：元</div>
+	  </div>
+  </div>
+    
+    <div class="layui-form-item">
+        <label class="layui-form-label">库存</label>
+        <div class="layui-input-inline">
+            <input type="number" name="stock"   placeholder="请输入商品库存" autocomplete="off" class="layui-input" value="{$srdb['stock']}">
+        </div>
+    </div>
+    
+  
+  <div class="layui-form-item">
+    <label class="layui-form-label">是否上架</label>
+    <div class="layui-input-block">
+      <input type="radio" name="is_show" value="2" title="上架" {if $srdb['is_show'] == '2' || $srdb['is_show'] == ''}checked{/if}>
+      <input type="radio" name="is_show" value="1" title="下架" {if $srdb['is_show'] == '1' }checked{/if}>
+      
+    </div>
+  </div>
+  
+ 
+  
+  
+  
+
+  
+    <div class="layui-form-item">
+        <label class="layui-form-label">是否热销</label>
+        <div class="layui-input-block">
+            <input type="radio" name="recommend" value="1" title="否" {if $srdb['recommend'] == '1' || $srdb['is_show'] == ''}checked{/if}>
+            <input type="radio" name="recommend" value="2" title="是" {if $srdb['recommend'] == '2'}checked{/if}>
+        </div>
+    </div> 
+
+   
+  
+  <div class="layui-form-item">
+    <div class="layui-input-block">
+      <button class="layui-btn" lay-submit lay-filter="demo1">立即提交</button>
+      <input type="button" class="layui-btn layui-btn-primary" onclick="history.go(-1)" value="返回列表"> 
+    </div>
+  </div>
+  <!-- 更多表单结构排版请移步文档左侧【页面元素-表单】一项阅览 -->
+</form>
+</div>
+
+<script src="__PUBLIC__/static/layuiadmin/layui/layui.js"></script>
+<script type="text/javascript" src="__PUBLIC__/static/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" src="__PUBLIC__/static/ueditor/ueditor.all.js"></script>
+<script>
+	layui.config({
+	    base: '__PUBLIC__/static/layuiadmin/' //静态资源所在路径
+	}).extend({
+	    index: 'lib/index' //主入口模块
+	    	, layarea: '../layui/layui_exts/city-picker/layarea'
+	    		,tag :'../layui/layui_exts/tag/tag'
+	}).use(['jquery','layer', 'index', 'table','upload', 'layarea','layedit','tag'], function(){
+		var $ = layui.$
+		, layer = layui.layer
+		, layedit = layui.layedit
+	    , table = layui.table
+	    , form = layui.form
+	    , layarea = layui.layarea
+	    , tag = layui.tag
+	    , upload = layui.upload;
+    	
+		tag.render("label", {
+            skin: 'layui-btn layui-btn-primary layui-btn-sm layui-btn-radius',//标签样式
+            tagText: '<i class="layui-icon layui-icon-add-1"></i> 新标签' //标签添加按钮提示文本
+        });
+
+		
+         typeIdChange($("input[name='is_exchange']:checked").val());
+        
+        
+
+        function typeIdChange(value){
+        	if(value==2){
+            	$("#region_type_div").attr('style',"display: none;");
+            	$("#need_integer_div").removeAttr('style');
+            	
+            	$("input[name='region_type'][value=3]").attr("checked",true);
+            }
+            else{
+            	$("#need_integer_div").attr("style","display: none");
+            	$("#region_type_div").removeAttr('style');
+            }
+        } 
+        
+        
+        form.on('radio(levelM)', function(data){
+            typeIdChange(data.value);
+        });
+        
+        
+
+		
+		
+        tag.on('click(label)', function (data) {
+            console.log('点击');
+            console.log(tag.data('label'));
+        });
+
+        tag.on('add(label)', function (data) {
+            console.log('新增');
+            var label = $(data.othis).html();
+            console.log(label);
+        });
+
+        tag.on('delete(label)', function (data) {
+        	console.log(tag.data('label'));
+            $(this).remove();
+        });
+    	
+    	layarea.render({
+            elem: '#area-picker',
+            change: function (res) {
+                //选择结果
+                console.log(res);
+            }
+        });
+
+        var ue = UE.getEditor('ueditor', {
+
+            zIndex: 99,
+
+            maximumWords: 999,
+
+            scaleEnabled: true,
+
+            initialFrameWidth: 800,
+
+            initialFrameHeight: 300,
+
+            autoHeightEnabled: false,}
+
+        );
+
+        upload.render({
+            elem: '#test1'
+            ,url: "{:siteUrl('admin/index/upload','','web')}" //改成您自己的上传接口
+            ,done: function(res){
+                //如果上传失败
+                if(res.code < 0){
+                    return layer.msg('上传失败');
+                }else{
+                    $('#demo1').attr('src', res.msg); //图片链接（base64）
+                    $('#cover').val(res.msg);
+                }
+            }
+        });
+        
+        form.on('radio(bbb)', function (data) {
+        	console.log("11111");
+            if ($('#is_freight input[name="is_freight"]:checked ').val() == "2") {
+             $(".type1").show();
+            }
+            else {
+             $(".type1").hide();
+            }
+            form.render();
+        });
+
+    	
+
+        //多图片上传
+        upload.render({
+            elem: '#test2'
+            ,url: "{:siteUrl('admin/index/upload','','web')}" //改成您自己的上传接口
+            ,multiple: true
+
+            ,done: function(res){
+                if(res.code > 0){
+                    return layer.msg('上传失败');
+                }else{
+                    $('#demo2').append('<div style="position: relative;">\n' +
+                        '                         <div class="delete-css"><button  class="delete-css layui-btn layui-btn-danger layui-btn-xs del_img">删除</button></div>\n' +
+                        '                    <img src="'+ res.msg +'" alt="" class="layui-upload-img" style="width: 185px;margin:10px">\n' +
+                        '                    <input type="hidden" name="carousel[]" value="'+ res.msg +'">\n' +
+                        '                     </div>')
+
+                }
+
+            }
+        });
+
+        $(document).on('click',".del_img",function(){
+
+            $(this).parent().parent().remove();
+        });
+
+
+    	
+      //监听提交
+        form.on('submit(demo1)', function(data){
+            var admin = layui.admin
+            data.field.spec= tag.data('label');
+            
+            console.log( data.field.spec);
+
+      
+            	$.ajax({
+                	url:"{:siteUrl('admin/ktvGoods/edit_goods','','web')}",
+                    data:data.field,
+                    type:"POST",
+                    success: function(data){
+                    	console.log(data);
+                    	var res = JSON.parse(data);
+                    	if(res.code == 0 ){
+                    		layer.msg(res.msg,{icon: 1,time:3000},function(){
+                    			window.location.href="{:siteUrl('admin/ktvGoods/index','','web')}";
+                    		});
+                    	}else{
+                    		layer.msg(res.msg,{icon: 2,time:3000},function(){
+                    			window.location.href="{:siteUrl('admin/ktvGoods/index','','web')}";
+                    		});
+                    	}
+                    }
+                })
+                return false
+            
+
+            
+  
+        });
+
+
+    });
+</script>
+</body>
+<div class="layui-footer" style="margin-top:20px;display: flex;justify-content: center;align-items: flex-end;">
+	{include file='../addons/wjyk_nhyk/application/admin/view/index/footer.html' /}
+</div>
+</html>
