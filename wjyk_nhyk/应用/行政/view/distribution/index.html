@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>提现设置</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="__PUBLIC__/static/layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="__PUBLIC__/static/layuiadmin/style/admin.css" media="all">
+    <style>
+        form{
+            padding-right:15px ;
+        }
+    </style>
+</head>
+<body>
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <div class="layui-card-header">分销设置</div>
+                <div class="layui-card-body" pad15>
+                    <form class="layui-form " style="margin-top:21px;">
+                        <input type="hidden" name="id" value="{$set['id']}">
+
+
+                        <div class="layui-form-item">
+                            <label class="layui-form-label" style="width: 10%;">分销等级</label>
+                            <div class="layui-input-block">
+                                <input type="radio" name="distribution_level" value="0" title="关闭" {if $set['distribution_level'] == 0 || empty($set['distribution_level'])}checked{/if} lay-filter="bbb">
+                                <input type="radio" name="distribution_level" value="1" title="一级分销" {if $set['distribution_level'] == 1 }checked{/if} lay-filter="bbb">
+                                <input type="radio" name="distribution_level" value="2" title="二级分销" {if $set['distribution_level'] == 2 }checked{/if} lay-filter="bbb">
+                                <input type="radio" name="distribution_level" value="3" title="三级分销" {if $set['distribution_level'] == 3 }checked{/if} lay-filter="bbb">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label" style="width: 10%;">一级分销比例</label>
+                            <div class="layui-input-inline">
+                                <input type="number" name="distribution_one"   autocomplete="off" class="layui-input" value="{$set['distribution_one']}">
+                            </div>
+                            <div class="layui-form-mid layui-word-aux">小数         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;比如0.05</div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label" style="width: 10%;">二级分销比例</label>
+                            <div class="layui-input-inline">
+                                <input type="number" name="distribution_two"   autocomplete="off" class="layui-input" value="{$set['distribution_two']}">
+                            </div>
+                            <div class="layui-form-mid layui-word-aux">小数         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;比如0.03</div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label" style="width: 10%;">三级分销比例</label>
+                            <div class="layui-input-inline">
+                                <input type="number" name="distribution_three"   autocomplete="off" class="layui-input" value="{$set['distribution_three']}">
+                            </div>
+                            <div class="layui-form-mid layui-word-aux">小数         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;比如0.01</div>
+                        </div>
+
+                        <div class="layui-form-item">
+                            <label class="layui-form-label" style="width: 10%;">提现方式</label>
+                            <div class="layui-input-block">
+                            	  <input type="checkbox" name="w_type[1]" value="1" title="银行卡" {if strpos($set['w_type'],'1') !== false}checked{/if}>
+							      <input type="checkbox" name="w_type[2]"  value="2"  title="微信" {if strpos($set['w_type'],'2') !== false}checked{/if}>
+							      <input type="checkbox" name="w_type[3]" value="3"  title="支付宝" {if strpos($set['w_type'],'3') !== false}checked{/if}>
+                            
+                      
+                            </div>
+                        </div>
+                        
+                        <div class="layui-form-item">
+                            <label class="layui-form-label" style="width: 10%;">分销条件</label>
+                            <div class="layui-input-block">
+                            	  
+                                <input type="radio" name="condition" lay-filter="levelM" value="1" title="无条件" {if $set['condition'] == 1 || empty($set['condition'])}checked{/if}>
+                                <input type="radio" name="condition" lay-filter="levelM" value="2" title="审核" {if $set['condition'] == 2 }checked{/if}> 
+                                <input type="radio" name="condition" lay-filter="levelM" value="3" title="累计消费" {if $set['condition'] == 3 }checked{/if}> 
+                                <input type="radio" name="condition" lay-filter="levelM" value="4" title="指定会员等级" {if $set['condition'] == 4 }checked{/if}> 
+                            </div>
+                        </div>
+                        
+              
+                           <div class="layui-form-item condition_div" id="consume_money_div" style="display: none;">
+	                            <label class="layui-form-label" style="width: 10%;">累计消费金额</label>
+	                            <div class="layui-input-inline">
+	                                <input type="number" name="consume_money"   autocomplete="off" class="layui-input" value="{$set['consume_money']}">
+	                            </div>
+	                            <div class="layui-form-mid layui-word-aux">元</div>
+	                        </div>
+	                        <div class="layui-form-item condition_div" id="member_level_div" style="display: none;">
+	                            <label class="layui-form-label" style="width: 10%;">指定会员等级</label>
+	                            <div class="layui-input-inline">
+	                                <select lay-filter="typeSelect" name="member_level"  >	
+						              	 {if empty($levels)}	
+						              	      <option value="">暂无</option>	
+						              	 {else}							        						    	
+							              	 {foreach  $levels as $v}						                  
+							              		 <option value="{$v.id}"  {eq name="$set.member_level" value="$v.id"} selected="" {/eq}>{$v.member_name}</option>							        
+							              	 {/foreach}							    
+						              	 {/if}				           
+					              	  </select>  
+	                            </div>
+	                        </div>
+                        
+
+                        <div class="layui-form-item">
+                            <label class="layui-form-label" style="width: 10%;">提现额度</label>
+                            <div class="layui-input-inline">
+                                <input type="number" name="lowest_withdraw"   autocomplete="off" class="layui-input" value="{$set['lowest_withdraw']}">
+                            </div>
+                            <div class="layui-form-mid layui-word-aux">元         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;金额达到此额度时才能提现</div>
+                        </div>
+
+                        <div class="layui-form-item">
+                            <label class="layui-form-label" style="width: 10%;">提现手续费</label>
+                            <div class="layui-input-inline">
+                                <input type="number" name="handling_fee"   autocomplete="off" class="layui-input" value="{$set['handling_fee']}">
+                            </div>
+                            <div class="layui-form-mid layui-word-aux">%          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;收取百分之多少的手续费</div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">分销海报</label>
+                            <div class="layui-form-mid layui-word-aux">建议上传658px * 1032px尺寸</div>
+                            <button type="button" class="layui-btn" id="test1">上传图片</button>
+                            <div class="layui-input-block">
+                                <img class="layui-upload-img" id="demo1" style="margin-top: 10px;height: 500px;width: 350px" {if $set['poster']==''}{else}src="{$set['poster']}"{/if}">
+                                <input type="hidden" name="poster" id="poster" value="{$set['poster']}">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">分销说明</label>
+
+                            <div class="layui-input-block">
+                                <script id="ueditor" name="distribution_description" type="text/plain" >{$set['distribution_description']|raw}</script>
+                            </div>
+                            <div class="layui-input-block">
+                                <div class="layui-form-mid layui-word-aux">图片建议宽度375px</div>
+                            </div>
+                        </div>
+
+                        <div class="layui-form-item">
+                            <div class="layui-input-block">
+                                <button class="layui-btn" lay-submit lay-filter="demo1">立即提交</button>
+                            </div>
+                        </div>
+                        <!-- 更多表单结构排版请移步文档左侧【页面元素-表单】一项阅览 -->
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="__PUBLIC__/static/layuiadmin/layui/layui.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/static/ueditor/ueditor.config.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/static/ueditor/ueditor.all.js"></script>
+    <script>
+        layui.config({
+            base: '__PUBLIC__/static/layuiadmin/' //静态资源所在路径
+        }).extend({
+            index: 'lib/index' //主入口模块
+        }).use('index');
+
+    </script>
+    <script>
+        layui.use(['jquery','form', 'laydate','upload'], function(){
+            var $ = layui.$
+                ,form = layui.form
+                ,layer = layui.layer
+                , upload = layui.upload;
+
+            upload.render({
+                elem: '#test1'
+                ,url: "{:siteUrl('admin/index/upload','','web')}" //改成您自己的上传接口
+                ,done: function(res){
+                    //如果上传失败
+                    if(res.code < 0){
+                        return layer.msg('上传失败');
+                    }else{
+                        $('#demo1').attr('src', res.msg); //图片链接（base64）
+                        $('#poster').val(res.msg);
+                    }
+                }
+            });
+            
+          
+         
+            
+            radioChange($("input[name='condition']:checked").val());
+            
+            
+
+           
+            
+            
+            form.on('radio(levelM)', function(data){
+            	radioChange(data.value);
+            });
+            
+            function radioChange(value){
+            	
+            	$(".condition_div").hide();
+   	            if (value == '3') {
+   	                $("#consume_money_div").show();
+   	            }else if (value == '4') {
+   	        	    $("#member_level_div").show();
+   	            }
+            }
+            
+
+            var ue = UE.getEditor('ueditor', {
+
+                zIndex: 99,
+
+                maximumWords: 999,
+
+                scaleEnabled: true,
+
+                initialFrameWidth: 800,
+
+                initialFrameHeight: 300,
+
+                autoHeightEnabled: false,}
+
+            );
+
+            //监听提交
+            form.on('submit(demo1)', function(data){
+                var admin = layui.admin
+
+                admin.req({
+                    url:"{:siteUrl('admin/distribution/set','','web')}",
+                    data:data.field,
+                    type:"POST",
+                    done:res=>{
+                        if(res.code == 0 ){
+                            layer.msg("设置成功");
+                        }
+                    }
+                })
+                return false
+
+            });
+
+
+            //表单取值
+            layui.$('#LAY-component-form-getval').on('click', function(){
+                var data = form.val('example');
+                alert(JSON.stringify(data));
+            });
+
+        });
+    </script>
+</body>
+<div class="layui-footer" style="margin-top:20px;display: flex;justify-content: center;align-items: flex-end;">
+    {include file='../addons/wjyk_nhyk/application/admin/view/index/footer.html' /}
+</div>
+</html>

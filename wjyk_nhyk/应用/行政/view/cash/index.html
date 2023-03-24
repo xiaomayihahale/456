@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>用户扣款</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <link rel="stylesheet" href="__PUBLIC__/static/layuiadmin/layui/css/layui.css" media="all">
+  <link rel="stylesheet" href="__PUBLIC__/static/layuiadmin/style/admin.css" media="all">
+  <style>
+    form{
+      padding-right:15px ;
+    }
+  </style>
+</head>
+<body>
+<form class="layui-form " style="margin-top:21px;" onkeydown="if(event.keyCode==13)return false;">
+
+  <input type="hidden" name="id" value="{$srdb['id']}"> <div class="layui-form-item">    <label class="layui-form-label">会员卡号</label>    <div class="layui-input-block">      <input type="text" id="member_no_id" name="member_no" autocomplete="off"  class="layui-input" value="{$srdb['member_no']}"  />    </div>  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">会员头像</label>
+    <div class="layui-input-block">
+      <img id="showImg" style="width: 150px; margin-left:10px;cursor:pointer;" src="{$srdb['avatar']}"  >
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">会员昵称</label>
+    <div class="layui-input-block">		<label class="layui-form-label">{$srdb['nickname']}</label>
+    </div>
+  </div>    <div class="layui-form-item">    <label class="layui-form-label">会员等级</label>    <div class="layui-input-block">       <label class="layui-form-label">{$srdb['member_name']}</label>    </div>  </div>
+
+
+  <div class="layui-form-item">
+    <label class="layui-form-label">余额</label>
+    <div class="layui-input-block">	    <label class="layui-form-label">{$srdb['money']}元</label>
+    </div>
+  </div>
+ <div class="layui-form-item">    <label class="layui-form-label">应付金额</label>    <div class="layui-input-block">      <input type="text" name="k_money" autocomplete="off" class="layui-input"  value="">    </div>  </div>      <div class="layui-form-item">    <label class="layui-form-label">会员折扣</label>    <div class="layui-input-block">       <label class="layui-form-label">{$srdb['discount']}折</label>           </div>  </div> 	   
+  <div class="layui-form-item">		<div class="layui-inline">		      <label class="layui-form-label">优惠卷</label>		      <div class="layui-input-inline">		           <select lay-filter="typeSelect" name="coupon_id" id = "type_id" >		            	{if empty($coupons)}					      	<option value="">暂无分类</option>					    {else}					        <option value="">选择优惠卷</option>					    	{foreach  $coupons as $v}				                  <option value="{$v.id}" >{$v.info_label}</option>					        {/foreach}					    {/if}		            </select>		      </div>		    </div>	</div> 		<div class="layui-form-item">    <label class="layui-form-label">优惠金额</label>    <div class="layui-input-block">       <label class="layui-form-label" id="coupon_money_label">0.0元</label>       <input type="hidden" name="coupon_money" id ="coupon_money"/>    </div>  </div>		<div class="layui-form-item">    <label class="layui-form-label">实付金额</label>    <div class="layui-input-block">       <label class="layui-form-label" id="rel_money_label">0.0元</label>       <input type="hidden" name="rel_money" id ="rel_money"/>    </div>  </div>
+  <div class="layui-form-item">
+    <div class="layui-input-block">
+      <button class="layui-btn" lay-submit lay-filter="demo1">立即提交</button>
+    </div>
+  </div>
+  <!-- 更多表单结构排版请移步文档左侧【页面元素-表单】一项阅览 -->
+</form>
+
+<script src="__PUBLIC__/static/layuiadmin/layui/layui.js"></script>
+<script>
+  layui.config({
+    base: '__PUBLIC__/static/layuiadmin/' 
+  }).extend({
+    index: 'lib/index' 
+    , layarea: '../layui/layui_exts/city-picker/layarea'
+  }).use(['jquery','layer', 'index', 'layarea', 'table','laydate'], function(){
+    var $ = layui.$
+            , layer = layui.layer
+            , table = layui.table
+            , layarea = layui.layarea
+            , form = layui.form;
+   $("#member_no_id").focus();        
+    layarea.render({
+      elem: '#area-picker',
+      change: function (res) {
+        console.log(res);
+      }
+    });   
+    var coupons = eval(<?php echo json_encode($coupons);?>);
+    var discount ="<?= $srdb['discount']; ?>"; 
+    $('input[name=k_money]').on('change',function(e){
+    	k_money_change(this.value,1); 
+    	});      
+    function k_money_change(money,type){
+    	var rel_money = 0;
+    	var coupon_money = 0;
+    	if(discount > 0){
+    		rel_money = (money*(discount/10)).toFixed(2); 
+    		coupon_money = (money - rel_money).toFixed(2);
+    	}else{
+    		rel_money = money;
+    	}
+    
+    	$("#rel_money").val(rel_money);   
+    	$("#rel_money_label").text(rel_money+"元"); 
+    	$("#coupon_money").val(coupon_money);
+    	$("#coupon_money_label").text(coupon_money+"元");
+    	if(type == 1){ 
+    		$("#type_id").val("");	
+    		form.render('select'); 
+    	} 
+    }  
+    form.on('select(typeSelect)', function(data) {
+    	var value = $('input[name=k_money]').val();
+    	if(value == '' || value == 0){  
+    		layer.msg("请输入应该金额 再选择优惠卷",{icon: 2,time:3000},function(){    		});
+    		$("#type_id").val("");		
+    		form.render('select');  
+    		return ;  
+        }    	
+    	var sing = getSingCoupons(data.value); 
+    	var less = 0;    	
+    	if(sing['type'] == 2){  
+    		less = sing['less']; 
+    		}else if(sing['type'] == 1){    
+    			if(value < sing['full']){ 
+    				layer.msg("该优惠卷未达到使用要求",{icon: 2,time:3000},function(){    				        		});
+    				$("#type_id").val(""); 
+    				form.render('select');   
+    				return ;   
+    	}    
+    			less = sing['less']; 
+    	}    
+    	var yf_money = $('input[name=k_money]').val();
+    	k_money_change(yf_money,2);    
+    	var rel_money = $("#rel_money").val(); 
+    	rel_money = (rel_money - less).toFixed(2); 
+    	$("#rel_money").val(rel_money);  
+    	$("#rel_money_label").text(rel_money+"元"); 
+    	var coupon_money  = $("#coupon_money").val(); 
+    	coupon_money =  parseFloat(coupon_money);   
+    	less = parseInt(less);    
+    	coupon_money = (coupon_money + less); 
+    	$("#coupon_money").val(coupon_money);   
+    	$("#coupon_money_label").text(coupon_money+"元");
+    	form.render('select');
+    	});       
+    function getSingCoupons(id){ 
+    	var sing = ""; 
+    	$.each(coupons,function(k,v){ 
+    		if(v['id'] == id){   
+    			sing = v;    
+    			return v;    
+    			} 
+    	});  
+    	return sing;  
+    }         	        
+    form.on('submit(demo1)', function(data){
+    		
+    
+    	layer.confirm('确定扣款吗？', function(index){
+    	      var admin = layui.admin
+
+    	      $.ajax({
+    	        url:"{:siteUrl('admin/cash/deduction_money','','web','nhykrout')}",
+    	        data:data.field,
+    	        type:"POST",
+    	        success: function(data){
+    	          var res = JSON.parse(data);
+    	          if(res.code == 0 ){
+    	            layer.msg(res.msg,{icon: 1,time:2000},function(){
+    	            });
+    	          }else{
+    	            layer.msg(res.msg,{icon: 2,time:2000},function(){
+    	            });
+    	          }
+    	        }
+    	      })
+        });
+
+      return false;
+    });
+
+
+    $('#LAY-component-form-getval').on('click', function(){
+      var data = form.val('example');
+      alert(JSON.stringify(data));
+    });
+
+  });      
+  window.onload = function(e) {	
+	  var codeString = "";	
+	  var scanTimeer = setInterval(function() {	
+		  var now = new Date().getTime();
+		  if (now - lastTime > 200) {
+			  if(codeString !='' && codeString.length >= 16){	  
+				  
+				  window.location.href="{:siteUrl('admin/cash/index','','web')}&member_no="+codeString;
+			  }	            
+			  codeString = "";
+			  }	    
+		  },
+		  200);
+	  var lastTime;	
+	  var caseFormat = false;
+	  document.onkeydown = function(e) {
+		  var nextTime = new Date().getTime();
+		  var code = e.which;
+		  console.log(e.which);
+		  if (code == 16) {
+			  caseFormat = true;
+			  } else {	 
+				  var char = '';
+				  if (caseFormat) {	
+					  if (code >= 65 && code <= 90) {
+						  code = code + 32;
+						  } else if (code >= 97 && code <= 122) {
+							  code = code - 32;	
+							  } else if(code == 48){
+								  char = "=";
+								  } else if(code == 54){
+									  char = "&";
+									  }	   
+					  caseFormat = false;	
+					  }	  
+				  if(char == ''){
+					  var char = String.fromCharCode(code);
+					  }	   
+				  if (codeString == "") {
+					  codeString += char;
+					  } else if (nextTime - lastTime <= 30) {
+						  codeString += char;	
+						  }	      
+				  char = '';	
+				  }	      
+		  console.log(codeString);
+		  lastTime = nextTime;	 
+		  };	   
+		  };   
+</script>
+</body>
+</html>

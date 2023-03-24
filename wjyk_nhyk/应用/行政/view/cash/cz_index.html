@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>用户充值</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <link rel="stylesheet" href="__PUBLIC__/static/layuiadmin/layui/css/layui.css" media="all">
+  <link rel="stylesheet" href="__PUBLIC__/static/layuiadmin/style/admin.css" media="all">
+  <style>
+    form{
+      padding-right:15px ;
+    }
+  </style>
+</head>
+<body>
+<form class="layui-form " style="margin-top:21px;" onkeydown="if(event.keyCode==13)return false;">
+
+  <input type="hidden" name="id" value="{$srdb['id']}"> <div class="layui-form-item">    
+  <label class="layui-form-label">会员卡号</label>    
+  <div class="layui-input-block">     
+   <input type="text" id="member_no_id" name="member_no" autocomplete="off"  class="layui-input" value="{$srdb['member_no']}"  />    </div>  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">会员头像</label>
+    <div class="layui-input-block">
+      <img id="showImg" style="width: 150px; margin-left:10px;cursor:pointer;" src="{$srdb['avatar']}"  >
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">会员昵称</label>
+    <div class="layui-input-block">		<label class="layui-form-label">{$srdb['nickname']}</label>
+    </div>
+  </div>    <div class="layui-form-item">    <label class="layui-form-label">会员等级</label>    <div class="layui-input-block">       <label class="layui-form-label">{$srdb['member_name']}</label>    </div>  </div>
+
+
+  <div class="layui-form-item">
+    <label class="layui-form-label">余额</label>
+    <div class="layui-input-block">	    <label class="layui-form-label">{$srdb['money']}元</label>
+    </div>
+  </div>
+  
+   <div class="layui-form-item">
+    <label class="layui-form-label">充值类型</label>
+    <div class="layui-input-block">
+         <input type="radio" name="type" lay-filter="levelM" value="1" title="普通充值" checked>
+      <input type="radio" name="type" lay-filter="levelM" value="2" title="自定义充值" >
+    </div>
+  </div>  	
+   <div class="layui-form-item" id="pt_recharge_div">
+    <label class="layui-form-label">充值金额</label>
+    <div class="layui-input-block">
+         <input type="text" name="cz_money" autocomplete="off"  class="layui-input"   /> 
+    </div>
+  </div> 
+  
+    	   
+  <div class="layui-form-item" id = "recharge_div">		
+  <div class="layui-inline">		      
+  <label class="layui-form-label">充值金额</label>		      
+  <div class="layui-input-inline">		           
+  <select lay-filter="typeSelect" name="recharge_id" id = "type_id" >		            	
+  {if empty($recharges)}					      	
+  <option value="">暂无充值</option>					    
+  {else}					    	
+  {foreach  $recharges as $v}				               
+  <option value="{$v.id}" >充值{$v.money}元 送{$v.only}元</option>					        
+  {/foreach}					    
+  {/if}		            
+  </select>	
+   
+  </div>  
+  </div>	
+  </div> 
+  
+  
+
+  
+  		
+  		
+  <div class="layui-form-item">
+    <div class="layui-input-block">
+      <button class="layui-btn" lay-submit lay-filter="demo1">立即提交</button>
+    </div>
+  </div>
+  <!-- 更多表单结构排版请移步文档左侧【页面元素-表单】一项阅览 -->
+</form>
+
+<script src="__PUBLIC__/static/layuiadmin/layui/layui.js"></script>
+<script>
+  layui.config({
+    base: '__PUBLIC__/static/layuiadmin/' 
+  }).extend({
+    index: 'lib/index' 
+    , layarea: '../layui/layui_exts/city-picker/layarea'
+  }).use(['jquery','layer', 'index', 'layarea', 'table','laydate'], function(){
+    var $ = layui.$
+            , layer = layui.layer
+            , table = layui.table
+            , layarea = layui.layarea
+            , form = layui.form;
+   $("#member_no_id").focus();        
+    layarea.render({
+      elem: '#area-picker',
+      change: function (res) {
+        console.log(res);
+      }
+    });    	     
+    
+    typeIdChange($("input[name='type']:checked").val());
+    form.on('submit(demo1)', function(data){
+      var admin = layui.admin
+		
+      layer.confirm('确定充值吗？', function(index){
+    	  $.ajax({
+    	        url:"{:siteUrl('admin/cash/cz_money','','web','nhykrout')}",
+    	        data:data.field,
+    	        type:"POST",
+    	        success: function(data){
+    	          var res = JSON.parse(data);
+    	          if(res.code == 0 ){
+    	            layer.msg(res.msg,{icon: 1,time:2000},function(){
+    	            });
+    	          }else{
+    	            layer.msg(res.msg,{icon: 2,time:2000},function(){
+    	            });
+    	          }
+    	        }
+    	      })
+      });
+      
+      
+      return false
+    });
+
+    function typeIdChange(value){
+    	if(value==2){
+        	$("#recharge_div").attr('style',"display: none;");
+        	$("#pt_recharge_div").removeAttr('style');
+        }
+        else{
+        	$("#pt_recharge_div").attr("style","display: none");
+        	$("#recharge_div").removeAttr('style');
+        }
+    }
+    
+    
+    form.on('radio(levelM)', function(data){
+        typeIdChange(data.value);
+    });
+    
+    
+    
+
+    $('#LAY-component-form-getval').on('click', function(){
+      var data = form.val('example');
+      alert(JSON.stringify(data));
+    });
+
+  });      window.onload = function(e) {	  	   
+	  var codeString = "";	    
+	  var scanTimeer = setInterval(function() {	
+		  var now = new Date().getTime();	
+		  if (now - lastTime > 200) {	  
+			  if(codeString !='' && codeString.length >= 16){	  
+				  window.location.href="{:siteUrl('admin/cash/cz_index','','web')}&member_no="+codeString;
+				  }	            codeString = "";	
+				  }	    },	    200);	    			    var lastTime;	    	    var caseFormat = false;	    document.onkeydown = function(e) {	        var nextTime = new Date().getTime();	        var code = e.which;	       console.log(e.which);	        if (code == 16) {	            caseFormat = true;	        } else {	        	var char = '';	            if (caseFormat) {	                if (code >= 65 && code <= 90) {	                    code = code + 32;	                } else if (code >= 97 && code <= 122) {	                    code = code - 32;	                } else if(code == 48){	                	char = "=";	                } else if(code == 54){	                	char = "&";	                }	                caseFormat = false;	            }	            if(char == ''){	            	var char = String.fromCharCode(code);	            }	            	            if (codeString == "") {	                codeString += char;	            } else if (nextTime - lastTime <= 30) {	                codeString += char;	            }	            char = '';	       }	        console.log(codeString);	        lastTime = nextTime;	    };	   	};   
+</script>
+</body>
+</html>

@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>用户充值</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <link rel="stylesheet" href="__PUBLIC__/static/layuiadmin/layui/css/layui.css" media="all">
+  <link rel="stylesheet" href="__PUBLIC__/static/layuiadmin/style/admin.css" media="all">
+  <style>
+    form{
+      padding-right:15px ;
+    }
+  </style>
+</head>
+<body>
+<div class="layui-form " style="margin-top:21px;" onkeydown="if(event.keyCode==13)return false;">
+
+
+	<div class="layui-form-item">
+			    <label class="layui-form-label">搜索会员</label>
+			    <div class="layui-input-block">
+			      <select name="users" id="users" lay-filter="typeSelect" lay-search>
+			      	 <option value="0"></option>
+			      	 
+			      	   {foreach  $users as $k=>$v}				               
+						  <option value="{$v.id}" >{$v.nickname}/{$v.mobile}</option>					        
+					   {/foreach}
+			      	    
+			      </select>
+			    </div>
+			  </div>
+	
+	  <div id="showId" style="display: none;">
+  		
+  		
+  
+  		<div class="layui-form-item">
+	    <label class="layui-form-label">会员头像</label>
+	    <div class="layui-input-block">
+	      <img id="showImg" style="width: 150px; margin-left:10px;cursor:pointer;" src="{$srdb['avatar']}"  >
+	    </div>
+	  </div>
+	  <div class="layui-form-item">
+	    <label class="layui-form-label">会员昵称</label>
+	    <div class="layui-input-block">		<label class="layui-form-label" id="nickname">{$srdb['nickname']}</label>
+	    </div>
+	  </div>   
+	  
+	    <div class="layui-form-item">
+	    <label class="layui-form-label">会员号</label>
+	    <div class="layui-input-block">		<label class="layui-form-label" id="member_no">{$srdb['member_no']}</label>
+	    </div>
+	  </div>   
+	  
+	  
+	   <div class="layui-form-item">    <label class="layui-form-label">会员等级</label>    <div class="layui-input-block">    
+	      <label class="layui-form-label" id="member_name">{$srdb['member_name']}</label>  
+	        </div>  </div>
+	
+	
+	  <div class="layui-form-item">
+	    <label class="layui-form-label">余额</label>
+	    <div class="layui-input-block">	    <label class="layui-form-label" id="money">{$srdb['money']}元</label>
+	    </div>
+	  </div>
+	  
+	  <div class="layui-form-item">
+	    <div class="layui-input-block">	  
+	            <table class="layui-hide" id="test"></table>
+			   <script type="text/html" id="test-table-operate-barDemo">
+                    <a class="layui-btn layui-btn-xs layui-btn-primary " lay-href="{:siteUrl('admin/cash/meal_index','','web')}&id={{d.id}}" >使用</a>
+      			 </script>
+	    </div>
+	  </div>
+	  
+	  
+	
+	  		
+	  		
+	  <div class="layui-form-item">
+	    <div class="layui-input-block">
+	      <button class="layui-btn" lay-submit lay-filter="demo1">赠送优惠券</button>
+	      <button class="layui-btn" lay-submit lay-filter="demo2" id="kg_btn">扣款</button>
+	      <button class="layui-btn" lay-submit lay-filter="demo3" id="cz_btn">充值</button>
+	    </div>
+	  </div>
+  </div>
+  
+  <!-- 更多表单结构排版请移步文档左侧【页面元素-表单】一项阅览 -->
+</div>
+
+<script src="__PUBLIC__/static/layuiadmin/layui/layui.js"></script>
+<script>
+  layui.config({
+    base: '__PUBLIC__/static/layuiadmin/' 
+  }).extend({
+    index: 'lib/index' 
+    , layarea: '../layui/layui_exts/city-picker/layarea'
+  }).use(['jquery','layer', 'index', 'layarea', 'table','laydate','laytpl'], function(){
+    var $ = layui.$
+            , layer = layui.layer
+            , table = layui.table
+            , layarea = layui.layarea
+            ,laytpl = layui.laytpl
+            , form = layui.form;
+   $("#member_no_id").focus();        
+    layarea.render({
+      elem: '#area-picker',
+      change: function (res) {
+        console.log(res);
+      }
+    });    	     
+    
+    
+
+    
+    typeIdChange($("input[name='type']:checked").val());
+    
+    
+    form.on('select(typeSelect)', function(data1){
+    	
+    	 
+	    	$.ajax({
+	  	        url:"{:siteUrl('admin/user/getUser','','web','nhykrout')}",
+	  	        data:{'id':data1.value},
+	  	        type:"POST",
+	  	        success: function(data){
+	  	          var res = JSON.parse(data);
+	  	          if(res.code == 0 ){
+	  	          		var user = res.user;
+	  	          		$("#nickname").html(user.nickname);
+	  	          		$("#showImg").attr("src",user.avatar);
+	  	          	  	$("#member_no").html(user.member_no);
+	  	          		$("#member_name").html(user.member_name);
+	  	          		$("#money").html(user.money);
+	  	          		$("#showId").show();
+	  	          		$("#cz_btn").attr("lay-href","{:siteUrl('admin/cash/cz_index','','web')}&member_no="+user.member_no);
+	  	          	    $("#kg_btn").attr("lay-href","{:siteUrl('admin/cash/index','','web')}&member_no="+user.member_no);
+	  	          	    
+		  	          
+		                //执行重载 --id
+		                table.reload('test', {
+		                	url:"{:siteUrl('admin/meal/get_my_meal','','web','nhykrout')}&uid="+user.id,
+		                    page: {
+		                        curr: 1 //重新从第 1 页开始
+		                    }
+		                });
+		  	          	    
+	  	          	    
+	  	          }
+	  	        }
+	  	    });
+
+       
+     });
+    
+    
+
+    	
+    table.render({
+	    elem: '#test'
+	    ,url:"{:siteUrl('admin/meal/get_my_meal','','web','nhykrout')}"
+	    ,cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
+	    ,cols: [[
+	      {field:'meal_name',  title: '套餐卡名称', sort: true}
+	      ,{field:'meal_money',  title: '价格'}
+	      ,{field:'sum_count',  title: '总次数', sort: true}
+	      ,{field:'rel_count',  title: '使用次数'}
+	      ,{ align:'center', toolbar: '#test-table-operate-barDemo'}
+	    ]]
+	  });
+    	  
+    	
+    
+    	  //监听工具条
+          table.on('tool(test-table-operate)', function(obj){
+              var data = obj.data;
+              if(obj.event === 'detail'){
+                  window.location.href="{:siteUrl('admin/meal/edit_meal',array('pid'=>0),'web')}&id="+data.id;
+              } else if(obj.event === 'del'){
+                  layer.confirm('确定删除该菜单栏吗', function(index){
+                      window.location.href="{:siteUrl('admin/meau/del_meau','','web')}&id="+data.id;
+                  });
+              } else if(obj.event === 'edit'){
+                  layer.open({
+                      type:2,
+                      area : [ '80%', '80%' ],
+                      title:"编辑菜单栏",
+                      yes: function(index, layero){
+                          //按钮【按钮一】的回调
+                          layer.close(index);
+                      },
+                      cancel: function(){
+                          //右上角关闭回调
+
+                          //return false 开启该代码可禁止点击该按钮关闭
+                      },
+                      content:"{:siteUrl('admin/meau/edit_meau',array('pid'=>0),'web')}&type=1&id="+data.id,
+                      success:function(){
+
+
+                      }
+                  });
+              }
+          });
+    	  
+    
+    
+    form.on('submit(demo1)', function(data){
+      var admin = layui.admin
+		
+      layer.open({
+          type:2,
+          area: ['75%', '80%'],
+          title:"选择优惠券",
+          btn: ['确定', '取消'],
+          yes: function(index, layero){
+              //按钮【按钮一】的回调
+             var iframeWin1 = window[layero.find('iframe')[0]['name']];
+             var checkedData = iframeWin1.callbackdata(); //获取选中节点的数据
+             
+          	 if(checkedData != null && checkedData.length>0){
+          		var couponid = checkedData[0].id;
+          		var uid = $("#users").val();
+          		
+          		layer.confirm('确定赠送吗？', function(index){
+              	  $.ajax({
+              	        url:"{:siteUrl('admin/cash/trans_coupon','','web','nhykrout')}",
+              	        data:{'coupons':couponid,'uids':uid},
+              	        type:"POST",
+              	        success: function(data){
+              	          var res = JSON.parse(data);
+              	          if(res.code == 0 ){
+              	            layer.msg(res.msg,{icon: 1,time:2000},function(){
+              	            });
+              	          }else{
+              	            layer.msg(res.msg,{icon: 2,time:2000},function(){
+              	            });
+              	          }
+              	        }
+              	      })
+                });
+          		
+          		
+          	 }
+          	layer.close(index);
+          },
+          cancel: function(){ 
+              //右上角关闭回调
+              
+              //return false 开启该代码可禁止点击该按钮关闭
+          },
+          content:"{:siteUrl('admin/coupon/choose_index','','web')}",
+          success:function(){
+          	
+   
+          }  
+      });
+      
+      return false
+    });
+
+    function typeIdChange(value){
+    	if(value==2){
+        	$("#recharge_div").attr('style',"display: none;");
+        	$("#pt_recharge_div").removeAttr('style');
+        }
+        else{
+        	$("#pt_recharge_div").attr("style","display: none");
+        	$("#recharge_div").removeAttr('style');
+        }
+    }
+    
+    
+    form.on('radio(levelM)', function(data){
+        typeIdChange(data.value);
+    });
+    
+    
+    
+
+    $('#LAY-component-form-getval').on('click', function(){
+      var data = form.val('example');
+      alert(JSON.stringify(data));
+    });
+
+  });         
+</script>
+</body>
+</html>

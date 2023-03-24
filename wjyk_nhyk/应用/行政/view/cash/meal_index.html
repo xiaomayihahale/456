@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>套餐卡使用</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <link rel="stylesheet" href="__PUBLIC__/static/layuiadmin/layui/css/layui.css" media="all">
+  <link rel="stylesheet" href="__PUBLIC__/static/layuiadmin/style/admin.css" media="all">
+  <style>
+    form{
+      padding-right:15px ;
+    }
+  </style>
+</head>
+<body>
+<form class="layui-form " style="margin-top:21px;" onkeydown="if(event.keyCode==13)return false;">
+
+  <input type="hidden" name="id" value="{$srdb['id']}"> <div class="layui-form-item">    <label class="layui-form-label">会员卡号</label>    <div class="layui-input-block">      <input type="text" id="member_no_id" name="member_no" autocomplete="off"  class="layui-input" value="{$srdb['member_no']}"  />    </div>  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">会员头像</label>
+    <div class="layui-input-block">
+      <img id="showImg" style="width: 150px; margin-left:10px;cursor:pointer;" src="{$srdb['avatar']}"  >
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">会员昵称</label>
+    <div class="layui-input-block">		<label class="layui-form-label">{$srdb['nickname']}</label>
+    </div>
+  </div>    <div class="layui-form-item">    <label class="layui-form-label">套餐卡名称</label>    <div class="layui-input-block">       <label class="layui-form-label">{$srdb['meal_name']}</label>    </div>  </div>
+  <div class="layui-form-item">    <label class="layui-form-label">套餐卡购买时间</label>    <div class="layui-input-block">	    <label class="layui-form-label">{$srdb['createtime']}</label>    </div>  </div>  <div class="layui-form-item">    <label class="layui-form-label">套餐卡购买金额</label>    <div class="layui-input-block">	    <label class="layui-form-label">{$srdb['meal_money']}</label>    </div>  </div>
+
+  <div class="layui-form-item">
+    <label class="layui-form-label">套餐卡可使用次数</label>
+    <div class="layui-input-block">	    <label class="layui-form-label">已使用<font color="#FF0000">{$srdb['rel_count']}</font> /{$srdb['sum_count']}次数</label>
+    </div>
+  </div>      <div class="layui-form-item">    <label class="layui-form-label">套餐卡过期时间</label>    <div class="layui-input-block">	    <label class="layui-form-label">{$srdb['expired_date']}</label>    </div>  </div>
+    	   
+
+  <div class="layui-form-item">
+    <div class="layui-input-block">
+      <button class="layui-btn" lay-submit lay-filter="demo1">立即使用</button>
+    </div>
+  </div>
+  <!-- 更多表单结构排版请移步文档左侧【页面元素-表单】一项阅览 -->
+</form>
+
+<script src="__PUBLIC__/static/layuiadmin/layui/layui.js"></script>
+<script>
+  layui.config({
+    base: '__PUBLIC__/static/layuiadmin/' 
+  }).extend({
+    index: 'lib/index' 
+    , layarea: '../layui/layui_exts/city-picker/layarea'
+  }).use(['jquery','layer', 'index', 'layarea', 'table','laydate'], function(){
+    var $ = layui.$
+            , layer = layui.layer
+            , table = layui.table
+            , layarea = layui.layarea
+            , form = layui.form;
+   $("#member_no_id").focus();        
+    layarea.render({
+      elem: '#area-picker',
+      change: function (res) {
+        console.log(res);
+      }
+    });    	        
+    form.on('submit(demo1)', function(data){
+      var admin = layui.admin
+		
+      layer.confirm('确定使用吗？', function(index){
+    	  $.ajax({
+    	        url:"{:siteUrl('admin/cash/use_meal','','web','nhykrout')}",
+    	        data:data.field,
+    	        type:"POST",
+    	        success: function(data){
+    	          var res = JSON.parse(data);
+    	          if(res.code == 0 ){
+    	            layer.msg(res.msg,{icon: 1,time:2000},function(){
+    	            });
+    	          }else{
+    	            layer.msg(res.msg,{icon: 2,time:2000},function(){
+    	            });
+    	          }
+    	        }
+    	      })
+      });
+     
+      return false
+    });
+
+
+    $('#LAY-component-form-getval').on('click', function(){
+      var data = form.val('example');
+      alert(JSON.stringify(data));
+    });
+
+  });      window.onload = function(e) {	  	  
+	  var codeString = "";	    	    
+	  var scanTimeer = setInterval(function() {	 
+		  var now = new Date().getTime();	 
+		  if (now - lastTime > 200) {	      
+			  if(codeString !=''){	        
+				          
+				  
+				  window.location.href="{:siteUrl('admin/cash/meal_index','','web')}&id="+codeString;
+				  }	  
+			  codeString = "";	        }	    },	    200);	    			    var lastTime;	    	    var caseFormat = false;	    document.onkeydown = function(e) {	        var nextTime = new Date().getTime();	        var code = e.which;	       console.log(e.which);	        if (code == 16) {	            caseFormat = true;	        } else {	        	var char = '';	            if (caseFormat) {	                if (code >= 65 && code <= 90) {	                    code = code + 32;	                } else if (code >= 97 && code <= 122) {	                    code = code - 32;	                } else if(code == 48){	                	char = "=";	                } else if(code == 54){	                	char = "&";	                }	                caseFormat = false;	            }	            if(char == ''){	            	var char = String.fromCharCode(code);	            }	            	            if (codeString == "") {	                codeString += char;	            } else if (nextTime - lastTime <= 30) {	                codeString += char;	            }	            char = '';	       }	        console.log(codeString);	        lastTime = nextTime;	    };	   	};   
+</script>
+</body>
+</html>

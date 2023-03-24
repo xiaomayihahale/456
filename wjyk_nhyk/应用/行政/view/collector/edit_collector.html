@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>编辑用户</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="__PUBLIC__/static/layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="__PUBLIC__/static/layuiadmin/style/admin.css" media="all">
+    <style>
+        form{
+            padding-right:15px ;
+        }
+    </style>
+</head>
+<body>
+<form class="layui-form " style="margin-top:21px;">
+
+	<input type="hidden" name="id" value="{$srdb['id']}">
+
+  <div class="layui-form-item">
+    <label class="layui-form-label">名称</label>
+    <div class="layui-input-block">
+      <input type="text" name="name" autocomplete="off" class="layui-input" value="{$srdb['name']}">
+    </div>
+  </div>
+  
+  <div class="layui-form-item">
+    <label class="layui-form-label">性别</label>
+    <div class="layui-input-block">
+      <input type="radio" name="sex" value="1" title="男" {if $srdb['sex'] == '1' || $srdb['sex'] == ''}checked{/if}>
+      <input type="radio" name="sex" value="2" title="女"  {if $srdb['sex'] == '2'}checked{/if}>
+    </div>
+  </div>
+  
+  <div class="layui-form-item">
+    <label class="layui-form-label">手机号码</label>
+    <div class="layui-input-block">
+      <input type="text" name="telphone"  autocomplete="off" class="layui-input" value="{$srdb['telphone']}">
+    </div>
+  </div>
+  
+  <div class="layui-form-item">
+    <label class="layui-form-label">接单状态</label>
+    <div class="layui-input-block">
+      <input type="radio" name="is_online" value="1" title="开启" {if $srdb['is_online'] == '1' || $srdb['is_online'] == ''}checked{/if}>
+      <input type="radio" name="is_online" value="2" title="关闭" {if $srdb['is_online'] == '2'}checked{/if}>
+    </div>
+  </div>
+
+  
+  <div class="layui-form-item">
+    <div class="layui-input-block">
+      <button class="layui-btn" lay-submit lay-filter="demo1">立即提交</button>
+      <input type="button" class="layui-btn layui-btn-primary" onclick="history.go(-1)" value="返回列表"> 
+    </div>
+  </div>
+  <!-- 更多表单结构排版请移步文档左侧【页面元素-表单】一项阅览 -->
+</form>
+<div class="layui-footer" style="position:absolute;bottom:0;text-align:center;width:100%">
+	{include file='../addons/wjyk_recycle/application/admin/view/index/footer.html' /}
+</div>
+<script src="__PUBLIC__/static/layuiadmin/layui/layui.js"></script>
+<script>
+    layui.config({
+        base: '__PUBLIC__/static/layuiadmin/' //静态资源所在路径
+    }).extend({
+        index: 'lib/index' //主入口模块
+    }).use(['jquery','layer', 'index', 'table'], function(){
+    	var $ = layui.$
+    	, layer = layui.layer
+        , table = layui.table
+        , form = layui.form;
+    	
+      //监听提交
+        form.on('submit(demo1)', function(data){
+            var admin = layui.admin
+
+            admin.req({
+                url:"{:siteUrl('admin/collector/edit_collector','','web')}",
+                data:data.field,
+                type:"POST",
+                done:res=>{
+                	if(res.code == 0 ){
+                		layer.msg(res.msg,{icon: 1,time:3000},function(){
+                			window.location.href="{:siteUrl('admin/collector/index','','web')}";
+                		});
+                	}else{
+                		layer.msg(res.msg,{icon: 2,time:3000},function(){
+                			window.location.href="{:siteUrl('admin/collector/index','','web')}";
+                		});
+                	}
+                }
+            })
+            return false
+  
+        });
+
+
+        //表单取值
+        $('#LAY-component-form-getval').on('click', function(){
+            var data = form.val('example');
+            alert(JSON.stringify(data));
+        });
+        
+    });
+</script>
+</body>
+</html>
