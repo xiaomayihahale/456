@@ -1,0 +1,67 @@
+<view>
+    <view class="require-order-page">
+        <form bindsubmit="__e" data-event-opts="{{[ [ 'submit',[ [ 'chongzhi',['$event'] ] ] ] ]}}">
+            <view class="flex-column alltop">
+                <view class="stores">
+                    <view class="flex-between stores2">
+                        <view class="flex-align-center">
+                            <text class="iconfont icon-mendian1" style="margin-right:10rpx;font-size:32rpx;"></text>
+                            <view wx:if="{{storeName}}">{{storeName}}</view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view class="shopinfo">
+                <view class="dingcan flex-columns">
+                    <view>订餐信息</view>
+                    <text>确认好订单信息后，提交支付</text>
+                </view>
+                <view class="content sunui-flex" wx:for="{{orderList}}" wx:key="index">
+                    <image mode class="shopimg sunui-margin-r20" src="{{item.cover}}"></image>
+                    <view style="flex:1;margin-top:20rpx;">
+                        <view class="flex-between">
+                            <view class="sunui-ellipsis-2" style="color:#333;">{{item.foods_name}}</view>
+                            <view class="price">{{'￥'+item.spec_price}}</view>
+                        </view>
+                        <view class="end flex-between">
+                            <view class="spec sunui-ellipsis-1" wx:if="{{item.spec}}">{{'规格：'+item.spec}}</view>
+                            <view class="spec">{{'x'+item.num}}</view>
+                        </view>
+                    </view>
+                </view>
+                <sunui-cell bind:__l="__l" cellStyle="padding:20rpx 0;" vueId="852d9c7e-1" vueSlots="{{['default']}}" wx:if="{{options.personnelCode!=1}}">
+                    <view class="sunui-flex-space-between sunui-w100 item-info">
+                        <view style="width:300rpx;">备注</view>
+                        <input bindinput="__e" bindtap="__e" class="font-overflow price" data-event-opts="{{[ [ 'tap',[ ['beizhus'] ] ],[ 'input',[ [ '__set_model',[ '','beizhu','$event',[] ] ] ] ] ]}}" placeholder="请输入备注信息 " value="{{beizhu}}"></input>
+                    </view>
+                </sunui-cell>
+                <sunui-cell bind:__l="__l" cellStyle="padding:20rpx 0;" vueId="852d9c7e-2" vueSlots="{{['default']}}" wx:if="{{options.personnelCode!=1}}">
+                    <view class="sunui-flex-space-between sunui-w100 item-info">
+                        <view>{{userInfo.curMember_name}}</view>
+                        <view class="price">
+                            <text class="price" wx:if="{{$root.m0}}">{{$root.g0+'折'}}</text>
+                            <text class="price" wx:else>无折扣</text>
+                        </view>
+                    </view>
+                </sunui-cell>
+                <view class="flex-end">
+                    <view style="color:#666;">{{'共'+numa+'件商品'}}</view>
+                    <view class="fukuans">总付款</view>
+                    <view class="realPrices">{{'￥'+$root.g1+''}}</view>
+                </view>
+            </view>
+            <view style="height:100rpx;"></view>
+            <view class="order-detail-operate sunui-box-shadow">
+                <view class="priceAll flex-align-center">实付款<view wx:if="{{options.personnelCode==1}}">{{$root.g2}}</view>
+                    <view wx:else>
+                        <view wx:if="{{$root.m1<0}}">0.00</view>
+                        <view wx:else>{{'￥'+$root.g3+''}}</view>
+                    </view>
+                </view>
+                <view class="flex">
+                    <button class="order-submit-btn" formType="submit" hoverClass="sunui-hover" style="background:#FF6145;color:#FFFFFF;" type="default">选好了</button>
+                </view>
+            </view>
+        </form>
+    </view>
+</view>

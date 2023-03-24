@@ -1,0 +1,20 @@
+<view>
+    <image class="indexbg" src="{{voucherList.img}}"></image>
+    <view style="margin-left:20rpx;">
+        <view class="text1">{{voucherList.name}}</view>
+        <view class="zhi flex-align-center">面值<view class="price">￥<text style="font-size:40rpx;">{{voucherList.only}}</text>
+            </view>
+        </view>
+        <view class="store">{{voucherList.desc}}</view>
+    </view>
+    <view style="height:20rpx;background-color:#F0F0F0;"></view>
+    <view style="margin-left:20rpx;margin-bottom:200rpx;">
+        <view class="text1">使用说明</view>
+        <view style="color:#333;">
+            <rich-parser bind:__l="__l" class="vue-ref" data-ref="article" domain="https://6874-html-foe72-1259071903.tcb.qcloud.la" html="{{voucherList.use_desc}}" lazyLoad="{{true}}" selectable="{{true}}" showWithAnimation="{{true}}" useAnchor="{{true}}" vueId="5c18817e-1"></rich-parser>
+        </view>
+    </view>
+    <view class="bun3 flex">
+        <view bindtap="__e" class="btn flex" data-event-opts="{{[ [ 'tap',[ ['zhifu'] ] ] ]}}">{{'1张共支付 ￥'+voucherList.money}}</view>
+    </view>
+</view>

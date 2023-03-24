@@ -1,0 +1,17 @@
+<view>
+    <view class="share_view flex">选择座位号</view>
+    <mescroll-body bind:__l="__l" bind:down="__e" bind:init="__e" bind:up="__e" class="vue-ref" data-event-opts="{{[ [ '^init',[ ['mescrollInit'] ] ],[ '^down',[ ['downCallback'] ] ],[ '^up',[ ['upCallback'] ] ] ]}}" data-ref="mescrollRef" down="{{downOption}}" vueId="287d8f21-1" vueSlots="{{['default']}}">
+        <view class="flex-between" style="margin:0rpx 20rpx 0rpx 12rpx;" wx:if="{{item.status==1}}" wx:for="{{list}}" wx:key="index">
+            <view class="PackageCard flex-column">
+                <view class="all2 flex-columns" style="{{'background-image:'+'url('+item.img+')'+';'}}">
+                    <view class="card flex-columns">
+                        <text>{{item.name}}</text>
+                        <view>{{'面值：'+item.only+''}}</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </mescroll-body>
+    <view class="flex" style="height:320rpx;" wx:if="{{list.length==0}}">暂无座位号可用</view>
+    <block wx:else></block>
+</view>

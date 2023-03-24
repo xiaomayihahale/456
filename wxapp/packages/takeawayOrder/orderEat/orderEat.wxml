@@ -1,0 +1,253 @@
+<view class="data-v-39f2846b">
+    <view class="address data-v-39f2846b" wx:if="{{order.receipt_type==2}}">
+        <view class="namesd data-v-39f2846b">
+            <view class="font-overflow data-v-39f2846b" style="max-width:260rpx;margin-right:20rpx;">{{order.realname+''}}</view>
+            <view class="data-v-39f2846b" style="flex:1;">{{order.mobile}}</view>
+        </view>
+        <view class="sunui-ellipsis-2 data-v-39f2846b" style="color:#333;font-size:24rpx;">{{order.province+' '+order.city+' '+order.district+' '+order.address}}</view>
+    </view>
+    <view class="view_top flex-column data-v-39f2846b">
+        <view class="group_all data-v-39f2846b">
+            <view class="orderCommodity data-v-39f2846b">{{'下单商品（'+numa+'）'}}</view>
+            <view bindtap="__e" class="commodity flex-align-center data-v-39f2846b" data-event-opts="{{[ [ 'tap',[ [ 'storeClick',['$0'],['order'] ] ] ] ]}}" wx:if="{{order.goods.length<=2}}" wx:for="{{order.goods}}" wx:key="index">
+                <view class="view_img data-v-39f2846b">
+                    <image class="order_img data-v-39f2846b" mode="aspectFill" src="{{item.foods_img}}"></image>
+                </view>
+                <view class="order_top data-v-39f2846b">
+                    <view class="flex-columns data-v-39f2846b">
+                        <view class="font-overflow2 data-v-39f2846b">{{item.foods_name}}</view>
+                        <view class="font-overflow guige data-v-39f2846b" wx:if="{{item.spec}}">{{'规格：'+item.spec}}</view>
+                    </view>
+                    <view class="view_price data-v-39f2846b">
+                        <view class="data-v-39f2846b">{{'￥'+item.unit_price}}</view>
+                        <view class="guige data-v-39f2846b">{{'数量：x'+item.num}}</view>
+                    </view>
+                </view>
+            </view>
+            <view class="express data-v-39f2846b" wx:if="{{order.goods.length>2}}">
+                <view bindtap="__e" class="{{['data-v-39f2846b',isShow?'on tl-card':'tl-card']}}" data-event-opts="{{[ [ 'tap',[ [ 'storeClick',['$0'],['order'] ] ] ] ]}}">
+                    <view class="commodity flex-align-center data-v-39f2846b" wx:for="{{order.goods}}" wx:key="index">
+                        <view class="view_img data-v-39f2846b">
+                            <image class="order_img data-v-39f2846b" mode="aspectFill" src="{{item.foods_img}}"></image>
+                        </view>
+                        <view class="order_top data-v-39f2846b">
+                            <view class="flex-columns data-v-39f2846b">
+                                <view class="font-overflow2 data-v-39f2846b">{{item.foods_name}}</view>
+                                <view class="font-overflow guige data-v-39f2846b" wx:if="{{item.spec}}">{{'规格：'+item.spec}}</view>
+                            </view>
+                            <view class="view_price data-v-39f2846b">
+                                <view class="data-v-39f2846b">{{'￥'+item.unit_price}}</view>
+                                <view class="guige data-v-39f2846b">{{'数量：x'+item.num}}</view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+                <view bindtap="__e" class="tl-mgs data-v-39f2846b" data-event-opts="{{[ [ 'tap',[ [ 'toChange',['$event'] ] ] ] ]}}" wx:if="{{!isShow}}">展开 ></view>
+                <view bindtap="__e" class="tl-mgs data-v-39f2846b" data-event-opts="{{[ [ 'tap',[ [ 'toChange',['$event'] ] ] ] ]}}" wx:if="{{isShow}}">收起 ></view>
+            </view>
+            <view class="group_schedule data-v-39f2846b">
+                <view class="price flex-between data-v-39f2846b">
+                    <view class="data-v-39f2846b">实付款：</view>
+                    <block wx:if="{{order.pickup_type==1}}">
+                        <view class="amounts data-v-39f2846b" wx:if="{{order.order_per_type==1}}">{{''+$root.g0+''}}</view>
+                        <view class="amounts data-v-39f2846b" wx:else>{{''+$root.g1+''}}</view>
+                    </block>
+                    <view class="amounts data-v-39f2846b" wx:if="{{order.pickup_type==0}}">{{'￥'+$root.g2}}</view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="view_top flex-column data-v-39f2846b">
+        <view class="group_all data-v-39f2846b">
+            <view class="ordermessage data-v-39f2846b">订单信息</view>
+            <view class="view_message flex-between data-v-39f2846b">
+                <text class="data-v-39f2846b" style="color:#666666;">下单时间</text>
+                <view class="data-v-39f2846b">{{order.createtime}}</view>
+            </view>
+            <view class="view_message flex-between data-v-39f2846b">
+                <text class="data-v-39f2846b" style="color:#666666;">订单编号</text>
+                <view class="flex-align-center data-v-39f2846b">
+                    <view class="data-v-39f2846b">{{order.order_number}}</view>
+                    <view bindtap="__e" class="copy flex data-v-39f2846b" data-event-opts="{{[ [ 'tap',[ ['paste'] ] ] ]}}">复制</view>
+                </view>
+            </view>
+            <view class="view_message flex-between data-v-39f2846b" wx:if="{{order.pickup_type==1}}">
+                <text class="data-v-39f2846b" style="color:#666666;">餐桌号</text>
+                <view class="data-v-39f2846b">{{order.seat_number}}</view>
+            </view>
+            <view class="view_message flex-between data-v-39f2846b" wx:if="{{order.receipt_type==1}}">
+                <text class="data-v-39f2846b" style="color:#666666;">联系电话</text>
+                <view class="data-v-39f2846b">{{order.mobile}}</view>
+            </view>
+            <view class="view_message flex-between data-v-39f2846b" wx:if="{{order.receipt_type==2&&order.remark!=''}}">
+                <text class="data-v-39f2846b" style="color:#666666;">备注</text>
+                <view class="data-v-39f2846b">{{order.remark}}</view>
+            </view>
+            <view class="view_message flex-between data-v-39f2846b">
+                <text class="data-v-39f2846b" style="color:#666666;">消费方式</text>
+                <view class="data-v-39f2846b" wx:if="{{order.pickup_type==1}}">到店消费</view>
+                <view class="data-v-39f2846b" wx:if="{{order.pickup_type==0}}">
+                    <view class="data-v-39f2846b" wx:if="{{order.receipt_type==1}}">门店消费</view>
+                    <view class="data-v-39f2846b" wx:if="{{order.receipt_type==2}}">外卖配送</view>
+                </view>
+            </view>
+            <view class="view_message flex-between data-v-39f2846b" wx:if="{{order.pickup_type==1}}">
+                <text class="data-v-39f2846b" style="color:#666666;">订单状态</text>
+                <view class="data-v-39f2846b" wx:if="{{order.status==1&&order.pickup_type==1}}">上菜中</view>
+                <view class="data-v-39f2846b" wx:if="{{order.status==4}}">已完成</view>
+            </view>
+            <view class="view_message flex-between data-v-39f2846b" wx:if="{{order.pickup_type==0}}">
+                <text class="data-v-39f2846b" style="color:#666666;">订单状态</text>
+                <view class="data-v-39f2846b" wx:if="{{order.status==1}}">待付款</view>
+                <view class="data-v-39f2846b" wx:if="{{order.status==2&&order.receipt_type==1}}">上菜中</view>
+                <view class="data-v-39f2846b" wx:if="{{order.status==2&&order.receipt_type==2}}">配送中</view>
+                <view class="data-v-39f2846b" wx:if="{{order.status==3&&order.receipt_type==1}}">菜品已上齐</view>
+                <view class="data-v-39f2846b" wx:if="{{order.status==3&&order.receipt_type==2}}">待收货</view>
+                <view class="data-v-39f2846b" wx:if="{{order.status==4}}">已完成</view>
+            </view>
+        </view>
+    </view>
+    <view class="view_details data-v-39f2846b">
+        <view bindtap="__e" class="invite flex data-v-39f2846b" data-event-opts="{{[ [ 'tap',[ [ 'addEat',['$0'],['order'] ] ] ] ]}}" wx:if="{{order.status==1&&order.pickup_type==1}}">加菜</view>
+        <view bindtap="__e" class="details flex data-v-39f2846b" data-event-opts="{{[ [ 'tap',[ [ 'BillPlease',['$0'],['order'] ] ] ] ]}}" wx:if="{{order.status==1&&order.pickup_type==1&&options.isTure==1}}">结账</view>
+    </view>
+    <sunui-popup bind:__l="__l" class="data-v-39f2846b vue-ref" data-ref="popAll" style="background-color:#FFFFFF;" vueId="e0b026fe-1" vueSlots="{{['content']}}">
+        <form bindsubmit="__e" class="data-v-39f2846b" data-event-opts="{{[ [ 'submit',[ [ 'chongzhi',['$event'] ] ] ] ]}}" slot="content">
+            <view class="share_content flex-columns data-v-39f2846b" style="width:100%;">
+                <image bindtap="__e" class="storeImage2 data-v-39f2846b" data-event-opts="{{[ [ 'tap',[ ['closeDialog'] ] ] ]}}" src="/static/delect.png"></image>
+                <view class="flex data-v-39f2846b">
+                    <image class="storeImage data-v-39f2846b" src="{{byseatInfo.store_logo}}"></image>
+                    <view class="share_view flex data-v-39f2846b">{{byseatInfo.store_name}}</view>
+                </view>
+                <sunui-cell bind:__l="__l" bind:click="__e" cellStyle="padding:30rpx;" class="data-v-39f2846b" data-event-opts="{{[ [ '^click',[ ['handleCoupon'] ] ] ]}}" vueId="{{'e0b026fe-2'+','+'e0b026fe-1'}}" vueSlots="{{['default']}}">
+                    <view class="flex-between sunui-w100 item-info data-v-39f2846b">
+                        <view class="data-v-39f2846b">优惠券</view>
+                        <view class="prices data-v-39f2846b">{{coupons}}</view>
+                    </view>
+                </sunui-cell>
+                <sunui-cell bind:__l="__l" bind:click="__e" cellStyle="padding:0rpx 30rpx 30rpx;" class="data-v-39f2846b" data-event-opts="{{[ [ '^click',[ ['voucherList'] ] ] ]}}" vueId="{{'e0b026fe-3'+','+'e0b026fe-1'}}" vueSlots="{{['default']}}" wx:if="{{byseatInfo.order_per_type==1}}">
+                    <view class="flex-between sunui-w100 item-info data-v-39f2846b">
+                        <view class="data-v-39f2846b">代金券</view>
+                        <view class="prices data-v-39f2846b">{{''+vouchers+''}}</view>
+                    </view>
+                </sunui-cell>
+                <sunui-cell bind:__l="__l" cellStyle="padding:0rpx 30rpx 30rpx;" class="data-v-39f2846b" vueId="{{'e0b026fe-4'+','+'e0b026fe-1'}}" vueSlots="{{['default']}}">
+                    <view class="flex-between sunui-w100 item-info data-v-39f2846b">
+                        <view class="data-v-39f2846b">订单金额</view>
+                        <view class="prices data-v-39f2846b">{{'￥'+$root.g3}}</view>
+                    </view>
+                </sunui-cell>
+                <sunui-cell bind:__l="__l" cellStyle="padding:0rpx 30rpx 30rpx;" class="data-v-39f2846b" vueId="{{'e0b026fe-5'+','+'e0b026fe-1'}}" vueSlots="{{['default']}}" wx:if="{{byseatInfo.order_per_type==1}}">
+                    <view class="sunui-flex-space-between sunui-w100 item-info data-v-39f2846b">
+                        <view class="data-v-39f2846b">{{userInfo.curMember_name}}</view>
+                        <view class="prices data-v-39f2846b">
+                            <text class="prices data-v-39f2846b" wx:if="{{$root.m0}}">{{$root.g4+'折'}}</text>
+                            <text class="prices data-v-39f2846b" wx:else>无折扣</text>
+                        </view>
+                    </view>
+                </sunui-cell>
+                <sunui-cell bind:__l="__l" cellStyle="border-radius:20rpx;" class="data-v-39f2846b" vueId="{{'e0b026fe-6'+','+'e0b026fe-1'}}" vueSlots="{{['default']}}">
+                    <view class="flex-between sunui-w100 item-info data-v-39f2846b" style="padding:0rpx 30rpx 30rpx;">
+                        <view class="data-v-39f2846b">支付方式</view>
+                        <view class="apply-radio data-v-39f2846b">
+                            <radio-group bindchange="__e" class="data-v-39f2846b" data-event-opts="{{[ [ 'change',[ [ 'handleApplyType',['$event'] ] ] ] ]}}" name="apply">
+                                <label class="sunui-margin-r10 data-v-39f2846b">
+                                    <radio checked="{{true}}" class="data-v-39f2846b" color="#6392e2" style="transform:scale(0.8);" value="1"></radio>
+                                    <text class="data-v-39f2846b">微信支付</text>
+                                </label>
+                                <label class="data-v-39f2846b">
+                                    <radio class="data-v-39f2846b" color="#6392e2" style="transform:scale(0.8);" value="2"></radio>
+                                    <text class="data-v-39f2846b">余额支付</text>
+                                </label>
+                            </radio-group>
+                        </view>
+                    </view>
+                </sunui-cell>
+                <view class="flex-column amountPopup data-v-39f2846b">
+                    <view class="data-v-39f2846b" style="color:#9e9b9e;">需付款</view>
+                    <view class="realPrices flex-align-center data-v-39f2846b" wx:if="{{byseatInfo.order_per_type==1}}">￥<view class="data-v-39f2846b" wx:if="{{$root.m1<0}}">0.00</view>
+                        <view class="data-v-39f2846b" wx:else>{{''+$root.g5+''}}</view>
+                    </view>
+                    <view class="realPrices flex-align-center data-v-39f2846b" wx:if="{{byseatInfo.order_per_type==2}}">￥<view class="data-v-39f2846b">{{$root.g6}}</view>
+                    </view>
+                </view>
+                <button class="order-submit-btn data-v-39f2846b" formType="submit" hoverClass="sunui-hover" type="default">去支付</button>
+            </view>
+        </form>
+    </sunui-popup>
+    <sunui-popup bind:__l="__l" class="data-v-39f2846b vue-ref" data-ref="pops" style="background-color:#FFFFFF;z-index:1999;" vueId="e0b026fe-7" vueSlots="{{['content']}}">
+        <view slot="content">
+            <view class="share_view flex data-v-39f2846b">选择代金券</view>
+            <view class="flex data-v-39f2846b" style="height:320rpx;" wx:if="{{myMealList.length==0}}">暂无代金券可用</view>
+            <scroll-view class="data-v-39f2846b" scrollY="{{true}}" style="height:440rpx;" wx:else>
+                <view class="flex-between data-v-39f2846b" style="margin:0rpx 20rpx 0rpx 12rpx;" wx:if="{{item.status==1}}" wx:for="{{myMealList}}" wx:key="index">
+                    <view class="PackageCard flex-column data-v-39f2846b">
+                        <view class="all2 flex-columns data-v-39f2846b" style="{{'background-image:'+'url('+item.img+')'+';'}}">
+                            <view class="card flex-columns data-v-39f2846b">
+                                <text class="data-v-39f2846b">{{item.name}}</text>
+                                <view class="data-v-39f2846b">{{'面值：'+item.only+''}}</view>
+                            </view>
+                        </view>
+                    </view>
+                    <radio-group class="data-v-39f2846b" name="apply">
+                        <label class="sunui-margin-r10 flex-align-center data-v-39f2846b">
+                            <radio bindtap="__e" checked="{{item.checkMyMeal}}" class="data-v-39f2846b" color="#494949" data-event-opts="{{[ [ 'tap',[ [ 'checkeBox2',['$0'],[ [ ['myMealList','',index,'id'] ] ] ] ] ] ]}}" style="padding:12rpx;" value="{{item.value}}"></radio>
+                        </label>
+                    </radio-group>
+                </view>
+            </scroll-view>
+        </view>
+    </sunui-popup>
+    <sunui-popup bind:__l="__l" class="data-v-39f2846b vue-ref" data-ref="pop" style="background-color:#FFFFFF;z-index:1999;" vueId="e0b026fe-8" vueSlots="{{['content']}}">
+        <view slot="content">
+            <view class="share_view flex data-v-39f2846b">选择优惠券</view>
+            <view class="flex data-v-39f2846b" style="height:320rpx;" wx:if="{{couponList.length==0}}">暂无优惠券可用</view>
+            <scroll-view class="data-v-39f2846b" scrollY="{{true}}" style="height:440rpx;" wx:else>
+                <view class="flex-between data-v-39f2846b" style="position:relative;margin:0rpx 20rpx 40rpx 12rpx;" wx:for="{{$root.l0}}" wx:for-item="i" wx:key="index">
+                    <view class="data-v-39f2846b">
+                        <view class="all3 data-v-39f2846b">
+                            <view class="left flex-columns data-v-39f2846b" style="{{'background-size:cover;'+'background-image:'+'url('+youhui1+')'+';'}}">
+                                <view class="data-v-39f2846b">
+                                    <text class="data-v-39f2846b" style="font-size:32rpx;color:#FFFFFF;">￥</text>{{''+i.g7+''}}</view>
+                                <text class="data-v-39f2846b" wx:if="{{i.$orig.region==2}}">仅商城可用</text>
+                                <text class="data-v-39f2846b" wx:if="{{i.$orig.region==3}}">无门槛使用</text>
+                            </view>
+                            <view class="data-v-39f2846b" wx:if="{{i.$orig.c_type==1}}">
+                                <view class="zhong flex-columns data-v-39f2846b" wx:if="{{i.$orig.type==1}}">
+                                    <view class="data-v-39f2846b">{{'满'+i.$orig.full+'减'+i.$orig.less}}</view>
+                                    <text class="data-v-39f2846b">{{'到期时间：'+i.$orig.end_time}}</text>
+                                </view>
+                                <view class="zhong flex-columns data-v-39f2846b" wx:if="{{i.$orig.type==2}}">
+                                    <view class="data-v-39f2846b">无门槛福利优惠券</view>
+                                    <text class="data-v-39f2846b">{{'到期时间：'+i.$orig.end_time}}</text>
+                                </view>
+                            </view>
+                            <view class="data-v-39f2846b" wx:if="{{i.$orig.c_type==2}}">
+                                <view class="zhong flex-columns data-v-39f2846b" wx:if="{{i.$orig.type==1}}">
+                                    <view class="data-v-39f2846b">{{'满'+i.$orig.full+'减'+i.$orig.less}}</view>
+                                    <text class="data-v-39f2846b">{{'到期时间：'+i.$orig.end_time}}</text>
+                                </view>
+                                <view class="zhong flex-columns data-v-39f2846b" wx:if="{{i.$orig.type==2}}">
+                                    <view class="data-v-39f2846b">无门槛福利优惠券</view>
+                                    <text class="data-v-39f2846b">{{'到期时间：'+i.$orig.end_time}}</text>
+                                </view>
+                            </view>
+                        </view>
+                        <view class="dikou flex-align-center data-v-39f2846b" style="{{'background-size:cover;'+'background-image:'+'url('+youhui2+')'+';'}}" wx:if="{{i.$orig.c_type==1}}">
+                            <view class="dikou5 data-v-39f2846b" wx:if="{{i.$orig.region==2}}">会员商品，积分商品不可使用该优惠券</view>
+                            <view class="dikou5 data-v-39f2846b" wx:if="{{i.$orig.region==3}}">全场可用，抵扣任何商品</view>
+                        </view>
+                        <view class="dikou flex-align-center data-v-39f2846b" style="{{'background-size:cover;'+'background-image:'+'url('+youhui2+')'+';'}}" wx:if="{{i.$orig.c_type==2}}">【生日福利】<view class="dikou5 data-v-39f2846b" wx:if="{{i.$orig.region==2}}">会员商品，积分商品不可使用该优惠券</view>
+                            <view class="dikou5 data-v-39f2846b" wx:if="{{i.$orig.region==3}}">全场可用，抵扣任何商品</view>
+                        </view>
+                    </view>
+                    <radio-group class="data-v-39f2846b" name="apply">
+                        <label class="sunui-margin-r10 flex-align-center data-v-39f2846b">
+                            <radio bindtap="__e" checked="{{i.$orig.checkCoupon}}" class="data-v-39f2846b" color="#494949" data-event-opts="{{[ [ 'tap',[ [ 'checkeBox',['$0'],[ [ ['couponList','',index,'id'] ] ] ] ] ] ]}}" style="padding:12rpx;" value="{{i.$orig.value}}"></radio>
+                        </label>
+                    </radio-group>
+                </view>
+            </scroll-view>
+        </view>
+    </sunui-popup>
+</view>

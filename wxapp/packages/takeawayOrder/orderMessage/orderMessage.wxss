@@ -1,0 +1,458 @@
+page {
+    background: #f0f0f0;
+}
+
+button::after {
+    border: none;
+    outline: none;
+}
+
+.button-hover {
+    color: #fff!important;
+}
+
+.inaver._30f2b4d {
+    position: fixed;
+    right: 28rpx;
+    bottom: 200rpx;
+    z-index: 9999;
+}
+
+.inaver .left._30f2b4d {
+    width: 70rpx;
+    height: 100rpx;
+    margin: 8rpx;
+}
+
+.inaver .left .icon._30f2b4d {
+    padding: 14rpx;
+    margin: 0rpx;
+    font-size: 45rpx;
+    background: #fff;
+    border-radius: 50%;
+}
+
+.aa {
+    width: 50%;
+}
+
+.noneimg {
+    height: 454rpx;
+    width: 549rpx;
+    margin-top: 30rpx;
+}
+
+.ordernos {
+    color: #999;
+    padding-top: 30rpx;
+}
+
+.addOrder {
+    background: #ff6701;
+    border-radius: 54rpx;
+    width: 342rpx;
+    height: 100rpx;
+    color: #fff;
+    font-size: 32rpx;
+    margin: 50rpx 0rpx 62rpx;
+}
+
+.all {
+    width: 720rpx;
+    height: auto;
+    background: #fff;
+    border-radius: 20rpx;
+    margin-bottom: 24rpx;
+}
+
+.sls {
+    padding: 28rpx 32rpx 40rpx 28rpx;
+}
+
+.starts {
+    font-size: 24rpx;
+    color: #4ec27a;
+}
+
+.starts2 {
+    font-size: 24rpx;
+    color: #999;
+}
+
+.commodity {
+    padding: 0rpx 32rpx 32rpx 20rpx;
+}
+
+.img {
+    width: 168rpx;
+    height: 168rpx;
+    margin-right: 12rpx;
+    margin-bottom: 10rpx;
+}
+
+.eatall {
+    font-size: 24rpx;
+    width: 168rpx;
+    text-align: center;
+    padding: 0rpx 16rpx;
+}
+
+.price43 text {
+    font-size: 24rpx;
+}
+
+.price {
+    margin-bottom: 16rpx;
+    font-size: 24rpx;
+    font-weight: 700;
+}
+
+.price text {
+    font-size: 32rpx;
+}
+
+.require,.look {
+    color: #4ec27a;
+    font-size: 24rpx;
+    border: 2rpx solid #4ec27a;
+    border-radius: 146rpx;
+    width: 130rpx;
+    height: 56rpx;
+    margin-right: 20rpx;
+    margin-bottom: 20rpx;
+}
+
+.look {
+    color: #999;
+    border: 2rpx solid #999;
+}
+
+.storeImage {
+    width: 40rpx;
+    height: 40rpx;
+    margin-right: 20rpx;
+}
+
+.storeImage2 {
+    width: 50rpx;
+    height: 50rpx;
+    padding: 20rpx 70rpx 10rpx 30rpx;
+}
+
+.share_view {
+    font-size: 36rpx;
+    font-weight: 700;
+    margin: 24rpx 0rpx;
+    color: #767376;
+}
+
+.share_content {
+    background-color: #fff;
+    border-bottom: 2rpx solid #f1f1f1;
+}
+
+.order-submit-btn {
+    background-image: -webkit-gradient(linear,left top,right top,from(#6392e2),to(#6292e3));
+    background-image: -webkit-linear-gradient(left,#6392e2,#6292e3);
+    background-image: linear-gradient(90deg,#6392e2,#6292e3);
+    width: 690rpx;
+    height: 100rpx;
+    line-height: 100rpx;
+    font-size: 32rpx;
+    margin: 0rpx 30rpx 60rpx;
+    border-radius: 6rpx;
+}
+
+.amountPopup {
+    padding: 70rpx 0rpx;
+    margin: 0rpx 30rpx;
+    border-top: 2rpx solid #f7f5f7;
+}
+
+.realPrices {
+    margin-top: 20rpx;
+    color: #292629;
+    font-size: 30rpx;
+}
+
+.realPrices view {
+    color: #292629;
+    font-size: 56rpx;
+    font-weight: 700;
+    margin-left: 8rpx;
+}
+
+.PackageCard {
+    margin-top: 16rpx;
+    width: 648rpx;
+    height: auto;
+    background: #fff;
+    border-radius: 20rpx;
+}
+
+.card {
+    padding: 0rpx 20rpx;
+    width: 648rpx;
+    height: 166rpx;
+}
+
+.card text {
+    color: #fff;
+    font-size: 32rpx;
+    font-weight: 700;
+    margin-top: 30rpx;
+}
+
+.card view {
+    padding-top: 18rpx;
+    color: #fff;
+    font-size: 24rpx;
+}
+
+.all2 {
+    margin-bottom: 28rpx;
+    background-color: #d0cece;
+    background-size: cover;
+}
+
+.all3 {
+    width: 648rpx;
+    height: 188rpx;
+    background: #fff;
+    display: flex;
+}
+
+.left2 {
+    text-align: center;
+    background-color: #a0cfff;
+    width: 176rpx;
+    height: 188rpx;
+}
+
+.left2 view {
+    color: #fff;
+    font-size: 42rpx;
+    font-weight: 700;
+    margin-top: 14rpx;
+}
+
+.left2 text {
+    font-size: 24rpx;
+    color: #fff;
+}
+
+.zhong {
+    margin: 16rpx 44rpx 0rpx 16rpx;
+}
+
+.zhong view {
+    color: #d9b776;
+    font-size: 32rpx;
+}
+
+.zhong text {
+    color: #999;
+    font-size: 24rpx;
+    margin-top: 16rpx;
+}
+
+.dikou {
+    background: #ececec;
+    color: #d9b776;
+    font-size: 24rpx;
+    width: 648rpx;
+    height: 52rpx;
+    text-align: left;
+    padding-left: 16rpx;
+    position: absolute;
+    bottom: 0rpx;
+}
+
+.dikou5 {
+    color: #d9b776;
+    font-size: 24rpx;
+    padding-left: 6rpx;
+}
+
+.item-info>view:first-child {
+    color: #9e9b9e;
+    font-size: 32rpx;
+}
+
+.item-info .prices {
+    text-align: right;
+    color: #9e9b9e;
+}
+
+.require-order-page .apply-radio radio {
+    transform: scale(.8);
+}
+
+.require-order-page .alltop {
+    width: 750rpx;
+}
+
+.require-order-page .stores {
+    margin: 22rpx 0rpx 20rpx;
+    background-color: #fff;
+    border-radius: 20rpx;
+    width: 720rpx;
+    height: auto;
+}
+
+.require-order-page .stores2 {
+    padding: 34rpx 16rpx 0rpx 26rpx;
+}
+
+.require-order-page .priceAll {
+    color: #999;
+    font-size: 24rpx;
+    margin-left: 34rpx;
+}
+
+.require-order-page .priceAll view {
+    font-size: 36rpx;
+    font-weight: 700;
+    margin-left: 6rpx;
+    color: #000;
+}
+
+.require-order-page .order-detail-operate {
+    position: fixed;
+    bottom: 0;
+    z-index: 100;
+    background-color: #fff;
+    width: 100%;
+    height: 100rpx;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+}
+
+.require-order-page .anchor-radio-group radio {
+    transform: scale(.8);
+}
+
+.require-order-page .dingcan view {
+    font-size: 32rpx;
+    font-weight: 700;
+    padding-bottom: 12rpx;
+}
+
+.require-order-page .dingcan text {
+    color: #999;
+    font-size: 24rpx;
+}
+
+.require-order-page .messages {
+    color: #d9b776;
+    font-size: 24rpx;
+    border: 2rpx solid #d9b776;
+    border-radius: 50rpx;
+    width: 130rpx;
+    height: 48rpx;
+}
+
+.require-order-page .fukuans {
+    color: #333;
+    margin-left: 12rpx;
+}
+
+.require-order-page .shopinfo {
+    padding: 28rpx;
+    background-color: #fff;
+    border-radius: 20rpx;
+    margin-top: 20rpx;
+    margin: 20rpx;
+}
+
+.require-order-page .shopinfo .title {
+    font-weight: 700;
+}
+
+.require-order-page .shopinfo .choose-coupon {
+    font-size: 28rpx;
+    width: 200rpx;
+}
+
+.require-order-page .shopinfo .icon-xiangyou1 {
+    font-size: 20rpx;
+}
+
+.require-order-page .shopinfo .content {
+    position: relative;
+    margin-top: 20rpx;
+}
+
+.require-order-page .shopinfo .content .shopimg {
+    width: 140rpx;
+    height: 140rpx;
+}
+
+.require-order-page .shopinfo .content .price {
+    font-weight: 700;
+    color: #333;
+}
+
+.require-order-page .shopinfo .content .end {
+    -webkit-box-flex: 1;
+    flex: 1;
+    margin-top: 10rpx;
+}
+
+.require-order-page .shopinfo .content .end .main {
+    color: #a1a1a1;
+}
+
+.require-order-page .shopinfo .content .end .spec {
+    font-size: 24rpx;
+    color: #999;
+}
+
+.require-order-page .coupon {
+    margin: 20rpx;
+}
+
+.require-order-page .coupon .choose-coupon {
+    margin-right: 44rpx;
+}
+
+.require-order-page .leix,.require-order-page .leix2 {
+    background: #e3e3e3;
+    border-radius: 66rpx;
+    width: 88rpx;
+    height: 54rpx;
+    color: #fff;
+}
+
+.require-order-page .leix2 {
+    background: #333;
+}
+
+.require-order-page .receipt-address {
+    margin: 20rpx;
+}
+
+.require-order-page .receipt-address .icon-dizhi {
+    color: #ff765e;
+    font-size: 40rpx;
+}
+
+.require-order-page .receipt-address .unaddress {
+    color: #666;
+}
+
+.require-order-page .receipt-address .uinfo .uname {
+    font-size: 32rpx;
+    max-width: 260rpx;
+    margin-left: 20rpx;
+    margin-right: 12rpx;
+}
+
+.require-order-page .receipt-address .uinfo .uphone {
+    font-size: 32rpx;
+    -webkit-box-flex: 1;
+    flex: 1;
+}

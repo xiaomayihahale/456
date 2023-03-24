@@ -1,0 +1,5 @@
+.share_view {
+    margin: 24rpx 0rpx;
+    font-size: 32rpx;
+    font-weight: 700;
+}

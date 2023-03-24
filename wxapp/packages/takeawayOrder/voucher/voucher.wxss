@@ -1,0 +1,43 @@
+page {
+    background: #f0f0f0;
+}
+
+.swiper {
+    width: 750rpx;
+    height: 406rpx;
+    margin: 22rpx 0rpx 40rpx;
+}
+
+.indexbg {
+    height: 406rpx;
+    background-color: #fff;
+}
+
+.sc_contain {
+    width: 730rpx;
+    white-space: nowrap;
+    height: 310rpx;
+}
+
+.view_sc_1 {
+    background-color: #fff;
+    display: inline-block;
+    width: 392rpx;
+    margin-right: 20rpx;
+}
+
+.backimg {
+    width: 392rpx;
+    height: 238rpx;
+    background-color: #fff;
+    border-radius: 8rpx;
+}
+
+.detial {
+    padding: 46rpx 18rpx 18rpx 14rpx;
+    background-color: #fff;
+    height: 104rpx;
+    position: absolute;
+    top: 204rpx;
+    width: 392rpx;
+}

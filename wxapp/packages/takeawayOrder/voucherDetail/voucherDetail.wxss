@@ -1,0 +1,52 @@
+.swiper {
+    width: 750rpx;
+    height: 406rpx;
+}
+
+.indexbg {
+    width: 750rpx;
+    height: 406rpx;
+    background-color: #fff;
+}
+
+.text1 {
+    font-size: 32rpx;
+    font-weight: 700;
+    color: #333;
+    margin-top: 22rpx;
+    margin-bottom: 20rpx;
+}
+
+.zhi {
+    color: #999;
+    margin: 20rpx 0rpx 28rpx;
+}
+
+.price {
+    font-weight: 700;
+    color: red;
+}
+
+.store {
+    color: #333;
+    font-size: 24rpx;
+    margin-bottom: 20rpx;
+}
+
+.bun3 {
+    width: 750rpx;
+    background-color: #fff;
+    position: fixed;
+    bottom: 0rpx;
+    padding: 28rpx 0rpx;
+}
+
+.btn {
+    font-size: 32rpx;
+    color: #fff;
+    width: 620rpx;
+    height: 96rpx;
+    background: #ff6145;
+    box-shadow: 0rpx 8rpx 16rpx 2rpx #ff6145;
+    border-radius: 100rpx;
+}

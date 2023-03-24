@@ -1,0 +1,29 @@
+.img {
+    width: 454rpx;
+    height: 358rpx;
+    margin: 228rpx 148rpx 120rpx;
+}
+
+.success {
+    font-size: 32rpx;
+    font-weight: 700;
+    margin-bottom: 114rpx;
+}
+
+.detil,.look {
+    background: #fff;
+    border: 2rpx solid #ff7658;
+    border-radius: 20rpx;
+    width: 600rpx;
+    height: 96rpx;
+    color: #ff7658;
+    font-size: 32rpx;
+    font-weight: 700;
+    margin-bottom: 48rpx;
+}
+
+.look {
+    color: #fff;
+    background: #ff7658;
+    box-shadow: 0rpx 8rpx 8rpx rgba(255,118,88,.53);
+}

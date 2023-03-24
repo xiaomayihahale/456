@@ -1,0 +1,49 @@
+<view>
+    <swiper autoplay="{{autoplay}}" circular="{{circular}}" class="swiper" duration="{{duration}}" indicatorDots="{{indicatorDots}}" interval="{{interval}}">
+        <swiper-item wx:for="{{system.djq_carousel}}" wx:key="index">
+            <image class="indexbg" mode="aspectFill" src="{{item}}"></image>
+        </swiper-item>
+    </swiper>
+    <view wx:if="{{voucherList3.length>0}}">
+        <view style="font-size:32rpx;margin-left:20rpx;">{{system.djq_name}}</view>
+        <view style="margin:20rpx 0rpx 42rpx 20rpx;">
+            <scroll-view class="sc_contain" scrollX="true">
+                <view bindtap="__e" class="view_sc_1" data-event-opts="{{[ [ 'tap',[ [ 'detial',['$0'],[ [ ['voucherList3','',index,'id'] ] ] ] ] ] ]}}" wx:for="{{voucherList3}}" wx:key="index">
+                    <image class="backimg" src="{{item.img}}"></image>
+                    <view class="flex-betweens detial">
+                        <view>{{item.name}}</view>
+                        <view style="font-weight:bold;color:#FF0000;">{{'￥'+item.money}}</view>
+                    </view>
+                </view>
+            </scroll-view>
+        </view>
+    </view>
+    <view wx:if="{{voucherList1.length>0}}">
+        <view style="font-size:32rpx;margin-left:20rpx;">热门推荐卡</view>
+        <view style="margin:36rpx 0rpx 42rpx 20rpx;">
+            <scroll-view class="sc_contain" scrollX="true">
+                <view bindtap="__e" class="view_sc_1" data-event-opts="{{[ [ 'tap',[ [ 'detial',['$0'],[ [ ['voucherList1','',index,'id'] ] ] ] ] ] ]}}" wx:for="{{voucherList1}}" wx:key="index">
+                    <image class="backimg" src="{{item.img}}"></image>
+                    <view class="flex-betweens detial">
+                        <view>{{item.name}}</view>
+                        <view style="font-weight:bold;color:#FF0000;">{{'￥'+item.money}}</view>
+                    </view>
+                </view>
+            </scroll-view>
+        </view>
+    </view>
+    <view wx:if="{{voucherList2.length>0}}">
+        <view style="font-size:32rpx;margin-left:20rpx;">新卡推荐</view>
+        <view style="margin:20rpx 0rpx 26rpx 20rpx;">
+            <scroll-view class="sc_contain" scrollX="true">
+                <view bindtap="__e" class="view_sc_1" data-event-opts="{{[ [ 'tap',[ [ 'detial',['$0'],[ [ ['voucherList2','',index,'id'] ] ] ] ] ] ]}}" wx:for="{{voucherList2}}" wx:key="index">
+                    <image class="backimg" src="{{item.img}}"></image>
+                    <view class="flex-betweens detial">
+                        <view>{{item.name}}</view>
+                        <view style="font-weight:bold;color:#FF0000;">{{'￥'+item.money}}</view>
+                    </view>
+                </view>
+            </scroll-view>
+        </view>
+    </view>
+</view>

@@ -1,0 +1,6 @@
+<view>
+    <block wx:if="{{lat==''&&lng==''}}">
+        <image src="{{address2}}" style="width:750rpx;height:750rpx;"></image>
+        <view class="aa2">请打开定位</view>
+    </block>
+</view>
