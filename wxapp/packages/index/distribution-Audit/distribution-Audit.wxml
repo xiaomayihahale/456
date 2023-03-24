@@ -1,0 +1,14 @@
+<view>
+    <view class="flex-column v-width" wx:if="{{status==0}}">
+        <image class="img" src="{{successfulReview}}"></image>
+        <view bindtap="__e" class="submitReview flex" data-event-opts="{{[ [ 'tap',[ ['applyAudit'] ] ] ]}}">提交审核</view>
+    </view>
+    <view class="flex-column v-width" wx:if="{{status==2}}">
+        <image class="img" src="{{auditFailure}}"></image>
+        <view bindtap="__e" class="resubmit flex" data-event-opts="{{[ [ 'tap',[ ['applyAudit'] ] ] ]}}">重新提交</view>
+    </view>
+    <view class="flex-column v-width" wx:if="{{status==1}}">
+        <image class="img" src="{{underReview}}"></image>
+        <view class="underResubmit">正在加急审核中~~~</view>
+    </view>
+</view>

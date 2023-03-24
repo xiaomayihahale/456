@@ -1,0 +1,36 @@
+<view>
+    <view class="top">
+        <view class="flex" style="width:100%;">
+            <view class="PackageCard flex-column" style="padding-bottom:40rpx;">
+                <view wx:if="{{singleCouponList}}">
+                    <view style="position:relative;margin:8rpx 26rpx 0rpx;">
+                        <view class="all2">
+                            <view class="left flex-columns" style="{{'background-size:cover;'+'background-image:'+'url('+youhui1+')'+';'}}">
+                                <view>
+                                    <text style="font-size:32rpx;color:#FFFFFF;">￥</text>{{''+$root.m0+''}}</view>
+                                <text wx:if="{{singleCouponList.region==2}}">仅商城可用</text>
+                                <text wx:if="{{singleCouponList.region==3}}">无门槛使用</text>
+                            </view>
+                            <view class="flex-betweens" style="width:492rpx;">
+                                <view class="zhong flex-columns" wx:if="{{singleCouponList.type==1}}">
+                                    <view>{{'满'+singleCouponList.full+'减'+singleCouponList.less}}</view>
+                                    <text>{{'到期时间：'+singleCouponList.end_time}}</text>
+                                </view>
+                                <view class="zhong flex-columns" wx:if="{{singleCouponList.type==2}}">
+                                    <view>无门槛福利优惠券</view>
+                                    <text>{{'到期时间：'+singleCouponList.end_time}}</text>
+                                </view>
+                                <view bindtap="__e" class="use flex" data-event-opts="{{[ [ 'tap',[ [ 'handleReceiptCoupon',['$0'],['singleCouponList.id'] ] ] ] ]}}">立即领取</view>
+                            </view>
+                        </view>
+                        <view class="dikou flex-align-center" style="{{'background-size:cover;'+'background-image:'+'url('+youhui2+')'+';'}}" wx:if="{{singleCouponList.region==2}}">会员商品，积分商品不可使用该优惠券</view>
+                        <view class="dikou flex-align-center" style="{{'background-size:cover;'+'background-image:'+'url('+youhui2+')'+';'}}" wx:if="{{singleCouponList.region==3}}">全场可用，抵扣任何商品</view>
+                    </view>
+                </view>
+                <view class="flex" wx:else>
+                    <image mode="aspectFit" src="{{couponsss}}" style="width:750rpx;"></image>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

@@ -1,0 +1,83 @@
+page {
+    background-color: #efefef;
+}
+
+.method {
+    background: #fff;
+    margin: 36rpx 20rpx;
+}
+
+.fangshi {
+    font-size: 32rpx;
+    font-weight: 700;
+    padding: 20rpx 30rpx;
+    border-bottom: 2rpx solid #ececec;
+}
+
+.all {
+    border-radius: 30rpx;
+    background-color: #fff;
+    margin: 0rpx 20rpx 40rpx;
+    padding: 64rpx 54rpx;
+}
+
+.all2 {
+    background-color: #fff;
+    margin: 0rpx 20rpx 40rpx;
+    border-radius: 30rpx;
+    padding: 0rpx 14rpx;
+}
+
+.all3 {
+    background-color: #fff;
+    margin: 0rpx 20rpx 40rpx;
+    border-radius: 30rpx;
+    padding: 14rpx;
+}
+
+.wx {
+    font-size: 30rpx;
+}
+
+.images {
+    border-radius: 50%;
+    width: 64rpx;
+    height: 64rpx;
+    margin-right: 20rpx;
+}
+
+.input_price {
+    font-size: 60rpx;
+    color: #000;
+    padding-left: 13rpx;
+    font-weight: 700;
+}
+
+.tixian {
+    background-color: #141414;
+    width: 550rpx;
+    height: 100rpx;
+    font-size: 36rpx;
+    color: #fff;
+    border-radius: 24rpx;
+}
+
+.nickname {
+    font-size: 30rpx;
+    padding: 28rpx 20rpx;
+}
+
+.nickname:nth-child(n+2) {
+    border-top: 2rpx solid #f0f0f0;
+}
+
+.nicknameRight input {
+    font-size: 28rpx;
+    color: #666;
+    text-align: right;
+}
+
+.nicknameRight image {
+    width: 28rpx;
+    height: 28rpx;
+}

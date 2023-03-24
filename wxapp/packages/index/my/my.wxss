@@ -1,0 +1,133 @@
+scroll-view.data-v-956b31d6 {
+    padding: 20rpx 0;
+    width: 100%;
+    white-space: nowrap;
+}
+
+.dayTitle.data-v-956b31d6 {
+    width: 150rpx;
+    border-radius: 60rpx;
+    text-align: center;
+    display: inline-block;
+}
+
+.dayTitle2.data-v-956b31d6 {
+    width: 150rpx;
+    border-radius: 60rpx;
+    text-align: center;
+    display: inline-block;
+    margin-left: 20rpx;
+}
+
+.zong.data-v-956b31d6 {
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+.zong view.data-v-956b31d6 {
+    font-size: 28rpx;
+}
+
+.sc_contain.data-v-956b31d6 {
+    width: 750rpx;
+    white-space: nowrap;
+}
+
+.like.data-v-956b31d6 {
+    color: #757575;
+}
+
+.select.data-v-956b31d6 {
+    color: #000;
+}
+
+.select2.data-v-956b31d6 {
+    color: #000;
+    font-weight: 700;
+}
+
+.top.data-v-956b31d6 {
+    padding: 34rpx 28rpx 18rpx 24rpx;
+    border-bottom: 2rpx solid #e5e5e5;
+}
+
+.position.data-v-956b31d6 {
+    width: 20rpx;
+    height: 20rpx;
+}
+
+.combo.data-v-956b31d6 {
+    font-weight: 700;
+    margin-left: 22rpx;
+}
+
+.i-view image.data-v-956b31d6 {
+    width: 40rpx;
+    height: 40rpx;
+    margin-right: 10rpx;
+}
+
+.i-view view.data-v-956b31d6 {
+    color: #757575;
+}
+
+.roomAll.data-v-956b31d6 {
+    min-width: 200rpx;
+    margin: 22rpx 18rpx 28rpx 0rpx;
+    border: 2rpx solid #f7f7f7;
+    padding: 34rpx 36rpx 30rpx;
+    background: #fff;
+    box-shadow: 0rpx 0rpx 6rpx 2rpx rgba(0,0,0,.05);
+    border-radius: 10rpx;
+}
+
+.room.data-v-956b31d6 {
+    font-size: 24rpx;
+    font-weight: 700;
+}
+
+.room view.data-v-956b31d6 {
+    color: #ff4556;
+}
+
+.room2.data-v-956b31d6 {
+    font-size: 24rpx;
+    font-weight: 700;
+}
+
+.room2 view.data-v-956b31d6 {
+    color: #757575;
+}
+
+.on.data-v-956b31d6 {
+    margin-top: 18rpx;
+}
+
+.time.data-v-956b31d6 {
+    padding: 42rpx 12rpx 30rpx 26rpx;
+    border-bottom: 2rpx solid #f7f7f7;
+    margin: 0rpx 20rpx;
+}
+
+.prcie.data-v-956b31d6 {
+    color: #ff4556;
+    font-weight: 700;
+    font-size: 32rpx;
+    margin-top: 18rpx;
+}
+
+.reserve.data-v-956b31d6 {
+    font-size: 24rpx;
+    color: #ff4556;
+    font-weight: 700;
+    border: 2rpx solid #ff4556;
+    border-radius: 10rpx;
+    width: 152rpx;
+    height: 60rpx;
+}

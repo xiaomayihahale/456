@@ -1,0 +1,78 @@
+<view>
+    <view class="method">
+        <view class="fangshi">提现方式</view>
+        <radio-group bindchange="__e" data-event-opts="{{[ [ 'change',[ [ 'handleApplyType',['$event'] ] ] ] ]}}" name="apply">
+            <label class="sunui-margin-r10">
+                <view>
+                    <view class="flex-between" style="padding:30rpx;" wx:if="{{zhifu==2||zhifu2==2||zhifu3==2}}">
+                        <view class="flex-align-center">
+                            <image class="images" src="{{wx}}"></image>
+                            <view class="wx">微信</view>
+                        </view>
+                        <view>
+                            <radio color="#494949" style="transform:scale(0.9);" value="2"></radio>
+                        </view>
+                    </view>
+                    <view class="flex-between" style="padding:30rpx;" wx:if="{{zhifu==3||zhifu2==3||zhifu3==3}}">
+                        <view class="flex-align-center">
+                            <image class="images" src="{{zfb}}"></image>
+                            <view class="wx">支付宝</view>
+                        </view>
+                        <view>
+                            <radio color="#494949" style="transform:scale(0.9);" value="3"></radio>
+                        </view>
+                    </view>
+                    <view class="flex-between" style="padding:30rpx;" wx:if="{{zhifu==1||zhifu2==1||zhifu3==1}}">
+                        <view class="flex-align-center">
+                            <image class="images" src="{{yhk}}"></image>
+                            <view class="wx">银行卡</view>
+                        </view>
+                        <view>
+                            <radio color="#494949" style="transform:scale(0.9);" value="1"></radio>
+                        </view>
+                    </view>
+                </view>
+            </label>
+        </radio-group>
+    </view>
+    <view>
+        <view class="all">
+            <view>提现金额</view>
+            <view class="flex-align-center" style="border-bottom:2rpx solid #ECECEC;padding-bottom:12rpx;">
+                <view style="font-size:60rpx;">￥</view>
+                <input bindinput="__e" class="input_price" data-event-opts="{{[ [ 'input',[ [ '__set_model',[ '','logno','$event',[] ] ],[ 'changeInput',['$event'] ] ] ] ]}}" placeholder="0" placeholderClass="placeholder-input" placeholderStyle="color:#000000;" style="height:100rpx;" type="digit" value="{{logno}}"></input>
+            </view>
+            <view style="color:#999999;margin-top:18rpx;">{{'当前零钱余额'+$root.g0+'元。'}}<text bindtap="__e" data-event-opts="{{[ [ 'tap',[ [ 'determineAll',['$event'] ] ] ] ]}}" style="color:#6C6F7A;font-weight:bold;">全部提现</text>
+            </view>
+        </view>
+        <view class="all3" wx:if="{{applyType!=2&&applyType!=''}}">
+            <view class="nickname flex-between" wx:if="{{applyType==3||applyType==1}}">
+                <view>姓名</view>
+                <view class="nicknameRight flex-align-center">
+                    <input bindinput="__e" class="font-overflow" data-event-opts="{{[ [ 'input',[ [ '__set_model',[ '','realname','$event',[] ] ] ] ] ]}}" placeholder="请填写您的姓名" value="{{realname}}"></input>
+                </view>
+            </view>
+            <view class="nickname flex-between" wx:if="{{applyType==3||applyType==1}}">
+                <view>手机号</view>
+                <view class="nicknameRight flex-align-center">
+                    <input bindinput="__e" class="font-overflow" data-event-opts="{{[ [ 'input',[ [ '__set_model',[ '','mobile','$event',[] ] ] ] ] ]}}" maxlength="11" placeholder="请填写您的手机号" type="number" value="{{mobile}}"></input>
+                </view>
+            </view>
+            <view class="nickname flex-between" wx:if="{{applyType==1}}">
+                <view>银行名称</view>
+                <view class="nicknameRight flex-align-center">
+                    <input bindinput="__e" class="font-overflow" data-event-opts="{{[ [ 'input',[ [ '__set_model',[ '','realnames','$event',[] ] ] ] ] ]}}" placeholder="请填写您的银行名称" value="{{realnames}}"></input>
+                </view>
+            </view>
+            <view class="nickname flex-between" wx:if="{{applyType==1}}">
+                <view>银行卡号</view>
+                <view class="nicknameRight flex-align-center">
+                    <input bindinput="__e" class="font-overflow" data-event-opts="{{[ [ 'input',[ [ '__set_model',[ '','mobiles','$event',[] ] ] ] ] ]}}" placeholder="请填写您的银行卡号" type="number" value="{{mobiles}}"></input>
+                </view>
+            </view>
+        </view>
+        <view bindtap="__e" class="flex" data-event-opts="{{[ [ 'tap',[ [ 'determine',['$event'] ] ] ] ]}}" style="margin:40rpx 0rpx;">
+            <view class="tixian flex">提现</view>
+        </view>
+    </view>
+</view>

@@ -1,0 +1,17 @@
+<view>
+    <mescroll-body bind:__l="__l" bind:down="__e" bind:init="__e" bind:up="__e" class="vue-ref" data-event-opts="{{[ [ '^init',[ ['mescrollInit'] ] ],[ '^down',[ ['downCallback'] ] ],[ '^up',[ ['upCallback'] ] ] ]}}" data-ref="mescrollRef" down="{{downOption}}" vueId="7b84ff84-1" vueSlots="{{['default']}}">
+        <view class="commodity flex-between" wx:for="{{list}}" wx:key="index">
+            <image class="commodity_img" src="{{item.avatar}}"></image>
+            <view class="flex-column-center" style="width:80%;">
+                <view class="flex-between">
+                    <view class="font-overflow sunui-ellipsis-1">{{item.nickname}}</view>
+                    <view class="money_btn flex">{{'佣金 +'+item.commission}}</view>
+                </view>
+                <view class="jiajia">{{'价格:'+item.price}}</view>
+                <view class="bottom flex-align-center">
+                    <view>{{'时间:'+item.addtime}}</view>
+                </view>
+            </view>
+        </view>
+    </mescroll-body>
+</view>

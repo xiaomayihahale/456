@@ -1,0 +1,120 @@
+page {
+    background-color: #f0f0f0;
+}
+
+.charts-box {
+    width: 100%;
+    height: 300px;
+}
+
+.sc_contain {
+    width: 750rpx;
+    display: flex;
+}
+
+.all {
+    height: 670rpx;
+    width: 750rpx;
+    background: -webkit-gradient(linear,left top,left bottom,from(#fc8f14),to(#ffc440));
+    background: -webkit-linear-gradient(#fc8f14,#ffc440);
+    background: linear-gradient(#fc8f14,#ffc440);
+    margin-bottom: 28rpx;
+}
+
+.margins {
+    padding: 0rpx 54rpx 0rpx 26rpx;
+}
+
+.this_month {
+    font-size: 34rpx;
+    font-weight: 700;
+    margin-right: 20rpx;
+    color: #fff;
+}
+
+.active3 {
+    border: 2rpx solid #fff;
+    color: #fff!important;
+    font-size: 24rpx;
+    width: 102rpx;
+    height: 48rpx;
+    background-color: #fc8f14;
+    -webkit-transition: color 2s,background-color 1s;
+}
+
+.active2 {
+    border: 2rpx solid #fff;
+    color: #fc8f14!important;
+    font-size: 24rpx;
+    width: 102rpx;
+    height: 48rpx;
+    background-color: #fff;
+    -webkit-transition: color 2s,background-color 1s;
+}
+
+.jine {
+    font-size: 24rpx;
+    color: #fff;
+    margin-right: 12rpx;
+}
+
+.money {
+    font-size: 36rpx;
+    color: #fff;
+}
+
+.btun {
+    margin-right: 26rpx;
+    color: #999;
+}
+
+.btun2 {
+    margin-right: 26rpx;
+    color: #333;
+    font-weight: 700;
+}
+
+.commodity {
+    padding: 12rpx 20rpx;
+    border-bottom: 2rpx solid #f9f9f9;
+    background-color: #fff;
+}
+
+.address {
+    font-size: 24rpx;
+    color: #333;
+}
+
+.img2 {
+    width: 48rpx;
+    height: 48rpx;
+    margin: 10rpx;
+    border-radius: 50%;
+}
+
+.img {
+    width: 84rpx;
+    height: 84rpx;
+    border-radius: 50%;
+}
+
+.time {
+    color: #999;
+    font-size: 24rpx;
+}
+
+.time2 {
+    font-size: 24rpx;
+    color: #333;
+}
+
+.detail {
+    padding: 24rpx 22rpx;
+    border-bottom: 2rpx solid #f5f5f5;
+    background-color: #fff;
+}
+
+.jiaoyi {
+    color: #666;
+    font-size: 24rpx;
+}

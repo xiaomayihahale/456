@@ -1,0 +1,29 @@
+page {
+    background-color: #ff7714;
+}
+
+.all {
+    width: 630rpx;
+    padding: 60rpx 0rpx;
+    background: #fff;
+    border-radius: 40rpx;
+    margin-top: 180rpx;
+}
+
+.img {
+    margin: 30rpx 0rpx;
+    width: 468rpx;
+    height: 468rpx;
+}
+
+.v-fontSize {
+    font-size: 42rpx;
+    font-weight: 700;
+    color: #ff7714;
+    text-shadow: 4px 5px 12px #f1f1f1;
+}
+
+.card {
+    font-size: 38rpx;
+    margin: 30rpx 0rpx 20rpx;
+}

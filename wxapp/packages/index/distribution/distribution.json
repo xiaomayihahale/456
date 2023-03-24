@@ -1,0 +1,12 @@
+{
+    "navigationBarTitleText": "分销推广",
+    "navigationBarBackgroundColor": "#FFFFFF",
+    "navigationBarTextStyle": "black",
+    "enablePullDownRefresh": false,
+    "usingComponents": {
+        "mescroll-body": "/components/mescroll-uni/mescroll-body",
+        "mescroll-empty": "/components/mescroll-uni/components/mescroll-empty",
+        "mescroll-uni": "/components/mescroll-uni/mescroll-uni",
+        "poster": "/components/zywPosterSmall/zywPosterSmall"
+    }
+}

@@ -1,0 +1,56 @@
+page {
+    background: #f0f0f0;
+}
+
+.all.data-v-02b10e2f {
+    background-color: #fff;
+    border-top: 2rpx solid #f5f5f5;
+}
+
+.top.data-v-02b10e2f {
+    border-top: 2rpx solid #f7f7f7;
+}
+
+.top view.data-v-02b10e2f {
+    width: calc(100% / 3);
+    font-size: 24rpx;
+    color: #a1a1a1;
+    text-align: center;
+    margin: 20rpx 0rpx;
+}
+
+.xixi.data-v-02b10e2f,.xixi2.data-v-02b10e2f,.xixi3.data-v-02b10e2f {
+    margin-left: 10rpx;
+    font-size: 22rpx;
+    color: #fff;
+    width: 84rpx;
+    height: 30rpx;
+    background-color: #00bb29;
+}
+
+.xixi2.data-v-02b10e2f {
+    background-color: #c4c4c4;
+}
+
+.xixi3.data-v-02b10e2f {
+    background-color: #c07a7a;
+}
+
+.month_btn.data-v-02b10e2f {
+    width: 22rpx;
+    height: 18rpx;
+    padding: 26rpx 0rpx;
+}
+
+.money_btn.data-v-02b10e2f {
+    margin-right: 20rpx;
+    font-weight: 700;
+    font-size: 32rpx;
+}
+
+.bottom.data-v-02b10e2f {
+    margin-left: 28rpx;
+    margin-bottom: 18rpx;
+    color: #bebebe;
+    font-size: 24rpx;
+}

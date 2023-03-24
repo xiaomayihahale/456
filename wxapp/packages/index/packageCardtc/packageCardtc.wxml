@@ -1,0 +1,20 @@
+<view>
+    <view class="flex" style="width:100%;">
+        <view class="PackageCard flex-column">
+            <block wx:if="{{MyMealList.length==0}}">
+                <image mode="aspectFit" src="{{couponsss}}" style="width:750rpx;"></image>
+                <view class="noNumber">暂无套餐卡</view>
+            </block>
+            <block wx:else>
+                <view bindtap="__e" class="all flex-between" data-event-opts="{{[ [ 'tap',[ [ 'couponNext',['$0'],[ [ ['MyMealList','',index] ] ] ] ] ] ]}}" style="{{'background-image:'+'url('+item.meal_back_img+')'+';'}}" wx:for="{{MyMealList}}" wx:key="index">
+                    <view class="card flex-columns">
+                        <text>{{item.meal_name}}</text>
+                        <view>{{'次数 ：'+item.rel_count+'/'+item.sum_count+' |'}}<text style="padding-top:18rpx;font-size:24rpx;padding-left:10rpx;" wx:if="{{item.expired_date}}">{{'到期时间：'+item.expired_date}}</text>
+                        </view>
+                    </view>
+                    <image class="img" src="{{arrow}}"></image>
+                </view>
+            </block>
+        </view>
+    </view>
+</view>

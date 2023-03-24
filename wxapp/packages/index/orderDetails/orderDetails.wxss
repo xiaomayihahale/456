@@ -1,0 +1,254 @@
+.data-v-177bc788 .sunui-countdown>view>text {
+    color: #fff;
+}
+
+.data-v-177bc788 .sunui-countdown {
+    font-size: 24rpx;
+    color: #fff;
+    margin: 10rpx;
+}
+
+button::after {
+    border: none;
+}
+
+page {
+    background-color: #f7f7f7;
+}
+
+view {
+    font-size: 28rpx;
+    color: #000;
+}
+
+.sunui-scroll-x-items {
+    width: auto!important;
+}
+
+.view_details {
+    padding-bottom: 20rpx;
+    display: flex;
+    -webkit-box-pack: end;
+    justify-content: flex-end;
+}
+
+.invite {
+    border: 2rpx solid #999;
+    border-radius: 56rpx;
+    width: 156rpx;
+    height: 60rpx;
+    margin-right: 20rpx;
+}
+
+.details {
+    color: #fff;
+    background-color: #ff6145;
+    border: 2rpx solid #ff6145;
+    border-radius: 56rpx;
+    width: 156rpx;
+    height: 60rpx;
+    margin-right: 20rpx;
+}
+
+.order-detail-operate {
+    position: fixed;
+    bottom: 0;
+    z-index: 100;
+    background-color: #fff;
+    width: 100%;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: end;
+    justify-content: flex-end;
+    padding: 16rpx 20rpx;
+}
+
+.order-detail-operate .cancel-order .sunui-tag {
+    padding: 10rpx 30rpx;
+    border-radius: 40rpx;
+}
+
+.order-detail-operate .require-order .sunui-tag {
+    padding: 10rpx 30rpx;
+    text-align: center;
+    border-radius: 40rpx;
+    background-color: #ff5d5d;
+}
+
+.details_top {
+    width: 100%;
+    height: 324rpx;
+    background-color: #ff6145;
+}
+
+.details_top_next {
+    color: #fff;
+    font-size: 32rpx;
+    padding: 40rpx 22rpx;
+}
+
+.syTime {
+    font-size: 24rpx;
+    color: #fff;
+    margin: 10rpx;
+}
+
+.view_top {
+    width: 94%;
+    height: 128rpx;
+    margin: 3%;
+    background-color: #fff;
+    position: absolute;
+    margin-top: -200rpx;
+}
+
+.address {
+    padding: 18rpx 20rpx;
+    border-bottom: 2rpx solid #f9f9f9;
+}
+
+.group_all {
+    background-color: #fff;
+}
+
+.group {
+    padding: 20rpx 22rpx;
+    border-bottom: 2rpx solid #f1f1f1;
+}
+
+.commodity {
+    padding: 15rpx 0rpx;
+}
+
+.order_img {
+    width: 180rpx;
+    height: 180rpx;
+    margin: 21rpx;
+}
+
+.guige {
+    color: #999;
+    font-size: 24rpx;
+    margin-top: 8rpx;
+}
+
+.view_price {
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    align-items: center;
+    margin-top: 22rpx;
+}
+
+.customer_Service {
+    padding: 19rpx 0rpx;
+}
+
+.invite_btn {
+    color: #fff;
+    background-color: #ff3d3d;
+    border-radius: 54rpx;
+    width: 600rpx;
+    height: 86rpx;
+    font-size: 32rpx;
+}
+
+.group_schedule {
+    padding: 0rpx 23rpx;
+    background-color: #fff;
+    margin-bottom: 20rpx;
+}
+
+.price {
+    padding-top: 32rpx;
+}
+
+.priceView {
+    color: #333;
+    font-size: 24rpx;
+}
+
+.priceText {
+    color: #ff6145;
+    font-size: 24rpx;
+}
+
+.price2 {
+    margin-top: 22rpx;
+}
+
+.total {
+    padding: 50rpx 0rpx 14rpx;
+    -webkit-box-pack: end;
+    justify-content: flex-end;
+    display: flex;
+}
+
+.group_price {
+    font-size: 32rpx;
+}
+
+.group_Pieces {
+    color: #a1a1a1;
+}
+
+.tuikuan {
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    padding: 20rpx 36rpx;
+    background-color: #f2f2f2;
+}
+
+.tuikuan_img {
+    width: 30rpx;
+    height: 30rpx;
+    margin: 10rpx;
+}
+
+.view_message {
+    padding: 22rpx 26rpx;
+    color: #666;
+    display: flex;
+}
+
+.copy {
+    margin-left: 8rpx;
+    color: #bebebe;
+    width: 60rpx;
+    height: 32rpx;
+    border: 2rpx solid #bebebe;
+    font-size: 20rpx;
+}
+
+.view_message2 {
+    padding: 22rpx 26rpx 36rpx;
+    color: #666;
+}
+
+.buttonCK {
+    width: 170rpx;
+    height: 60rpx;
+    border: 1px solid #999;
+    border-radius: 56rpx;
+    margin-left: 18rpx;
+}
+
+.buttonCK view {
+    padding: 10rpx 22rpx;
+}
+
+.buttonCK2 {
+    width: 156rpx;
+    height: 60rpx;
+    border: 1px solid #ff6145;
+    background-color: #ff6145;
+    border-radius: 56rpx;
+    margin-left: 18rpx;
+}
+
+.buttonCK2 view {
+    padding: 10rpx 22rpx;
+    color: #fff;
+}

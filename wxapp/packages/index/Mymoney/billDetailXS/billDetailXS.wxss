@@ -1,0 +1,72 @@
+page {
+    background: #f0f0f0;
+}
+
+.img {
+    width: 112rpx;
+    height: 112rpx;
+    border-radius: 50%;
+    margin: 48rpx 28rpx;
+}
+
+.czPrice {
+    color: #999;
+    font-size: 24rpx;
+    margin-top: 12rpx;
+}
+
+.price {
+    font-size: 32rpx;
+    font-weight: 700;
+    color: #333;
+    margin-top: 12rpx;
+    margin-bottom: 32rpx;
+}
+
+.all {
+    padding: 0rpx 42rpx 54rpx;
+}
+
+.time {
+    font-size: 24rpx;
+    color: #333;
+}
+
+.time2 {
+    font-size: 24rpx;
+    color: #999;
+}
+
+.copy {
+    color: #689ceb;
+    font-size: 24rpx;
+    margin-left: 12rpx;
+}
+
+.address {
+    padding: 24rpx 36rpx 16rpx 26rpx;
+}
+
+.content {
+    font-weight: 700;
+    padding: 16rpx 0rpx 0rpx 42rpx;
+}
+
+.spimg {
+    width: 180rpx;
+    height: 180rpx;
+    padding: 30rpx 20rpx;
+}
+
+.guige {
+    color: #999;
+    font-size: 24rpx;
+    margin-top: 8rpx;
+    margin-bottom: 6rpx;
+}
+
+.more {
+    width: 750rpx;
+    height: 66rpx;
+    background-color: #fff;
+}

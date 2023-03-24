@@ -1,0 +1,113 @@
+.money {
+    background-size: cover;
+    width: 750rpx;
+    height: 298rpx;
+}
+
+.all {
+    padding: 38rpx 30rpx;
+}
+
+.img {
+    width: 96rpx;
+    height: 96rpx;
+    border-radius: 50%;
+    margin-right: 22rpx;
+}
+
+.vipText {
+    color: #fff;
+    font-size: 24rpx;
+}
+
+.vipTexts {
+    color: #fff;
+    font-size: 32rpx;
+}
+
+.vip {
+    color: #424242;
+    font-size: 24rpx;
+    background-size: cover;
+    height: 22rpx;
+    width: 46rpx;
+    margin-left: 10rpx;
+    font-style: oblique;
+}
+
+.cz {
+    color: #3287ff;
+    width: 140rpx;
+    height: 56rpx;
+    background-color: #fff;
+    border-radius: 92rpx;
+}
+
+.vipdj {
+    margin-left: 10rpx;
+    width: 54rpx;
+    height: 32rpx;
+}
+
+.phoneaa {
+    font-size: 24rpx;
+    color: #fff;
+    margin-top: 10rpx;
+}
+
+.price {
+    font-size: 48rpx;
+    font-weight: 700;
+    color: #fff;
+}
+
+.czPrice {
+    margin: 48rpx 0rpx 8rpx;
+}
+
+.je {
+    display: flex;
+    margin: 0rpx 16rpx;
+    flex-wrap: wrap;
+}
+
+.all2 {
+    margin: 28rpx 0rpx;
+    width: calc(100% / 3);
+}
+
+.yuan {
+    background-color: #f0f0f0;
+    width: 218rpx;
+    height: 140rpx;
+}
+
+.yuan view {
+    color: #333;
+}
+
+.yuan2 {
+    background: #3287ff;
+    width: 218rpx;
+    height: 140rpx;
+}
+
+.yuan2 view {
+    color: #fff;
+}
+
+.butn {
+    width: 620rpx;
+    height: 96rpx;
+    background-color: #3287ff;
+    border-radius: 108px;
+    box-shadow: 0 4px 8px 1px rgba(50,135,255,.33);
+    font-size: 32rpx;
+    color: #fff;
+    margin: 80rpx 0rpx 104rpx;
+}
+
+.ts {
+    font-weight: 700;
+    margin: 22rpx;
+}

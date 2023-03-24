@@ -1,0 +1,7 @@
+<view>
+    <rich-parser bind:__l="__l" class="alsdjaa vue-ref" data-ref="article" domain="https://6874-html-foe72-1259071903.tcb.qcloud.la" html="{{system.dist.distribution_description}}" lazyLoad="{{true}}" selectable="{{true}}" showWithAnimation="{{true}}" useAnchor="{{true}}" vueId="4003f408-1" wx:if="{{system.dist.distribution_description}}"></rich-parser>
+    <view class="team flex-column " wx:else>
+        <image src="/static/nodata.png" style="width:280rpx;height:280rpx;"></image>
+        <text class="text">空空如也 ~</text>
+    </view>
+</view>

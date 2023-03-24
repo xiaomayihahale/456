@@ -1,0 +1,99 @@
+<view>
+    <view style="height:696rpx;background-color:#292929;width:100%;">
+        <view class="flex-between">
+            <view class="flex-align-center">
+                <image class="imgtop" src="{{userInfo.avatar}}"></image>
+                <view class="flex-columns">
+                    <view class="flex-align-center">
+                        <view class="nickname sunui-ellipsis-1">{{userInfo.nickname}}</view>
+                        <image class="vipdj2" mode="aspectFill" src="{{userInfo.curMember_logo}}"></image>
+                    </view>
+                    <view class="phone" wx:if="{{userInfo.phone}}">{{userInfo.phone}}</view>
+                </view>
+            </view>
+        </view>
+        <swiper autoplay="{{false}}" bindchange="__e" circular="true" class="swiper-block" current="{{$root.m0}}" data-event-opts="{{[ [ 'change',[ [ 'swiperChange',['$event'] ] ] ] ]}}" duration="{{700}}" interval="{{1000}}" nextMargin="90rpx" previousMargin="90rpx">
+            <swiper-item class="swiper-item" wx:for="{{member}}" wx:key="index">
+                <view class="{{[currentIndex===index?'active':'slide-image']}}" mode="aspectFill" style="{{'background-image:'+'url('+item.member_back_logo+')'+';'}}">
+                    <view style="padding:20rpx 0rpx 0rpx 24rpx;">
+                        <view class="flex-columns" style="margin-left:58rpx;">
+                            <view class="flex-between">
+                                <view class="hy">{{item.member_name}}</view>
+                                <view class="czhi flex" wx:if="{{item.member_name==userInfo.curMember_name}}">当前等级</view>
+                            </view>
+                            <view class="vipdj">{{item.xq}}</view>
+                        </view>
+                    </view>
+                    <view class="card">{{'卡号：'+userInfo.member_no}}</view>
+                </view>
+            </swiper-item>
+        </swiper>
+        <view>
+            <view class="flex-align-center">
+                <view class="srfl flex-column">
+                    <image src="{{fl1}}"></image>
+                    <view>生日福利</view>
+                </view>
+                <view class="srfl flex-column">
+                    <image src="{{fl2}}"></image>
+                    <view>全场折扣</view>
+                </view>
+                <view class="srfl flex-column">
+                    <image src="{{fl3}}"></image>
+                    <view>会员商品</view>
+                </view>
+                <view class="srfl flex-column">
+                    <image src="{{fl4}}"></image>
+                    <view>会员优惠券</view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view style="margin:30rpx;">
+        <view class="hy2">会员充值</view>
+        <scroll-view class="sc_contain" scrollX="true">
+            <view bindtap="__e" class="{{[tabIndex==index?'all2':'all']}}" data-event-opts="{{[ [ 'tap',[ [ 'boxs',[index,'$0'],[ [ ['system.recharge','',index] ] ] ] ] ] ]}}" wx:for="{{$root.l0}}" wx:key="index">
+                <view class="text">会员充值</view>
+                <view class="text2">{{'充'+item.g0+'送'+item.g1+'元'}}</view>
+                <view class="Price2">
+                    <text>￥</text>{{''+item.$orig.money+''}}</view>
+            </view>
+        </scroll-view>
+    </view>
+    <view style="width:750rpx;height:20rpx;background:#f0f0f0;"></view>
+    <view>
+        <view class="flex-between" style="margin:26rpx;">
+            <view style="font-size:32rpx;font-weight:bold;">加速升级</view>
+            <view class="member">当前会员值：<text>{{$root.g2}}</text>
+            </view>
+        </view>
+        <view class="flex-column">
+            <view class="xf">
+                <view wx:if="{{userInfo.nextLevelId==-1}}">{{'您已是满级会员，享全场'+$root.g3+'折'}}</view>
+                <view wx:else>再消费<text>{{userInfo.nextMoney}}</text>{{'元升级'+userInfo.nextMember_name+'，享全场'+$root.g4+'折'}}</view>
+            </view>
+            <progress activeColor="#504D4E" backgroundColor="#E3E3E3" borderRadius="100" percent="{{100}}" showInfo="{{true}}" strokeWidth="4" style="width:76%;margin:18rpx 0rpx 82rpx;" wx:if="{{$root.m1>=$root.m2}}"></progress>
+            <progress activeColor="#504D4E" backgroundColor="#E3E3E3" borderRadius="100" percent="{{$root.g5}}" showInfo="{{true}}" strokeWidth="4" style="width:76%;margin:18rpx 0rpx 82rpx;" wx:else></progress>
+        </view>
+        <view class="flex-between" style="margin:0rpx 38rpx 0rpx 52rpx;">
+            <view class="flex-align-center">
+                <text class="iconfont icon-weixinzhifu" style="color:#00C000;background-color:#FFFFFF;font-size:54rpx;margin-right:26rpx;"></text>
+                <view class="flex-columns">
+                    <view class="wx">微信支付</view>
+                    <view class="ye">当前选择余额充值</view>
+                </view>
+            </view>
+            <view>
+                <radio-group bindchange="__e" data-event-opts="{{[ [ 'change',[ [ 'handleApplyType',['$event'] ] ] ] ]}}" name="apply">
+                    <label class="sunui-margin-r10">
+                        <radio bindtap="__e" checked="{{checked}}" color="#494949" data-event-opts="{{[ [ 'tap',[ ['checkedOn'] ] ] ]}}" style="transform:scale(0.8);" value="1"></radio>
+                    </label>
+                </radio-group>
+            </view>
+        </view>
+        <view class="flex">
+            <button class="wx3" wx:if="{{checked==false}}">立即充值余额</button>
+            <button bindtap="__e" class="wx2" data-event-opts="{{[ [ 'tap',[ ['chongzhi'] ] ] ]}}" wx:else>立即充值余额</button>
+        </view>
+    </view>
+</view>

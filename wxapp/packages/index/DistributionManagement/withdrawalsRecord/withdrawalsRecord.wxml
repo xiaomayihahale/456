@@ -1,0 +1,23 @@
+<view class="data-v-02b10e2f">
+    <view class="top flex data-v-02b10e2f">
+        <view class="data-v-02b10e2f">用户</view>
+        <view class="data-v-02b10e2f">时间</view>
+        <view class="data-v-02b10e2f">佣金</view>
+    </view>
+    <mescroll-body bind:__l="__l" bind:down="__e" bind:init="__e" bind:up="__e" class="data-v-02b10e2f vue-ref" data-event-opts="{{[ [ '^init',[ ['mescrollInit'] ] ],[ '^down',[ ['downCallback'] ] ],[ '^up',[ ['upCallback'] ] ] ]}}" data-ref="mescrollRef" down="{{downOption}}" vueId="7ae473de-1" vueSlots="{{['default']}}">
+        <view class="flex-between all data-v-02b10e2f" wx:for="{{list}}" wx:key="index">
+            <view class="flex-columns data-v-02b10e2f">
+                <view class="flex-align-center data-v-02b10e2f" style="padding:20rpx 10rpx 12rpx 28rpx;">
+                    <view class="data-v-02b10e2f" wx:if="{{item.w_type==2}}">提现到微信钱包</view>
+                    <view class="data-v-02b10e2f" wx:if="{{item.w_type==1}}">提现到银行卡</view>
+                    <view class="data-v-02b10e2f" wx:if="{{item.w_type==3}}">提现到支付宝</view>
+                    <view class="xixi flex data-v-02b10e2f" wx:if="{{item.status==1}}">申请中</view>
+                    <view class="xixi flex data-v-02b10e2f" wx:if="{{item.status==2}}">已退回</view>
+                    <view class="xixi flex data-v-02b10e2f" wx:if="{{item.status==3}}">已提现</view>
+                </view>
+                <view class="bottom data-v-02b10e2f">{{item.addtime}}</view>
+            </view>
+            <view class="money_btn flex data-v-02b10e2f">{{item.price}}</view>
+        </view>
+    </mescroll-body>
+</view>

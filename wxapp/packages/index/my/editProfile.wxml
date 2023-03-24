@@ -1,0 +1,56 @@
+<view>
+    <view class="img1 flex-column">
+        <image src="{{userInfo.avatar}}"></image>
+    </view>
+    <view class="nickname flex-between" style="margin-top:300rpx;">
+        <view>昵称</view>
+        <view class="nicknameRight flex-align-center">
+            <input bindinput="__e" class="font-overflow" data-event-opts="{{[ [ 'input',[ [ '__set_model',[ '','realname','$event',[] ] ] ] ] ]}}" placeholder="点击修改昵称" value="{{realname}}"></input>
+        </view>
+    </view>
+    <view class="nickname flex-between">
+        <view>电话</view>
+        <view class="nicknameRight flex-align-center">
+            <input bindinput="__e" class="font-overflow" data-event-opts="{{[ [ 'input',[ [ '__set_model',[ '','mobile','$event',[] ] ] ] ] ]}}" maxlength="11" placeholder="点击修改电话" type="number" value="{{mobile}}"></input>
+        </view>
+    </view>
+    <view class="nickname flex-between">
+        <view>生日</view>
+        <view bindtap="__e" data-event-opts="{{[ [ 'tap',[ [ 'birsthday',['$event'] ] ] ] ]}}" wx:if="{{userInfo.is_update_bir==2}}">
+            <view class="nicknameRight flex-align-center" style="padding-right:2rpx;">
+                <view class="flex-align-center" style="color:#666666;">{{''+yeartime+''}}<text>-</text>{{''+monthtime+''}}<text>-</text>{{''+daytime+''}}</view>
+            </view>
+        </view>
+        <picker bindchange="__e" data-event-opts="{{[ [ 'change',[ [ 'bindDateChange',['$event'] ] ] ] ]}}" end="{{endDate}}" mode="date" start="{{startDate}}" value="{{date}}" wx:else>
+            <view class="nicknameRight flex-align-center" style="padding-right:2rpx;">
+                <view class="flex-align-center" style="color:#666666;">{{''+yeartime+''}}<text>-</text>{{''+monthtime+''}}<text>-</text>{{''+daytime+''}}</view>
+                <image src="{{arrow}}"></image>
+            </view>
+        </picker>
+    </view>
+    <view bindtap="__e" class="nickname flex-between" data-event-opts="{{[ [ 'tap',[ [ 'e0',['$event'] ] ] ] ]}}">
+        <view>性别</view>
+        <view class="nicknameRight flex-align-center" style="padding-right:4rpx;color:#666666;">
+            <u-select bind:__l="__l" bind:confirm="__e" bind:input="__e" confirmColor="#4CAF50" data-event-opts="{{[ [ '^confirm',[ ['confirm'] ] ],[ '^input',[ [ '__set_model',[ '','show','$event',[] ] ] ] ] ]}}" list="{{list}}" mode="single-column" style="color:#666666;" value="{{show}}" vueId="0adb8da9-1"></u-select>
+            <view style="color:#666666;">{{spec}}</view>
+            <image src="{{arrow}}"></image>
+        </view>
+    </view>
+    <view class="nickname flex-between">
+        <view style="width:200rpx;">所在地</view>
+        <view bindtap="__e" class="nicknameRight flex-align-center" data-event-opts="{{[ [ 'tap',[ ['addressSelect'] ] ] ]}}">
+            <view class="v_view" wx:if="{{addressAll}}">{{addressAll}}</view>
+            <view class="v_view" wx:else>选择位置</view>
+            <image src="{{arrow}}"></image>
+        </view>
+    </view>
+    <view class="textarea-box">
+        <textarea bindinput="__e" data-event-opts="{{[ [ 'input',[ [ '__set_model',[ '','textModel','$event',[] ] ],[ 'descInput',['$event'] ] ] ] ]}}" maxlength="50" placeholder="{{system.desc_label}}" style="height:120rpx;" value="{{textModel}}"></textarea>
+        <view class="textarea-color">{{remnant+'/50'}}</view>
+    </view>
+    <view bindtap="__e" class="flex" data-event-opts="{{[ [ 'tap',[ ['editUser'] ] ] ]}}" style="width:100%;">
+        <view class="button flex">
+            <view class="flex">保存</view>
+        </view>
+    </view>
+</view>

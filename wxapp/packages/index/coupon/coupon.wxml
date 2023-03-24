@@ -1,0 +1,61 @@
+<view>
+    <view class="my-coupon-page">
+        <view class="sunui-sticky">
+            <sunui-navbar activeColor="#FF5D5D" activeDirection="center" activeLineBg="#FF5D5D" activeLineHeight="4rpx" activeLineWidth="60%" autoLeft="list" bind:__l="__l" bind:change="__e" currentIndex="{{navIndex3}}" data-event-opts="{{[ [ '^change',[ ['navChange3'] ] ] ]}}" isCenter="{{false}}" items="{{navItem3}}" keyId="id" keyName="title" lineHeight="80rpx" margin="{{10}}" padding="20rpx" size="{{180}}" textAlign="center" vueId="64a862b0-1"></sunui-navbar>
+            <sunui-navbar activeColor="#FF5D5D" activeLineHeight="0" activeLineWidth="0" autoLeft="list1" bind:__l="__l" bind:change="__e" currentIndex="{{navIndex2}}" data-event-opts="{{[ [ '^change',[ ['navChange2'] ] ] ]}}" isCenter="{{false}}" items="{{navItem2}}" keyId="id" keyName="title" lineHeight="80rpx" margin="{{0}}" padding="20rpx" size="{{180}}" textAlign="center" vueId="64a862b0-2" wx:if="{{navIndex3==0}}"></sunui-navbar>
+        </view>
+        <view class="coupon-list">
+            <mescroll-empty bind:__l="__l" option="{{optEmpty}}" vueId="64a862b0-3" wx:if="{{couponList.length==0}}"></mescroll-empty>
+            <view wx:else>
+                <view class="sunui-coupons-margin">
+                    <view wx:if="{{navIndex3==0}}">
+                        <view wx:for="{{couponList}}" wx:key="index">
+                            <view bindtap="__e" class="sunui-coupons" data-event-opts="{{[ [ 'tap',[ [ 'handleUseCoupon',['$0'],[ [ ['couponList','',index] ] ] ] ] ] ]}}">
+                                <view class="left">
+                                    <view class="number">
+                                        <view class="show" style="{{'color:'+(item.status==1?themeColor:invalidColor)+';'}}">
+                                            <text style="{{'color:'+(item.status==1?themeColor:invalidColor)+';'}}">￥</text>{{''+item.less+''}}</view>
+                                        <view class="txt" style="{{'color:'+(item.status==1?themeColor:invalidColor)+';'}}">{{'满'+item.full+'元可用'}}</view>
+                                    </view>
+                                    <view class="body">
+                                        <view class="title" style="{{'color:'+(item.status==1?'#000':invalidColor)+';'}}">全场通用券</view>
+                                        <view class="desc" style="{{'color:'+(item.status==1?'#666':invalidColor)+';'}}">{{'有效期至 '+item.end_time}}</view>
+                                    </view>
+                                </view>
+                                <view class="right" hoverClass="sunui-hover" style="{{'height:180rpx;'+'background:'+(item.status==1?themeColor:invalidColor)+';'}}">
+                                    <text>{{item.status==1?'去使用':item.status==2?'已使用':'已失效'}}</text>
+                                </view>
+                                <view class="sawtooth" style="{{'height:180rpx;'+'background:'+(item.status==1?themeColor:invalidColor)+';'}}">
+                                    <view class="circular" wx:for="1234567890" wx:key="index"></view>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                    <view wx:else>
+                        <view style="margin-bottom:20rpx;" wx:for="{{couponList}}" wx:key="index">
+                            <view class="sunui-coupons">
+                                <view class="left">
+                                    <view class="number">
+                                        <view class="show" style="{{'color:'+themeColor+';'}}">
+                                            <text style="{{'color:'+themeColor+';'}}">￥</text>{{''+item.less+''}}</view>
+                                        <view class="txt" style="{{'color:'+themeColor+';'}}">{{'满'+item.full+'元可用'}}</view>
+                                    </view>
+                                    <view class="body">
+                                        <view class="title" style="{{'color:'+'#000'+';'}}">全场通用券</view>
+                                        <view class="desc">{{'有效期至 '+item.end_time}}</view>
+                                    </view>
+                                </view>
+                                <view bindtap="__e" class="right" data-event-opts="{{[ [ 'tap',[ [ 'handleReceiptCoupon',['$0'],[ [ ['couponList','',index,'id'] ] ] ] ] ] ]}}" hoverClass="sunui-hover" style="{{'height:180rpx;'+'background:'+themeColor+';'}}">
+                                    <text>领取</text>
+                                </view>
+                                <view class="sawtooth" style="{{'height:180rpx;'+'background:'+themeColor+';'}}">
+                                    <view class="circular" wx:for="1234567890" wx:key="index"></view>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

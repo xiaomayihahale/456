@@ -1,0 +1,41 @@
+<view>
+    <view class="bg" style="{{'background-image:'+'url('+fxbjs+')'+';'}}">
+        <view class="all flex-between">
+            <view class="price_all flex-columns">
+                <view style="margin:10rpx;">当前余额 (元)</view>
+                <view class="price">{{commissionList.credit3}}</view>
+            </view>
+            <view bindtap="__e" class="price_btn flex" data-event-opts="{{[ [ 'tap',[ ['withdraw'] ] ] ]}}">
+                <view style="color:#1C7FF5;">提现申请</view>
+            </view>
+        </view>
+        <view class="flex-between">
+            <view class="income">{{'昨日收益：￥'+commissionList.yesterdat_money}}</view>
+            <view class="income">{{'推荐人：'+commissionList.pnickname}}</view>
+        </view>
+    </view>
+    <view>
+        <sunui-cell arrow="{{true}}" bind:__l="__l" bind:click="__e" data-event-opts="{{[ [ '^click',[ [ 'toGo',['$0','$1'],[ [ ['list','',index,'url'] ],[ ['list','',index,'title'] ] ] ] ] ] ]}}" vueId="{{'19be9470-1-'+index}}" vueSlots="{{['default']}}" wx:for="{{list}}" wx:key="index">
+            <view class="bottom flex-align-center">{{item.title}}</view>
+        </sunui-cell>
+        <sunui-cell arrow="{{true}}" bind:__l="__l" bind:click="__e" data-event-opts="{{[ [ '^click',[ ['tixian'] ] ] ]}}" vueId="19be9470-2" vueSlots="{{['default']}}">
+            <view class="bottom2 flex-align-center">提现记录</view>
+        </sunui-cell>
+    </view>
+    <view style="margin-top:36rpx;">
+        <sunui-cell arrow="{{true}}" bind:__l="__l" bind:click="__e" data-event-opts="{{[ [ '^click',[ ['poster'] ] ] ]}}" vueId="19be9470-3" vueSlots="{{['default']}}">
+            <view class="bottom flex-align-center">分销海报</view>
+        </sunui-cell>
+        <sunui-cell arrow="{{true}}" bind:__l="__l" bind:click="__e" data-event-opts="{{[ [ '^click',[ [ 'toGo',['$0','$1'],[ [ ['lists','',index,'url'] ],[ ['lists','',index,'title'] ] ] ] ] ] ]}}" vueId="{{'19be9470-4-'+index}}" vueSlots="{{['default']}}" wx:for="{{lists}}" wx:key="index">
+            <view class="bottom2 flex-align-center">{{item.title}}</view>
+        </sunui-cell>
+    </view>
+    <sunui-popup bind:__l="__l" class="vue-ref" data-ref="pops" vueId="19be9470-5" vueSlots="{{['content']}}">
+        <view slot="content" style="{{'background-size:cover;width:658rpx;height:1032rpx;position:relative;'+'background-image:'+'url('+system.dist.poster+')'+';'}}">
+            <image class="qr-code" src="{{commissionList.qrcode}}"></image>
+        </view>
+    </sunui-popup>
+    <view class="box">
+        <sunui-painter bind:__l="__l" bind:fail="__e" bind:success="__e" board="{{basePainter}}" class="vue-ref" customStyle="position: fixed; left: 200%;" data-event-opts="{{[ [ '^fail',[ ['getFailInfo'] ] ],[ '^success',[ ['getSuccessInfo'] ] ] ]}}" data-ref="painter" isRenderBlob="{{true}}" isRenderImage="{{true}}" vueId="19be9470-6"></sunui-painter>
+    </view>
+</view>

@@ -1,0 +1,54 @@
+page {
+    background-color: #ff7714;
+}
+
+.shangBox {
+    position: fixed;
+    top: 76rpx;
+    width: 594rpx;
+    height: 850rpx;
+    background: hsla(0,0%,76.9%,.45);
+    border-radius: 40rpx;
+    opacity: 1%;
+    z-index: 10;
+}
+
+.all {
+    z-index: 999;
+    width: 630rpx;
+    height: 796rpx;
+    background: #fff;
+    border-radius: 40rpx;
+}
+
+.img2 {
+    margin-top: 56rpx;
+    width: 530rpx;
+    height: 86rpx;
+}
+
+.img {
+    width: 372rpx;
+    height: 372rpx;
+}
+
+.text {
+    color: #7695e0;
+}
+
+.card {
+    margin-left: 12rpx;
+    font-size: 24rpx;
+    color: #7695e0;
+}
+
+.erwe {
+    font-size: 48rpx;
+    color: #fff;
+}
+
+.money {
+    font-size: 24rpx;
+    color: #fff;
+    margin-top: 34rpx;
+}

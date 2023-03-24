@@ -1,0 +1,102 @@
+<view class="data-v-177bc788">
+    <view class="details_top data-v-177bc788">
+        <view class="details_top_next data-v-177bc788">{{order.status==1?'待付款':order.status==2?'待发货':order.status==3?'已发货':'已完成'}}</view>
+    </view>
+    <view class="view_top data-v-177bc788">
+        <view class="data-v-177bc788">
+            <view class="address data-v-177bc788" wx:if="{{order.receipt_type==1}}">
+                <view class="data-v-177bc788" style="display:flex;">
+                    <view class="font-overflow data-v-177bc788" style="max-width:260rpx;margin-right:16rpx;">{{storeListInfo.store_name+''}}</view>
+                    <view class="data-v-177bc788" style="flex:1;">{{storeListInfo.store_phone}}</view>
+                    <view bindtap="__e" class="data-v-177bc788" data-event-opts="{{[ [ 'tap',[ [ 'address',['$0'],['storeListInfo'] ] ] ] ]}}" style="width:116rpx;">去这里 ></view>
+                </view>
+                <view class="sunui-ellipsis-1 data-v-177bc788" style="color:#999999;">{{storeListInfo.store_addres}}</view>
+            </view>
+            <view class="address data-v-177bc788" wx:if="{{order.receipt_type==2}}">
+                <view class="data-v-177bc788" style="display:flex;">
+                    <view class="font-overflow data-v-177bc788" style="max-width:260rpx;margin-right:16rpx;">{{order.realname+''}}</view>
+                    <view class="data-v-177bc788" style="flex:1;">{{order.mobile}}</view>
+                </view>
+                <view class="sunui-ellipsis-1 data-v-177bc788" style="color:#999999;">{{order.province+' '+order.city+' '+order.district+' '+order.address}}</view>
+            </view>
+            <view class="group_all data-v-177bc788">
+                <view bindtap="__e" class="commodity flex-align-center data-v-177bc788" data-event-opts="{{[ [ 'tap',[ [ 'commodity',['$0'],[ [ ['order.goods','',index] ] ] ] ] ] ]}}" wx:for="{{order.goods}}" wx:key="index">
+                    <view class="view_img data-v-177bc788">
+                        <image class="order_img data-v-177bc788" mode="aspectFill" src="{{item.cover}}"></image>
+                    </view>
+                    <view class="data-v-177bc788" style="width:68%;margin-right:25rpx;">
+                        <view class="font-overflow2 data-v-177bc788">{{item.goods_name}}</view>
+                        <view class="font-overflow guige data-v-177bc788" wx:if="{{item.new_spec}}">{{'规格：'+item.new_spec}}</view>
+                        <view class="view_price data-v-177bc788">
+                            <view class="data-v-177bc788" wx:if="{{item.is_exchange==2}}">
+                                <block wx:if="{{item.unit_price!=0&&item.unit_price!=0&&item.unit_price!=0}}">{{'￥'+item.unit_price+'+'}}<text class="data-v-177bc788" style="font-size:24rpx;">{{order.need_integral+'积分'}}</text>
+                                </block>
+                                <view class="data-v-177bc788" wx:else>{{order.need_integral+'积分'}}</view>
+                            </view>
+                            <view class="data-v-177bc788" wx:else>{{'￥'+item.unit_price}}</view>
+                            <view class="guige data-v-177bc788">{{'数量：x'+item.num}}</view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view class="group_schedule data-v-177bc788">
+                <view class="price flex-between data-v-177bc788">
+                    <view class="priceView data-v-177bc788">商品总价：</view>
+                    <view class="priceText data-v-177bc788">{{'￥'+$root.g0}}</view>
+                </view>
+                <view class="price2 flex-between data-v-177bc788">
+                    <view class="priceView data-v-177bc788">运费：</view>
+                    <view class="priceText data-v-177bc788" wx:if="{{freight==0}}">本商品包邮</view>
+                    <view class="priceText data-v-177bc788" wx:else>{{'￥'+freight}}</view>
+                </view>
+                <view class="price2 flex-between data-v-177bc788">
+                    <view class="priceView data-v-177bc788">优惠券：</view>
+                    <view class="priceText data-v-177bc788" wx:if="{{order.discount>0}}">{{'￥'+order.discount}}</view>
+                    <view class="priceText data-v-177bc788" wx:else>未使用优惠券</view>
+                </view>
+                <view class="price2 flex-between data-v-177bc788">
+                    <view class="priceView data-v-177bc788">会员折</view>
+                    <view class="priceText data-v-177bc788">{{'￥'+userMoney}}</view>
+                </view>
+                <view class="total data-v-177bc788">
+                    <view class="data-v-177bc788">实付款：</view>
+                    <view class="flex data-v-177bc788">
+                        <view class="data-v-177bc788" style="color:#FF6145;padding-bottom:20rpx;font-size:32rpx;">{{'￥'+$root.g1}}</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="data-v-177bc788" style="margin-bottom:42rpx;background-color:#FFFFFF;border-radius:10rpx;">
+            <view class="data-v-177bc788" style="padding:30rpx 26rpx 30rpx 26rpx;font-weight:bold;">订单信息</view>
+            <view class="view_message flex-between data-v-177bc788">
+                <view class="flex-align-center data-v-177bc788">
+                    <text class="data-v-177bc788" style="color:#666666;">订单编号：</text>
+                    <view class="data-v-177bc788">{{order.order_number}}</view>
+                </view>
+                <view bindtap="__e" class="copy flex data-v-177bc788" data-event-opts="{{[ [ 'tap',[ ['paste'] ] ] ]}}">复制</view>
+            </view>
+            <view class="view_message data-v-177bc788">订单状态：<view class="data-v-177bc788">{{order.status==1?'待付款':order.status==2?'待发货':order.status==3?'已发货':'已完成'}}</view>
+            </view>
+            <view class="view_message data-v-177bc788" wx:if="{{order.pay_type!=3}}">支付方式：<view class="data-v-177bc788" wx:if="{{order.pay_type==1}}">微信</view>
+                <view class="data-v-177bc788" wx:if="{{order.pay_type==2}}">余额</view>
+            </view>
+            <view class="view_message data-v-177bc788">付款时间：<text class="data-v-177bc788">{{order.createtime}}</text>
+            </view>
+            <view class="view_message data-v-177bc788">收货方式：<view class="data-v-177bc788" wx:if="{{order.receipt_type==1}}">到店自提</view>
+                <view class="data-v-177bc788" wx:if="{{order.receipt_type==2}}">邮寄</view>
+            </view>
+            <view class="view_message data-v-177bc788" wx:if="{{order.receipt_type==1&&order.status==2}}">取件单号：<view class="data-v-177bc788">{{order.pickup_code}}</view>
+            </view>
+            <view class="view_message2 data-v-177bc788" wx:if="{{order.receipt_type==2}}">快递公司：<text class="data-v-177bc788">{{order.express_name?order.express_name:'暂无快递公司信息'}}</text>
+            </view>
+            <view class="view_message2 data-v-177bc788" wx:if="{{order.receipt_type==2}}">
+                <view class="flex-between data-v-177bc788" style="color:#666666;" wx:if="{{order.express_no}}">
+                    <view class="data-v-177bc788">
+                        <text class="data-v-177bc788" style="color:#666666;">快递单号：</text>{{order.express_no}}</view>
+                    <view bindtap="__e" class="copy flex data-v-177bc788" data-event-opts="{{[ [ 'tap',[ ['paste2'] ] ] ]}}">复制</view>
+                </view>
+                <view class="data-v-177bc788" style="color:#666666;" wx:else>快递单号：暂无快递单号信息</view>
+            </view>
+        </view>
+    </view>
+</view>

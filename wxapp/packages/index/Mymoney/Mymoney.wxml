@@ -1,0 +1,42 @@
+<view>
+    <view class="money" style="{{'background-image:'+'url('+fxbj+')'+';'}}">
+        <view class="all flex-between">
+            <view class="flex-align-center ">
+                <image class="img" src="{{userInfo.avatar}}"></image>
+                <view class="flex-columns">
+                    <view class="flex-align-center">
+                        <view style="color:#FFFFFF;">{{userInfo.nickname}}</view>
+                        <image class="vipdj" mode="aspectFill" src="{{userInfo.curMember_logo}}"></image>
+                    </view>
+                    <view class="phoneaa" wx:if="{{userInfo.phone}}">{{userInfo.phone}}</view>
+                </view>
+            </view>
+            <view bindtap="__e" class="cz flex" data-event-opts="{{[ [ 'tap',[ ['moneyjl'] ] ] ]}}">充值记录</view>
+        </view>
+        <view style="margin-left:32rpx;">
+            <view style="font-size:22rpx;color:#FFFFFF;">当前余额</view>
+            <view class="flex-align-center">
+                <text style="color:#FFFFFF;">￥</text>
+                <view class="price">{{userInfo.money}}</view>
+            </view>
+        </view>
+    </view>
+    <view class="czPrice flex">充值金额</view>
+    <view class="je flex-align-center">
+        <view class="all2 flex" wx:for="{{system.recharge}}" wx:key="index">
+            <view bindtap="__e" class="{{['flex-column',tabIndex==index?'yuan2':'yuan']}}" data-event-opts="{{[ [ 'tap',[ [ 'boxs',[index,'$0'],[ [ ['system.recharge','',index] ] ] ] ] ] ]}}">
+                <view style=";">{{'￥'+item.money}}</view>
+                <view>{{'送'+item.only+'元'}}</view>
+            </view>
+        </view>
+    </view>
+    <view bindtap="__e" class="flex" data-event-opts="{{[ [ 'tap',[ ['chongzhi'] ] ] ]}}" style="width:100%;">
+        <view class="butn flex">充值</view>
+    </view>
+    <view wx:if="{{system.recharge_money_desc}}">
+        <view class="ts">温馨提示：</view>
+        <view style="margin-left:22rpx;">
+            <rich-parser bind:__l="__l" class="vue-ref" data-ref="article" domain="https://6874-html-foe72-1259071903.tcb.qcloud.la" html="{{system.recharge_money_desc}}" lazyLoad="{{true}}" selectable="{{true}}" showWithAnimation="{{true}}" useAnchor="{{true}}" vueId="58a07efe-1"></rich-parser>
+        </view>
+    </view>
+</view>

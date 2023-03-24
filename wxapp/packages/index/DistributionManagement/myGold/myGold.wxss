@@ -1,0 +1,76 @@
+page {
+    background-color: #f7f7f7;
+}
+
+.this_month {
+    font-size: 24rpx;
+    font-weight: 700;
+    margin: 20rpx 0rpx 0rpx 32rpx;
+}
+
+.month_btn {
+    width: 22rpx;
+    height: 18rpx;
+    padding: 26rpx 0rpx;
+}
+
+.income {
+    margin: 0 0rpx 28rpx 32rpx;
+    display: flex;
+}
+
+.income view {
+    font-size: 24rpx;
+    color: #a1a1a1;
+    margin-right: 54rpx;
+}
+
+.jiajia {
+    color: red;
+    margin-top: 7px;
+    font-weight: 700;
+    font-size: 30rpx;
+}
+
+.commodity {
+    width: 94%;
+    height: auto;
+    background-color: #fff;
+    border-radius: 10rpx;
+    margin: 20rpx 3%;
+}
+
+.commodity_img {
+    width: 100rpx;
+    height: 100rpx;
+    margin: 18rpx;
+    border-radius: 200rpx;
+}
+
+.money_btn {
+    padding: 0rpx 10rpx;
+    height: 52rpx;
+    background-color: #ff6145;
+    color: #fff;
+    border-top-left-radius: 10rpx;
+    border-bottom-left-radius: 10rpx;
+}
+
+.bottom {
+    margin-top: 28rpx;
+    margin-bottom: 10rpx;
+}
+
+.bottom view {
+    color: #757575;
+    font-size: 24rpx;
+}
+
+.flex-between {
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    align-items: center;
+    margin-top: 10rpx;
+}

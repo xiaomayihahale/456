@@ -1,0 +1,147 @@
+page {
+    background-color: #f7f7f7;
+}
+
+button::after {
+    border: none;
+}
+
+.product {
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.order {
+    width: 94%;
+    background-color: #fff;
+    margin: 3%;
+    border-radius: 10rpx;
+}
+
+.line-detail {
+    width: 100%;
+    height: 4rpx;
+    background-color: #e60200;
+}
+
+.product_details {
+    color: #e60200;
+    margin: 20rpx;
+}
+
+.product_review {
+    color: #757575;
+}
+
+.copy {
+    margin-left: 8rpx;
+    color: #bebebe;
+    width: 60rpx;
+    height: 32rpx;
+    border: 2rpx solid #bebebe;
+    font-size: 20rpx;
+}
+
+.view_group {
+    color: #ff6145;
+}
+
+.commodity {
+    padding-bottom: 6rpx;
+    border-bottom: 2rpx solid #f6f6f6;
+}
+
+.view_img {
+    width: 30%;
+}
+
+.order_img {
+    width: 180rpx;
+    height: 180rpx;
+    margin: 21rpx;
+}
+
+.group {
+    color: #fe4039;
+    font-size: 24rpx;
+    font-weight: 700;
+    border: 2rpx solid #fe433a;
+    border-radius: 10rpx;
+    padding: 6rpx 20rpx 4rpx 14rpx;
+    margin-right: 10rpx;
+}
+
+.group_price {
+    color: #fe3838;
+    font-size: 32rpx;
+}
+
+.group_Pieces {
+    color: #a1a1a1;
+    margin-right: 20rpx;
+}
+
+.view_details {
+    padding-bottom: 20rpx;
+    display: flex;
+    -webkit-box-pack: end;
+    justify-content: flex-end;
+}
+
+.invite {
+    border: 2rpx solid #999;
+    border-radius: 56rpx;
+    width: 156rpx;
+    height: 60rpx;
+    margin-right: 28rpx;
+}
+
+.details {
+    color: #fff;
+    background-color: #ff6145;
+    border: 2rpx solid #ff6145;
+    border-radius: 56rpx;
+    width: 156rpx;
+    height: 60rpx;
+    margin-right: 28rpx;
+}
+
+.view_price {
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    align-items: center;
+}
+
+.share_view {
+    margin: 24rpx 0rpx;
+    font-size: 28rpx;
+}
+
+.share_yq {
+    background-color: #fff;
+    border-bottom: 2rpx solid #f1f1f1;
+}
+
+.share_view2 {
+    margin: 24rpx 0rpx;
+    font-size: 24rpx;
+}
+
+.share_content {
+    background-color: #fff;
+    border-bottom: 2rpx solid #f1f1f1;
+}
+
+.view_share {
+    margin: 30rpx 0rpx;
+}
+
+.share_img {
+    height: 81rpx;
+    width: 81rpx;
+    margin: 15rpx;
+}

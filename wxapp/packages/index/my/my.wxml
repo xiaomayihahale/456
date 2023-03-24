@@ -1,0 +1,41 @@
+<view class="data-v-956b31d6">
+    <view class="flex-between top data-v-956b31d6">
+        <view class="flex-align-center data-v-956b31d6">
+            <image class="position data-v-956b31d6" src="/components/sunui-keyboard/delete.png"></image>
+            <view class="combo data-v-956b31d6">预订</view>
+        </view>
+        <view class="i-view flex-align-center data-v-956b31d6">
+            <image class="data-v-956b31d6" src="/components/sunui-numboard/images/delete-light.png"></image>
+            <view class="data-v-956b31d6">支持退订</view>
+        </view>
+    </view>
+    <scroll-view class="data-v-956b31d6" scrollX="true">
+        <view bindtap="__e" class="{{['dayTitle','data-v-956b31d6',current==index?'select':'like']}}" data-event-opts="{{[ [ 'tap',[ [ 'timeSelectd',[index] ] ] ] ]}}" wx:for="{{dayList}}" wx:key="index">
+            <view class="zong data-v-956b31d6">
+                <view class="{{['data-v-956b31d6',current==index?'select2':'like']}}">
+                    <view class="data-v-956b31d6" wx:if="{{index==0}}">今天</view>
+                    <view class="data-v-956b31d6" wx:else>{{'周'+item.week}}</view>
+                </view>
+                <view class="data-v-956b31d6" style="margin-top:4rpx;">{{item.month+'-'+item.day}}</view>
+            </view>
+        </view>
+    </scroll-view>
+    <scroll-view class="sc_contain data-v-956b31d6" scrollX="true">
+        <view class="flex-align-center data-v-956b31d6" style="margin-left:18rpx;">
+            <view class="data-v-956b31d6" wx:for="{{$root.l0}}" wx:key="index">
+                <view bindtap="__e" class="{{['flex-column','roomAll','data-v-956b31d6',tabIndex2==index?'room':'room2']}}" data-event-opts="{{[ [ 'tap',[ [ 'roomNames',[index,'$0'],[ [ ['cateInfo','',index] ] ] ] ] ] ]}}">
+                    <view class="data-v-956b31d6">{{item.g0[0]}}</view>
+                    <view class="on data-v-956b31d6">{{'('+item.g1[1]}}</view>
+                </view>
+            </view>
+        </view>
+    </scroll-view>
+    <view class="data-v-956b31d6" style="height:20rpx;background:#F7F7F7;"></view>
+    <view class="flex-between time data-v-956b31d6" wx:for="{{cateCombosInfo}}" wx:key="index">
+        <view class="flex-columns data-v-956b31d6">
+            <view class="data-v-956b31d6">{{item.name}}</view>
+            <view class="prcie data-v-956b31d6">{{'￥'+item.price}}</view>
+        </view>
+        <view bindtap="__e" class="reserve flex data-v-956b31d6" data-event-opts="{{[ [ 'tap',[ [ 'reservation',['$0'],[ [ ['cateCombosInfo','',index,'id'] ] ] ] ] ] ]}}">预约</view>
+    </view>
+</view>

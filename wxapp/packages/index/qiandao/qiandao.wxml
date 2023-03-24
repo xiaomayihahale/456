@@ -1,0 +1,48 @@
+<view>
+    <image src="{{qiandao}}" style="width:750rpx;height:624rpx;"></image>
+    <view style="position:absolute;top:470rpx;z-index:999;">
+        <view class="all">
+            <view class="qian">已连续签到<text style="color:#FFB617;font-weight:bold;" wx:if="{{userInfo.sign_count==null}}">0</text>
+                <text style="color:#FFB617;font-weight:bold;" wx:else>{{userInfo.sign_count}}</text>天</view>
+            <view class="xunh">
+                <view wx:for="{{$root.l0}}" wx:key="index">
+                    <view wx:if="{{index==0}}">
+                        <view bindtap="__e" class="{{[index>=item.m0?'flex-column jifen':'flex-column jifen-active ']}}" data-event-opts="{{[ [ 'tap',[ [ 'sqiandao',['$0'],[ [ ['sign','',index] ] ] ] ] ] ]}}">
+                            <view class="{{[index>=item.m1?'timesa':'timesa-active ']}}" style="font-weight:bold;">{{'第'+item.$orig.time+'天'}}</view>
+                            <image src="{{shang}}" style="width:48rpx;height:48rpx;margin:16rpx 0rpx;"></image>
+                            <view style="font-size:24rpx;color:#666;" wx:if="{{index>=item.m2}}">{{item.m3+'积分'}}</view>
+                            <view style="font-size:24rpx;color:#fff;" wx:else>已签到</view>
+                        </view>
+                    </view>
+                    <view wx:if="{{index<6&&index!=0}}">
+                        <view bindtap="__e" class="{{[index>=item.m4?'flex-column jifen':'flex-column jifen-active ']}}" data-event-opts="{{[ [ 'tap',[ [ 'sqiandao',['$0'],[ [ ['sign','',index] ] ] ] ] ] ]}}">
+                            <view class="{{[index>=item.m5?'timesa':'timesa-active ']}}" style="font-weight:bold;">{{'第'+item.$orig.time+'天'}}</view>
+                            <image src="{{shang}}" style="width:48rpx;height:48rpx;margin:16rpx 0rpx;"></image>
+                            <view style="font-size:24rpx;color:#666;" wx:if="{{index>=item.m6}}">{{item.m7*item.m8+'积分'}}</view>
+                            <view style="font-size:24rpx;color:#fff;" wx:else>已签到</view>
+                        </view>
+                    </view>
+                </view>
+                <view bindtap="__e" class="{{[$root.m9==7?'jifen-active3 flex-between':'jifen3 flex-between ']}}" data-event-opts="{{[ [ 'tap',[ ['qiandaos'] ] ] ]}}">
+                    <view class="flex-columns" style="margin:8rpx 0rpx 6rpx 20rpx;">
+                        <view class="{{[$root.m10==7?'timesa-active':'timesa']}}" style="font-weight:bold;">{{'第'+signs.time+'天'}}</view>
+                        <view class="{{[$root.m11==7?'timesa-active':'timesa']}}" style="font-size:24rpx;color:#666;margin-top:80rpx;">
+                            <view style="font-size:24rpx;color:#fff;" wx:if="{{$root.m12==7}}">已签到</view>
+                            <view style="font-size:24rpx;color:#666;" wx:else>{{''+$root.m13*6+'积分'}}</view>
+                        </view>
+                    </view>
+                    <view style="padding:0rpx;">
+                        <view class="price flex">最高奖励</view>
+                        <image class="jf2" src="{{jifen2}}"></image>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="tishi" wx:if="{{system.sign_desc}}">
+            <view style="font-size:32rpx;font-weight:bold;padding:26rpx 0rpx;">友情提示</view>
+            <view style="color:#999999;padding-bottom:26rpx;">
+                <rich-parser bind:__l="__l" class="vue-ref" data-ref="article" domain="https://6874-html-foe72-1259071903.tcb.qcloud.la" html="{{system.sign_desc}}" lazyLoad="{{true}}" selectable="{{true}}" showWithAnimation="{{true}}" useAnchor="{{true}}" vueId="4af711cc-1"></rich-parser>
+            </view>
+        </view>
+    </view>
+</view>

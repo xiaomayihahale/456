@@ -1,0 +1,36 @@
+<view>
+    <view wx:if="{{dist==1}}">
+        <sunui-tab bind:__l="__l" bind:navbarTap="__e" data-event-opts="{{[ [ '^navbarTap',[ ['navbarTapHandler'] ] ] ]}}" navArr="{{indexarr1}}" sty="display: flex; justify-content: space-around;" tabCurrentIndex="{{currentIndex}}" vueId="b767ba44-1"></sunui-tab>
+    </view>
+    <view wx:if="{{dist==2}}">
+        <sunui-tab bind:__l="__l" bind:navbarTap="__e" data-event-opts="{{[ [ '^navbarTap',[ ['navbarTapHandler'] ] ] ]}}" navArr="{{indexarr2}}" sty="display: flex; justify-content: space-around;" tabCurrentIndex="{{currentIndex}}" vueId="b767ba44-2"></sunui-tab>
+    </view>
+    <view wx:if="{{dist==3}}">
+        <sunui-tab bind:__l="__l" bind:navbarTap="__e" data-event-opts="{{[ [ '^navbarTap',[ ['navbarTapHandler'] ] ] ]}}" navArr="{{indexarr3}}" sty="display: flex; justify-content: space-around;" tabCurrentIndex="{{currentIndex}}" vueId="b767ba44-3"></sunui-tab>
+    </view>
+    <view class="top flex">
+        <view>用户</view>
+        <view>时间</view>
+        <view>佣金</view>
+    </view>
+    <view wx:if="{{myTeamList.length==0}}">
+        <view class="team flex-column ">
+            <image src="{{teams}}" style="width:280rpx;height:280rpx;"></image>
+            <text class="text">空空如也 ~</text>
+        </view>
+    </view>
+    <block wx:else>
+        <view class="user" wx:for="{{myTeamList}}" wx:key="index">
+            <view class="flex-between">
+                <view class="flex-align-center">
+                    <image class="promotion_img" src="{{item.avatar}}"></image>
+                    <view class="flex-columns">
+                        <view>{{item.nickname}}</view>
+                        <view style="font-size:24rpx;color:#BEBEBE;">{{item.createtime}}</view>
+                    </view>
+                </view>
+                <view style="font-size:32rpx;font-weight:bold;margin-right:20rpx;">{{item.money}}</view>
+            </view>
+        </view>
+    </block>
+</view>

@@ -1,0 +1,11 @@
+<view>
+    <view class="flex" style="width:100%;height:1000rpx;">
+        <view class="all flex-column">
+            <image class="img" src="{{myMealList.qrcode}}"></image>
+            <view style="color:#999999;">扫一扫即可使用</view>
+            <view class="card">{{'套餐卡剩余次数：'+$root.m0-$root.m1+'次'}}</view>
+            <view>{{'每日可使用次数：'+myMealList.meal_use_count+'次'}}<text style="{{countUse==2?'color: red;':''}}">{{'（剩余'+$root.m2+'次）'}}</text>
+            </view>
+        </view>
+    </view>
+</view>

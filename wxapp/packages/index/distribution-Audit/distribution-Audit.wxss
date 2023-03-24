@@ -1,0 +1,30 @@
+page {
+    background: #f0f0f0;
+}
+
+.v-width {
+    width: 750rpx;
+}
+
+.img {
+    width: 600rpx;
+    height: 600rpx;
+    margin: 128rpx 0rpx 182rpx;
+}
+
+.submitReview,.resubmit {
+    color: #fff;
+    background: #4ec27a;
+    border-radius: 53px;
+    width: 300rpx;
+    height: 88rpx;
+}
+
+.resubmit {
+    background: red;
+}
+
+.underResubmit {
+    text-align: center;
+    color: #898989;
+}

@@ -1,0 +1,52 @@
+page {
+    background: #f0f0f0;
+}
+
+.PackageCard {
+    margin-top: 16rpx;
+    width: 720rpx;
+    height: auto;
+    background: #fff;
+    border-radius: 20rpx;
+    padding: 36rpx 0rpx 80rpx;
+}
+
+.sunui-tab {
+    selectcolor: #f000ee;
+}
+
+.all {
+    background-color: #d0cece;
+    width: 670rpx;
+    height: 166rpx;
+    padding: 0rpx 20rpx;
+    background-size: cover;
+}
+
+.all:nth-child(n+2) {
+    width: 670rpx;
+    height: 166rpx;
+    padding: 0rpx 20rpx;
+    margin-top: 36rpx;
+}
+
+.card text {
+    color: #fff;
+    font-size: 32rpx;
+    font-weight: 700;
+}
+
+.card view {
+    padding-top: 18rpx;
+    color: #fff;
+    font-size: 24rpx;
+}
+
+.img {
+    width: 20rpx;
+    height: 24rpx;
+}
+
+.noNumber {
+    color: #666;
+}

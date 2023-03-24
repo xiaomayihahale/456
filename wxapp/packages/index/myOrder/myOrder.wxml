@@ -1,0 +1,43 @@
+<view>
+    <view style="background-color:#FFFFFF;">
+        <sunui-tab bind:__l="__l" bind:navbarTap="__e" data-event-opts="{{[ [ '^navbarTap',[ ['navbarTapHandler'] ] ] ]}}" navArr="{{navArr}}" selectColor="#FF6145" style="{{'display: flex;justify-content: flex-start;border-top:2rpx solid #f6f6f6;align-items: center;'}}" tabCurrentIndex="{{currentIndex}}" vueId="30a64162-1"></sunui-tab>
+    </view>
+    <mescroll-body bind:__l="__l" bind:down="__e" bind:init="__e" bind:up="__e" class="vue-ref" data-event-opts="{{[ [ '^init',[ ['mescrollInit'] ] ],[ '^down',[ ['downCallback'] ] ],[ '^up',[ ['upCallback'] ] ] ]}}" data-ref="mescrollRef" down="{{downOption}}" vueId="30a64162-2" vueSlots="{{['default']}}">
+        <view style="background-color:#FFFFFF;margin-top:12rpx;" wx:for="{{$root.l0}}" wx:for-item="items" wx:key="index">
+            <view class="flex-between" style="padding:14rpx 36rpx 10rpx 20rpx;">
+                <view class="flex-align-center">
+                    <view style="color:#999999;font-size:24rpx;">{{'订单号：'+items.$orig.order_number}}</view>
+                    <view bindtap="__e" class="copy flex" data-event-opts="{{[ [ 'tap',[ [ 'paste',['$0'],[ [ ['orderList','',index] ] ] ] ] ] ]}}">复制</view>
+                </view>
+                <view class="view_group">{{items.m0}}</view>
+            </view>
+            <view class="commodity">
+                <view bindtap="__e" class=" flex-align-center" data-event-opts="{{[ [ 'tap',[ [ 'handleDetails',['$0'],[ [ ['orderList','',index,'id'] ] ] ] ] ] ]}}">
+                    <view class="view_img">
+                        <image class="order_img" src="{{items.$orig.goods[0].cover}}"></image>
+                    </view>
+                    <view style="width:68%;margin-right:25rpx;">
+                        <view class="group_text font-overflow2">{{items.$orig.goods[0].goods_name}}</view>
+                        <view style="color:#999999;font-size:24rpx;" wx:if="{{items.$orig.goods[0].spec}}">{{'规格：'+items.$orig.goods[0].spec}}</view>
+                        <view class="view_price">
+                            <view class="group_price">{{'￥'+items.$orig.real_payment}}</view>
+                            <view class="group_Pieces">{{'数量x'+items.$orig.goods.length}}</view>
+                        </view>
+                    </view>
+                </view>
+                <view style="display:flex;align-items:center;justify-content:flex-end;">
+                    <view style="margin:4rpx 30rpx 24rpx 0rpx;">{{'共'+items.$orig.goods.length+'件商品 合计￥'+items.$orig.real_payment}}</view>
+                </view>
+            </view>
+            <view bindtap="__e" class="flex" data-event-opts="{{[ [ 'tap',[ [ 'fuzhi',['$0'],[ [ ['orderList','',index] ] ] ] ] ] ]}}" style="width:750rpx;" wx:if="{{items.$orig.status==2&&items.$orig.receipt_type==1}}">
+                <text style="margin-top:20rpx;font-size:32rpx;text-align:center;">{{'复制取件单号：'+items.$orig.pickup_code}}</text>
+            </view>
+            <view class="view_details" style="margin-top:20rpx;">
+                <view bindtap="__e" class="invite flex" data-event-opts="{{[ [ 'tap',[ [ 'handleDetails',['$0'],[ [ ['orderList','',index,'id'] ] ] ] ] ] ]}}" wx:if="{{items.$orig.status!=1}}">查看详情</view>
+                <view catchtap="__e" class="invite flex" data-event-opts="{{[ [ 'tap',[ [ 'handleOperate',['$0','cancel'],[ [ ['orderList','',index] ] ] ] ] ] ]}}" wx:if="{{items.$orig.status==1}}">取消订单</view>
+                <view catchtap="__e" class="details flex" data-event-opts="{{[ [ 'tap',[ [ 'handleOperate',['$0','pay'],[ [ ['orderList','',index] ] ] ] ] ] ]}}" wx:if="{{items.$orig.status==1}}">立即付款</view>
+                <view catchtap="__e" class="details flex" data-event-opts="{{[ [ 'tap',[ [ 'handleOperate',['$0','require'],[ [ ['orderList','',index] ] ] ] ] ] ]}}" wx:if="{{items.$orig.status==3}}">确认收货</view>
+            </view>
+        </view>
+    </mescroll-body>
+</view>
