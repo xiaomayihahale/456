@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>系统设置</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="__PUBLIC__/static/layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="__PUBLIC__/static/layuiadmin/style/admin.css" media="all">
+    <link rel=icon href="__PUBLIC__/static/dist/favicon.ico" >
+    <link rel=stylesheet href="__PUBLIC__/static/dist/static/font/iconfont.css">
+    <style>
+        form{
+            padding-right:15px ;
+        }
+    </style>
+</head>
+<body>
+
+
+  
+
+
+
+
+  
+  
+<noscript>
+		<strong>请开启JS支持</strong>
+</noscript>
+	<div id=app></div>
+	<script src="__PUBLIC__/static/dist/js/chunk-vendors.d35e2a3e.js"></script>
+	<script src="__PUBLIC__/static/dist/js/app.d21118a0.js"></script>
+ 
+  
+
+  
+
+        
+<div class="layui-footer" style="margin-top:20px;display: flex;justify-content: center;align-items: flex-end;">
+	{include file='../addons/wjyk_nhyk/application/admin/view/index/footer.html' /}
+</div>
+<script src="__PUBLIC__/static/layuiadmin/layui/layui.js"></script>
+<script type="text/javascript" src="__PUBLIC__/static/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" src="__PUBLIC__/static/ueditor/ueditor.all.js"></script>
+
+
+<link href="__PUBLIC__/static/dist/js/about.09751c3f.js" rel=prefetch>
+<link href="__PUBLIC__/static/dist/css/app.7a1fad77.css" rel=preload as=style>
+<link href="__PUBLIC__/static/dist/css/chunk-vendors.87d3b6c6.css" rel="preload" as="style">
+<link href="__PUBLIC__/static/dist/js/app.d21118a0.js" rel=preload as=script>
+<link href="__PUBLIC__/static/dist/js/chunk-vendors.d35e2a3e.js" rel=preload as=script>
+<link href="__PUBLIC__/static/dist/css/chunk-vendors.87d3b6c6.css" rel=stylesheet>
+<link href="__PUBLIC__/static/dist/css/app.7a1fad77.css" rel=stylesheet>
+
+<script>
+	var _hmt = _hmt || [];
+	(function() {
+		var hm = document.createElement("script");
+		hm.src = "https://hm.baidu.com/hm.js?666f29845ed43fbcd0282a91cb281b83";
+		var s = document.getElementsByTagName("script")[0];
+		s.parentNode.insertBefore(hm, s);
+	})();
+</script>
+<script>
+	var baseURI = "/";
+	if (baseURI === '/') {
+		baseURI = (location.protocol + '//' + location.host + location.pathname)
+				.replace(/(.+\/).*$/, '$1')
+	};
+	window.API_URL = baseURI;
+	window.PREVIEW_URL = baseURI + 'api/preview';
+	window.UPLOAD_URL = baseURI + 'api/upload';
+	console.info('fastposter(2.1.1): 强势来袭')
+</script>
+
+
+<script>
+	layui.config({
+	    base: '__PUBLIC__/static/layuiadmin/' //静态资源所在路径
+	}).extend({
+	    index: 'lib/index' //主入口模块
+	    	, layarea: '../layui/layui_exts/city-picker/layarea'
+	}).use(['jquery','layer', 'index', 'table','upload', 'layarea','layedit'], function(){
+		var $ = layui.$
+		, layer = layui.layer
+		, layedit = layui.layedit
+	    , table = layui.table
+	    , form = layui.form
+	    , layarea = layui.layarea
+	    , upload = layui.upload;
+		
+		
+
+    });
+</script>
+</body>
+</html>

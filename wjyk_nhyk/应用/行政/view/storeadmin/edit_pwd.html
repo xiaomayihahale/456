@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>修改密码</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="__PUBLIC__/static/layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="__PUBLIC__/static/layuiadmin/style/admin.css" media="all">
+    <style>
+        form{
+            padding-right:15px ;
+        }
+    </style>
+</head>
+<body>
+<form class="layui-form" style="margin-top:21px;">
+    <input type="hidden" name="id" value="{$srdb['id']}"/>
+	  <div class="layui-form-item">
+	    <label class="layui-form-label">旧密码</label>
+	    <div class="layui-input-block">
+	      <input type="password" name="old_pwd" required lay-verify="required" placeholder="请输入旧密码" autocomplete="off" class="layui-input"  />
+	    </div>
+	  </div>
+	  
+	  <div class="layui-form-item">
+	    <label class="layui-form-label">新密码</label>
+	    <div class="layui-input-block">
+	      <input type="password" name="new_pwd" required lay-verify="required" placeholder="请输入新密码" autocomplete="off" class="layui-input"  />
+	    </div>
+	  </div>
+	  
+	  <div class="layui-form-item">
+	    <label class="layui-form-label">再次输入新密码</label>
+	    <div class="layui-input-block">
+	      <input type="password" name="re_pwd" required lay-verify="required" placeholder="请再次输入新密码" autocomplete="off" class="layui-input"  />
+	    </div>
+	  </div>
+  <div class="layui-form-item">
+    <div class="layui-input-block">
+      <button class="layui-btn" lay-submit lay-filter="demo1">立即提交</button>
+    </div>
+  </div>
+  <!-- 更多表单结构排版请移步文档左侧【页面元素-表单】一项阅览 -->
+</form>
+
+<script src="__PUBLIC__/static/layuiadmin/layui/layui.js"></script>
+<script type="text/javascript" src="__PUBLIC__/static/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" src="__PUBLIC__/static/ueditor/ueditor.all.js"></script>
+<script>
+	layui.config({
+	    base: '__PUBLIC__/static/layuiadmin/' //静态资源所在路径
+	}).extend({
+	    index: 'lib/index' //主入口模块
+	    	, layarea: '../layui/layui_exts/city-picker/layarea'
+	}).use(['jquery','layer', 'index', 'table','upload', 'layarea','layedit'], function(){
+		var $ = layui.$
+		, layer = layui.layer
+		, layedit = layui.layedit
+	    , table = layui.table
+	    , form = layui.form
+	    , layarea = layui.layarea
+	    , upload = layui.upload;
+
+  
+      
+        
+        
+
+       window.addEventListener('message', function(event) {
+        
+            console.log(event) // 里面就有经纬度等其他信息
+        })
+      
+        
+
+
+     
+
+        $(document).on('click',".del_details",function(){
+            $(this).parent().parent().remove();
+        });
+
+      //监听提交
+        form.on('submit(demo1)', function(data){
+            var admin = layui.admin;
+          
+            
+            $.ajax({
+            	url:"{:siteUrl('admin/user/edit_pwd','','web','merchant')}",
+                data:data.field,
+                type:"POST",
+                success: function(data){
+                	var res = JSON.parse(data);
+                	if(res.code == 0 ){
+               			layer.msg(res.msg,{icon: 1,time:3000},function(){
+                   			//window.location.href="{:siteUrl('admin/storeAdmin/index','','web')}";
+                   		});
+                		
+                		
+                	}else{
+               			layer.msg(res.msg,{icon: 2,time:3000},function(){
+                   			//window.location.href="{:siteUrl('admin/storeAdmin/index','','web')}";
+                   		});
+                		
+                	}
+                }
+            })
+            return false
+        });
+
+		
+      
+    });
+</script>
+</body>
+</html>

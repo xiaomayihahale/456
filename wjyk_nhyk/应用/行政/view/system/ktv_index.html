@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>系统设置</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="__PUBLIC__/static/layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="__PUBLIC__/static/layuiadmin/style/admin.css" media="all">
+    <style>
+        form{
+            padding-right:15px ;
+        }
+    </style>
+</head>
+<body>
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <div class="layui-card-header">基本设置</div>
+                <div class="layui-card-body" pad15>
+
+                    <div class="layui-form" wid100 lay-filter="">
+<form class="layui-form" style="margin-top:21px;">
+
+	<div class="layui-fluid">
+	    <div class="layui-row layui-col-space15">
+	        <div class="layui-col-md12">
+	            <div class="layui-card">
+	                <div class="layui-card-body">
+	                	
+	                </div>
+	               
+	            </div>
+	           
+	        </div>
+	        
+	    </div>
+	</div>
+
+
+  <div class="layui-form-item">
+    <label class="layui-form-label">首页分享标题</label>
+    <div class="layui-input-block">
+      <input type="text" name="index_share_title" required lay-verify="required"  autocomplete="off" class="layui-input" value="{$system['index_share_title']}">
+    </div>
+  </div>
+  
+
+  
+  <div class="layui-form-item">
+    <label class="layui-form-label">首页分享图片</label>
+    <div class="layui-form-mid layui-word-aux">建议上传100px * 100px尺寸</div>
+        <button type="button" class="layui-btn" id="test6">上传图片</button>
+        <div class="layui-input-block">
+            <img class="layui-upload-img" id="demo6" style="margin-top: 10px;height: 150px;width: 150px" {if $system['index_share_img']==''}{else}src="{$system['index_share_img']}"{/if}">
+            <input type="hidden" name="index_share_img" id="logo6" value="{$system['index_share_img']}">
+        </div>
+  </div>
+
+
+      <div class="layui-form-item">
+        <label class="layui-form-label">提前多少小时免费(小时)</label>
+        <div class="layui-input-block">
+            <input type="number" name="free_hour" required lay-verify="required"  autocomplete="off" class="layui-input" value="{$system['free_hour']}">
+        </div>
+    </div>
+    
+ 
+    
+    <div class="layui-form-item">
+        <label class="layui-form-label">超时违约金额(元)</label>
+        <div class="layui-input-block">
+            <input type="number" name="promise_money" required lay-verify="required"  autocomplete="off" class="layui-input" value="{$system['promise_money']}">
+        </div>
+    </div>
+    
+    <div class="layui-form-item">
+        <label class="layui-form-label">超时违约每过一小时加收金额</label>
+        <div class="layui-input-block">
+            <input type="number" name="promise_add_money" required lay-verify="required"  autocomplete="off" class="layui-input" value="{$system['promise_add_money']}">
+        </div>
+    </div>
+    
+    <div class="layui-form-item">
+        <label class="layui-form-label">退款截止时间(小时)</label>
+        <div class="layui-input-block">
+            <input type="number" name="back_hour" required lay-verify="required"  autocomplete="off" class="layui-input" value="{$system['back_hour']}">
+        </div>
+    </div>
+
+
+    
+    <div class="layui-form-item">
+        <label class="layui-form-label">点歌二维码</label>
+        <button type="button" class="layui-btn" id="carousel_upload">上传图片</button>
+        <div class="layui-form-mid layui-word-aux">图片建议尺寸622px * 750px，或者等比例图片</div>
+        <div class="layui-input-block">
+            <img class="layui-upload-img" id="carousel_upload_img" style="margin-top: 10px;height: 166px;width: 150px" {if !empty($system['qrcode'])} src="{$system['qrcode']}" {/if} >
+            <input type="hidden" name="qrcode" id="carousel_upload_log" class="carousel"   {if !empty($system['qrcode'])} value="{$system['qrcode']}" {/if} >
+        </div>
+    </div>
+    
+    
+    
+    
+     <div class="layui-form-item">
+        <label class="layui-form-label">退款规则</label>
+        <div class="layui-input-block">
+            <script id="qdUeditor" name="abouts" type="text/plain" >{$system['abouts']|raw}</script>
+        </div>
+    </div>
+    
+
+  
+  <div class="layui-form-item">
+    <div class="layui-input-block">
+      <button class="layui-btn" lay-submit lay-filter="demo1">立即提交</button>
+    </div>
+  </div>
+  <!-- 更多表单结构排版请移步文档左侧【页面元素-表单】一项阅览 -->
+</form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="layui-footer" style="margin-top:20px;display: flex;justify-content: center;align-items: flex-end;">
+	{include file='../addons/wjyk_nhyk/application/admin/view/index/footer.html' /}
+</div>
+<script src="__PUBLIC__/static/layuiadmin/layui/layui.js"></script>
+<script type="text/javascript" src="__PUBLIC__/static/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" src="__PUBLIC__/static/ueditor/ueditor.all.js"></script>
+<script>
+	layui.config({
+	    base: '__PUBLIC__/static/layuiadmin/' //静态资源所在路径
+	}).extend({
+	    index: 'lib/index' //主入口模块
+	    	, layarea: '../layui/layui_exts/city-picker/layarea'
+	}).use(['jquery','layer', 'index', 'table','upload', 'layarea','layedit'], function(){
+		var $ = layui.$
+		, layer = layui.layer
+		, layedit = layui.layedit
+	    , table = layui.table
+	    , form = layui.form
+	    , layarea = layui.layarea
+	    , upload = layui.upload;
+		
+		
+		var allUpload =  $("button[id$='_upload']");
+        allUpload.each(function(){
+            var id = $(this).attr('id');
+            upload.render({
+                elem: '#'+id
+                ,url: "{:siteUrl('admin/index/upload','','web')}" //改成您自己的上传接口
+                ,done: function(res){
+                    //如果上传失败
+                    if(res.code < 0){
+                        return layer.msg('上传失败');
+                    }else{
+                        $('#'+id+"_img").attr('src', res.msg); //图片链接（base64）
+                        $('#'+id+"_log").val(res.msg);
+                    }
+                }
+            });
+        });
+		
+        upload.render({
+            elem: '#test6'
+            ,url: "{:siteUrl('admin/index/upload','','web')}" //改成您自己的上传接口
+            ,done: function(res){
+                //如果上传失败
+                if(res.code < 0){
+                    return layer.msg('上传失败');
+                }else{
+                    $('#demo6').attr('src', res.msg); //图片链接（base64）
+                    $('#logo6').val(res.msg);
+                }
+            }
+        });
+        
+        var protocolUe = UE.getEditor('czUeditor', {
+
+            zIndex: 99,
+
+            maximumWords: 999,
+
+            scaleEnabled: true,
+
+            initialFrameWidth: 800,
+
+            initialFrameHeight: 300,
+
+            autoHeightEnabled: false,}
+
+        );
+        
+        var protocolUe = UE.getEditor('qdUeditor', {
+
+            zIndex: 99,
+
+            maximumWords: 999,
+
+            scaleEnabled: true,
+
+            initialFrameWidth: 800,
+
+            initialFrameHeight: 300,
+
+            autoHeightEnabled: false,}
+
+        );
+		
+		$('#ImgPreview img').on('click', function () {
+            layer.photos({
+                photos: '#ImgPreview',
+                shadeClose: false,
+                closeBtn: 2,
+                anim: 0
+            });
+        })
+        
+        $('#ImgPreviewTemp img').on('click', function () {
+            layer.photos({
+                photos: '#ImgPreviewTemp',
+                shadeClose: false,
+                closeBtn: 2,
+                anim: 0
+            });
+        })
+
+        $('#ImgStore img').on('click', function () {
+            layer.photos({
+                photos: '#ImgStore',
+                shadeClose: false,
+                closeBtn: 2,
+                anim: 0
+            });
+        })
+        
+        $('.upload_img').on('click',function () {
+    		var url = $(this).attr('id');
+    		$(this).parents('.image-container').remove();
+    	});
+		
+		
+
+		
+		layarea.render({
+            elem: '#area-picker',
+            change: function (res) {
+                //选择结果
+                console.log(res);
+            }
+        });
+		
+	
+    
+
+    	
+    	upload.render({
+            elem: '#test1'
+            ,url: "{:siteUrl('admin/index/upload','','web')}" //改成您自己的上传接口
+            ,done: function(res){
+                //如果上传失败
+                if(res.code < 0){
+                    return layer.msg('上传失败');
+                }else{
+                    $('#demo1').attr('src', res.msg); //图片链接（base64）
+                    $('#logo').val(res.msg);
+                }
+            }
+        });
+    	
+        upload.render({
+            elem: '#test3'
+            ,url: "{:siteUrl('admin/index/upload','','web')}" //改成您自己的上传接口
+            ,done: function(res){
+                //如果上传失败
+                if(res.code < 0){
+                    return layer.msg('上传失败');
+                }else{
+                    $('#demo3').attr('src', res.msg); //图片链接（base64）
+                    $('#advertising').val(res.msg);
+                }
+            }
+        });
+    	
+    	upload.render({
+            elem: '#test2'
+           	,url: "{:siteUrl('admin/index/upload','','web')}" //改成您自己的上传接口
+         	,multiple: true
+            ,choose:function (obj) {
+            	var files = this.files = obj.pushFile();
+               //预读本地文件示例，不支持ie8
+             obj.preview(function(index, file, result){
+                $('#ImgPreview').append('<div class="image-container" id="container'+index+'"><div class="delete-css"><button id="upload_img_'+index+'" class="layui-btn layui-btn-danger layui-btn-xs">删除</button></div>\n' +
+                    '<img id="showImg'+index+'" style="width: 150px; margin:10px;cursor:pointer;" src="'+ result +'" alt="'+ file.name +'" ></div>');
+                $("#upload_img_" + index).bind('click', function () {
+                	delete files[index];
+                    $("#container"+index).remove();
+                });
+             });
+             }
+             ,done: function(res,index){ //当文件全部被提交后，才触发
+               $('#ImgPreview').append('<input value="'+ res.msg +'" name="carousel[]" class="carousel"  type="hidden">');
+               delete this.files[index];
+             }
+          });
+    	
+    	
+    	
+    	upload.render({
+            elem: '#test4'
+           	,url: "{:siteUrl('admin/index/upload','','web')}" //改成您自己的上传接口
+         	,multiple: true
+            ,choose:function (obj) {
+           	 var files = obj.pushFile();
+               //预读本地文件示例，不支持ie8
+             obj.preview(function(index, file, result){
+                $('#ImgPreviewTemp1').append('<div class="image-container" id="container1'+index+'"><div class="delete-css"><button id="upload_img_1'+index+'" class="layui-btn layui-btn-danger layui-btn-xs">删除</button></div>\n' +
+                    '<img id="showImg1'+index+'" style="width: 150px; margin:10px;cursor:pointer;" src="'+ result +'" alt="'+ file.name +'" ></div>');
+                $("#upload_img_1" + index).bind('click', function () {
+                	delete files[index];
+                    $("#container1"+index).remove();
+                });
+             });
+             }
+             ,done: function(res){ //当文件全部被提交后，才触发
+               $('#ImgPreviewTemp1').append('<input value="'+ res.msg +'" name="cate_carousel[]" class="carousel"  type="hidden">')
+             }
+          });
+    	
+    	
+    	upload.render({
+            elem: '#test5'
+           	,url: "{:siteUrl('admin/index/upload','','web')}" //改成您自己的上传接口
+         	,multiple: true
+            ,choose:function (obj) {
+           	 var files = obj.pushFile();
+               //预读本地文件示例，不支持ie8
+             obj.preview(function(index, file, result){
+                $('#ImgPreviewTemp2').append('<div class="image-container" id="container2'+index+'"><div class="delete-css"><button id="upload_img_2'+index+'" class="layui-btn layui-btn-danger layui-btn-xs">删除</button></div>\n' +
+                    '<img id="showImg'+index+'" style="width: 150px; margin:10px;cursor:pointer;" src="'+ result +'" alt="'+ file.name +'" ></div>');
+                $("#upload_img_2" + index).bind('click', function () {
+                	delete files[index];
+                    $("#container2"+index).remove();
+                });
+             });
+             }
+             ,done: function(res){ //当文件全部被提交后，才触发
+               $('#ImgPreviewTemp2').append('<input value="'+ res.msg +'" name="djq_carousel[]" class="carousel"  type="hidden">')
+             }
+          });
+
+
+
+        //创建一个编辑器
+        var editIndex = layedit.build('LAY_demo_editor');
+        //自定义验证规则
+        form.verify({
+            name: function(value){
+                if(value.length < 5){
+                    return '标题至少得5个字符啊';
+                }
+            }
+            ,promotion_content: function(value){
+                layedit.sync(editIndex);
+            }
+        });
+
+        //监听指定开关
+        form.on('switch(switchTest)', function(data){
+            layer.msg('开关checked：'+ (this.checked ? 'true' : 'false'), {
+                offset: '6px'
+            });
+            layer.tips('温馨提示：请注意开关状态的文字可以随意定义，而不仅仅是ON|OFF', data.othis)
+        });
+        
+      //监听提交
+        form.on('submit(demo1)', function(data){
+            var admin = layui.admin
+            
+         
+
+            admin.req({
+                url:"{:siteUrl('admin/system/set_ktv_system','','web')}",
+                data:data.field,
+                type:"POST",
+                done:res=>{
+                    if(res.code == 0 ){
+                		layer.msg("设置成功");
+                	}
+                }
+            })
+            return false
+  
+        });
+      
+        $("#dian").click(function(){
+        	layer.open({
+                type:2,
+                area: ['60%', '65%'],
+                title:"支付配置",
+                yes: function(index, layero){
+                    //按钮【按钮一】的回调
+                	layer.close(index);
+                },
+                cancel: function(){ 
+                    //右上角关闭回调
+                    
+                    //return false 开启该代码可禁止点击该按钮关闭
+                },
+                content:"{:siteUrl('admin/payconfig/index','','web')}",
+                success:function(){
+                	
+
+                }  
+            });
+       });
+        
+        $("#fujian").click(function(){
+        	layer.open({
+                type:2,
+                area: ['60%', '65%'],
+                title:"附件配置",
+                yes: function(index, layero){
+                    //按钮【按钮一】的回调
+                	layer.close(index);
+                },
+                cancel: function(){ 
+                    //右上角关闭回调
+                    
+                    //return false 开启该代码可禁止点击该按钮关闭
+                },
+                content:"{:siteUrl('admin/attachment/index','','web')}",
+                success:function(){
+                	
+                }  
+            });
+       });
+        
+        
+        
+        $("#trapeze").click(function(){
+            layer.open({
+                type:2,
+                area: ['800px', '500px'],
+                title:"选择经纬度",
+                btn: ['确定', '取消'],
+                yes: function(index, layero){
+                    //按钮【按钮一】的回调
+                    var body = layer.getChildFrame('body', index);
+                    var tempLng = body.find("#lng").val();
+                    var tempLat = body.find("#lat").val();
+                    console.log("lng",tempLng);
+                    console.log("lat",tempLat);
+                   
+                    $("#lng").val(tempLng);
+                    $("#lat").val(tempLat);
+                	layer.close(index);
+                	
+                },
+                cancel: function(){ 
+                    //右上角关闭回调
+                    
+                    //return false 开启该代码可禁止点击该按钮关闭
+                },
+                content:"{:siteUrl('admin/index/map','','web')}",
+                success:function(){
+                	
+
+                }  
+            });
+       });
+        
+        $("#rangeSelect").click(function(){
+            layer.open({
+                type:2,
+                area: ['1000px', '600px'],
+                title:"选择经营范围",
+                btn: ['确定', '取消'],
+                yes: function(index, layero){
+                    //按钮【按钮一】的回调
+                    var body = layer.getChildFrame('body', index);
+                    var rangeLng = body.find("#rangeLng").val();
+                    var rangeLat = body.find("#rangeLat").val();
+                    console.log("rangeLng",rangeLng);
+                    console.log("rangeLat",rangeLat);
+                                        
+                   
+                    $("#rangeLng").val(rangeLng);
+                    $("#rangeLat").val(rangeLat);
+                	layer.close(index);
+                	
+                },
+                cancel: function(){ 
+                    //右上角关闭回调
+                    
+                    //return false 开启该代码可禁止点击该按钮关闭
+                },
+                content:"{:siteUrl('admin/index/range','','web')}",
+                success:function(){
+                	
+
+                }  
+            });
+       });
+      
+
+
+        //表单取值
+        layui.$('#LAY-component-form-getval').on('click', function(){
+            var data = form.val('example');
+            alert(JSON.stringify(data));
+        });
+
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>系统设置</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="__PUBLIC__/static/layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="__PUBLIC__/static/layuiadmin/style/admin.css" media="all">
+    <style>
+        form{
+            padding-right:15px ;
+        }
+    </style>
+</head>
+<body>
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <div class="layui-card-header">基本设置</div>
+                <div class="layui-card-body" pad15>
+
+                    <div class="layui-form" wid100 lay-filter="">
+<form class="layui-form" style="margin-top:21px;">
+
+	
+
+<input type="hidden" name="id" value="{$store['id']}"/>
+
+<div class="layui-form-item">
+	    <label class="layui-form-label">门店名称</label>
+	    <div class="layui-input-block">
+	      <input type="text" name="store_name" required lay-verify="required" placeholder="请输入门店名称" autocomplete="off" class="layui-input" value="{$store['store_name']}" />
+	    </div>
+	  </div>
+	  
+	  <div class="layui-form-item">
+	    <label class="layui-form-label">门店电话号码</label>
+	    <div class="layui-input-block">
+	      <input type="text" name="store_phone" required lay-verify="required" placeholder="请输入门店号码" autocomplete="off" class="layui-input" value="{$store['store_phone']}" />
+	    </div>
+	  </div>
+	  
+	  
+<!-- 	  <div class="layui-form-item" >
+        <label class="layui-form-label">门店管理员</label>
+        <div class="layui-input-block">
+            <select lay-filter="cateSelect" name="account_id"  >
+            	{if empty($accounts)}
+			      	<option value="">暂无分类</option>
+			    {else}
+			    	<option value="" >暂不选择</option>
+			    	{foreach  $accounts as $v}
+			    		<option value="{$v.id}" {eq name="$store.account_id" value="$v.id"} selected="" {/eq}>{$v.username}</option>
+			        {/foreach}
+			    {/if}
+            </select>
+        </div>
+    </div> -->
+	  
+	  
+	  <div class="layui-form-item">
+	    <label class="layui-form-label">门店地址</label>
+	    <div class="layui-input-inline">
+	        <input type="hidden" name="store_addres_lng" value="{$store['store_addres_lng']}" id="lng">
+			<input type="hidden" name="store_addres_lat" value="{$store['store_addres_lat']}" id="lat">
+			<input type="hidden" name="store_addres" value="{$store['store_addres']}" id="addres">
+	        <button type="button" class="layui-btn" id="qqtrapeze">选择地址</button>
+	    </div>
+	    <div class="layui-input-inline">
+	       <label id="addresLabel">{$store['store_addres']}</label>
+	    </div>
+	  </div>
+	  
+
+
+	
+
+    
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">门店图片</label>
+        <button type="button" class="layui-btn" id="test2">上传图片</button>
+        <div class="layui-input-block">
+            <img class="layui-upload-img" id="demo2" style="margin-top: 10px;height: 150px;width: 150px" {if $store['store_logo']==''}{else}src="{$_W['siteroot']}{$store['store_logo']}"{/if}">
+            <input type="hidden" name="store_logo"  lay-verify="required" id="group_log" value="{$store['store_logo']}">
+        </div>
+        <div class="layui-input-block">
+            <div class="layui-form-mid layui-word-aux">图片建议尺寸380*380px</div>
+        </div>
+    </div>
+
+
+  
+
+  
+  <div class="layui-form-item">
+    <div class="layui-input-block">
+      <button class="layui-btn" lay-submit lay-filter="demo1">立即提交</button>
+    </div>
+  </div>
+  <!-- 更多表单结构排版请移步文档左侧【页面元素-表单】一项阅览 -->
+</form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="layui-footer" style="margin-top:20px;display: flex;justify-content: center;align-items: flex-end;">
+	{include file='../addons/wjyk_nhyk/application/admin/view/index/footer.html' /}
+</div>
+<script src="__PUBLIC__/static/layuiadmin/layui/layui.js"></script>
+<script type="text/javascript" src="__PUBLIC__/static/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" src="__PUBLIC__/static/ueditor/ueditor.all.js"></script>
+<script>
+	layui.config({
+	    base: '__PUBLIC__/static/layuiadmin/' //静态资源所在路径
+	}).extend({
+	    index: 'lib/index' //主入口模块
+	    	, layarea: '../layui/layui_exts/city-picker/layarea'
+	}).use(['jquery','layer', 'index', 'table','upload', 'layarea','layedit'], function(){
+		var $ = layui.$
+		, layer = layui.layer
+		, layedit = layui.layedit
+	    , table = layui.table
+	    , form = layui.form
+	    , layarea = layui.layarea
+	    , upload = layui.upload;
+		
+	
+    
+    	
+        upload.render({
+            elem: '#test2'
+            ,url: "{:siteUrl('admin/index/upload','','web','merchant')}" //改成您自己的上传接口
+            ,done: function(res){
+                if(res.code > 0){
+                    return layer.msg('上传失败');
+                }else{
+                    $('#demo2').attr('src', res.msg); //图片链接（base64）
+                    $('#group_log').val(res.relimg_path);
+                    
+                }
+            }
+        });
+    	
+    	
+    
+
+      //监听提交
+        form.on('submit(demo1)', function(data){
+            var admin = layui.admin;
+            admin.req({
+                url:"{:siteUrl('admin/store/edit_store','','web','merchant')}",
+                data:data.field,
+                type:"POST",
+                done:res=>{
+                    if(res.code == 0 ){
+                		layer.msg("设置成功");
+                	}
+                }
+            })
+            return false
+  
+        });
+      
+       
+        
+    
+        
+      
+
+
+        //表单取值
+        layui.$('#LAY-component-form-getval').on('click', function(){
+            var data = form.val('example');
+            alert(JSON.stringify(data));
+        });
+
+    });
+</script>
+</body>
+</html>

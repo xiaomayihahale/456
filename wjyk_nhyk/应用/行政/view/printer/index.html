@@ -1,0 +1,172 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>打印机列表</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="__PUBLIC__/static/layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="__PUBLIC__/static/layuiadmin/style/admin.css" media="all">
+</head>
+<style>
+  .layui-table-cell{
+      display:table-cell;
+      vertical-align: middle;
+  }
+</style>
+<body>
+
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <div class="layui-card-header">打印机列表</div>
+                <div class="layui-card-body">
+                    <div class=" demoTable layui-form" style="margin-bottom:10px">
+                    	<button class="layui-btn" data-type="addfoods">添加打印机</button>
+              
+					</div>
+                    <table class="layui-hide" id="test-table-operate" lay-filter="test-table-operate"></table>
+
+                    <script type="text/html" id="test-table-operate-barDemo">
+                        <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+                        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+				
+                    </script>
+                    
+                    <script type="text/html" id="displayTpl">
+  						<script type="text/html" id="displayTpl">
+                        {{#  if(d.is_show == 1){ }}
+                        <input type="checkbox" checked lay-skin="switch" lay-filter="encrypt"  lay-text="显示|隐藏" >
+                        {{#  } else { }}
+                        <input type="checkbox" lay-skin="switch" lay-filter="encrypt" lay-text="显示|隐藏" >
+                        {{#  } }}
+                    </script>
+					</script>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="__PUBLIC__/static/layuiadmin/layui/layui.js"></script>
+<script>
+    layui.config({
+        base: '__PUBLIC__/static/layuiadmin/' //静态资源所在路径
+    }).extend({
+        index: 'lib/index' //主入口模块
+    }).use(['index', 'table'], function(){
+        var table = layui.table
+            ,admin = layui.admin;
+
+        table.render({
+            elem: '#test-table-operate'
+            ,url:"{:siteUrl('admin/printer/printer_list','','web')}&store_id=<?= $store_id; ?>"
+            ,cols: [[
+				{field:'user',  title: '用户'}
+				,{field:'ukey',  title: '用户key'}
+                ,{field:'name', title: '打印机名称', sort: true}
+                ,{field:'createtime',  title: '添加时间', sort: true ,templet:function(d){
+                	return layui.util.toDateString(d.createtime*1000, "yyyy-MM-dd HH:mm");
+                }}
+                ,{width:218, align:'center', toolbar: '#test-table-operate-barDemo'}
+            ]]
+            ,page: true
+        });
+        
+        
+
+        //监听表格复选框选择
+        table.on('checkbox(test-table-operate)', function(obj){
+            console.log(obj)
+        });
+        //监听工具条
+        table.on('tool(test-table-operate)', function(obj){
+            var data = obj.data;
+            if(obj.event === 'detail'){
+            	window.location.href="{:siteUrl('admin/goods/edit_goods','','web')}&id="+data.id;
+            } else if(obj.event === 'del'){
+                layer.confirm('确定删除该产品吗？', function(index){
+                	window.location.href="{:siteUrl('admin/printer/del_printer','','web')}&id="+data.id;
+                    layer.close(index);
+                });
+            } else if(obj.event === 'edit'){
+            	layer.open({
+                    type:2,
+                    area: ['60%', '80%'],
+                    title:"编辑 "+obj.name,
+                    
+                    content:"{:siteUrl('admin/printer/edit_printer','','web')}&store_id=<?= $store_id; ?>&id="+data.id,
+                    success:function(){
+                    	
+                    }  
+                });
+            }
+            else if(obj.event === 'setSign'){
+                admin.req({
+                    url:"{:siteUrl('admin/goods/change','','web')}&id="+data.id,
+                    type:"POST",
+                    done:res=>{
+                        table.reload('test-table-operate', {
+                            // page: {
+                            //     curr: 1 //重新从第 1 页开始
+                            // }
+                        });
+                    }
+                })
+            }
+        });
+        
+        table.on('toolbar(test-table-operate)', function(obj){
+       	  var checkStatus = table.checkStatus(obj.config.id);
+       	  switch(obj.event){
+       	    case 'add':
+       	    	window.location.href="{:siteUrl('admin/goods/edit_goods','','web')}";
+       	    break;
+       	  };
+       	});
+
+        var $ = layui.$, active = {
+            reload: function(){
+            	var demoReload = $('#test-table-demoReload');
+                var categoryid = $('#categoryid');
+                //执行重载 --id
+                table.reload('test-table-operate', {
+                  page: {
+                    curr: 1 //重新从第 1 页开始
+                  }
+                  ,where: {
+                	  'name': demoReload.val(),
+                    'categoryid': categoryid.val()
+                  }
+                });
+              },
+              addfoods:function(){
+            	  layer.open({
+                      type:2,
+                      area: ['60%', '80%'],
+                      title:"新增打印机",
+                      
+                      content:"{:siteUrl('admin/printer/edit_printer','','web')}&store_id=<?= $store_id; ?>",
+                      success:function(){
+                      	
+                      }  
+                  });
+               }
+        };
+
+        $('.demoTable .layui-btn').on('click', function(){
+            var type = $(this).data('type');
+            active[type] ? active[type].call(this) : '';
+        });
+
+    });
+</script>
+</body>
+<div class="layui-footer" style="margin-top:20px;display: flex;justify-content: center;align-items: flex-end;">
+	{include file='../addons/wjyk_nhyk/application/admin/view/index/footer.html' /}
+</div>
+</html>

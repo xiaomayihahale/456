@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>服务项目</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="__PUBLIC__/static/layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="__PUBLIC__/static/layuiadmin/style/admin.css" media="all">
+    <style>
+        form{
+            padding-right:15px ;
+        }
+		.color-red{
+			color: red;
+        }
+    </style>
+</head>
+<body>
+<form class="layui-form layui-form-pane" style="margin-top:21px;">
+
+	<div class="layui-card">
+	  <div class="layui-card-header">充值详情</div>
+	  <div class="layui-card-body">
+
+
+
+
+		  <input type="hidden" id="order_id" value="{$srdb['id']}">
+
+
+		  <div style="display: flex;flex-wrap: wrap">
+			  <div style="width: 50%;">
+				  <div class="layui-card">
+					  <div class="layui-card-body layui-text">
+						  <table class="layui-table">
+							  <colgroup>
+								  <col width="100">
+								  <col>
+							  </colgroup>
+							  <tbody>
+							  <tr>
+								  <td>会员</td>
+								  <td>
+									  <script type="text/html" template>
+										  <img src="{$srdb['avatar']}" alt="" style="width: 30px">{$srdb['nickname']}
+									  </script>
+								  </td>
+							  </tr>
+							  <tr>
+								  <td>会员卡号</td>
+								  <td>
+									  <script type="text/html" template>
+										  {$srdb['member_no']}： {$srdb['mobile']}
+									  </script>
+								  </td>
+							  </tr>
+							  <tr>
+								  <td>充值金额</td>
+								  <td>
+									  <script type="text/html" template>
+										  {$srdb['money']}
+									  </script>
+								  </td>
+							  </tr>
+							  <tr>
+								  <td>赠送金额</td>
+								  <td>
+									  <script type="text/html" template>
+										  {$srdb['only']}
+									  </script>
+								  </td>
+							  </tr>
+
+							  <tr>
+								  <td>充值类型</td>
+								  <td>
+									  <script type="text/html" template>
+										  {if $srdb['type']==1}普通充值{else}代理充值{/if}
+									  </script>
+								  </td>
+							  </tr>
+							  {if $srdb['type']==2}
+							  		 <tr>
+								  <td>代充员工</td>
+								  <td>
+									  <script type="text/html" template>
+										  {$srdb['username']}
+									  </script>
+								  </td>
+								  </tr>
+								  <tr>
+									  <td>代充员工工号</td>
+									  <td>
+										  <script type="text/html" template>
+										 {$srdb['acc_id']}
+									  </script>
+									  </td>
+								  </tr>
+								  <tr>
+									  <td>代充门店</td>
+									  <td>
+										  <script type="text/html" template>
+										 {$srdb['store_name']}
+									  </script>
+									  </td>
+								  </tr>
+							  {/if}
+							 
+							  </tbody>
+						  </table>
+					  </div>
+				  </div>
+
+			  </div>
+			 
+
+
+	  </div>
+
+
+
+	</div>
+
+  <div class="layui-form-item">
+    <div class="layui-input-block">
+
+    	
+
+    </div>
+  </div>
+  <!-- 更多表单结构排版请移步文档左侧【页面元素-表单】一项阅览 -->
+</form>
+<script src="__PUBLIC__/static/layuiadmin/layui/layui.js"></script>
+
+
+<script>
+
+
+	layui.config({
+	    base: '__PUBLIC__/static/layuiadmin/' //静态资源所在路径
+	}).extend({
+	    index: 'lib/index' //主入口模块
+	}).use(['jquery','layer', 'index', 'table','upload','layedit'], function(){
+		var $ = layui.$
+		, layer = layui.layer
+		, layedit = layui.layedit
+	    , table = layui.table
+	    , form = layui.form
+	    , upload = layui.upload;
+     
+
+        //表单取值
+        layui.$('#LAY-component-form-getval').on('click', function(){
+            var data = form.val('example');
+            alert(JSON.stringify(data));
+        });
+
+    });
+</script>
+</body>
+</html>

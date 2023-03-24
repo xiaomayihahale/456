@@ -1,0 +1,692 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>门店统计</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="__PUBLIC__/static/layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="__PUBLIC__/static/layuiadmin/style/admin.css" media="all">
+    <script src="__PUBLIC__/static/layuiadmin/layui/echarts.min.js"></script>
+</head>
+<style>
+  .layui-table-cell{
+      display:table-cell;
+      vertical-align: middle;
+  }
+  
+  .left-group, .right-group{
+            width: 300px;
+  			height:50px;
+            background-color: #7ecff2;
+            text-align: center;
+   }
+   .mid-group{
+          
+   			width: 300px;
+   			height:50px;
+            background-color: #ff5000;
+            text-align: center;
+   }
+   
+   .myul{
+	    display: block;
+	    list-style-type: disc;
+	    margin-block-start: 1em;
+	    margin-block-end: 1em;
+	    padding-inline-start: 40px;
+   	    margin: 15px 0;
+   }
+   
+
+  
+</style>
+<body>
+
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <div class="layui-card-header">统计数据</div>
+                
+                
+                <div class="layui-card-body">
+                	<ul class="myul layui-row layui-col-space15 site-doc-color">
+                		<li class="layui-col-sm3">
+                			<div style="background-color: #FFB800;">
+                				<p>
+                					总充值: {$srdb['recharge_summoney']} 元
+                				</p>
+                			</div>
+                		</li>
+                		<li class="layui-col-sm3">
+                			<div style="background-color: #FF5722;">
+                				<p>
+                					总消费: {$srdb['order_summoney']} 元
+                				</p>
+                			</div>
+                		</li>
+                		<li class="layui-col-sm3">
+                			<div style="background-color: #1E9FFF;">
+                				<p>
+                					总扣费: {$srdb['proxy_summoney']} 元
+                				</p>
+                			</div>
+                		</li>
+                	</ul>
+                	
+                
+                
+                	<!-- <div class="demoTable layui-form" style="margin-bottom:10px">
+
+                        <div class="layui-inline left-group">
+                             		总充值: {$srdb['recharge_summoney']} 元
+                        </div>
+                        <div class="layui-inline min-group">
+                             <label class="layui-form-label">总消费: {$srdb['order_summoney']} 元</label>
+                        </div>
+                        <div class="layui-inline right-group">
+                             <label class="layui-form-label">总扣费: {$srdb['proxy_summoney']} 元</label>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-md12">
+            <div class="layui-card">
+              <div class="layui-card-header">数据概览</div>
+              
+              
+              
+              <div>
+              		<div class=" main_demoTable layui-form" style="margin-bottom:10px;float:right" >	
+		                 <div class="layui-form-item" id="eff_div">
+					        <label class="layui-form-label">范围选择</label>
+					        <div class="layui-input-inline">
+					            <input type="text" class="layui-input" name="effective" id="test5"  />
+					        </div>
+					        <button class="layui-btn" data-type="main_7_reload">最近7天</button>
+			                <button class="layui-btn" data-type="main_3_reload">最近3个月</button>
+					     </div>
+				  </div>
+				  <!-- <div style="margin-bottom:10px;float:left">
+				  		<label style="font-size: 16px;">总消费</label>
+				  		<label style="font-size: 16px;">123</label>
+				  </div> -->
+              </div>
+              
+              <div class="layui-card-body" style="margin-top:30px;">
+                
+                <div class="layui-carousel layadmin-carousel layadmin-dataview" id="main" data-anim="fade" lay-filter="LAY-index-dataview">
+					
+                </div>
+                
+              </div>
+            </div>
+          </div>
+          
+        
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <div class="layui-card-header">数据列表</div>
+                <div class="layui-card-body">
+                	<div class="demoTable layui-form" style="margin-bottom:10px">
+                		<div class="layui-form-item">
+	                        <button class="layui-btn" data-type="cz">充值</button>
+	                        <button class="layui-btn" data-type="order">消费</button>
+	                        <button class="layui-btn" data-type="kg">扣款</button>
+						</div>
+                	
+                	
+						<div class="layui-form-item" id = "cz_search_div">
+	                        <div class="layui-inline">
+	                            <input class="layui-input" placeholder="请输入会员名称" name="member_name"  autocomplete="off">
+	                        </div>
+	                        <div class="layui-inline">
+	                             <input class="layui-input" placeholder="请输入代充员工名称" name="account_name"  autocomplete="off">
+	                        </div>
+	                        <div class="layui-inline">
+	                           <select name="type" id="typeSelect" lay-verify="">
+	                               <option value="">全部</option>
+					               <option value="1">普通充值</option>
+					               <option value="2">代理充值</option>
+					           </select>
+	                        </div>
+							
+	                        <button class="layui-btn" data-type="reload">搜索</button>
+						</div>
+						
+						<div class="layui-form-item" id = "kg_search_div" style="display: none;">
+				            <div class="layui-inline" >
+				              <input class="layui-input" placeholder="请输入会员名称" name="name"  autocomplete="off">
+				            </div>
+				            <div class="layui-inline" style="margin-left:10px">
+				              <input class="layui-input" placeholder="请输入门店名称" name="store_name"  autocomplete="off">
+				            </div>
+	                        <button class="layui-btn" data-type="kg_reload">搜索</button>
+						</div>
+						
+						
+						<div class="layui-form-item" id = "order_search_div" style="display: none;">
+	                        <div class="layui-inline" >
+				              <label class="layui-form-label">订单状态</label>
+							    <div class="layui-inline">
+							      <select  lay-verify="" id="is_status">
+					              	<option value="0">请选择订单状态</option>
+							        <option value="2">待发货</option>
+							        <option value="3">已发货</option>
+							        <option value="4">已完成</option>
+							      </select>
+							    </div>
+				            </div>
+				            <div class="layui-inline">
+						      <label class="layui-form-label">时间范围</label>
+						      <div class="layui-input-inline">
+						        <input type="text" class="layui-input" id="test10" placeholder=" - " readonly style="width: 280px;">
+						      </div>
+						    </div>
+				            <button class="layui-btn" style="margin-left:85px;" data-type="order_reload">搜索</button>
+						</div>
+						
+					
+						
+						
+						 
+						
+						
+						
+                    </div>
+                
+                    <table class="layui-hide" id="test-table-operate" lay-filter="test-table-operate"></table>
+                    <script type="text/html" id="test-table-operate-barDemo-cz">
+					    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail_cz">查看</a>
+                    </script>
+                    <script type="text/html" id="test-table-operate-barDemo-order">
+					    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail_order">查看</a>
+                    </script>
+                    <script type="text/html" id="test-table-operate-barDemo-kg">
+					    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail_kg">查看</a>
+                    </script>
+                 
+                </div>
+            </div>
+        </div> 
+        
+         
+    </div>
+    
+</div>
+
+<script src="__PUBLIC__/static/layuiadmin/layui/layui.js"></script>
+<script>
+    layui.config({
+        base: '__PUBLIC__/static/layuiadmin/' //静态资源所在路径
+    }).extend({
+        index: 'lib/index' //主入口模块
+    }).use(['index', 'table','laydate'], function(){
+        var table = layui.table
+            ,laydate = layui.laydate
+            ,admin = layui.admin;
+
+        table.render({
+            elem: '#test-table-operate'
+            ,url:"{:siteUrl('admin/recharge/recharge_log_list','','web')}&oper_id=<?= $oper_id; ?>&store_id=<?= $store_id; ?>"
+            ,cols: [[
+                {field:'money',  title: '充值金额(元)', sort: true}
+                ,{field:'only', title: '赠送金额金额(元)'}
+                ,{field:'nickname', title: '充值会员名称'}
+                ,{field:"type",title:"充值类型",templet:function(d){
+                	if(d.type == 1){
+                		return "普通充值";
+                	}else if(d.type == 2){
+                		return "代理充值员工:"+d.username;
+                	}
+                }}
+                ,{field:'createtime', title: '添加时间', sort: true }
+                ,{align:'center', toolbar: '#test-table-operate-barDemo-cz'}
+            ]]
+            ,page: true
+        });
+        
+      //日期时间范围选择
+        laydate.render({
+            elem: '#test5'
+            ,type: 'datetime'
+            ,range: '~' //或 range: '~' 来自定义分割字符
+           	,done: function(value, date){
+           		  initEs({"type":3,"date":value,"obj":1,"store_id":eval("<?= $store_id; ?>")});
+           	 }
+        });
+      
+        laydate.render({
+            elem: '#test10'
+           	,range: true
+           	,trigger: 'click'
+   	    	,type: 'datetime'
+   	    	,format: 'yyyy/MM/d HH:mm:ss'
+          });
+
+        //监听表格复选框选择
+        table.on('checkbox(test-table-operate)', function(obj){
+            console.log(obj)
+        });
+        //监听工具条
+        table.on('tool(test-table-operate)', function(obj){
+            var data = obj.data;
+            if(obj.event === 'detail_cz'){
+            	
+            	layer.open({
+                    type:2,
+                    area: ['800px', '500px'],
+                    title:"充值详情",
+                    
+                    content:"{:siteUrl('admin/recharge/edit_recharge_log','','web')}&id="+data.id,
+                    success:function(){
+                    	
+                    }  
+                });
+            }else if(obj.event === 'detail_order'){
+            	if(data.plugin_type == 0 || data.plugin_type == ''){
+            		layer.open({
+                        type:2,
+                        area: ['1200px', '600px'],
+                        title:"订单详情",
+                        
+                        content:"{:siteUrl('admin/goodsOrder/edit_order','','web')}&id="+data.id,
+                        success:function(){
+                        	
+                        }  
+                    });
+            	}else if(data.plugin_type == 1){
+            		layer.open({
+                        type:2,
+                        area: ['1200px', '600px'],
+                        title:"订单详情",
+                        
+                        content:"{:siteUrl('admin/foodsOrder/edit_order','','web')}&id="+data.id,
+                        success:function(){
+                        	
+                        }  
+                    });
+            	}else if(data.plugin_type == 2){
+            		layer.open({
+                        type:2,
+                        area: ['1200px', '600px'],
+                        title:"订单详情",
+                        
+                        content:"{:siteUrl('admin/hotelOrder/edit_order','','web')}&id="+data.id,
+                        success:function(){
+                        	
+                        }  
+                    });
+            	}
+            	
+            }else if(obj.event === 'detail_kg'){
+            	layer.open({
+                    type:2,
+                    area: ['500px', '600px'],
+                    title:"扣款详情",
+                    
+                    content:"{:siteUrl('admin/storeAdmin/edit_proxy_log','','web')}&id="+data.id,
+                    success:function(){
+                    	
+                    }  
+                });
+            }
+        });
+        
+        table.on('toolbar(test-table-operate)', function(obj){
+       	  var checkStatus = table.checkStatus(obj.config.id);
+       	  switch(obj.event){
+       	    case 'add':
+       	    	
+       	    	
+       	    	window.location.href="{:siteUrl('admin/recharge/edit_recharge','','web')}";
+       	    break;
+       	  };
+       	});
+        
+        var $ = layui.$, active = {
+                reload: function(){
+                	var member_name = $("input[name=member_name]").val();
+                	var account_name = $("input[name=account_name]").val();
+                    var type = $('#typeSelect').val();
+                    //执行重载 --id
+                    table.reload('test-table-operate', {
+                      page: {
+                        curr: 1 //重新从第 1 页开始
+                      }
+                      ,where: {
+                    	  'member_name': member_name,
+                        'account_name': account_name,
+                        'type':type
+                      }
+                    });
+                  },
+                  order_reload: function(){
+                      var status = $('#is_status');
+                      var con_time = $('#test10');
+                      //执行重载 --id
+                      table.reload('test-table-operate', {
+                        page: {
+                          curr: 1 //重新从第 1 页开始
+                        }
+                        ,where: {
+                          'status': status.val(),
+                          'con_time': con_time.val()
+                        }
+                      });
+                   },
+                    kg_reload: function(){
+                    	var name = $('input[name=name]').val();
+                        var store_name = $('input[name=store_name]').val();
+                        //执行重载 --id
+                        table.reload('test-table-operate', {
+                          page: {
+                            curr: 1 //重新从第 1 页开始
+                          }
+                          ,where: {
+                        	  'name': name,
+                            'store_name': store_name
+                          }
+                        });
+                      },
+                  main_7_reload:function(){
+                	  initEs({"type":1,"obj":1,"store_id":eval("<?= $store_id; ?>")});
+                  },
+                  main_3_reload:function(){
+                	  initEs({"type":2,"obj":1,"store_id":eval("<?= $store_id; ?>")});
+                  },
+                  cz:function(){
+                	  
+                	  table.render({
+                          elem: '#test-table-operate'
+                          ,url:"{:siteUrl('admin/recharge/recharge_log_list','','web')}&store_id=<?= $store_id; ?>"
+                          ,cols: [[
+                              {field:'money',  title: '充值金额(元)', sort: true}
+                              ,{field:'only', title: '赠送金额金额(元)'}
+                              ,{field:'nickname', title: '充值会员名称'}
+                              ,{field:"type",title:"充值类型",templet:function(d){
+                              	if(d.type == 1){
+                              		return "普通充值";
+                              	}else if(d.type == 2){
+                              		return "代理充值员工:"+d.username;
+                              	}
+                              }}
+                              ,{field:'createtime', title: '添加时间', sort: true }
+                              ,{align:'center', toolbar: '#test-table-operate-barDemo-cz'}
+                          ]]
+                          ,page: true
+                      });
+                	  $("#order_search_div").attr("style","display: none");
+                	  $("#kg_search_div").attr("style","display: none");
+                	  $("#cz_search_div").removeAttr("style");
+                  },
+                  kg:function(){
+                	  table.render({
+                          elem: '#test-table-operate'
+                          ,url:"{:siteUrl('admin/statistics/proxy_list','','web')}&oper_id=<?= $oper_id; ?>&store_id=<?= $store_id; ?>"
+                          ,cols: [[
+              				{field:'nickname',  title: '会员名称',}
+              				,{field:'avatar', title: '用户头像',templet:function(d){
+
+                                  return "<img style='max-width:25px;' src='"+d.avatar+"'></img>";
+
+                              }}
+              				,{field:'money',  title: '消费金额'}
+              				,{field:'username',  title: '操作员'}
+              				,{field:'store_name',  title: '门店'}
+                              ,{field:'createtime',  title: '添加时间', sort: true ,templet:function(d){
+                              	return layui.util.toDateString(d.createtime*1000, "yyyy-MM-dd HH:mm");
+                              }}
+                               ,{width:218, align:'center', toolbar: '#test-table-operate-barDemo-kg'} 
+                          ]],
+                          done: function (res, curr, count) {
+                             
+                          }
+                          ,page: true
+                      });
+                	  $("#order_search_div").attr("style","display: none");
+                	  $("#cz_search_div").attr("style","display: none");
+                	  $("#kg_search_div").removeAttr("style");
+                       
+                  },
+                  order:function(){
+                	  table.render({
+                          elem: '#test-table-operate'
+                          ,url:"{:siteUrl('admin/goodsOrder/order_all_list','','web')}&store_id=<?= $store_id; ?>"
+                         	,cellMinWidth: 80
+                         	,cols: [[
+                               {field:'goods_name', width:'30%', title: '商品信息',templet:function(d){
+                                      return d.goods;
+                                  }}
+                               ,{field:'order_number', width:'11%', title: '订单号', sort: true}
+                               ,{field:'uid',width:'11%', title: '用户信息',templet:function(d){
+                               	return "<img style='max-width:25px;' src='"+d.avatar+"'></img>"+d.nickname;
+                               }}
+
+                               ,{field:'real_payment',width:'11%', title: '实付金额(元)', sort: true}
+                               ,{field:'status', width:'11%',title: '订单状态', sort: true,templet:function(d){
+                            	   if(d.plugin_type == 0 || d.plugin_type == '' ||(d.plugin_type==1&&d.pickup_type==0)){
+                            		   if(d.status == 2){
+	                                 		return "待发货";
+	                                 	}else if(d.status == 3){
+	                                 		return "已发货";
+	                                 	}else if(d.status == 4){
+	                                 		return "已完成";
+	                                 	}
+                            	   }else if(d.plugin_type == 1){
+                            		   if(d.status == 1){
+	                                 		return "待付款";
+	                                 	}else if(d.status == 4){
+	                                 		return "已完成";
+	                                 	}
+                            	   }else if(d.plugin_type == 2){
+                            		     if(d.status ==   2){
+                                			  return "待入住";
+	                                     }else if(d.status == 3  ){
+	                                       		return "待退房";
+	                                     }else if(d.status == 4){
+	                                       		return "已完成";
+	                                     }
+                           	   	   }
+	                              	    
+                               }}
+                               ,{field:'createtime',width:'11%', title: '提交时间', sort: true ,templet:function(d){
+                               	return layui.util.toDateString(d.createtime*1000, "yyyy-MM-dd HH:mm");
+                               }}
+                               ,{width:'15%',align:'center', toolbar: '#test-table-operate-barDemo-order'}
+                           ]]
+                          ,page: true
+                      });
+                	  $("#cz_search_div").attr("style","display: none");
+                	  $("#kg_search_div").attr("style","display: none");
+                	  $("#order_search_div").removeAttr("style");
+                  }
+                  
+            };
+
+
+        $('.main_demoTable .layui-btn').on('click', function(){
+
+            var type = $(this).data('type');
+
+            active[type] ? active[type].call(this) : '';
+
+        });
+        
+        $('.demoTable .layui-btn').on('click', function(){
+
+            var type = $(this).data('type');
+
+            active[type] ? active[type].call(this) : '';
+
+        });
+        
+        
+        
+        
+        initEs({"type":2,"obj":1,"store_id":eval("<?= $store_id; ?>")});
+        var app = {};
+        var chartDom = document.getElementById('main');
+        var myChart = echarts.init(chartDom);
+        var option;
+        function initEs(data){
+        	
+        	 $.get("{:siteUrl('admin/statistics/consume_sum','','web')}",data, function (result) {
+
+             	var posList = [
+                                'left', 'right', 'top', 'bottom',
+                                'inside',
+                                'insideTop', 'insideLeft', 'insideRight', 'insideBottom',
+                                'insideTopLeft', 'insideTopRight', 'insideBottomLeft', 'insideBottomRight'
+                            ];
+
+                            app.configParameters = {
+                                rotate: {
+                                    min: -90,
+                                    max: 90
+                                },
+                                align: {
+                                    options: {
+                                        left: 'left',
+                                        center: 'center',
+                                        right: 'right'
+                                    }
+                                },
+                                verticalAlign: {
+                                    options: {
+                                        top: 'top',
+                                        middle: 'middle',
+                                        bottom: 'bottom'
+                                    }
+                                },
+                                position: {
+                                    options: posList.reduce(function (map, pos) {
+                                        map[pos] = pos;
+                                        return map;
+                                    }, {})
+                                },
+                                distance: {
+                                    min: 0,
+                                    max: 100
+                                }
+                            };
+
+                            app.config = {
+                                rotate: 90,
+                                align: 'left',
+                                verticalAlign: 'middle',
+                                position: 'insideBottom',
+                                distance: 15,
+                                onChange: function () {
+                                    var labelOption = {
+                                        normal: {
+                                            rotate: app.config.rotate,
+                                            align: app.config.align,
+                                            verticalAlign: app.config.verticalAlign,
+                                            position: app.config.position,
+                                            distance: app.config.distance
+                                        }
+                                    };
+                                    myChart.setOption({
+                                        series: [{
+                                            label: labelOption
+                                        }, {
+                                            label: labelOption
+                                        }, {
+                                            label: labelOption
+                                        }, {
+                                            label: labelOption
+                                        }]
+                                    });
+                                }
+                            };
+
+
+                            var labelOption = {
+                                show: true,
+                                position: app.config.position,
+                                distance: app.config.distance,
+                                align: app.config.align,
+                                verticalAlign: app.config.verticalAlign,
+                                rotate: app.config.rotate,
+                                formatter: '{c}  {name|{a}}',
+                                fontSize: 16,
+                                rich: {
+                                    name: {
+                                    }
+                                }
+                            };
+
+                            var seriesTemp = [];
+                           
+                            for (key in result.data.data){
+                         	   var tempJson = {
+                         			   name:  key,
+                         			   type:'bar',
+                         			   barGap: 0,
+                                        label: labelOption,
+                                        emphasis: {
+                                            focus: 'series'
+                                        },
+                                        data:result.data.data[key]
+                         	   }
+                         	   seriesTemp.push(tempJson);
+                            }
+                            
+                            option = {
+                                tooltip: {
+                                    trigger: 'axis',
+                                    axisPointer: {
+                                        type: 'shadow'
+                                    }
+                                },
+                                legend: {
+                                    data: result.data.cateList
+                                },
+                                toolbox: {
+                                    show: true,
+                                    orient: 'vertical',
+                                    left: 'right',
+                                    top: 'center',
+                                    feature: {
+                                        mark: {show: true},
+                                        dataView: {show: true, readOnly: false},
+                                        magicType: {show: true, type: ['line', 'bar', 'stack', 'tiled']},
+                                        restore: {show: true},
+                                        saveAsImage: {show: true}
+                                    }
+                                },
+                                xAxis: [
+                                    {
+                                        type: 'category',
+                                        axisTick: {show: false},
+                                        data: result.data.dateList
+                                        
+                                    }
+                                ],
+                                yAxis: [
+                                    {
+                                        type: 'value'
+                                    }
+                                ],
+                                series: seriesTemp
+                            };
+                            option && myChart.setOption(option);
+         	    
+         	 }, 'json')
+        }
+        
+       
+
+    });
+</script>
+</body>
+<!-- <div class="layui-footer" style="position:absolute;bottom:0;text-align:center;width:100%;margin-top:30px;">
+	{include file='../addons/wjyk_nhyk/application/admin/view/index/footer.html' /}
+</div> -->
+</html>

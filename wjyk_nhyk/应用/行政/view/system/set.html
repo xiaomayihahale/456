@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>基础设置</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="__PUBLIC__/static/layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="__PUBLIC__/static/layuiadmin/style/admin.css" media="all">
+    <style>
+        form{
+            padding-right:15px ;
+        }
+        .xxx {
+			float: left;
+        }
+		.button-tag {
+			height: 60px;
+        }
+		.aaaa {
+		    /* float: left; */
+		    display: block;
+		    padding: 9px 0!important;
+		    line-height: 20px;
+		    margin-right: 10px;
+		}
+		.tag-item{
+			height:60px;
+		}
+		.showImg{
+			width: 50px; 
+			margin:10px 0px 10px 0px;
+			cursor:pointer;
+		}
+.layui-input-block {
+
+        position: relative;
+
+    }
+
+
+
+    .word {
+
+        position: absolute;
+
+        right: 10px;
+
+        bottom: 10px;
+
+        color: #aaa;
+
+        font-size: 12px;
+
+    }
+    
+.showImg2{
+			width: 50px; 
+			margin:10px 0px 10px 0px;
+			cursor:pointer;
+		}
+    </style>
+</head>
+<body>
+<form class="layui-form" style="margin-top:21px;">
+
+<div class="layui-form-item">
+    <label class="layui-form-label">模板选择</label>
+    <div class="layui-input-block">
+    	<div class="xxx">
+    		<input type="radio" name="template" id="oneTemplate" value="1" title="模板1" {if $system['template'] == '1' || $system['template'] == ''}checked{/if}>
+	      <div class="aaaa layui-word-aux" id='ImgPreview1'>
+	      	<img style="width:135px;height:185px"src='__PUBLIC__/static/template1.jpg'/>
+	      </div>
+    		
+    	</div>
+    	<div class="xxx">
+    	 <input type="radio" name="template" value="2" title="模板2" {if $system['template'] == '2'}checked{/if}>
+	      <div class="aaaa layui-word-aux" id='ImgPreview2'>
+	      	<img style="width:135px;height:185px"src='__PUBLIC__/static/template2.jpg'/>
+	      </div>
+    	</div>
+    	
+    	<div class="xxx">
+    		<input type="radio" name="template" id="oneTemplate" value="3" title="模板3" {if $system['template'] == '3'}checked{/if}>
+	      <div class="aaaa layui-word-aux" id='ImgPreview3'>
+	      	<img style="width:135px;height:185px"src='__PUBLIC__/static/template3.jpg'/>
+	      </div>
+           
+    </div>
+  </div>
+  
+  <div class="layui-form-item">
+    <label class="layui-form-label">回收要求</label>
+    <div class="layui-upload-list" style="display: flex;"> 
+	    <div class="layui-input-block" style="width: 100%;display:flex;align-items: center;margin-left: 0px;">
+	    	{if !empty($list)}
+		    	{foreach $list as $v}
+				    <div class="image-container" style="margin-right:20px">
+				        <div class="delete-css">
+		            		<div id="{$v['id']}" class="upload_img layui-btn layui-btn-danger layui-btn-xs">删除</div>
+		            	</div>
+		            	<img class="showImg" id="{$v['id']}" src="{$v['icon']}"  >
+		                <span>{$v['text']}</span>
+		            </div>
+		    	{/foreach}
+	    	{/if}
+	    	
+	    	{lt name="$list|count" value="3"}
+	    	<div class="layui-btn" id="addRequired"><i class="layui-icon layui-icon-add-1"></i>添加</div>
+	    	{/lt}
+	    </div>
+	</div>
+  </div>
+  
+
+ <div class="layui-form-item">
+    <label class="layui-form-label">预约时间段</label>
+    <div class="layui-input-block">
+      <input type="text" name="reserve" required lay-verify="required" placeholder="请输入回收预约时间段" autocomplete="off" class="layui-input" value="{$system['reserve']}">
+      <div class="layui-form-mid layui-word-aux">回收预约时间段（用  , 分割）</div>
+    </div>
+  </div>
+  
+  <div class="layui-form-item">
+   <label class="layui-form-label">审核周期</label>
+   <div class="layui-input-inline">
+     <input type="number" name="check"   autocomplete="off" class="layui-input" value="{$system['check']}">
+   </div>
+   <div class="layui-form-mid layui-word-aux">天         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;回收员审核周期（单位：天）</div>
+ </div>
+  
+  <div class="layui-form-item">
+    <label class="layui-form-label">腾讯地图key</label>
+    <div class="layui-input-block">
+      <input type="text" name="key" required lay-verify="required" placeholder="请输入腾讯地图key值" autocomplete="off" class="layui-input" value="{$system['key']}">
+    </div>
+  </div>
+  
+  <div class="layui-form-item">
+    <label class="layui-form-label">用户新订单模板ID</label>
+    <div class="layui-input-block">
+      <input type="text" name="userTemplate" required lay-verify="required" placeholder="请输入用户新订单模板ID" autocomplete="off" class="layui-input" value="{$system['userTemplate']}">
+      <div class="layui-form-mid layui-word-aux">小程序后台添加新订单通知</div>
+    </div>
+  </div>
+  
+  <div class="layui-form-item">
+    <label class="layui-form-label">接单成功模板ID</label>
+    <div class="layui-input-block">
+      <input type="text" name="receiveTemplate" required lay-verify="required" placeholder="请输入接单成功提醒模板ID" autocomplete="off" class="layui-input" value="{$system['receiveTemplate']}">
+      <div class="layui-form-mid layui-word-aux">小程序后台添加接单成功提醒</div>
+    </div>
+  </div>
+  
+  <div class="layui-form-item">
+    <label class="layui-form-label">接单成功备注信息</label>
+    <div class="layui-input-block">
+      <textarea placeholder="请输入接单成功提醒模板备注信息"  name ="receiveMessage" 
+      
+      oninput="wordLeg(this);" maxlength="20" onpropertychange="if(value.length>20) value=value.substr(0,20)"
+      required class="layui-textarea">{$system['receiveMessage']}</textarea>
+      <div class="word"><span class="text_count">0</span>&nbsp;/&nbsp;<span class="num_count" id="numCount">20</span></div>
+      <div class="layui-form-mid layui-word-aux">接单成功提醒模板备注信息</div>
+    </div>
+  </div>
+
+  <div class="layui-form-item">
+    <label class="layui-form-label">开启广告</label>
+    <div class="layui-input-block">
+      <input type="radio" name="is_adver" value="1" title="开启" {if $system['is_adver'] == '1' || $system['is_adver'] == ''}checked{/if}>
+      <input type="radio" name="is_adver" value="2" title="关闭" {if $system['is_adver'] == '2'}checked{/if}>
+    </div>
+  </div>
+  
+  <div class="layui-form-item">
+        <label class="layui-form-label">广告图片</label>
+        <button type="button" class="layui-btn" id="test1">上传图片</button>
+        <div class="layui-form-mid layui-word-aux">图片建议尺寸220px * 280px</div>
+        <div class="layui-input-block">
+            <img class="layui-upload-img" id="demo1" style="margin-top: 10px;height: 280px;width: 220px" {if $system['adver_pic']==''}{else}src="{$system['adver_pic']}"{/if}">
+            <input type="hidden" name="adver_pic" id="adver_pic" value="{$system['adver_pic']}">
+        </div>
+    </div>
+  
+    <div class="layui-form-item">
+        <label class="layui-form-label">回收员入驻背景图</label>
+        <button type="button" class="layui-btn" id="test2">上传图片</button>
+        <div class="layui-form-mid layui-word-aux">图片建议尺寸375px * 110px</div>
+        <div class="layui-input-block">
+            <img class="layui-upload-img" id="demo2" style="margin-top: 10px;height: 110px;width: 375px" {if $system['collector']==''}{else}src="{$system['collector']}"{/if}">
+            <input type="hidden" name="collector" id="collector" value="{$system['collector']}">
+        </div>
+    </div>
+  
+  
+  <div class="layui-form-item">
+    <label class="layui-form-label">回收员协议</label>
+    
+    <div class="layui-input-block">
+    	<script id="ueditor" name="protocol" type="text/plain" >{$system['protocol']|raw}</script>
+    </div>
+  </div>
+
+  
+  <div class="layui-form-item">
+    <div class="layui-input-block">
+      <button class="layui-btn" lay-submit lay-filter="demo1">立即提交</button>
+    </div>
+  </div>
+  <!-- 更多表单结构排版请移步文档左侧【页面元素-表单】一项阅览 -->
+</form>
+<div class="layui-footer" style="margin-top:20px;display: flex;justify-content: center;align-items: flex-end;">
+	{include file='../addons/wjyk_recycle/application/admin/view/index/footer.html' /}
+</div>
+<script src="__PUBLIC__/static/layuiadmin/layui/layui.js"></script>
+<script type="text/javascript" src="__PUBLIC__/static/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" src="__PUBLIC__/static/ueditor/ueditor.all.js"></script>
+<script>
+
+	layui.config({
+	    base: '__PUBLIC__/static/layuiadmin/' //静态资源所在路径
+	}).extend({
+	    index: 'lib/index' //主入口模块
+	    	,layarea: '../layui/layui_exts/city-picker/layarea'
+	}).use(['jquery','layer', 'index', 'table','upload', 'layarea','layedit'], function(){
+		var $ = layui.$
+		, layer = layui.layer
+		, layedit = layui.layedit
+	    , table = layui.table
+	    , form = layui.form
+	    , layarea = layui.layarea
+	    , upload = layui.upload;
+		
+		
+		window.wordLeg = function (obj) {
+
+		      var currleg = $(obj).val().length;
+
+		      var length = $(obj).attr('maxlength');
+
+		      if (currleg > length) {
+
+		           layer.msg('字数请在' + length + '字以内');
+
+		        } else {
+
+		           $('.text_count').text(currleg);
+
+		       }
+
+		 }
+		
+		$('.upload_img2').on('click',function () {
+			
+			var id = $(this).attr('id');
+			
+		    var thisObj = $(this);
+			
+			layer.confirm('确定删除该底部菜单吗', function(index){
+				
+				
+				
+				thisObj.parents('.image-container2').remove();
+	    		
+	    		
+            	window.location.href="{:siteUrl('admin/system/del_bottom','','web')}&id="+id;
+            });
+    		
+    	});
+		
+		$('.showImg2').on('click',function () {
+			
+			var id = $(this).attr('id');
+			
+			layer.open({
+                type:2,
+                area: ['80%', '70%'],
+                title:"底部菜单",
+                yes: function(index, layero){
+                    //按钮【按钮一】的回调
+                	layer.close(index);
+                },
+                cancel: function(){ 
+                    //右上角关闭回调
+                    
+                    //return false 开启该代码可禁止点击该按钮关闭
+                },
+                content:"{:siteUrl('admin/system/bottom','','web')}&id="+id,
+                success:function(){
+                	
+
+                }  
+            });
+    		
+    	});
+		
+		$("#addBottom").click(function(){
+        	layer.open({
+                type:2,
+                area: ['80%', '70%'],
+                title:"底部菜单",
+                yes: function(index, layero){
+                    //按钮【按钮一】的回调
+                	layer.close(index);
+                },
+                cancel: function(){ 
+                    //右上角关闭回调
+                    
+                    //return false 开启该代码可禁止点击该按钮关闭
+                },
+                content:"{:siteUrl('admin/system/bottom','','web')}",
+                success:function(){
+                	
+
+                }  
+            });
+       });
+		
+		
+		
+		upload.render({
+            elem: '.bottom'
+            ,url: "{:siteUrl('admin/index/upload','','web')}" //改成您自己的上传接口
+            ,done: function(res){
+                //如果上传失败
+                if(res.code < 0){
+                    return layer.msg('上传失败');
+                }else{
+                	$(this.item).attr('src', res.msg);
+                	
+                	$($(this.item).nextAll()[1]).val(res.msg);
+                	                    
+                }
+            }
+        });
+		
+		
+		$('.upload_img').on('click',function () {
+			
+			var id = $(this).attr('id');
+			
+		    var thisObj = $(this);
+			
+			layer.confirm('确定删除该回收要求吗', function(index){
+				
+				
+				
+				thisObj.parents('.image-container').remove();
+	    		
+	    		
+            	window.location.href="{:siteUrl('admin/system/del_required','','web')}&id="+id;
+            });
+    		
+    	});
+		
+		$('.showImg').on('click',function () {
+			
+			var id = $(this).attr('id');
+			
+			layer.open({
+                type:2,
+                area: ['60%', '40%'],
+                title:"回收要求",
+                yes: function(index, layero){
+                    //按钮【按钮一】的回调
+                	layer.close(index);
+                },
+                cancel: function(){ 
+                    //右上角关闭回调
+                    
+                    //return false 开启该代码可禁止点击该按钮关闭
+                },
+                content:"{:siteUrl('admin/system/required','','web')}&id="+id,
+                success:function(){
+                	
+
+                }  
+            });
+    		
+    	});
+		
+		$("#addRequired").click(function(){
+        	layer.open({
+                type:2,
+                area: ['60%', '40%'],
+                title:"回收要求",
+                yes: function(index, layero){
+                    //按钮【按钮一】的回调
+                	layer.close(index);
+                },
+                cancel: function(){ 
+                    //右上角关闭回调
+                    
+                    //return false 开启该代码可禁止点击该按钮关闭
+                },
+                content:"{:siteUrl('admin/system/required','','web')}",
+                success:function(){
+                	
+
+                }  
+            });
+       });
+		
+		
+		
+		upload.render({
+            elem: '.required'
+            ,url: "{:siteUrl('admin/index/upload','','web')}" //改成您自己的上传接口
+            ,done: function(res){
+                //如果上传失败
+                if(res.code < 0){
+                    return layer.msg('上传失败');
+                }else{
+                	$(this.item).attr('src', res.msg);
+                	
+                	$($(this.item).nextAll()[1]).val(res.msg);
+                	                    
+                }
+            }
+        });
+	
+		 $('#ImgPreview1 img').on('click', function () {
+            layer.photos({
+                photos: '#ImgPreview1',
+                shadeClose: false,
+                closeBtn: 2,
+                anim: 0
+            });
+        })
+        
+        $('#ImgPreview2 img').on('click', function () {
+            layer.photos({
+                photos: '#ImgPreview2',
+                shadeClose: false,
+                closeBtn: 2,
+                anim: 0
+            });
+        })
+        
+        $('#ImgPreview3 img').on('click', function () {
+            layer.photos({
+                photos: '#ImgPreview3',
+                shadeClose: false,
+                closeBtn: 2,
+                anim: 0
+            });
+        })
+		
+		layarea.render({
+            elem: '#area-picker',
+            change: function (res) {
+                //选择结果
+                console.log(res);
+            }
+        });
+		
+		var ue = UE.getEditor('ueditor', {
+
+	 		         zIndex: 99,
+
+	 		         maximumWords: 999,
+
+	 		         scaleEnabled: true,
+
+	 		         initialFrameWidth: 800,
+
+	 		         initialFrameHeight: 300,
+
+	 		         autoHeightEnabled: false,}
+
+	 		         );
+
+    	upload.render({
+            elem: '#test1'
+            ,url: "{:siteUrl('admin/index/upload','','web')}" //改成您自己的上传接口
+            ,done: function(res){
+                //如果上传失败
+                if(res.code < 0){
+                    return layer.msg('上传失败');
+                }else{
+                    $('#demo1').attr('src', res.msg); //图片链接（base64）
+                    $('#adver_pic').val(res.msg);
+                }
+            }
+        });
+    	
+    	upload.render({
+            elem: '#test2'
+            ,url: "{:siteUrl('admin/index/upload','','web')}" //改成您自己的上传接口
+            ,done: function(res){
+                //如果上传失败
+                if(res.code < 0){
+                    return layer.msg('上传失败');
+                }else{
+                    $('#demo2').attr('src', res.msg); //图片链接（base64）
+                    $('#collector').val(res.msg);
+                }
+            }
+        });
+    	
+    	
+
+        //创建一个编辑器
+        var editIndex = layedit.build('LAY_demo_editor');
+
+        //自定义验证规则
+        form.verify({
+            name: function(value){
+                if(value.length < 5){
+                    return '标题至少得5个字符啊';
+                }
+            }
+            ,promotion_content: function(value){
+                layedit.sync(editIndex);
+            }
+        });
+
+        //监听指定开关
+        form.on('switch(switchTest)', function(data){
+            layer.msg('开关checked：'+ (this.checked ? 'true' : 'false'), {
+                offset: '6px'
+            });
+            layer.tips('温馨提示：请注意开关状态的文字可以随意定义，而不仅仅是ON|OFF', data.othis)
+        });
+        
+      //监听提交
+        form.on('submit(demo1)', function(data){
+            var admin = layui.admin
+
+            admin.req({
+                url:"{:siteUrl('admin/system/set_base','','web')}",
+                data:data.field,
+                type:"POST",
+                done:res=>{
+                    if(res.code == 0 ){
+                		layer.msg("设置成功");
+                	}
+                }
+            })
+            return false
+  
+        });
+
+        //表单取值
+        layui.$('#LAY-component-form-getval').on('click', function(){
+            var data = form.val('example');
+            alert(JSON.stringify(data));
+        });
+
+    });
+</script>
+</body>
+</html>
