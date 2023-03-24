@@ -1,0 +1,17 @@
+<cover-view class="tabbar data-v-63da3352" items="{{list}}" style="{{'z-index:999999;'+'height:'+tabbarHeight+'rpx'+';'+'padding-bottom:'+paddingBottomHeight+'rpx'+';'}}">
+    <cover-view bindtap="__e" class="tabbar-item data-v-63da3352" data-event-opts="{{[ [ 'tap',[ [ 'tabbarChange',['$0',index,'$1'],[ [ ['list','',index,'path'] ],[ ['list','',index,'id'] ] ] ] ] ] ]}}" wx:if="{{type==1}}" wx:for="{{list}}" wx:key="index">
+        <cover-image class="item-img data-v-63da3352" src="{{item.icon_select}}" wx:if="{{current==index}}"></cover-image>
+        <cover-image class="item-img data-v-63da3352" src="{{item.icon}}" wx:else></cover-image>
+        <cover-view class="{{['item-name','data-v-63da3352',current==index?'tabbarActive':'']}}" wx:if="{{item.meau_name}}">{{item.meau_name}}</cover-view>
+    </cover-view>
+    <cover-view bindtap="__e" class="tabbar-item data-v-63da3352" data-event-opts="{{[ [ 'tap',[ [ 'tabbarChange',['$0',index,'$1'],[ [ ['listss','',index,'path'] ],[ ['listss','',index,'id'] ] ] ] ] ] ]}}" wx:if="{{type==2}}" wx:for="{{listss}}" wx:key="index">
+        <cover-image class="item-img data-v-63da3352" src="{{item.icon_select}}" wx:if="{{current==index}}"></cover-image>
+        <cover-image class="item-img data-v-63da3352" src="{{item.icon}}" wx:else></cover-image>
+        <cover-view class="{{['item-name','data-v-63da3352',current==index?'tabbarActive':'']}}" wx:if="{{item.meau_name}}">{{item.meau_name}}</cover-view>
+    </cover-view>
+    <cover-view bindtap="__e" class="tabbar-item data-v-63da3352" data-event-opts="{{[ [ 'tap',[ [ 'tabbarChange',['$0',index,'$1'],[ [ ['ktvList','',index,'path'] ],[ ['ktvList','',index,'id'] ] ] ] ] ] ]}}" wx:if="{{type==3}}" wx:for="{{ktvList}}" wx:key="index">
+        <cover-image class="item-img data-v-63da3352" src="{{item.icon_select}}" wx:if="{{current==index}}"></cover-image>
+        <cover-image class="item-img data-v-63da3352" src="{{item.icon}}" wx:else></cover-image>
+        <cover-view class="{{['item-name','data-v-63da3352',current==index?'tabbarActive2':'']}}" wx:if="{{item.meau_name}}">{{item.meau_name}}</cover-view>
+    </cover-view>
+</cover-view>

@@ -1,0 +1,78 @@
+.uni-numbox {
+    display: -webkit-inline-box;
+    display: -webkit-inline-flex;
+    display: inline-flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    flex-direction: row;
+    -webkit-box-pack: start;
+    justify-content: flex-start;
+    height: 54rpx;
+    position: relative;
+}
+
+.uni-numbox--disabled.uni-numbox__minus {
+    color: #666!important;
+    border: 1rpx solid #fff;
+}
+
+.sunui-number-add {
+    background-color: #fb6e62;
+    border-radius: 50rpx;
+    padding: 16rpx 32rpx;
+}
+
+.sunui-number-space {
+    background-color: #c9caca;
+    border-radius: 50rpx;
+    padding: 16rpx 32rpx;
+}
+
+.uni-numbox__minus,.uni-numbox__plus {
+    margin: 0;
+    background-color: #f8f8f8;
+    width: 54rpx;
+    font-size: 40rpx;
+    height: 100%;
+    line-height: 70rpx;
+    text-align: center;
+    display: -webkit-inline-box;
+    display: -webkit-inline-flex;
+    display: inline-flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    color: #333;
+    position: relative;
+}
+
+.uni-numbox__minus {
+    border-radius: 50%;
+    color: #d7d7d7!important;
+    border: 1rpx solid #d7d7d7;
+    background-color: #fff;
+}
+
+.uni-numbox__plus {
+    border-radius: 50%;
+    color: #fff!important;
+    background: -webkit-gradient(linear,left top,right top,from(#ffba64),color-stop(92.27%,#f60))!important;
+    background: -webkit-linear-gradient(left,#ffba64,#f60 92.27%)!important;
+    background: linear-gradient(90deg,#ffba64 0,#f60 92.27%)!important;
+}
+
+.uni-numbox__value {
+    position: relative;
+    background-color: #fff;
+    width: 82rpx;
+    height: 100%;
+    text-align: center;
+    padding: 0;
+}
+
+.uni-numbox--disabled {
+    color: #666!important;
+    background-color: initial!important;
+    border: 2rpx solid #999!important;
+}

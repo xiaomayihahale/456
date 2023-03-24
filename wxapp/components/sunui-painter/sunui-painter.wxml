@@ -1,0 +1,2 @@
+<canvas id="{{canvasId}}" style="{{style}}" type="2d" wx:if="{{isUse2dCanvas}}"></canvas>
+<canvas canvasId="{{canvasId}}" height="{{boardHeight*dpr}}" id="{{canvasId}}" style="{{style}}" width="{{boardWidth*dpr}}" wx:else></canvas>

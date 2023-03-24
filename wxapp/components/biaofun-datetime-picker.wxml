@@ -1,0 +1,7 @@
+<view class="datatime data-v-f7386f38">
+    <picker bindchange="__e" bindcolumnchange="__e" class="data-v-f7386f38" data-event-opts="{{[ [ 'change',[ [ 'change',['$event'] ] ] ],[ 'columnchange',[ [ 'columnchange',['$event'] ] ] ] ]}}" disabled="{{disabled}}" mode="multiSelector" range="{{range}}" rangeKey="text" value="{{value}}">
+        <view class="{{['content','data-v-f7386f38',!dateStr?'placeholder':'']}}">
+            <text class="data-v-f7386f38">{{dateStr?dateStr:placeholder}}</text>
+        </view>
+    </picker>
+</view>

@@ -1,0 +1,10 @@
+<view class="uni-section data-v-3b8eb216" nvue="{{true}}">
+    <view class="uni-section__head data-v-3b8eb216" wx:if="{{type}}">
+        <view class="{{['uni-section__head-tag','data-v-3b8eb216',type]}}"></view>
+    </view>
+    <view class="uni-section__content data-v-3b8eb216">
+        <text class="{{['uni-section__content-title','data-v-3b8eb216',!subTitle?'distraction':'']}}">{{title}}</text>
+        <text class="uni-section__content-sub data-v-3b8eb216" wx:if="{{subTitle}}">{{subTitle}}</text>
+    </view>
+    <slot></slot>
+</view>

@@ -1,0 +1,10 @@
+<view catchtouchmove="true" class="posterContainer data-v-44855718">
+    <canvas canvasId="zwyPoster" class="isCan data-v-44855718" style="{{'width:'+cansWidth+'px'+';'+'height:'+cansHeight+'px'+';'}}"></canvas>
+    <view class="showImg2 data-v-44855718">
+        <view class="flex data-v-44855718">
+            <image bindtap="__e" class="fixedBox data-v-44855718" data-event-opts="{{[ [ 'tap',[ [ 'closeCans',['$event'] ] ] ] ]}}" src="../../static/delect.png" wx:if="{{tempImgShow}}"></image>
+        </view>
+        <image bindlongpress="__e" class="showImg data-v-44855718" data-event-opts="{{[ [ 'longpress',[ [ 'longpress',['$event'] ] ] ] ]}}" src="{{tempImg}}" style="{{'width:'+cansWidth+'px'+';'+'height:'+cansHeight+'px'+';'}}" wx:if="{{tempImgShow}}"></image>
+        <view bindtap="__e" class="fixedBox2 data-v-44855718" data-event-opts="{{[ [ 'tap',[ [ 'longpress',['$event'] ] ] ] ]}}" wx:if="{{tempImgShow}}">保存到手机</view>
+    </view>
+</view>

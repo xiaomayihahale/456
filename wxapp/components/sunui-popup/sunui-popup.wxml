@@ -1,0 +1,21 @@
+<view catchtouchmove="__e" class="{{['sunui-pop','data-v-7da24416',options.isCloseCls]}}" data-event-opts="{{[ [ 'touchmove',[ [ 'moveHandle',['$event'] ] ] ] ]}}" wx:if="{{options.show}}">
+    <view class="sunui-pop-panel data-v-7da24416">
+        <view bindtouchstart="__e" class="sunui-pop-mask data-v-7da24416" data-event-opts="{{[ [ 'touchstart',[ [ 'shadeTaped',['$event'] ] ] ] ]}}" style="{{'background-color:'+(options.rgba?options.rgba:'')+';'}}" wx:if="{{options.shade}}"></view>
+        <view class="sunui-pop-main data-v-7da24416">
+            <view class="{{['sunui-pop-child','data-v-7da24416','anim-'+options.anim,options.skin?'sunuipop-'+options.skin:'',options.position]}}" style="{{options.style}}">
+                <view class="sunui-pop-tit data-v-7da24416" style="{{options.titleStyle}}" wx:if="{{options.title}}">
+                    <view bindtap="__e" class="data-v-7da24416" data-event-opts="{{[ [ 'tap',[ ['close'] ] ] ]}}" style="position:absolute;top:8rpx;color:#000;font-weight:bold;font-size:40rpx;" wx:if="{{options.topcloseleft&&!options.xclose}}">×</view>{{''+options.title+''}}<view bindtap="__e" class="data-v-7da24416" data-event-opts="{{[ [ 'tap',[ ['close'] ] ] ]}}" style="position:absolute;top:8rpx;right:40rpx;color:#000;font-weight:bold;font-size:40rpx;" wx:if="{{options.topcloseright&&!options.xclose}}">×</view>
+                </view>
+                <view class="sunui-pop-cnt data-v-7da24416" style="{{options.contentStyle}}" wx:if="{{options.content}}">
+                    <view class="{{['sunui-pop-toast','data-v-7da24416',options.icon]}}" wx:if="{{options.icon&&options.skin=='toast'}}"></view>
+                    <rich-text class="data-v-7da24416" nodes="{{options.content}}"></rich-text>
+                    <slot name="content"></slot>
+                </view>
+                <view class="sunui-pop-btns data-v-7da24416" wx:if="{{options.btns}}">
+                    <text bindtap="__e" class="btn data-v-7da24416" data-event-opts="{{[ [ 'tap',[ [ 'btnTaped',['$0'],[ [ ['options.btns','',index] ] ] ] ] ] ]}}" style="{{item.style}}" wx:for="{{options.btns}}" wx:key="index">{{item.text}}</text>
+                </view>
+            </view>
+            <view bindtap="__e" class="sunuipop-xclose data-v-7da24416" data-event-opts="{{[ [ 'tap',[ [ 'close',['$event'] ] ] ] ]}}" wx:if="{{options.xclose}}"></view>
+        </view>
+    </view>
+</view>
