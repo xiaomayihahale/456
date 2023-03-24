@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>商城设置</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="__PUBLIC__/static/layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="__PUBLIC__/static/layuiadmin/style/admin.css" media="all">
+    <style>
+        form{
+            padding-right:15px ;
+        }
+        
+             /*使下拉列表框不被遮挡*/
+    .layui-table-cell {
+        overflow: visible !important;
+          height: auto;
+    }
+    /*使列表框与表格单元格重合*/
+    td .layui-form-select {
+        margin-top: -10px;
+        margin-left: -15px;
+        margin-right: -15px;
+    }
+        
+    </style>
+</head>
+<body>
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <div class="layui-card-header">商城设置</div>
+                <div class="layui-card-body" pad15>
+
+                    <div class="layui-form" wid100 lay-filter="">
+<form class="layui-form" style="margin-top:21px;">
+
+	
+
+     <div class="layui-form-item" >
+        <label class="layui-form-label">每日特惠背景图</label>
+        <button type="button" class="layui-btn" id="mei_upload">上传图片</button>
+        <div class="layui-form-mid layui-word-aux">图片建议尺寸382px * 300px，或者等比例图片</div>
+        <div class="layui-input-block">
+            <img class="layui-upload-img" id="mei_upload_img" style="margin-top: 10px;height: 150px;width: 150px" {if !empty($system['mei_img'])} src="{$system['mei_img']}" {/if} >
+            <input type="hidden" name="mei_img" id="mei_upload_log"  class="carousel"  {if !empty($system['mei_img'])} value="{$system['mei_img']}" {/if} >
+        </div>
+    </div>
+    
+    <div class="layui-form-item" >
+        <label class="layui-form-label">兑换专区背景图</label>
+        <button type="button" class="layui-btn" id="dui_upload">上传图片</button>
+        <div class="layui-form-mid layui-word-aux">图片建议尺寸176px * 370px，或者等比例图片</div>
+        <div class="layui-input-block">
+            <img class="layui-upload-img" id="dui_upload_img" style="margin-top: 10px;height: 150px;width: 150px" {if !empty($system['dui_img'])} src="{$system['dui_img']}" {/if} >
+            <input type="hidden" name="dui_img" id="dui_upload_log"  class="carousel"  {if !empty($system['dui_img'])} value="{$system['dui_img']}" {/if} >
+        </div>
+    </div>
+    
+    <div class="layui-form-item" >
+        <label class="layui-form-label">新品专区背景图</label>
+        <button type="button" class="layui-btn" id="new_good_upload">上传图片</button>
+        <div class="layui-form-mid layui-word-aux">图片建议尺寸176px * 700px，或者等比例图片</div>
+        <div class="layui-input-block">
+            <img class="layui-upload-img" id="new_good_upload_img" style="margin-top: 10px;height: 150px;width: 150px" {if !empty($system['new_good_img'])} src="{$system['new_good_img']}" {/if} >
+            <input type="hidden" name="new_good_img" id="new_good_upload_log" class="carousel"  {if !empty($system['new_good_img'])} value="{$system['new_good_img']}" {/if} >
+        </div>
+    </div>
+    
+    
+    <div class="layui-form-item">
+        <label class="layui-form-label">会员抢购背景图</label>
+        <button type="button" class="layui-btn" id="member_upload">上传图片</button>
+        <div class="layui-form-mid layui-word-aux">图片建议尺寸170px * 370px，或者等比例图片</div>
+        <div class="layui-input-block">
+        	
+            <img class="layui-upload-img" id="member_upload_img" style="margin-top: 10px;height: 150px;width: 150px" {if !empty($system['member_img'])} src="{$system['member_img']}" {/if} >
+            <input type="hidden" name="member_img" id="member_upload_log" class="carousel"   {if !empty($system['member_img'])} value="{$system['member_img']}" {/if} >
+        </div>
+    </div>
+    
+    <div class="layui-form-item">
+        <label class="layui-form-label">首页轮播图</label>
+        <button type="button" class="layui-btn" id="test2">上传图片</button>
+        <div class="layui-form-mid layui-word-aux">图片建议尺寸622px * 750px，或者等比例图片</div>
+      <div class="layui-input-block">
+        <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;">
+		   <!--  预览图：
+		    <div class="layui-upload-list"  id="ImgPreviewt" style="display: flex;"> 
+	         	{if !empty($system['carousel'])}
+	         		{foreach  $system['carousel'] as $v}
+		  			<div class="image-container" id="containert{$v}">
+				        <div class="delete-css">
+		            		<div id="{$v}" class="upload_img layui-btn layui-btn-danger layui-btn-xs">删除</div>
+		            	</div>
+		                <img id="showImgt" style="width:150px; margin:10px;cursor:pointer;" src="{$v}"  >
+		                <input value="{$v}" name="carousel[]" class="carousel" type="hidden">
+		            </div>
+			        {/foreach}
+				{/if}
+	        </div> -->
+	        <table class="layui-hide" style="float: none" id="test-table-operate" lay-filter="test-table-operate"></table>
+		 </blockquote>
+      </div>
+    </div>
+    
+    
+    <div class="layui-form-item">
+        <label class="layui-form-label">分类轮播图</label>
+        <button type="button" class="layui-btn" id="test4">上传图片</button>
+        <div class="layui-form-mid layui-word-aux">图片建议尺寸540px * 234px，或者等比例图片</div>
+      <div class="layui-input-block">
+        <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;">
+		    预览图：
+		    <div class="layui-upload-list"  id="ImgPreviewTemps" style="display: flex;"> 
+	         	{if !empty($system['cate_carousel'])}
+	         		{foreach  $system['cate_carousel'] as $v2}
+		  			<div class="image-container" id="containers{$v2}">
+				        <div class="delete-css">
+		            		<div id="{$v2}" class="upload_img layui-btn layui-btn-danger layui-btn-xs">删除</div>
+		            	</div>
+		                <img id="showImgs" style="width:150px; margin:10px;cursor:pointer;" src="{$v2}"  >
+		                <input value="{$v2}" name="cate_carousel[]" class="carousel" type="hidden">
+		            </div>
+			        {/foreach}
+				{/if}
+	        </div>
+		 </blockquote>
+      </div>
+    </div>
+    
+  
+  <script type="text/html" id="didaxinxi-table-bar-switchTpl">
+		<select name="editStateS" lay-filter="editStateS" lay-search>
+            <option value="-1">不跳转</option>
+    		<option value="0">内部</option>
+        	<option value="1">外部h5</option>
+            <option value="2">外部小程序</option>
+   		</select>
+
+	</script>
+ 
+ <script type="text/html" id="test-table-operate-barDemo">       
+   		 <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+     </script>
+  
+
+  
+  <div class="layui-form-item">
+    <div class="layui-input-block">
+      <button class="layui-btn" lay-submit lay-filter="demo1">立即提交</button>
+    </div>
+  </div>
+  <!-- 更多表单结构排版请移步文档左侧【页面元素-表单】一项阅览 -->
+</form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="layui-footer" style="margin-top:20px;display: flex;justify-content: center;align-items: flex-end;">
+	{include file='../addons/wjyk_nhyk/application/admin/view/index/footer.html' /}
+</div>
+<script src="__PUBLIC__/static/layuiadmin/layui/layui.js"></script>
+<script type="text/javascript" src="__PUBLIC__/static/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" src="__PUBLIC__/static/ueditor/ueditor.all.js"></script>
+<script>
+	layui.config({
+	    base: '__PUBLIC__/static/layuiadmin/' //静态资源所在路径
+	}).extend({
+	    index: 'lib/index' //主入口模块
+	    	, layarea: '../layui/layui_exts/city-picker/layarea'
+	}).use(['jquery','layer', 'index', 'table','upload', 'layarea','layedit'], function(){
+		var $ = layui.$
+		, layer = layui.layer
+		, layedit = layui.layedit
+	    , table = layui.table
+	    , form = layui.form
+	    , layarea = layui.layarea
+	    , upload = layui.upload;
+		
+		
+		var allUpload =  $("button[id$='_upload']");
+        allUpload.each(function(){
+            var id = $(this).attr('id');
+            upload.render({
+                elem: '#'+id
+                ,url: "{:siteUrl('admin/index/upload','','web')}" //改成您自己的上传接口
+                ,done: function(res){
+                    //如果上传失败
+                    if(res.code < 0){
+                        return layer.msg('上传失败');
+                    }else{
+                        $('#'+id+"_img").attr('src', res.msg); //图片链接（base64）
+                        $('#'+id+"_log").val(res.msg);
+                        
+                    }
+                }
+            });
+        });
+		
+        $('#ImgPreview img').on('click', function () {
+            layer.photos({
+                photos: '#ImgPreview',
+                shadeClose: false,
+                closeBtn: 2,
+                anim: 0
+            });
+        })
+        
+        $('#ImgPreviewTemp img').on('click', function () {
+            layer.photos({
+                photos: '#ImgPreviewTemp',
+                shadeClose: false,
+                closeBtn: 2,
+                anim: 0
+            });
+        })
+
+        $('#ImgStore img').on('click', function () {
+            layer.photos({
+                photos: '#ImgStore',
+                shadeClose: false,
+                closeBtn: 2,
+                anim: 0
+            });
+        })
+        
+        $('.upload_img').on('click',function () {
+    		var url = $(this).attr('id');
+    		$(this).parents('.image-container').remove();
+    	});
+        
+  
+
+        
+        var check_data = eval('<?php echo json_encode($system['link_carousel']);?>');
+       
+        if(check_data == null || !Array.isArray(check_data) ){
+        	check_data = [];
+        }
+        table.render({
+            elem: '#test-table-operate'
+            ,data:check_data
+            ,cellMinWidth: 80
+            ,height: '200px'
+            ,cols: [[
+               {field:'img', width:'10%', title: '图片',templet:function(d){
+                        return "<img style='max-width:25px;' src='"+d.img+"'></img>";
+                    }}
+               ,{field:'link_type', width:'15%', title: '链接类型', sort: true,templet: '#didaxinxi-table-bar-switchTpl'}
+                ,{field:'link', width:'20%', title: '内部链接', sort: true}
+                ,{field:'external_link',width:'20%', title: '外部链接', sort: true}
+                ,{field:'appid',width:'20%', title: 'appid', sort: true}
+                ,{width:'15.2%', align:'center', toolbar: '#test-table-operate-barDemo'}
+            ]]
+            ,page: false
+            ,done: function (res, curr, count) {
+                var tableView = this.elem.next();
+                layui.each(res.data, function (i, item) {
+                	
+                        tableView.find('tr[data-index=' + i + ']').find('td').eq(2).data('edit', true); //设置下标为9的单元格为可编辑
+                        tableView.find('tr[data-index=' + i + ']').find('td').eq(3).data('edit', true);
+                        tableView.find('tr[data-index=' + i + ']').find('td').eq(4).data('edit', true);
+                      
+                    
+                });
+                
+                var divForm = $("#test-table-operate").next();  // 获取表格，tableId是表格的id
+                var tableCache = table.cache['test-table-operate'];  // 获取表格缓存数据，tableCacheId也是表格的id
+                var trJqs = divForm.find(".layui-table-body tr");  // 获取表格body下的所有tr标签
+                trJqs.each(function () {  // 遍历每个tr标签
+                    var trJq = $(this);  // 获得当前遍历的tr标签
+                    var dataIndex = trJq.attr("data-index");  // 得到当前数据行的data-index，即为第几行数据
+                    trJq.find("td").each(function () {  // 遍历tr标签下的每一个td标签
+                        var tdJq = $(this);  // 获得当前遍历的td标签
+                        var fieldName = tdJq.attr("data-field");  // 获得当前td标签的字段名
+                        var selectJq = tdJq.find("select");  // 获得当前td标签下的select标签
+                        if (selectJq.length == 1) {  // 判断select标签是否存在
+                            selectJq.eq(0).val(tableCache[dataIndex][fieldName]);  // 将表格里的缓存数据赋值给select标签
+                        }
+                    });
+                });
+                form.render('select');  // 重新加载select表单
+            }
+
+        });
+        
+        //监听工具条
+        table.on('tool(test-table-operate)', function(obj){
+            var data = obj.data;
+            if(obj.event === 'del'){
+            	var data_index = $(this).parents('tr').data('index');
+                layer.confirm('确定删除该数据吗？', function(index){
+                	obj.del();
+                    layer.close(index);
+                    var tabledata = table.cache["test-table-operate"];
+                	tabledata.splice(data_index, 1);
+                });
+            } 
+        });
+      
+      //监听提交
+        form.on('submit(demo1)', function(data){
+            var admin = layui.admin
+            
+     /*        if($('.carousel').attr('value') == '' ||$('.carousel').attr('value') == null ){
+            	layer.msg('图片为空',{icon: 2,time:3000});
+            	return false;
+            }
+			 */
+            var tabledata = table.cache["test-table-operate"];
+			
+            data.field['link_carousel'] = tabledata;
+            
+            admin.req({
+                url:"{:siteUrl('admin/goods/set_system','','web')}",
+                data:data.field,
+                type:"POST",
+                done:res=>{
+                    if(res.code == 0 ){
+                		layer.msg("设置成功");
+                	}
+                }
+            })
+            return false
+  
+        });
+      
+        upload.render({
+            elem: '#test2'
+           	,url: "{:siteUrl('admin/index/upload','','web')}" //改成您自己的上传接口
+         	,multiple: true
+            ,choose:function (obj) {
+            	var files = this.files = obj.pushFile();
+               //预读本地文件示例，不支持ie8
+             obj.preview(function(index, file, result){
+                /* $('#ImgPreviewt').append('<div class="image-container" id="containert'+index+'"><div class="delete-css"><button id="upload_img_t'+index+'" class="layui-btn layui-btn-danger layui-btn-xs">删除</button></div>\n' +
+                    '<img id="showImgt'+index+'" style="width: 150px; margin:10px;cursor:pointer;" src="'+ result +'" alt="'+ file.name +'" ></div>');
+                $("#upload_img_t" + index).bind('click', function () {
+                	delete files[index];
+                    $("#containert"+index).remove();
+                }); */
+             });
+             }
+             ,done: function(res,index){ //当文件全部被提交后，才触发
+               //$('#ImgPreviewt').append('<input value="'+ res.msg +'" name="carousel[]" class="carousel"  type="hidden">');
+               delete this.files[index];
+               
+               
+               var tabledata = table.cache["test-table-operate"]; //获取现有数据
+	             tabledata.push({
+	             "img": res.msg
+	             ,"link_type":"-1"
+	             ,"link": ""
+	             ,"external_link": ""
+	            	 ,"appid": ""
+	             })
+	             //添加数据,  字段名对应值.  不要初始值的话 留空即可.
+
+	            
+	             table.reload("test-table-operate", {
+	             	data: tabledata,
+	             });
+               
+             }
+          });
+    	
+    	
+    	
+    	upload.render({
+            elem: '#test4'
+           	,url: "{:siteUrl('admin/index/upload','','web')}" //改成您自己的上传接口
+         	,multiple: true
+            ,accept: 'file'
+            ,choose:function (obj) {
+           	 var files = this.files = obj.pushFile();
+               //预读本地文件示例，不支持ie8
+             obj.preview(function(index, file, result){
+                $('#ImgPreviewTemps').append('<div class="image-container" id="containers'+index+'"><div class="delete-css"><button id="upload_img_s'+index+'" class="layui-btn layui-btn-danger layui-btn-xs">删除</button></div>\n' +
+                    '<img id="showImgs'+index+'" style="width: 150px; margin:10px;cursor:pointer;" src="'+ result +'" alt="'+ file.name +'" ></div>');
+                $("#upload_img_s" + index).bind('click', function () {
+                	delete files[index];
+                    $("#containers"+index).remove();
+                });
+             });
+             }
+             ,done: function(res,index){ //当文件全部被提交后，才触发
+               $('#ImgPreviewTemps').append('<input value="'+ res.msg +'" name="cate_carousel[]" class="carousel"  type="hidden">');
+               delete this.files[index];
+             }
+          });
+      
+
+
+        //表单取值
+        layui.$('#LAY-component-form-getval').on('click', function(){
+            var data = form.val('example');
+            alert(JSON.stringify(data));
+        });
+
+    });
+</script>
+</body>
+</html>

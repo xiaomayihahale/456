@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>服务项目</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="__PUBLIC__/static/layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="__PUBLIC__/static/layuiadmin/style/admin.css" media="all">
+    <style>
+        form{
+            padding-right:15px ;
+        }
+    </style>
+</head>
+<body>
+<div class="layui-form-item" style="margin-top:15px;">
+    <div class="layui-input-inline" style="width:40%;margin-left:20px">
+      <input type="text" name="address" id="address" placeholder="请输入详细地址" autocomplete="off" class="layui-input">
+    </div>
+    <button id="dian" class="layui-btn ">搜索</button>
+</div>
+<div id="maplocation" style="height: 500px"></div>
+<input type="hidden" name="lng" id="lng">
+<input type="hidden" name="lat" id="lat">
+
+
+<script type="text/javascript" src="//api.map.baidu.com/api?v=2.0&ak=EhhW6UAjmUNGyKCVTfZggKIIdjxX3z57"></script>
+<script type="text/javascript" src="//api.map.baidu.com/library/MarkerTool/1.2/src/MarkerTool_min.js"></script>
+<script type="text/javascript" src="//api.map.baidu.com/library/CityList/1.4/src/CityList_min.js"></script>
+
+<script src="__PUBLIC__/static/layuiadmin/layui/layui.js"></script>
+<!-- <script type="text/javascript" src="https://api.map.baidu.com/library/MarkerClusterer/1.2/src/MarkerClusterer_min.js"></script> -->
+<script>
+    layui.config({
+        base: '__PUBLIC__/static/layuiadmin/' //静态资源所在路径
+    }).extend({
+        index: 'lib/index' //主入口模块
+        , LoadScript: 'layui/layui_exts/map/LoadScript'
+    }).use(['jquery','layer','LoadScript'], function(){
+    	var $ = layui.$
+    	, layer = layui.layer;
+        
+    	
+    		var map = new BMap.Map("maplocation"); // 创建地图实例 
+            map.enableScrollWheelZoom();   //启用滚轮放大缩小，默认禁用
+            var point = new BMap.Point(116.404, 39.915); // 创建点坐标 
+            map.centerAndZoom(point, 12);
+            function myFun(result){
+                var cityName = result.name;
+                map.setCenter(cityName);
+                //alert("当前定位城市:"+cityName);
+            }
+            var myCity = new BMap.LocalCity();
+            myCity.get(myFun);
+            var marker = new BMap.Marker(map.getCenter());  // 创建标注
+            map.addOverlay(marker);               // 将标注添加到地图中
+            marker.enableDragging();                //可拖拽
+            //marker.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
+            map.addEventListener("click",function(e){  
+                 // alert(e.point.lng+","+e.point.lat);// 单击地图获取坐标点；
+                 $("#lng").val(e.point.lng);
+                 $("#lat").val(e.point.lat);
+                 //map.panTo(new BMap.Point(e.point.lng,e.point.lat));// map.panTo方法，把点击的点设置为地图中心点  
+            }); 
+            marker.addEventListener("dragend", function(e){                    //拖拽标注获取标注坐标
+                 //alert("当前位置：" + e.point.lng + ", " + e.point.lat);           //可拖拽的标注 
+                 $("#lng").val(e.point.lng);
+                 $("#lat").val(e.point.lat);
+            })
+            //加载完成之后,改变标注点坐标,使之和当前定位的城市基本相符
+            map.addEventListener("tilesloaded",function(){
+                var newpoint = map.getCenter();
+                marker.setPosition(newpoint);
+            });
+            
+ 
+    	
+    	
+        $("#dian").click(function(){
+        	var addressStr = $("#address").val();
+            $.ajax({
+                url: "https://api.map.baidu.com/geocoding/v3/", 
+                data: {"address": addressStr, "output":"json", "ak":"EhhW6UAjmUNGyKCVTfZggKIIdjxX3z57"},
+                type: "post",
+                dataType:'JSONP',
+                success :function(data){
+                	console.log(data.result);
+                    var lng = data.result.location.lng;
+                    var lat = data.result.location.lat;
+                    
+                    var map = new BMap.Map("maplocation"); // 创建地图实例 
+                    map.enableScrollWheelZoom();   //启用滚轮放大缩小，默认禁用
+                    var point = new BMap.Point(lng, lat); // 创建点坐标 
+                    map.centerAndZoom(point, 12);
+                    var marker = new BMap.Marker(map.getCenter());  // 创建标注
+                    map.addOverlay(marker);
+                    $("#lng").val(lng);
+                    $("#lat").val(lat);
+                    console.log(lng+","+lat);
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>

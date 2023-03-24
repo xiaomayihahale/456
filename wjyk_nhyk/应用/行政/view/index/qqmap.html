@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>服务项目</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="__PUBLIC__/static/layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="__PUBLIC__/static/layuiadmin/style/admin.css" media="all">
+    <style>
+        form{
+            padding-right:15px ;
+        }
+    
+        * {
+            margin: 0;
+            padding: 0;
+        }
+ 
+        #maplocation {
+            /*地图(容器)显示大小*/
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+ 
+        .searchWrap {
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            z-index: 2;
+        }
+ 
+        #list-group,
+        #list-group2,
+        .searchEnd {
+            display: none;
+        }
+ 
+        #closeBtn {
+            position: absolute;
+            top: -10px;
+            right: -14px;
+        }
+ 
+        .dropdown-menu .list-group-item.active {
+            color: #fff;
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+
+        
+    </style>
+</head>
+<body onload="initMap()">
+<div id="maplocation" style="min-width: 600px;min-height:767px;"></div>
+
+
+
+		<div class="searchWrap">
+		
+			<div class="searchStart">
+	            <div class="input-group mb-3">
+	                <input type="text" autocomplete="off" id="search" class="form-control strtSiteIpt" placeholder="请输入地点"
+	                    aria-describedby="basic-addon1">
+	                <div class="input-group-append">
+	                    <span class="input-group-text" id="basic-addon1">搜索</span>
+	                </div>
+	            </div>
+	            <ul class="list-group" id="list-group">
+	                <li class="list-group-item"></li>
+	            </ul>
+	        </div>
+		</div>
+        
+        
+ 
+
+<input type="hidden" name="lng" id="lng">
+<input type="hidden" name="lat" id="lat">
+<input type="hidden" name="addres" id="addres">
+<script src="__PUBLIC__/static/layuiadmin/layui/layui.js"></script>
+<script src="https://3gimg.qq.com/lightmap/components/geolocation/geolocation.min.js"></script>
+<script src="https://map.qq.com/api/gljs?v=1.exp&key=TYQBZ-IGZCJ-E5XFU-KUR6C-OEGKZ-D2BLP"></script>
+<script src="https://map.qq.com/api/js?v=2.exp&key=TYQBZ-IGZCJ-E5XFU-KUR6C-OEGKZ-D2BLP"></script>
+
+<script>
+
+window.addEventListener( 'message' , function (event) {
+    // 接收位置信息，用户选择确认位置点后选点组件会触发该事件，回传用户的位置信息
+    var loc = event.data;
+    if (loc && loc.module == 'locationPicker' ) { //防止其他应用也会向该页面post信息，需判断module是否为'locationPicker'
+      console.log( 'location' , loc);
+    }
+}, false );
+
+	function initMap(){
+		
+		
+		layui.config({
+	        base: '__PUBLIC__/static/layuiadmin/' //静态资源所在路径
+	    }).extend({
+	        index: 'lib/index' //主入口模块
+	        , LoadScript: 'layui/layui_exts/map/LoadScript'
+	    }).use(['jquery','layer','LoadScript'], function(){
+	    	var $ = layui.$
+	    	, layer = layui.layer;
+	        
+	    	
+	    	
+
+			var geolocation = new qq.maps.Geolocation("TYQBZ-IGZCJ-E5XFU-KUR6C-OEGKZ-D2BLP", "myapp");
+			
+			var options = {timeout: 15000};
+
+		    //position 自定义的一个名称 成功之后 获取的数据
+		    //city:"深圳市"  nation:"中国" province:"广东省"
+		    //lat:"22.543099"  lng:"114.057868"
+		    function showPosition(position) {
+		        var mapInfo = JSON.stringify(position, null, 4);
+				var jsonMapInfo = eval('('+mapInfo+')');
+				var latLng = new TMap.LatLng(jsonMapInfo.lat, jsonMapInfo.lng);
+				debugger;
+				init(latLng);
+				
+				//citylocation.searchCityByLatLng(latLng);
+		    };
+
+		    function showErr() {
+		        console.log("获取经纬度失败");
+		    };
+			debugger;
+			var map,markerLayer;
+			
+			geolocation.getLocation(showPosition, showErr, options);
+			function init(lat){
+				var center = new TMap.LatLng(lat.lat, lat.lng);
+		        //定义map变量，调用 TMap.Map() 构造函数创建地图
+		         map = new TMap.Map(document.getElementById('maplocation'), {
+		            center: center,//设置地图中心点坐标
+		            zoom: 11,   //设置地图缩放级别
+		            // pitch: 43.5,  //设置俯仰角
+		            // rotation: 45    //设置地图旋转角度
+		        });
+		         markerLayer = new TMap.MultiMarker({
+		            id: 'marker-layer',
+		            map: map
+		        });
+		       //监听点击事件添加marker
+		            map.on("click", function(evt) {
+		            	if (searchStartVal !== null) {
+			                removeMarker([searchStartVal.id])
+			            }
+		            	
+		            	addMarker();
+		            	
+		            	debugger;
+		                markerLayer.add({
+		                	position: evt.latLng
+		                });                      
+		            });
+			}
+	    	
+
+	    	
+			
+			
+	    	
+	    	
+	    	var searchStartArr = [];
+	    	 var searchStartVal = null;
+	    	$('body').on('input', '#search',
+	                function (e) {
+	                    let search = $('#search').val()
+	                    clearTimeout(window.setTimeOutSearch1)
+	                    window.setTimeOutSearch1 = setTimeout(() => {
+	                        searchStartArr = []
+	                        if (search === "") {
+	                            $('#list-group').hide()
+	                        } else {
+	                            $('#list-group').show()
+	                        }
+	                        $('#list-group').html('<li class="list-group-item" id="0"><span class="lleft">正在努力查找中<span><span class="lright"><span></li>')
+	                        $.ajax({
+	                            type: "get",
+	                            url: "https://apis.map.qq.com/ws/place/v1/suggestion",
+	                            data: {
+	                                'keyword': search,
+	                                'key': 'TYQBZ-IGZCJ-E5XFU-KUR6C-OEGKZ-D2BLP',
+	                                'output': 'jsonp'
+	                            },
+	                            //key换成自己的
+	                            dataType: "jsonp",
+	                            jsonp: "callback",
+	                            jsonpCallback: "TXmap",
+	                            headers: {
+	                                'Content-Type': 'application/json'
+	                            },
+	                            success: function (response) {
+	                            	
+	                                if (response.status !== 0) {
+	                                    console.log('请求失败')
+	                                    return
+	                                }
+	                                searchStartArr = response.data;
+	                                var html = '';
+	                                response.data.forEach(item => {
+	                                    html += '<li class="list-group-item"  style="color: #fff;background-color: #DDDDDD;border-color: #007bff;" id="'+item.id+'"><span class="lleft">'+item.title+'<span><span class="lright">'+item.address+'<span></li>';
+	                                });
+	                                $('#list-group').html(html);
+	                            }
+	                        });
+	                    }, 200)
+	                }
+	            )
+	            
+	            var marker;
+			    /* //添加监听事件  获取鼠标点击事件
+			    qq.maps.event.addListener(map, 'click', function(event) {
+			      if(!marker) {
+			       marker=new qq.maps.Marker({
+			                position:event.latLng, 
+			          map:map
+			          });
+			        return;
+			      }
+				marker.setPosition(event.latLng);      
+			    }); */
+	            
+	            $('.searchStart').on('click', '.list-group-item', function (e) {
+	            	
+	            	
+		          
+		            var target = null;
+		            if ($(e.target).attr('class') === "list-group-item") {
+		                target = $(e.target);
+		            } else {
+		                target = $(e.target).parents('.list-group-item');
+		            }
+		            var searchStartVal = searchStartArr.find(item => {
+		                return item.id == target.attr('id')
+		            })
+		            $('#search').val(searchStartVal.title);
+		            $('#list-group').hide();
+		            if(!marker){
+		            	 marker=new qq.maps.Marker({
+				                position:new qq.maps.LatLng(searchStartVal.location.lat, searchStartVal.location.lng)   , 
+				          map:map
+				          });
+		            }else{
+		            	marker.setPosition(new qq.maps.LatLng(searchStartVal.location.lat, searchStartVal.location.lng));    
+		            }
+		            
+		            //addMarker(searchStartVal.location, searchStartVal.id);
+		            $("#lng").val(searchStartVal.location.lng);
+		            $("#lat").val(searchStartVal.location.lat);
+		            $("#addres").val(searchStartVal.address+searchStartVal.title);
+	            })
+	            
+	            
+	            
+	            
+	    	
+		    	function removeMarker(id) {
+		            markerLayer.remove(id);
+		    	}
+	            function addMarker(latLng, id) {
+	            	debugger;
+		            markerLayer.add({
+		                "id": id,
+		                "position":  new TMap.LatLng(latLng.lat,latLng.lng),
+		                "draggable":true
+		            });
+		            
+		            
+		            
+		            
+		            
+		            var lng = latLng.lng
+		            var lat = latLng.lat
+		            map.setCenter(new TMap.LatLng(lat,lng)); // 坐标为天安门
+		            
+	    	   }
+	          
+	    	
+	    	
+	    	
+	    	
+	    	
+	    	
+	    	
+	    	
+	    	
+	    	
+	    	/*  $.ajax({
+	             type: "get",
+	             url: "https://apis.map.qq.com/ws/place/v1/suggestion",
+	             data: {
+	                 'keyword': search,
+	                 'key': 'TYQBZ-IGZCJ-E5XFU-KUR6C-OEGKZ-D2BLP',
+	                 'output': 'jsonp'
+	             },
+	             //key换成自己的
+	             dataType: "jsonp",
+	             jsonp: "callback",
+	             jsonpCallback: "TXmap",
+	             headers: {
+	                 'Content-Type': 'application/json'
+	             },
+	             success: function (response) {
+	                // debuggger;
+	             }
+	         });
+	 */
+	    	
+	    	
+	    	
+	    	
+	    	
+	        $("#dian").click(function(){
+	        	var addressStr = $("#address").val();
+	          	
+	        	$.ajax({
+	                type: "get",
+	                url: "https://apis.map.qq.com/ws/place/v1/suggestion",
+	                data: {
+	                    'keyword': addressStr,
+	                    'key': 'TYQBZ-IGZCJ-E5XFU-KUR6C-OEGKZ-D2BLP',
+	                    'output': 'jsonp'
+	                },
+	                //key换成自己的
+	                dataType: "jsonp",
+	                jsonp: "callback",
+	                jsonpCallback: "TXmap",
+	                headers: {
+	                    'Content-Type': 'application/json'
+	                },
+	                success: function (response) {
+	                	
+	                    debugger;
+	                }
+	            });
+	        	
+	        });
+	    });
+		
+		
+		
+		
+		
+		
+	    //showPosition  成功之后执行方法
+	    //showErr失败之后执行方法
+	    //options定位选项设置时间
+
+		
+		
+	    
+	}
+	
+	
+	
+    
+</script>
+</body>
+</html>

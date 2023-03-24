@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+	<meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="__PUBLIC__/static/layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="__PUBLIC__/static/layuiadmin/style/admin.css" media="all">
+	<style type="text/css">
+	body, html{width: 100%;height: 100%;margin:0;font-family:"微软雅黑";}
+	#allmap {width: 100%; height:500px; overflow: hidden;}
+	#result {width:100%;font-size:12px;}
+	dl,dt,dd,ul,li{
+		margin:0;
+		padding:0;
+		list-style:none;
+	}
+	p{font-size:12px;}
+	dt{
+		font-size:14px;
+		font-family:"微软雅黑";
+		font-weight:bold;
+		border-bottom:1px dotted #000;
+		padding:5px 0 5px 5px;
+		margin:5px 0;
+	}
+	dd{
+		padding:5px 0 0 5px;
+	}
+	li{
+		line-height:28px;
+	}
+	</style>
+	<script type="text/javascript" src="//api.map.baidu.com/api?v=2.0&ak=EhhW6UAjmUNGyKCVTfZggKIIdjxX3z57"></script>
+	<!--加载鼠标绘制工具-->
+	<script type="text/javascript" src="//api.map.baidu.com/library/DrawingManager/1.4/src/DrawingManager_min.js"></script>
+	<link rel="stylesheet" href="//api.map.baidu.com/library/DrawingManager/1.4/src/DrawingManager_min.css" />
+	<!--加载检索信息窗口-->
+	<script type="text/javascript" src="//api.map.baidu.com/library/SearchInfoWindow/1.4/src/SearchInfoWindow_min.js"></script>
+	<link rel="stylesheet" href="//api.map.baidu.com/library/SearchInfoWindow/1.4/src/SearchInfoWindow_min.css" />
+	<title>鼠标绘制工具</title>
+</head>
+<body>
+<div class="layui-form-item" style="margin-top:15px;">
+    <div class="layui-input-inline" style="width:40%;margin-left:20px">
+      <input type="text" name="address" id="address" placeholder="请输入详细地址" autocomplete="off" class="layui-input">
+    </div>
+    <button id="dian" class="layui-btn ">搜索</button>
+    <button id="move" class="layui-btn ">清除所有</button>
+</div>
+	<div id="allmap" style="overflow:hidden;zoom:1;position:relative;">	
+		<div id="map" style="height:100%;-webkit-transition: all 0.5s ease-in-out;transition: all 0.5s ease-in-out;"></div>
+	</div>
+	<div id="result">
+		<input type="hidden"  id="rangeLng">
+		<input type="hidden"  id="rangeLat">
+	</div>
+<script src="__PUBLIC__/static/layuiadmin/layui/layui.js"></script>
+<script>
+    layui.config({
+        base: '__PUBLIC__/static/layuiadmin/' //静态资源所在路径
+    }).extend({
+        index: 'lib/index' //主入口模块
+    }).use(['jquery','layer'], function(){
+    	var $ = layui.$
+    	,layer = layui.layer;
+    	
+    	var map = new BMap.Map('map');
+    	var overlays = [];
+ 	    var range = [];
+    	var styleOptions = {
+	        strokeColor:"red",    //边线颜色。
+	        fillColor:"red",      //填充颜色。当参数为空时，圆形将没有填充效果。
+	        strokeWeight: 3,       //边线的宽度，以像素为单位。
+	        strokeOpacity: 0.8,	   //边线透明度，取值范围0 - 1。
+	        fillOpacity: 0.6,      //填充的透明度，取值范围0 - 1。
+	        strokeStyle: 'solid' //边线的样式，solid或dashed。
+	    }
+    	
+    	var lngContent = $(window.parent.document).find("#rangeLng").val();
+    	var latContent = $(window.parent.document).find("#rangeLat").val();
+
+    	
+    	if(lngContent != ''&& lngContent != null && latContent != ''&& latContent != null){
+    		var polArry = [];
+    		
+    		var lngArray = lngContent.split(',');
+    		var latArray = latContent.split(',');
+    		    		
+    		var x = 0.0;
+      	　　var y = 0.0;
+    		
+    		for(var i = 0; i < latArray.length; i++){
+    			    			
+    			x = x + parseFloat(lngArray[i]);
+        	　　y = y + parseFloat(latArray[i]);
+    			
+    			
+    			var p = new BMap.Point(lngArray[i],latArray[i]);
+    			polArry.push(p);
+	        }
+    		
+    		console.log(polArry);
+    		
+            var polygon = new BMap.Polygon(polArry,styleOptions);
+            map.addOverlay(polygon);
+            
+            x = x / lngArray.length;
+
+      	　　y = y / latArray.length;
+      	
+      		var poi = new BMap.Point(x,y);
+            
+    	}else{
+    		var poi = new BMap.Point(116.307852,40.057031);
+    	}    
+    	
+    	
+	    map.centerAndZoom(poi, 16);
+	    map.enableScrollWheelZoom();  
+    	
+		// 百度地图API功能
+	   
+	   
+	   
+		var overlaycomplete = function(e){
+			
+			console.log('length',overlays.length);
+			
+			if(overlays.length >= 1){
+				map.clearOverlays();  
+				overlays.length = 0;
+				return layer.msg('仅可设置一个区域');
+			}
+			
+	        
+			overlays.push(e.overlay);
+	        range.push(e.overlay.getPath());
+	        
+	        var lngList = [];
+	        var latList = [];
+	        for(var i = 0; i < range.length; i++){
+	        	for(var j = 0; j < range[i].length; j++){
+	        		lngList.push(JSON.stringify(range[i][j]['lng']));
+	        		latList.push(JSON.stringify(range[i][j]['lat']));
+	        	}
+	        }
+	        
+	        $("#rangeLng").val(lngList); 
+	        $("#rangeLat").val(latList); 
+	        
+	    };
+	   
+	    //实例化鼠标绘制工具
+	    var drawingManager = new BMapLib.DrawingManager(map, {
+	        isOpen: false, //是否开启绘制模式
+	        enableDrawingTool: true, //是否显示工具栏
+	        //绘制模式  多边形
+	        drawingToolOptions: {
+	            anchor: BMAP_ANCHOR_TOP_RIGHT, //位置
+	            offset: new BMap.Size(5, 5), //偏离值
+	            drawingModes:[
+	                          BMAP_DRAWING_POLYGON
+	                      ]
+	        },
+	        circleOptions: styleOptions, //圆的样式
+	        polygonOptions: styleOptions, //多边形的样式
+	    });  
+		 //添加鼠标绘制工具监听事件，用于获取绘制结果
+	    drawingManager.addEventListener('overlaycomplete', overlaycomplete);
+
+	    
+	    $("#move").click(function(){
+	    	
+	    	if(polArry != '' && polArry != null && polArry.length != 0 ){
+	    		
+	    		map.clearOverlays();      
+	    		overlays.length = 0;
+	    		polArry.length = 0;
+	    	}
+	    	
+    	});
+
+	    
+	    $("#dian").click(function(){
+	    	    
+	    	    var addressStr = $("#address").val();
+	            $.ajax({
+	                url: "http://api.map.baidu.com/geocoding/v3/", 
+	                data: {"address": addressStr, "output":"json", "ak":"EhhW6UAjmUNGyKCVTfZggKIIdjxX3z57"},
+	                type: "post",
+	                dataType:'JSONP',
+	                success :function(data){
+	                	console.log(data.result);
+	                    var lng = data.result.location.lng;
+	                    var lat = data.result.location.lat;
+	                    console.log(lng+","+lat);
+	                    
+	                    map.enableScrollWheelZoom();   //启用滚轮放大缩小，默认禁用
+	                    var point = new BMap.Point(lng, lat); // 创建点坐标 
+	                    map.centerAndZoom(point, 16);
+	                    map.addOverlay(new BMap.Marker(map.getCenter()));
+	                    
+	                }
+	            });
+        });
+
+	    
+	    $('#getLayerInformation').click(function(){
+	    	var test = [];
+	        for(var i = 0; i < range.length; i++){
+	        	for(var j = 0; j < range[i].length; j++){
+	        		console.log(range[i][j]);
+		        	test.push(JSON.stringify(range[i][j]));
+	        	}
+	        }
+	        test = test.join('#');
+	    	
+	    });
+	    
+	    $('#draw').click(function(){
+	    	var point = [
+   	             {
+   	                 lng:"116.291611",
+   	                 lat:"40.061946"
+   	             },
+   	             {
+   	                 lng:"116.291539",
+   	                 lat:"40.059295"
+   	             },
+   	             {
+   	                 lng:"116.296102",
+   	                 lat:"40.057252"
+   	             },
+   	             {
+   	                 lng:"116.303109",
+   	                 lat:"40.060179"
+   	             }
+   	         ];
+    		var polArry = [];
+    		for(var i = 0; i < point.length; i++){
+    			var p = new BMap.Point(point[i]['lng'],point[i]['lat']);
+  	             	polArry.push(p);
+	        }
+
+   	         var polygon = new BMap.Polygon(polArry,styleOptions);
+   	         map.addOverlay(polygon);
+	    	
+	    });
+    });
+</script>
+</body>
+</html>

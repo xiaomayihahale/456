@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>个性化地图</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <style type="text/css">
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+        }
+
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        body {
+            font: 12px/16px Verdana, Helvetica, Arial, sans-serif;
+        }
+
+        #container {
+            min-width: 600px;
+            min-height: 767px;
+        }
+    </style>
+    <script charset="utf-8" src="https://map.qq.com/api/js?v=2.exp&key=I7JBZ-WDG3J-7XFFE-KDHU3-HCUJJ-ILFYZ"></script>
+    
+</head>
+
+<body onload="init()">
+        <script>
+var center,map,geocoder,marker = null;
+                var init = function () {
+                    // 创建地图
+                    center = new qq.maps.LatLng(39.916527, 116.397128);
+                    map = new qq.maps.Map(document.getElementById("container"), {
+                        center: center, // 地图的中心地理坐标
+                        zoom: 14, // 地图缩放级别
+                        mapStyleId: 'style1' // 该key绑定的style1对应于经典地图样式，若未绑定将弹出无权限提示窗
+                    });
+                    // 绑定单击事件添加参数
+                    // qq.maps.event.addListener(
+                    //     map,
+                    //     'click',
+                    //     function (event) {
+                    //         alert('你点击的位置为：[' + event.latLng.getLat()+ ',' + event.latLng.getLng() + ']');
+                    //     }
+                    // )
+                    //添加比例尺控件
+                    var scaleControl = new qq.maps.ScaleControl({
+                        align: qq.maps.ALIGN.BOTTOM_LEFT,
+                        margin: qq.maps.Size(85, 15),
+                        map: map
+                    });
+                    //创建标记
+                    marker = new qq.maps.Marker({
+                        position: center,
+                        map: map
+                    });
+                    //添加到提示窗
+                    var info = new qq.maps.InfoWindow({
+                        map: map
+                    });
+                    // 标注点击事件：
+                    qq.maps.event.addListener(marker, 'click', function (event) {
+                        info.open();
+                        // 标记的点击事件弹出地理位置信息
+                        info.setContent('<div style="text-align:center;white-space:nowrap;' +
+                            'margin:10px;">位置为：[' + event.latLng.getLat() + ',' + event.latLng.getLng() +
+                            ']</div>');
+                        // 实时更新消息弹框的坐标与标注点一致
+                        center = event.latLng;
+                        info.setPosition(center);
+                    });
+                    // 允许标注拖拽事件：
+                    marker.setDraggable(true);
+                    //地址和经纬度之间进行转换服务
+                    geocoder = new qq.maps.Geocoder();
+                    //设置服务请求成功的回调函数
+                    geocoder.setComplete(function(result) {
+                        center = result.detail.location;
+                        map.setCenter(center);
+                        marker.setPosition(center);
+                        // 点击Marker会弹出反查结果
+                        // qq.maps.event.addListener(marker, 'click', function() {
+                        //     alert("坐标地址为： " + result.detail.location);
+                        // });
+                    });
+                        //若服务请求失败，则运行以下函数
+                        geocoder.setError(function() {
+                            alert("出错了，请输入正确的地址！！！");
+                        });
+                       
+                }
+                function codeAddress() {
+                        var address = document.getElementById("address").value;
+                        //对指定地址进行解析
+                        geocoder.getLocation(address);
+                    }
+            </script>
+    <div>
+        <input id="address" type="textbox" value="济南职业学院">
+        <button onclick="codeAddress()">search</button>
+    </div>
+    <!--   定义地图显示容器   -->
+    <div id="container"></div>
+</body>
