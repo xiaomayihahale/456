@@ -1,0 +1,1159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns="http://www.we7.cc" versionCode="0.8,1.0">
+	<application setting="false">
+		<name><![CDATA[云科会员卡系统]]></name>
+		<identifie><![CDATA[wjyk_nhyk]]></identifie>
+		<version><![CDATA[1.4.8]]></version>
+		<type><![CDATA[business]]></type>
+		<ability><![CDATA[微聚云科新会员卡小程序]]></ability>
+		<description><![CDATA[微聚云科新会员卡小程序]]></description>
+		<author><![CDATA[WE7资源网]]></author>
+		<url><![CDATA[http://www.we7cc.cn/]]></url>
+	</application>
+
+	<platform>
+		<subscribes>
+		</subscribes>
+
+		<handles>
+			<message type="text" />
+		</handles>
+
+		<rule embed="false" /> 
+		<card embed="false" />
+		<oauth type="1" />
+		
+		<supports>
+			<item type="wxapp" />
+		</supports>
+		<plugins>
+			<item name="wjyk_nhyk_plugin_ktv" />
+			<item name="wjyk_nhyk_plugin_food" />
+			<item name="wjyk_nhyk_plugin_hotel" />
+		</plugins>
+	</platform>
+
+	<bindings>
+		<cover>
+			<entry title="首页" do="/wjyk_nhyk/pages/index/index" state="" direct="false"/>
+		</cover>
+		<menu call="__call"> 
+		</menu>
+	</bindings>
+
+	<permissions>
+	</permissions>
+
+	<install><![CDATA[
+CREATE TABLE IF NOT EXISTS `ims_wjyk_nhyk_account` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `account` varchar(255) DEFAULT NULL COMMENT '账号',
+  `name` varchar(255) DEFAULT NULL COMMENT '姓名',
+  `password` varchar(255) DEFAULT NULL COMMENT '密码',
+  `auth_level` int(1) DEFAULT NULL COMMENT '权限级别 1 员工 2 门店管理员 3 总管理员',
+  `create_date` int(11) DEFAULT NULL COMMENT '创建日期',
+  `uniacid` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE IF NOT EXISTS `ims_wjyk_nhyk_address` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uniacid` int(11) NOT NULL,
+  `uid` varchar(155) NOT NULL,
+  `realname` varchar(155) NOT NULL COMMENT '收货人姓名',
+  `mobile` varchar(155) NOT NULL COMMENT '收货人电话',
+  `province` varchar(20) DEFAULT NULL COMMENT '省',
+  `city` varchar(20) DEFAULT NULL COMMENT '市',
+  `district` varchar(20) DEFAULT NULL COMMENT '区',
+  `address` varchar(255) DEFAULT NULL COMMENT '详细地址',
+  `is_default` smallint(1) NOT NULL DEFAULT '1' COMMENT '1-非默认，2-默认',
+  `createtime` int(10) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='收货地址表';
+
+
+CREATE TABLE IF NOT EXISTS `ims_wjyk_nhyk_attachment` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uniacid` int(11) DEFAULT NULL,
+  `type` smallint(1) DEFAULT NULL COMMENT '类型 1.本地 2.七牛 3 阿里 4 腾讯',
+  `tx_appid` varchar(255) DEFAULT NULL COMMENT '腾讯appid',
+  `tx_secretid` varchar(255) DEFAULT NULL COMMENT '腾讯SecretIDid',
+  `tx_secretkey` varchar(255) DEFAULT NULL COMMENT '腾讯 SecretKEY',
+  `tx_bucket` varchar(255) DEFAULT NULL COMMENT '腾讯 Bucket',
+  `tx_url` varchar(255) DEFAULT NULL COMMENT '腾讯 url',
+  `qn_accesskey` varchar(255) DEFAULT NULL COMMENT '七牛 Accesskey',
+  `qn_secretkey` varchar(255) DEFAULT NULL,
+  `qn_bucket` varchar(255) DEFAULT NULL,
+  `qn_url` varchar(255) DEFAULT NULL,
+  `ali_access_key_id` varchar(255) DEFAULT NULL,
+  `ali_access_key_secret` varchar(255) DEFAULT NULL,
+  `ali_url` varchar(255) DEFAULT NULL,
+  `ali_bucket` varchar(255) DEFAULT NULL,
+  `tx_local` varchar(255) DEFAULT NULL,
+  `ali_end_point` varchar(255) DEFAULT '',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE IF NOT EXISTS `ims_wjyk_nhyk_car` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `order_number` varchar(255) DEFAULT NULL COMMENT '订单号',
+  `uniacid` int(11) NOT NULL,
+  `uid` int(11) NOT NULL,
+  `goods_id` int(11) NOT NULL,
+  `num` int(11) NOT NULL,
+  `createtime` int(10) NOT NULL,
+  `spec` varchar(255) DEFAULT NULL COMMENT '规格',
+  `car_type` smallint(1) DEFAULT '0' COMMENT '0 商城 1 点餐',
+  `store_id` int(11) DEFAULT NULL COMMENT '门店id',
+  `spec_price` decimal(10,2) DEFAULT '0.00' COMMENT '规格金额',
+  `spec_stock` int(11) DEFAULT '0' COMMENT '库存',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='购物车';
+
+
+CREATE TABLE IF NOT EXISTS `ims_wjyk_nhyk_category` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uniacid` int(11) NOT NULL,
+  `uid` int(11) NOT NULL,
+  `c_name` varchar(1000) NOT NULL COMMENT '内容',
+  `sort` int(11) NOT NULL,
+  `is_show` smallint(1) DEFAULT '1' COMMENT '分数',
+  `createtime` int(10) NOT NULL,
+  `ico` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='评论表';
+
+
+CREATE TABLE IF NOT EXISTS `ims_wjyk_nhyk_commission` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `uid` int(11) DEFAULT NULL COMMENT '0',
+  `uniacid` int(11) DEFAULT NULL COMMENT '公众号id',
+  `pid` int(11) DEFAULT NULL COMMENT '0',
+  `c_type` int(1) DEFAULT NULL COMMENT '1购买商品 2.充值',
+  `commission` float(11,2) DEFAULT NULL COMMENT '佣金',
+  `price` float(11,2) DEFAULT NULL COMMENT '价格',
+  `addtime` varchar(255) DEFAULT NULL COMMENT '时间',
+  `order_id` int(11) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='佣金表';
+
+
+CREATE TABLE IF NOT EXISTS `ims_wjyk_nhyk_commodity` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `commodity_name` varchar(255) DEFAULT NULL COMMENT '商品名称',
+  `commodity_price` decimal(10,2) DEFAULT NULL COMMENT '商品价格',
+  `commodity_img` varchar(255) DEFAULT '' COMMENT '商品价格',
+  `commodity_desc` varchar(255) DEFAULT NULL COMMENT '商品描述',
+  `commodity_norm` int(11) DEFAULT NULL COMMENT '规格id 为空即没有规格',
+  `uniacid` int(11) DEFAULT NULL,
+  `create_date` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE IF NOT EXISTS `ims_wjyk_nhyk_coupon` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `uniacid` int(11) DEFAULT NULL COMMENT '公众号id',
+  `full` float(11,2) DEFAULT '0.00' COMMENT '满',
+  `less` float(11,2) DEFAULT '0.00' COMMENT '减',
+  `sid` int(11) DEFAULT NULL COMMENT '店铺id',
+  `goods_id` int(11) DEFAULT NULL COMMENT '商品id',
+  `platform` int(1) DEFAULT '1' COMMENT '1平台，2商家',
+  `give` int(1) DEFAULT '1' COMMENT '1领劵大厅，2购买商品',
+  `num` int(11) DEFAULT '0' COMMENT '数量',
+  `is_show` int(1) DEFAULT '1' COMMENT '是否显示',
+  `start_time` int(10) NOT NULL,
+  `end_time` int(10) NOT NULL,
+  `addtime` int(10) NOT NULL,
+  `sort` int(11) DEFAULT '0',
+  `type` smallint(1) DEFAULT NULL COMMENT '优惠卷类型 1 满减 2 无门槛 ',
+  `region` smallint(1) DEFAULT NULL COMMENT '限制 1.积分商城 2.商城 3.全场',
+  `br_day` int(11) DEFAULT NULL COMMENT '有效天数',
+  `c_type` smallint(1) DEFAULT NULL COMMENT '1.普通卷 2.生日劵',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='优惠卷';
+
+
+CREATE TABLE IF NOT EXISTS `ims_wjyk_nhyk_deduction` (
+  `id` int(11) NOT NULL,
+  `uniacid` int(11) DEFAULT NULL,
+  `coupon_id` int(11) DEFAULT NULL COMMENT '优惠卷id',
+  `less` int(11) DEFAULT NULL COMMENT '优惠金额',
+  `createtime` int(11) DEFAULT NULL COMMENT '创建日期',
+  `uid` int(11) DEFAULT NULL,
+  `oper_uid` int(11) DEFAULT NULL COMMENT '操作员id',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE IF NOT EXISTS `ims_wjyk_nhyk_distribution_audit` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uid` int(11) DEFAULT NULL COMMENT '申请人uid',
+  `createtime` int(11) DEFAULT NULL,
+  `status` smallint(1) DEFAULT '1' COMMENT '审核状态 1待审核 2 拒绝 3 通过',
+  `remark` varchar(255) DEFAULT NULL COMMENT '备注',
+  `uniacid` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE IF NOT EXISTS `ims_wjyk_nhyk_distribution_set` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uniacid` int(11) NOT NULL,
+  `poster` varchar(255) DEFAULT '0' COMMENT '海报',
+  `distribution_level` int(1) DEFAULT '0' COMMENT '分销等级',
+  `distribution_one` float(3,2) DEFAULT '0.00' COMMENT '分销',
+  `distribution_two` float(3,2) DEFAULT '0.00' COMMENT '分销',
+  `distribution_three` float(3,2) DEFAULT '0.00' COMMENT '分销',
+  `distribution_description` text COMMENT '分销说明',
+  `handling_fee` float(11,2) NOT NULL DEFAULT '0.05',
+  `lowest_withdraw` int(11) DEFAULT NULL COMMENT '最低提现',
+  `w_type` varchar(50) DEFAULT '1' COMMENT '提现方式 1,微信 2.银行卡 3 支付宝',
+  `createtime` int(10) NOT NULL,
+  `condition` smallint(1) DEFAULT '1' COMMENT '限制条件 1 无条件 2审核 3 累计消费 4 指定会员等级 5 购买某个产品',
+  `consume_money` decimal(10,2) DEFAULT '0.00',
+  `member_level` int(11) DEFAULT NULL COMMENT '会员等级',
+  `goods_id` int(11) DEFAULT NULL,
+  `plugin_type` smallint(1) DEFAULT NULL COMMENT '插件类型',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='分销设置';
+
+
+CREATE TABLE IF NOT EXISTS `ims_wjyk_nhyk_foodcategory` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uniacid` int(11) NOT NULL,
+  `uid` int(11) NOT NULL,
+  `c_name` varchar(1000) NOT NULL COMMENT '内容',
+  `sort` int(11) NOT NULL,
+  `is_show` smallint(1) DEFAULT '1' COMMENT '分数',
+  `createtime` int(10) NOT NULL,
+  `ico` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='评论表';
+
+
+CREATE TABLE IF NOT EXISTS `ims_wjyk_nhyk_foods` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uniacid` int(11) DEFAULT NULL,
+  `foods_name` varchar(255) DEFAULT NULL COMMENT '食品名称',
+  `foods_img` varchar(255) DEFAULT NULL COMMENT '食品图片',
+  `carousel` varchar(255) DEFAULT NULL COMMENT '食品轮播图',
+  `discount` decimal(10,2) DEFAULT NULL COMMENT '折扣',
+  `original_price` decimal(10,2) DEFAULT NULL COMMENT '原价',
+  `desc` varchar(255) DEFAULT NULL COMMENT '描述',
+  `norm` varchar(1000) DEFAULT '' COMMENT '规格',
+  `summary` varchar(255) DEFAULT NULL COMMENT '简介',
+  `createtime` int(11) DEFAULT NULL COMMENT '创建日期',
+  `cid` int(11) DEFAULT NULL COMMENT '类型id',
+  `stock` int(11) DEFAULT '0' COMMENT '库存',
+  `is_show` smallint(1) DEFAULT NULL COMMENT '是否显示 0显示 1不显示 2 删除',
+  `sales` int(11) DEFAULT '0' COMMENT '销量',
+  `is_new` smallint(1) DEFAULT '1' COMMENT '是否新品 0 是 1 不是',
+  `different` int(11) DEFAULT '0' COMMENT '差评',
+  `medium` int(11) DEFAULT '0' COMMENT '中评',
+  `good` int(11) DEFAULT NULL COMMENT '好评',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE IF NOT EXISTS `ims_wjyk_nhyk_foods_store` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uniacid` int(11) DEFAULT NULL,
+  `store_id` int(11) DEFAULT NULL,
+  `is_show` smallint(1) DEFAULT NULL COMMENT '0 上架 1下架',
+  `foods_id` int(11) DEFAULT NULL COMMENT '食品id',
+  `foods_str` varchar(255) DEFAULT NULL,
+  `type` smallint(1) DEFAULT NULL COMMENT '类型  1 点餐 2 酒店',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE IF NOT EXISTS `ims_wjyk_nhyk_goods` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uniacid` int(11) NOT NULL,
+  `uid` int(11) NOT NULL,
+  `cid` int(11) NOT NULL,
+  `goods_name` varchar(100) NOT NULL COMMENT '商品名称',
+  `original_price` decimal(11,2) DEFAULT '0.00' COMMENT '原价',
+  `discount_price` decimal(11,2) DEFAULT '0.00' COMMENT '优惠价',
+  `cover` varchar(255) NOT NULL COMMENT '封面',
+  `carousel` text COMMENT '轮播图',
+  `details` text COMMENT '商品详情',
+  `is_show` int(1) NOT NULL DEFAULT '1' COMMENT ' 1隐藏  2显示，3删除',
+  `recommend` int(1) NOT NULL DEFAULT '1' COMMENT ' 1隐藏  2显示',
+  `sales` int(10) DEFAULT '0' COMMENT '销量',
+  `createtime` int(10) NOT NULL,
+  `good` int(11) DEFAULT '0',
+  `medium` int(11) DEFAULT '0',
+  `different` int(11) DEFAULT '0',
+  `favorites` int(10) DEFAULT '0',
+  `stock` int(11) DEFAULT '0',
+  `spec` text COMMENT '商品规格',
+  `is_freight` int(1) NOT NULL DEFAULT '1' COMMENT '是否需要运费 1包邮   2-运费',
+  `freight` decimal(11,2) DEFAULT '0.00' COMMENT '运费',
+  `region_type` smallint(1) DEFAULT NULL COMMENT '商品划分区域  1.每日 2 会员 3 普通 4.兑换专区 ',
+  `need_integer` int(11) DEFAULT NULL COMMENT '商品兑换需要积分',
+  `is_exchange` smallint(1) DEFAULT NULL COMMENT '是否为兑换专区 1 否 2 是',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='商品表';
+
+
+CREATE TABLE IF NOT EXISTS `ims_wjyk_nhyk_hotel` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uniacid` int(11) DEFAULT NULL,
+  `name` varchar(255) DEFAULT '' COMMENT '酒店名称',
+  `mobile` varchar(255) DEFAULT '' COMMENT '酒店电话号码',
+  `createtime` int(11) DEFAULT NULL,
+  `desc` varchar(255) DEFAULT '' COMMENT '酒店描述',
+  `img` varchar(255) DEFAULT NULL COMMENT '封面图',
+  `addres_lat` varchar(255) DEFAULT NULL COMMENT '门店地址 x轴',
+  `addres_lng` varchar(255) DEFAULT NULL,
+  `resideprovince` varchar(30) NOT NULL,
+  `residecity` varchar(30) NOT NULL,
+  `residedist` varchar(30) NOT NULL,
+  `score` decimal(10,1) DEFAULT '0.0' COMMENT '分数',
+  `status` smallint(1) DEFAULT '0' COMMENT ' 显示 1 不显示 2 删除',
+  `addres` varchar(255) DEFAULT NULL COMMENT '详细地址',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE IF NOT EXISTS `ims_wjyk_nhyk_hotel_thing` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uniacid` int(11) NOT NULL,
+  `uid` int(11) NOT NULL,
+  `c_name` varchar(1000) NOT NULL COMMENT '内容',
+  `sort` int(11) NOT NULL,
+  `is_show` smallint(1) DEFAULT '1' COMMENT '分数',
+  `createtime` int(10) NOT NULL,
+  `ico` varchar(255) DEFAULT NULL,
+  `price` decimal(10,2) DEFAULT '0.00' COMMENT '单价',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='评论表';
+
+
+CREATE TABLE IF NOT EXISTS `ims_wjyk_nhyk_hotel_thing_consume` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `order_id` int(11) DEFAULT NULL COMMENT '订单id',
+  `tid` int(11) DEFAULT NULL COMMENT '物品id',
+  `less_num` int(11) DEFAULT '0' COMMENT '消耗数量',
+  `less_price` decimal(10,2) DEFAULT '0.00' COMMENT '金额',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE IF NOT EXISTS `ims_wjyk_nhyk_hotel_thing_rel` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uniacid` int(11) DEFAULT NULL,
+  `rid` int(11) DEFAULT NULL,
+  `num` int(11) DEFAULT '0' COMMENT '数量',
+  `tid` int(11) DEFAULT NULL COMMENT '物品Id',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE IF NOT EXISTS `ims_wjyk_nhyk_index_meau` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uniacid` int(11) DEFAULT NULL,
+  `order` int(11) DEFAULT NULL COMMENT '排序值',
+  `meau_name` varchar(255) DEFAULT NULL COMMENT '菜单栏名称',
+  `meau_link` varchar(255) DEFAULT NULL COMMENT '菜单栏链接',
+  `createtime` int(11) DEFAULT NULL,
+  `status` smallint(1) DEFAULT NULL COMMENT '是否显示 0 显示1 隐藏 2 删除',
+  `icon` varchar(255) DEFAULT NULL COMMENT '图标',
+  `meal_app_id` varchar(255) DEFAULT NULL COMMENT 'appid',
+  `meau_params` varchar(255) DEFAULT '' COMMENT '链接参数',
+  `type` smallint(1) DEFAULT '1' COMMENT '类型  1.内部 2 外部h5 3 外部小程序',
+  `nei_type` int(11) DEFAULT NULL COMMENT '内部id',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE IF NOT EXISTS `ims_wjyk_nhyk_integral` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uniacid` int(11) DEFAULT NULL,
+  `ob_integral` int(11) DEFAULT NULL COMMENT '获得积分',
+  `type` smallint(1) DEFAULT NULL COMMENT '积分获得方式 1.签到  2 消费赠送积分',
+  `createtime` int(11) DEFAULT NULL,
+  `uid` int(11) DEFAULT NULL COMMENT '用户id',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE IF NOT EXISTS `ims_wjyk_nhyk_meal` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `meal_type` varchar(255) DEFAULT NULL COMMENT '服务类型',
+  `meal_count` int(11) DEFAULT '0' COMMENT '套餐次数',
+  `meal_money` decimal(10,2) DEFAULT '0.00' COMMENT '套餐价格',
+  `uniacid` int(11) DEFAULT NULL,
+  `create_date` int(11) DEFAULT NULL,
+  `status` int(1) DEFAULT NULL COMMENT '是否有效 0 有效 1 失效',
+  `expired_date` int(11) DEFAULT NULL COMMENT '过期时间',
+  `order` int(11) DEFAULT NULL COMMENT '排序 ',
+  `meal_month` int(11) DEFAULT NULL COMMENT '有效期月份',
+  `meal_name` varchar(255) DEFAULT NULL COMMENT '套餐名称',
+  `meal_discount` decimal(10,2) DEFAULT NULL COMMENT '折扣',
+  `meal_back_img` varchar(255) DEFAULT NULL COMMENT '套餐卡背景图',
+  `meal__desc` text COMMENT '套餐卡说明',
+  `meal_use_count` int(11) DEFAULT '0' COMMENT '每天限制使用次数',
+  `meal_buy_count` int(11) DEFAULT '10' COMMENT '每人限购次数',
+  `meal_desc` text COMMENT '套餐卡说明',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE IF NOT EXISTS `ims_wjyk_nhyk_meal_log` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uniacid` int(11) NOT NULL,
+  `uid` int(11) NOT NULL,
+  `meal_id` int(11) NOT NULL,
+  `createtime` int(11) NOT NULL,
+  `rel_count` int(11) NOT NULL,
+  `sum_count` int(11) NOT NULL,
+  `store_id` int(11) NOT NULL,
+  `oper_id` int(11) DEFAULT NULL COMMENT '操作员id',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE IF NOT EXISTS `ims_wjyk_nhyk_meau` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uniacid` int(11) DEFAULT NULL,
+  `order` int(11) DEFAULT NULL COMMENT '排序值',
+  `meau_name` varchar(255) DEFAULT NULL COMMENT '菜单栏名称',
+  `meau_link` varchar(255) DEFAULT NULL COMMENT '菜单栏链接',
+  `createtime` int(11) DEFAULT NULL,
+  `status` smallint(1) DEFAULT NULL COMMENT '是否显示 0 显示1 隐藏 2 删除',
+  `icon` varchar(255) DEFAULT NULL COMMENT '图标',
+  `icon_select` varchar(255) DEFAULT NULL COMMENT '图标选中',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE IF NOT EXISTS `ims_wjyk_nhyk_memlevel` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `member_name` varchar(255) DEFAULT NULL COMMENT '级别名称',
+  `need_money` int(11) DEFAULT NULL COMMENT '达到下一级别需要花费金额',
+  `member_level` int(2) DEFAULT NULL COMMENT '会员级别',
+  `next_level` int(2) DEFAULT NULL COMMENT '下一级别',
+  `create_date` int(11) DEFAULT NULL,
+  `uniacid` int(11) DEFAULT NULL,
+  `discount` decimal(10,2) DEFAULT NULL COMMENT '会员折扣价',
+  `member_logo` varchar(255) DEFAULT NULL COMMENT '会员图片',
+  `is_default` smallint(1) DEFAULT '1' COMMENT '2 默认 ',
+  `member_back_logo` varchar(255) DEFAULT NULL COMMENT '背景图片',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE IF NOT EXISTS `ims_wjyk_nhyk_merch_account` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uniacid` int(11) DEFAULT NULL,
+  `username` varchar(255) DEFAULT NULL COMMENT '账号名',
+  `pwd` varchar(255) DEFAULT NULL COMMENT '密码',
+  `createtime` int(11) DEFAULT NULL,
+  `lastvisit` varchar(255) DEFAULT NULL COMMENT '最后登录时间',
+  `lastip` varchar(255) DEFAULT NULL COMMENT '最后登录ip',
+  `type` smallint(1) DEFAULT NULL COMMENT '账户类型  1 门店管理 2 普通员工',
+  `store_id` int(11) DEFAULT NULL COMMENT '门店id',
+  `status` smallint(1) DEFAULT NULL COMMENT '状态 0 正常 1 停用',
+  `mobile` varchar(255) DEFAULT NULL COMMENT '电话号码',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE IF NOT EXISTS `ims_wjyk_nhyk_merch_user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `status` smallint(1) DEFAULT NULL COMMENT '状态',
+  `accounttime` int(11) DEFAULT NULL COMMENT '过期时间',
+  `uniacid` int(11) DEFAULT NULL,
+  `accountid` int(11) DEFAULT NULL COMMENT '账号id',
+  `createtime` int(11) DEFAULT NULL COMMENT '创建日期',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE IF NOT EXISTS `ims_wjyk_nhyk_module_plugin` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uniacid` int(11) DEFAULT NULL,
+  `pid` int(11) DEFAULT NULL,
+  `is_open` smallint(1) DEFAULT NULL COMMENT '1 关闭 2 开启',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE IF NOT EXISTS `ims_wjyk_nhyk_my_coupon` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `uniacid` int(11) DEFAULT NULL COMMENT '公众号id',
+  `uid` int(11) DEFAULT NULL COMMENT '店铺id',
+  `pid` int(11) DEFAULT NULL COMMENT 'pid',
+  `full` int(11) DEFAULT NULL COMMENT '满',
+  `less` int(11) DEFAULT NULL COMMENT '减',
+  `sid` int(11) DEFAULT NULL COMMENT '店铺id',
+  `c_type` int(1) DEFAULT '1' COMMENT '1平台，2商家',
+  `status` int(1) DEFAULT '1' COMMENT '1未使用，2已使用',
+  `start_time` int(10) NOT NULL,
+  `end_time` int(10) NOT NULL,
+  `addtime` int(10) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='我的优惠卷';
+
+
+CREATE TABLE IF NOT EXISTS `ims_wjyk_nhyk_my_meal` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uniacid` int(11) DEFAULT NULL,
+  `meal_id` int(11) NOT NULL,
+  `expired_date` int(11) NOT NULL COMMENT '过期时间',
+  `createtime` int(11) DEFAULT NULL COMMENT '创建时间',
+  `rel_count` int(11) DEFAULT '0' COMMENT '使用次数',
+  `sum_count` int(11) DEFAULT NULL COMMENT '总次数',
+  `uid` int(11) NOT NULL COMMENT '用户id',
+  `meal_discount` decimal(10,2) DEFAULT NULL COMMENT '折扣',
+  `qrcode` varchar(255) DEFAULT NULL COMMENT '核销码',
+  `meal_use_count` int(11) DEFAULT '0' COMMENT '每日限制使用次数',
+  `status` smallint(1) DEFAULT '0' COMMENT ' 套餐卡',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE IF NOT EXISTS `ims_wjyk_nhyk_my_voucher` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `uniacid` int(11) DEFAULT NULL COMMENT '公众号id',
+  `uid` int(11) DEFAULT NULL COMMENT '店铺id',
+  `pid` int(11) DEFAULT NULL COMMENT 'pid',
+  `money` int(11) DEFAULT NULL COMMENT '满',
+  `only` int(11) DEFAULT NULL COMMENT '减',
+  `status` int(1) DEFAULT '1' COMMENT '1未使用，2已使用',
+  `start_time` int(10) NOT NULL,
+  `end_time` int(10) NOT NULL,
+  `createtime` int(10) NOT NULL,
+  `transfer_uid` int(11) DEFAULT NULL COMMENT '转让人uid',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='我的优惠卷';
+
+
+CREATE TABLE IF NOT EXISTS `ims_wjyk_nhyk_note` (
+  `id` int(11) NOT NULL,
+  `is_open` smallint(1) DEFAULT '1' COMMENT '1-开启，2-隐藏',
+  `type` smallint(1) DEFAULT '1' COMMENT '1-助通云，2-阿里云',
+  `uniacid` int(11) DEFAULT NULL,
+  `user` varchar(50) DEFAULT NULL,
+  `pass` varchar(50) DEFAULT NULL,
+  `message` varchar(255) DEFAULT NULL COMMENT '短信内容 充值成功',
+  `keyId` varchar(50) DEFAULT NULL,
+  `keySecret` varchar(50) DEFAULT NULL,
+  `signName` varchar(50) DEFAULT NULL,
+  `templateCode` varchar(50) DEFAULT NULL COMMENT '充值成功模板id',
+  `kf_success_code` varchar(50) DEFAULT NULL COMMENT '扣费成功模板id',
+  `new_success_code` varchar(50) DEFAULT NULL COMMENT '新订单模板id',
+  `kf_success_message` varchar(255) DEFAULT NULL COMMENT '扣费msg',
+  `new_success_message` varchar(255) DEFAULT NULL COMMENT '新订单msg',
+  `br_success_code` varchar(255) DEFAULT NULL COMMENT '生日提醒模板code',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='短信配置表';
+
+
+CREATE TABLE IF NOT EXISTS `ims_wjyk_nhyk_notice_set` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uniacid` int(11) DEFAULT NULL,
+  `createtime` int(11) DEFAULT NULL,
+  `new_template` varchar(255) DEFAULT NULL COMMENT '新模板',
+  `cz_success_template` varchar(255) DEFAULT NULL COMMENT '充值模板',
+  `kf_template` varchar(255) DEFAULT NULL COMMENT '扣款模板',
+  `new_type` smallint(1) DEFAULT NULL COMMENT '新订单类型',
+  `cz_type` smallint(1) DEFAULT NULL,
+  `kf_type` smallint(1) DEFAULT NULL COMMENT '扣费类型',
+  `br_template` varchar(255) DEFAULT NULL COMMENT '生日消息模板',
+  `br_type` smallint(1) DEFAULT NULL COMMENT '生日 ',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE IF NOT EXISTS `ims_wjyk_nhyk_order` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `order_number` varchar(255) DEFAULT NULL COMMENT '订单号',
+  `uniacid` int(11) NOT NULL,
+  `uid` int(11) NOT NULL,
+  `goods_id` int(11) NOT NULL,
+  `num` int(11) NOT NULL,
+  `unit_price` float(10,2) DEFAULT '0.00',
+  `price` float(11,2) DEFAULT '0.00' COMMENT '金额',
+  `real_payment` float(11,2) DEFAULT '0.00' COMMENT '实付款',
+  `discount` float(11,2) DEFAULT '0.00' COMMENT '优惠卷金额',
+  `status` smallint(1) NOT NULL DEFAULT '1' COMMENT ' 1-待付款  2待发货，3待收货，4已完成',
+  `realname` varchar(20) DEFAULT NULL COMMENT '姓名',
+  `mobile` varchar(20) DEFAULT NULL COMMENT '电话',
+  `province` varchar(20) DEFAULT NULL COMMENT '省',
+  `city` varchar(20) DEFAULT NULL COMMENT '市',
+  `district` varchar(20) DEFAULT NULL COMMENT '区',
+  `address` varchar(255) DEFAULT NULL COMMENT '详细地址',
+  `ship_time` int(10) DEFAULT NULL COMMENT '发货时间',
+  `receipt_time` int(10) DEFAULT NULL COMMENT '收货时间',
+  `express_no` varchar(50) DEFAULT NULL COMMENT '快递单号',
+  `express_name` varchar(50) DEFAULT NULL COMMENT '快递',
+  `createtime` int(10) NOT NULL,
+  `is_comment` smallint(1) DEFAULT '1',
+  `coupon_id` int(11) DEFAULT '0',
+  `member_discount` float(11,2) DEFAULT '0.00' COMMENT '会员优惠金额',
+  `pay_type` smallint(1) NOT NULL DEFAULT '1' COMMENT ' 1微信，2余额',
+  `spec` text COMMENT '商品规格',
+  `type` smallint(1) NOT NULL DEFAULT '1' COMMENT ' 1普通订单，2 兑换专区订单',
+  `freight` float(3,2) DEFAULT '0.00' COMMENT '运费',
+  `integral` float(11,2) DEFAULT '0.00' COMMENT '订单总积分',
+  `other_goods_id` int(11) DEFAULT NULL,
+  `store_id` int(11) DEFAULT NULL COMMENT '门店id',
+  `store_name` varchar(255) DEFAULT NULL COMMENT '门店名称',
+  `need_integral` int(11) DEFAULT NULL COMMENT '兑换所需要积分',
+  `receipt_type` smallint(1) DEFAULT '1' COMMENT '收货方式 1.到店自提 2 邮寄',
+  `remark` varchar(255) DEFAULT NULL COMMENT '备注',
+  `pickup_code` varchar(255) DEFAULT NULL COMMENT '取货码',
+  `plugin_type` smallint(1) DEFAULT '0' COMMENT '0 普通商城 1 点餐 2 酒店预约',
+  `pr_number` int(11) DEFAULT NULL COMMENT '订餐人数',
+  `voucher_id` int(11) DEFAULT NULL COMMENT '代金券id',
+  `seat_number` varchar(255) DEFAULT NULL COMMENT '桌台号',
+  `arrival_time` varchar(255) DEFAULT '' COMMENT '到店时间',
+  `pickup_type` smallint(1) DEFAULT '0' COMMENT '0 外卖 1 店内用餐',
+  `reserve_number` int(11) DEFAULT '0' COMMENT '预约天数',
+  `reserve_start` int(11) DEFAULT NULL COMMENT '预约开始时间',
+  `reserve_end` int(11) DEFAULT NULL COMMENT '预约结束时间',
+  `is_show` smallint(1) DEFAULT '0' COMMENT '是否删除 0 正常 1 删除',
+  `deposit` decimal(10,0) DEFAULT '0' COMMENT '押金',
+  `meal_id` int(11) DEFAULT NULL COMMENT '套餐id',
+  `order_per_type` smallint(1) DEFAULT '1' COMMENT '下单人员类型 1普通客户 2 员工代下单',
+  `mid` int(11) DEFAULT NULL COMMENT '操作人员id',
+  `is_submit` smallint(1) DEFAULT '1' COMMENT '1 未提交 2 已提交(用于酒店插件是否有消耗物品)',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='订单表';
+
+
+CREATE TABLE IF NOT EXISTS `ims_wjyk_nhyk_order_goods` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `order_id` int(11) NOT NULL,
+  `uniacid` int(11) NOT NULL,
+  `goods_id` int(11) NOT NULL,
+  `num` int(11) NOT NULL,
+  `unit_price` float(11,2) DEFAULT '0.00' COMMENT '商品单价',
+  `createtime` int(10) NOT NULL,
+  `integral` decimal(10,2) DEFAULT '0.00' COMMENT '积分',
+  `spec` varchar(255) DEFAULT NULL COMMENT '规格',
+  `frequency` int(11) DEFAULT '1' COMMENT '点菜次数',
+  `name` varchar(255) DEFAULT NULL COMMENT '姓名',
+  `mobile` varchar(255) DEFAULT NULL COMMENT '电话号码',
+  `card` varchar(20) DEFAULT NULL COMMENT '身份证',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='订单商品表';
+
+
+CREATE TABLE IF NOT EXISTS `ims_wjyk_nhyk_parcategory` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uniacid` int(11) NOT NULL,
+  `uid` int(11) NOT NULL,
+  `c_name` varchar(1000) NOT NULL COMMENT '内容',
+  `sort` int(11) NOT NULL,
+  `is_show` smallint(1) DEFAULT '1' COMMENT '分数',
+  `createtime` int(10) NOT NULL,
+  `ico` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='商品区域分类表';
+
+
+CREATE TABLE IF NOT EXISTS `ims_wjyk_nhyk_pay_log` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uid` int(11) DEFAULT NULL,
+  `rid` int(11) DEFAULT NULL COMMENT '关联id',
+  `pay_money` decimal(10,2) DEFAULT '0.00' COMMENT '支付金额',
+  `pay_type` int(11) DEFAULT NULL COMMENT '1.余额  2.微信 3.积分 4.线下 5.积分混合',
+  `pay_integer` int(11) DEFAULT '0' COMMENT '支付积分',
+  `createtime` int(11) DEFAULT NULL,
+  `type` int(11) DEFAULT NULL COMMENT '购买类型 1.商城 2.充值 3.套餐卡',
+  `uniacid` int(11) DEFAULT NULL,
+  `less_money` decimal(10,2) DEFAULT '0.00' COMMENT '优惠金额',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE IF NOT EXISTS `ims_wjyk_nhyk_payconfig` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uniacid` int(11) NOT NULL,
+  `appid` varchar(50) NOT NULL,
+  `app_key` varchar(50) NOT NULL,
+  `mchid` varchar(50) NOT NULL,
+  `pay_key` varchar(50) NOT NULL,
+  `cert` smallint(1) DEFAULT NULL,
+  `key` smallint(1) DEFAULT NULL,
+  `sub_appid` varchar(50) DEFAULT NULL COMMENT '子商户id',
+  `sub_mchid` varchar(50) DEFAULT NULL COMMENT '子商户',
+  `pay_type` smallint(1) DEFAULT NULL COMMENT '1 主商户 2 子商户',
+  `bf_mchid` varchar(50) DEFAULT NULL,
+  `cer_pwd` varchar(50) DEFAULT NULL,
+  `sub_type` smallint(1) DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE IF NOT EXISTS `ims_wjyk_nhyk_person` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uniacid` int(11) DEFAULT NULL,
+  `uid` int(11) NOT NULL,
+  `person_name` varchar(255) DEFAULT '' COMMENT '联系人名称',
+  `person_mobile` varchar(255) DEFAULT '' COMMENT '联系电话',
+  `person_card` varchar(255) DEFAULT '' COMMENT '身份证号码',
+  `person_sex` smallint(1) DEFAULT NULL COMMENT '性别',
+  `person_addres` varchar(255) DEFAULT '' COMMENT '联系地址',
+  `createtime` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE IF NOT EXISTS `ims_wjyk_nhyk_plugin` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uniacid` int(11) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `identifie` varchar(255) DEFAULT NULL,
+  `summary` varchar(255) DEFAULT NULL,
+  `is_open` smallint(1) DEFAULT NULL,
+  `createtime` int(10) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE IF NOT EXISTS `ims_wjyk_nhyk_poster` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uniacid` int(11) DEFAULT NULL,
+  `code` varchar(255) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `preview` varchar(255) DEFAULT NULL,
+  `json` text,
+  `create_time` varchar(255) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL COMMENT '状态',
+  `img` varchar(255) DEFAULT NULL COMMENT '图片地址',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE IF NOT EXISTS `ims_wjyk_nhyk_printer_set` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uniacid` int(11) NOT NULL,
+  `user` varchar(155) NOT NULL COMMENT '用户',
+  `ukey` varchar(155) NOT NULL COMMENT '用户key',
+  `name` varchar(155) NOT NULL COMMENT '打印机名称',
+  `sncode` varchar(155) NOT NULL COMMENT '打印机sn码',
+  `key` varchar(155) NOT NULL COMMENT '打印机key',
+  `createtime` int(10) NOT NULL,
+  `store_id` int(11) DEFAULT NULL,
+  `is_show` smallint(1) DEFAULT '0' COMMENT '是否显示',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='小票打印机设置';
+
+
+CREATE TABLE IF NOT EXISTS `ims_wjyk_nhyk_proxy_log` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uniacid` int(11) DEFAULT NULL,
+  `uid` int(11) DEFAULT NULL,
+  `oper_uid` int(11) DEFAULT NULL COMMENT '操作员id',
+  `coupon_id` int(11) DEFAULT NULL COMMENT '优惠卷id',
+  `money` int(11) DEFAULT NULL COMMENT '充值金额',
+  `less` int(11) DEFAULT NULL COMMENT '优惠金额',
+  `rel_money` int(11) DEFAULT NULL COMMENT '实际金额',
+  `createtime` int(11) DEFAULT NULL COMMENT '创建日期',
+  `store_id` int(11) DEFAULT NULL COMMENT '门店id',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE IF NOT EXISTS `ims_wjyk_nhyk_recharge` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uniacid` int(11) NOT NULL,
+  `money` decimal(20,2) NOT NULL COMMENT '充值金额',
+  `only` decimal(20,2) NOT NULL COMMENT '仅需',
+  `sort` int(10) NOT NULL DEFAULT '0' COMMENT '排序，数值越高，越在前显示',
+  `createtime` int(10) NOT NULL,
+  `status` int(11) DEFAULT NULL COMMENT '0 显示 1 不显示',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE IF NOT EXISTS `ims_wjyk_nhyk_recharge_log` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uniacid` int(11) DEFAULT NULL,
+  `uid` int(11) DEFAULT NULL COMMENT '用户id',
+  `createtime` int(11) DEFAULT NULL,
+  `recharge_id` int(11) DEFAULT NULL COMMENT '充值优惠id',
+  `money` decimal(10,2) DEFAULT NULL COMMENT '充值金额',
+  `only` decimal(10,2) DEFAULT NULL COMMENT '充值优惠',
+  `type` smallint(1) DEFAULT NULL COMMENT '充值类型 1 普通充值 2 代充',
+  `oper_uid` int(11) DEFAULT NULL COMMENT '操作员id',
+  `store_id` int(11) DEFAULT NULL COMMENT '门店id',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE IF NOT EXISTS `ims_wjyk_nhyk_refund_log` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uniacid` int(11) NOT NULL,
+  `uid` int(11) NOT NULL,
+  `orderno` varchar(255) NOT NULL COMMENT '订单编号',
+  `result` varchar(255) DEFAULT NULL COMMENT '退款原因',
+  `contacts` varchar(255) DEFAULT NULL COMMENT '联系人',
+  `phone` varchar(255) DEFAULT NULL COMMENT '联系方式',
+  `is_status` smallint(1) NOT NULL DEFAULT '1' COMMENT ' 1-待处理  2已处理',
+  `createtime` int(10) NOT NULL,
+  `reason` varchar(255) DEFAULT NULL COMMENT '拒绝理由',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='退款记录表';
+
+
+CREATE TABLE IF NOT EXISTS `ims_wjyk_nhyk_room` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uniacid` int(11) DEFAULT NULL,
+  `spec` varchar(255) DEFAULT '' COMMENT '房间标签',
+  `desc` varchar(255) DEFAULT '' COMMENT '房间描述',
+  `price` decimal(10,2) DEFAULT '0.00' COMMENT '价格',
+  `discount_prcie` decimal(10,2) DEFAULT '0.00' COMMENT '优惠价',
+  `img` varchar(255) DEFAULT NULL COMMENT '封面图',
+  `carousel` varchar(1000) DEFAULT NULL COMMENT '详情轮播图',
+  `room_name` varchar(255) DEFAULT '' COMMENT '房间名称',
+  `room_num` int(11) DEFAULT '0' COMMENT '房间数量',
+  `pid` int(11) DEFAULT NULL COMMENT '所属酒店',
+  `status` smallint(1) DEFAULT '0' COMMENT '0显示 1不显示 2 删除',
+  `createtime` int(11) DEFAULT NULL,
+  `price_desc` varchar(255) DEFAULT NULL COMMENT '费用政策',
+  `cid` int(11) DEFAULT NULL COMMENT '类别id',
+  `top_type` smallint(1) DEFAULT '0' COMMENT '0 无 1 ',
+  `coupon_money` decimal(10,2) DEFAULT '0.00' COMMENT '优惠卷金额',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE IF NOT EXISTS `ims_wjyk_nhyk_room_seat` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uniacid` int(11) DEFAULT NULL,
+  `rid` int(11) DEFAULT NULL COMMENT '房间id',
+  `seat_no` varchar(255) DEFAULT NULL COMMENT '房间编号',
+  `remark` varchar(255) DEFAULT NULL COMMENT '备注',
+  `status` smallint(1) DEFAULT '1' COMMENT '1 可以使用 2 被占用',
+  `createtime` int(11) DEFAULT NULL,
+  `sort` int(11) DEFAULT NULL COMMENT '排序',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE IF NOT EXISTS `ims_wjyk_nhyk_room_store` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uniacid` int(11) DEFAULT NULL,
+  `store_id` int(11) DEFAULT NULL,
+  `is_show` smallint(1) DEFAULT NULL COMMENT '0 上架 1下架',
+  `foods_id` int(11) DEFAULT NULL COMMENT '食品id',
+  `foods_str` varchar(255) DEFAULT NULL,
+  `type` smallint(1) DEFAULT NULL COMMENT '类型  1 点餐 2 酒店',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE IF NOT EXISTS `ims_wjyk_nhyk_seat` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uniacid` int(11) DEFAULT NULL,
+  `name` varchar(255) DEFAULT '' COMMENT '座位名称',
+  `pe_number` int(11) DEFAULT '1' COMMENT '座位容纳人数',
+  `seat_number` varchar(255) DEFAULT NULL COMMENT '座位号',
+  `sort` int(11) DEFAULT '0' COMMENT '排序',
+  `is_show` smallint(1) DEFAULT '0' COMMENT '0 显示 1不显示 2 删除',
+  `createtime` int(11) DEFAULT NULL,
+  `store_id` int(11) DEFAULT NULL COMMENT '门店id',
+  `qrcode` varchar(255) DEFAULT NULL COMMENT '二维码',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE IF NOT EXISTS `ims_wjyk_nhyk_store` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uniacid` int(11) DEFAULT NULL,
+  `store_name` varchar(255) DEFAULT NULL COMMENT '门店名称',
+  `store_admin` int(11) DEFAULT NULL COMMENT '门店管理员',
+  `store_addres_lat` varchar(255) DEFAULT NULL COMMENT '门店地址 x轴',
+  `store_addres_lng` varchar(255) DEFAULT NULL,
+  `store_addres` varchar(255) DEFAULT NULL COMMENT '门店地址',
+  `store_logo` varchar(255) DEFAULT NULL COMMENT '门店logo',
+  `create_date` int(11) DEFAULT NULL,
+  `store_phone` varchar(255) DEFAULT NULL COMMENT '电话号码',
+  `account_id` int(11) DEFAULT NULL COMMENT '管理员id',
+  `status` smallint(1) DEFAULT NULL,
+  `store_desc_addres` varchar(255) DEFAULT NULL COMMENT '门店详细地址',
+  `cate_type` smallint(1) DEFAULT NULL COMMENT '1.线上 2 线下',
+  `oper_uid` int(11) DEFAULT NULL COMMENT '操作员id',
+  `store_id` int(11) DEFAULT NULL COMMENT '门店id',
+  `less_count` int(11) DEFAULT NULL COMMENT '套餐卡次数',
+  `business` varchar(255) DEFAULT '' COMMENT '营业时间',
+  `closure` smallint(1) DEFAULT '1' COMMENT '是否关闭',
+  `ktv_img` varchar(255) DEFAULT '' COMMENT '详情图片',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE IF NOT EXISTS `ims_wjyk_nhyk_system` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uniacid` int(11) NOT NULL COMMENT '所属公众号ID',
+  `name` varchar(255) NOT NULL COMMENT '系统名称',
+  `logo` varchar(255) NOT NULL COMMENT '系统logo',
+  `mobile` varchar(255) NOT NULL COMMENT '平台电话',
+  `carousel` text NOT NULL COMMENT '首页轮播图',
+  `abouts` text COMMENT '关于我们',
+  `advertising` varchar(255) DEFAULT NULL,
+  `newTemplate` text COMMENT '新订单模板id',
+  `cate_carousel` text COMMENT '分类轮播图',
+  `sign_integral` int(11) DEFAULT NULL COMMENT '签到积分',
+  `con_sing_integral` int(11) DEFAULT NULL COMMENT '连续签到积分',
+  `background_img` varchar(255) DEFAULT NULL COMMENT '分销海报背景图',
+  `do_mian` varchar(255) DEFAULT NULL COMMENT '域名',
+  `make_money_desc` text COMMENT '赚钱说明',
+  `consume_get_integral` int(11) DEFAULT NULL COMMENT '消费获得积分',
+  `qqmap_key` varchar(255) DEFAULT NULL COMMENT '腾讯地图key',
+  `mei_img` varchar(255) DEFAULT NULL COMMENT '每日图标',
+  `dui_img` varchar(255) DEFAULT NULL COMMENT '兑换log',
+  `member_img` varchar(255) DEFAULT NULL COMMENT '会员抢购log',
+  `recharge_money_desc` text COMMENT '充值',
+  `sign_desc` text COMMENT '签到提示',
+  `new_good_img` varchar(255) DEFAULT NULL COMMENT '新品背景图',
+  `link_carousel` text,
+  `index_share_title` varchar(255) DEFAULT '' COMMENT '首页分享标题',
+  `index_share_desc` varchar(255) DEFAULT '' COMMENT '首页分享说明',
+  `index_share_img` varchar(255) DEFAULT '' COMMENT '首页分享图片',
+  `is_open_auth` smallint(255) DEFAULT '1' COMMENT '1 不开启 2 开启',
+  `show_index_type` smallint(1) DEFAULT '0' COMMENT '0.默认 1 餐厅 2 酒店',
+  `desc_label` varchar(255) DEFAULT '' COMMENT '个人说明提示文本',
+  `distance_limit` int(11) DEFAULT '10000' COMMENT '限制距离 米',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE IF NOT EXISTS `ims_wjyk_nhyk_system_foods` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uniacid` int(11) NOT NULL COMMENT '所属公众号ID',
+  `carousel` text NOT NULL COMMENT '首页轮播图',
+  `abouts` text COMMENT '关于我们',
+  `advertising` varchar(255) DEFAULT NULL,
+  `newTemplate` text COMMENT '新订单模板id',
+  `cate_carousel` text COMMENT '分类轮播图',
+  `sign_integral` int(11) DEFAULT NULL COMMENT '签到积分',
+  `con_sing_integral` int(11) DEFAULT NULL COMMENT '连续签到积分',
+  `background_img` varchar(255) DEFAULT NULL COMMENT '分销海报背景图',
+  `do_mian` varchar(255) DEFAULT NULL COMMENT '域名',
+  `make_money_desc` text COMMENT '赚钱说明',
+  `consume_get_integral` int(11) DEFAULT NULL COMMENT '消费获得积分',
+  `mei_img` varchar(255) DEFAULT NULL COMMENT '每日图标',
+  `buy_img` varchar(255) DEFAULT NULL COMMENT '代金券log',
+  `jf_img` varchar(255) DEFAULT NULL COMMENT '会员抢购log',
+  `recharge_money_desc` text COMMENT '充值',
+  `sign_desc` text COMMENT '签到提示',
+  `wm_img` varchar(255) DEFAULT NULL COMMENT '外卖',
+  `jiu_img` varchar(255) DEFAULT NULL COMMENT '就餐图片',
+  `cj_img` varchar(255) DEFAULT NULL COMMENT '充值图片',
+  `djq_name` varchar(255) DEFAULT '' COMMENT '代金券列表名称',
+  `djq_carousel` text COMMENT '代金券轮播图',
+  `wm_text` varchar(255) DEFAULT NULL COMMENT '外卖文本',
+  `jiu_text` varchar(255) DEFAULT NULL COMMENT '就餐文本',
+  `link_carousel` text,
+  `index_share_title` varchar(255) DEFAULT '' COMMENT '首页分享标题',
+  `index_share_desc` varchar(255) DEFAULT '' COMMENT '首页分享说明',
+  `index_share_img` varchar(255) DEFAULT '' COMMENT '首页分享图片',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE IF NOT EXISTS `ims_wjyk_nhyk_system_hotel` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uniacid` int(11) NOT NULL COMMENT '所属公众号ID',
+  `carousel` text NOT NULL COMMENT '首页轮播图',
+  `abouts` text COMMENT '关于我们',
+  `advertising` varchar(255) DEFAULT NULL,
+  `newTemplate` text COMMENT '新订单模板id',
+  `cate_carousel` text COMMENT '分类轮播图',
+  `is_card` smallint(1) DEFAULT '0' COMMENT '是否需要身份证 0 需要 1 不需要',
+  `deposit` decimal(10,2) DEFAULT '0.00' COMMENT '押金',
+  `index_share_title` varchar(255) DEFAULT '' COMMENT '首页分享标题',
+  `index_share_desc` varchar(255) DEFAULT '' COMMENT '首页分享说明',
+  `index_share_img` varchar(255) DEFAULT '' COMMENT '首页分享图片',
+  `free_hour` int(11) DEFAULT '0' COMMENT '提前多少小时免费',
+  `promise_hour` int(11) DEFAULT '0' COMMENT '违约时间',
+  `promise_money` int(11) DEFAULT '0',
+  `promise_add_money` int(11) DEFAULT '0' COMMENT '每增加一小时加收金额',
+  `back_hour` int(11) DEFAULT '0' COMMENT '退款截止时间',
+  `arrive_time` int(11) DEFAULT NULL,
+  `leave_time` int(11) DEFAULT NULL COMMENT '离店时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE IF NOT EXISTS `ims_wjyk_nhyk_transfer_voucher` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uniacid` int(11) DEFAULT NULL,
+  `voucher_id` int(11) DEFAULT NULL COMMENT '代金券id',
+  `uid` int(11) DEFAULT NULL COMMENT '领取人id',
+  `transfer_uid` int(11) DEFAULT NULL COMMENT '转让人id',
+  `createtime` int(11) DEFAULT NULL COMMENT '领取时间',
+  `status` smallint(1) DEFAULT '1' COMMENT '已领取',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE IF NOT EXISTS `ims_wjyk_nhyk_user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uid` int(11) DEFAULT NULL,
+  `uniacid` int(11) DEFAULT NULL,
+  `openid` varchar(255) DEFAULT NULL,
+  `member_no` varchar(255) DEFAULT NULL COMMENT '会员号',
+  `phone` int(11) DEFAULT NULL COMMENT '电话号码',
+  `nickname` varchar(255) DEFAULT NULL COMMENT '昵称',
+  `realname` varchar(255) DEFAULT NULL COMMENT '姓名',
+  `sex` int(1) DEFAULT NULL COMMENT '性别',
+  `member_level` int(2) DEFAULT NULL COMMENT '用户级别',
+  `money` decimal(10,2) DEFAULT '0.00' COMMENT '卡上余额',
+  `com_money` decimal(10,2) DEFAULT '0.00' COMMENT '消费金额',
+  `createtime` int(11) DEFAULT NULL COMMENT '创建日期',
+  `sign_score` int(11) DEFAULT NULL COMMENT '签到积分',
+  `sign_date` varchar(11) DEFAULT NULL COMMENT '签到日期',
+  `pid` int(11) DEFAULT NULL COMMENT '上级id',
+  `addres` varchar(255) DEFAULT NULL COMMENT '地址',
+  `avatar` varchar(255) DEFAULT NULL COMMENT '头像',
+  `qrcode` varchar(255) DEFAULT NULL COMMENT '会员码',
+  `member_qrcode` varchar(255) DEFAULT NULL COMMENT '会员码',
+  `commission` decimal(10,2) DEFAULT '0.00' COMMENT '佣金',
+  `integral` int(11) DEFAULT '0' COMMENT '积分',
+  `sign_count` int(11) DEFAULT '0' COMMENT '签到次数',
+  `is_update_bir` smallint(1) DEFAULT '1' COMMENT '是否修改过生日信息 1 没有 2有',
+  `recharge_qrcode` varchar(255) DEFAULT NULL COMMENT '代充二维码',
+  `gender` smallint(1) DEFAULT NULL,
+  `birthyear` smallint(6) unsigned NOT NULL,
+  `birthmonth` tinyint(3) unsigned NOT NULL,
+  `birthday` tinyint(3) unsigned NOT NULL,
+  `mobile` varchar(255) DEFAULT NULL COMMENT '手机号码',
+  `resideprovince` varchar(30) NOT NULL,
+  `residecity` varchar(30) NOT NULL,
+  `residedist` varchar(30) NOT NULL,
+  `status` smallint(1) DEFAULT '0' COMMENT '0 未绑定 1.已绑定',
+  `is_distribution` smallint(1) DEFAULT '1',
+  `desc` varchar(255) DEFAULT '' COMMENT '个人说明',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE IF NOT EXISTS `ims_wjyk_nhyk_user_import` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uniacid` int(11) DEFAULT NULL,
+  `money` decimal(10,2) DEFAULT NULL COMMENT '钱包',
+  `integral` int(11) DEFAULT '0' COMMENT '积分',
+  `commission` decimal(10,2) DEFAULT '0.00' COMMENT '佣金',
+  `nickname` varchar(255) DEFAULT NULL COMMENT '名称',
+  `mobile` varchar(255) DEFAULT NULL COMMENT '手机号码',
+  `createtime` int(11) DEFAULT NULL,
+  `status` smallint(1) DEFAULT NULL COMMENT '0 未使用 1已绑定',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE IF NOT EXISTS `ims_wjyk_nhyk_voucher` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uniacid` int(11) NOT NULL,
+  `money` decimal(20,2) NOT NULL COMMENT '充值金额',
+  `only` decimal(20,2) NOT NULL COMMENT '仅需',
+  `sort` int(10) NOT NULL DEFAULT '0' COMMENT '排序，数值越高，越在前显示',
+  `createtime` int(10) NOT NULL,
+  `status` int(11) DEFAULT NULL COMMENT '0 显示 1 不显示',
+  `img` varchar(255) DEFAULT NULL COMMENT '图片',
+  `desc` varchar(255) DEFAULT NULL COMMENT '领取说明',
+  `name` varchar(255) DEFAULT NULL COMMENT '代金券名称',
+  `use_desc` text COMMENT '使用说明',
+  `is_type` smallint(1) DEFAULT '1' COMMENT '1 热门 2 新品 3 自定义',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE IF NOT EXISTS `ims_wjyk_nhyk_withdraw` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `uniacid` int(11) DEFAULT NULL COMMENT '公众号id',
+  `uid` int(11) DEFAULT NULL COMMENT '0',
+  `price` float(11,2) DEFAULT NULL COMMENT '金额',
+  `apply_price` float(11,2) NOT NULL DEFAULT '0.00',
+  `realname` varchar(255) DEFAULT NULL COMMENT '姓名',
+  `mobile` varchar(255) DEFAULT NULL COMMENT '电话',
+  `card_number` varchar(255) DEFAULT NULL COMMENT '卡号',
+  `bank` varchar(255) DEFAULT NULL COMMENT '银行',
+  `status` int(1) DEFAULT '0' COMMENT '1待审核，2拒绝,3通过',
+  `w_type` int(1) DEFAULT '0' COMMENT '1微信提现，2银行卡提现,3提现到余额',
+  `p_type` int(1) DEFAULT '0' COMMENT '0佣金提现，1余额提现',
+  `addtime` varchar(255) DEFAULT NULL COMMENT '时间',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='提现';
+
+INSERT INTO ims_wjyk_nhyk_plugin VALUES 
+('1','0','点餐','wjyk_nhyk_plugin_food','点餐插件','2','1632729878');
+INSERT INTO ims_wjyk_nhyk_plugin VALUES 
+('2','0','酒店预约','wjyk_nhyk_plugin_hotel','酒店预约插件','2','1634113547');
+INSERT INTO ims_wjyk_nhyk_plugin VALUES 
+('3','0','ktv','wjyk_nhyk_plugin_ktv','ktv预约插件','1','');
+]]></install>
+	<uninstall><![CDATA[DROP TABLE IF EXISTS `ims_wjyk_nhyk_account`;
+DROP TABLE IF EXISTS `ims_wjyk_nhyk_address`;
+DROP TABLE IF EXISTS `ims_wjyk_nhyk_attachment`;
+DROP TABLE IF EXISTS `ims_wjyk_nhyk_car`;
+DROP TABLE IF EXISTS `ims_wjyk_nhyk_category`;
+DROP TABLE IF EXISTS `ims_wjyk_nhyk_commission`;
+DROP TABLE IF EXISTS `ims_wjyk_nhyk_commodity`;
+DROP TABLE IF EXISTS `ims_wjyk_nhyk_coupon`;
+DROP TABLE IF EXISTS `ims_wjyk_nhyk_deduction`;
+DROP TABLE IF EXISTS `ims_wjyk_nhyk_distribution_audit`;
+DROP TABLE IF EXISTS `ims_wjyk_nhyk_distribution_set`;
+DROP TABLE IF EXISTS `ims_wjyk_nhyk_foodcategory`;
+DROP TABLE IF EXISTS `ims_wjyk_nhyk_foods`;
+DROP TABLE IF EXISTS `ims_wjyk_nhyk_foods_store`;
+DROP TABLE IF EXISTS `ims_wjyk_nhyk_goods`;
+DROP TABLE IF EXISTS `ims_wjyk_nhyk_hotel`;
+DROP TABLE IF EXISTS `ims_wjyk_nhyk_hotel_thing`;
+DROP TABLE IF EXISTS `ims_wjyk_nhyk_hotel_thing_consume`;
+DROP TABLE IF EXISTS `ims_wjyk_nhyk_hotel_thing_rel`;
+DROP TABLE IF EXISTS `ims_wjyk_nhyk_index_meau`;
+DROP TABLE IF EXISTS `ims_wjyk_nhyk_integral`;
+DROP TABLE IF EXISTS `ims_wjyk_nhyk_meal`;
+DROP TABLE IF EXISTS `ims_wjyk_nhyk_meal_log`;
+DROP TABLE IF EXISTS `ims_wjyk_nhyk_meau`;
+DROP TABLE IF EXISTS `ims_wjyk_nhyk_memlevel`;
+DROP TABLE IF EXISTS `ims_wjyk_nhyk_merch_account`;
+DROP TABLE IF EXISTS `ims_wjyk_nhyk_merch_user`;
+DROP TABLE IF EXISTS `ims_wjyk_nhyk_module_plugin`;
+DROP TABLE IF EXISTS `ims_wjyk_nhyk_my_coupon`;
+DROP TABLE IF EXISTS `ims_wjyk_nhyk_my_meal`;
+DROP TABLE IF EXISTS `ims_wjyk_nhyk_my_voucher`;
+DROP TABLE IF EXISTS `ims_wjyk_nhyk_note`;
+DROP TABLE IF EXISTS `ims_wjyk_nhyk_notice_set`;
+DROP TABLE IF EXISTS `ims_wjyk_nhyk_order`;
+DROP TABLE IF EXISTS `ims_wjyk_nhyk_order_goods`;
+DROP TABLE IF EXISTS `ims_wjyk_nhyk_parcategory`;
+DROP TABLE IF EXISTS `ims_wjyk_nhyk_pay_log`;
+DROP TABLE IF EXISTS `ims_wjyk_nhyk_payconfig`;
+DROP TABLE IF EXISTS `ims_wjyk_nhyk_person`;
+DROP TABLE IF EXISTS `ims_wjyk_nhyk_plugin`;
+DROP TABLE IF EXISTS `ims_wjyk_nhyk_poster`;
+DROP TABLE IF EXISTS `ims_wjyk_nhyk_printer_set`;
+DROP TABLE IF EXISTS `ims_wjyk_nhyk_proxy_log`;
+DROP TABLE IF EXISTS `ims_wjyk_nhyk_recharge`;
+DROP TABLE IF EXISTS `ims_wjyk_nhyk_recharge_log`;
+DROP TABLE IF EXISTS `ims_wjyk_nhyk_refund_log`;
+DROP TABLE IF EXISTS `ims_wjyk_nhyk_room`;
+DROP TABLE IF EXISTS `ims_wjyk_nhyk_room_seat`;
+DROP TABLE IF EXISTS `ims_wjyk_nhyk_room_store`;
+DROP TABLE IF EXISTS `ims_wjyk_nhyk_seat`;
+DROP TABLE IF EXISTS `ims_wjyk_nhyk_store`;
+DROP TABLE IF EXISTS `ims_wjyk_nhyk_system`;
+DROP TABLE IF EXISTS `ims_wjyk_nhyk_system_foods`;
+DROP TABLE IF EXISTS `ims_wjyk_nhyk_system_hotel`;
+DROP TABLE IF EXISTS `ims_wjyk_nhyk_transfer_voucher`;
+DROP TABLE IF EXISTS `ims_wjyk_nhyk_user`;
+DROP TABLE IF EXISTS `ims_wjyk_nhyk_user_import`;
+DROP TABLE IF EXISTS `ims_wjyk_nhyk_voucher`;
+DROP TABLE IF EXISTS `ims_wjyk_nhyk_withdraw`;
+]]></uninstall>
+	<upgrade><![CDATA[ru_rpgrade.php]]></upgrade>
+
+</manifest>
