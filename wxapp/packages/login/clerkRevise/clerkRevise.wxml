@@ -1,0 +1,21 @@
+<view>
+    <view style="margin-left:94rpx;margin-top:100rpx;">
+        <view class="text">账号</view>
+        <view class="zh">{{username}}</view>
+        <view class="text">密码</view>
+    </view>
+    <view class="flex" style="width:750rpx;">
+        <view class="uni-zhanghao flex-align-center" wx:if="{{type==1}}">
+            <input bindinput="__e" class="box-input" data-event-opts="{{[ [ 'input',[ [ '__set_model',[ '','password','$event',[] ] ] ] ] ]}}" placeholder="请输入店长修改密码" value="{{password}}"></input>
+        </view>
+        <view class="uni-zhanghao flex-align-center" wx:if="{{type==2}}">
+            <input bindinput="__e" class="box-input" data-event-opts="{{[ [ 'input',[ [ '__set_model',[ '','password','$event',[] ] ] ] ] ]}}" placeholder="请输入店员修改密码" value="{{password}}"></input>
+        </view>
+        <view class="uni-zhanghao flex-align-center" wx:if="{{type==3}}">
+            <input bindinput="__e" class="box-input" data-event-opts="{{[ [ 'input',[ [ '__set_model',[ '','password','$event',[] ] ] ] ] ]}}" placeholder="请输入管理员修改密码" value="{{password}}"></input>
+        </view>
+    </view>
+    <view bindtap="__e" class="btn flex" data-event-opts="{{[ [ 'tap',[ ['revisess'] ] ] ]}}">
+        <view class="revise flex">确认修改</view>
+    </view>
+</view>

@@ -1,0 +1,11 @@
+{
+    "navigationBarTitleText": "",
+    "enablePullDownRefresh": false,
+    "usingComponents": {
+        "sunui-tab": "/components/sunui-tab/sunui-tab",
+        "mescroll-body": "/components/mescroll-uni/mescroll-body",
+        "mescroll-empty": "/components/mescroll-uni/components/mescroll-empty",
+        "mescroll-uni": "/components/mescroll-uni/mescroll-uni",
+        "poster": "/components/zywPosterSmall/zywPosterSmall"
+    }
+}

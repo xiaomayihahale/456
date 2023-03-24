@@ -1,0 +1,40 @@
+<view>
+    <view class="flex-column" style="background-color:#FFFFFF;">
+        <image class="img" mode="aspectFill" src="{{singleInfo.avatar}}"></image>
+        <view>{{singleInfo.nickname}}</view>
+        <block wx:if="{{singleInfo.cate_type==2}}">
+            <view class="czPrice">扣款次数</view>
+            <view class="price">{{singleInfo.less_count}}</view>
+        </block>
+        <block wx:if="{{singleInfo.cate_type==1}}">
+            <view class="czPrice">购买金额</view>
+            <view class="price">{{singleInfo.meal_money}}</view>
+        </block>
+    </view>
+    <view style="background-color:#FFFFFF;">
+        <view class="flex-between all">
+            <view>交易时间：</view>
+            <view class="time2">{{singleInfo.createtime}}</view>
+        </view>
+        <view class="flex-between all1">
+            <view>交易内容：</view>
+            <view wx:if="{{singleInfo.cate_type==1}}">线上购买</view>
+            <view wx:if="{{singleInfo.cate_type==2}}">线下购买</view>
+        </view>
+        <view class="flex-between all1">
+            <view>套餐卡名：</view>
+            <view class="font-overflow">{{singleInfo.meal_name}}</view>
+        </view>
+        <view class="flex-between all2">
+            <view>会员卡号：</view>
+            <view class="flex-align-center">
+                <view style="color:#333333;">{{singleInfo.member_no}}</view>
+                <view bindtap="__e" class="copy flex" data-event-opts="{{[ [ 'tap',[ ['copy'] ] ] ]}}">复制</view>
+            </view>
+        </view>
+        <view class="flex-between all3">
+            <view>手机号：</view>
+            <view style="color:#999999;">{{singleInfo.mobile}}</view>
+        </view>
+    </view>
+</view>

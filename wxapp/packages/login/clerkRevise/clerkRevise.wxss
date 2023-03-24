@@ -1,0 +1,44 @@
+.text {
+    font-size: 32rpx;
+    font-weight: 700;
+}
+
+.zh {
+    font-size: 36rpx;
+    color: #333;
+    font-weight: 700;
+    margin: 30rpx 0rpx 70rpx;
+}
+
+.uni-zhanghao {
+    height: 96rpx;
+    width: 654rpx;
+    background: #f1f1f1;
+    margin-top: 56rpx;
+    border-radius: 80rpx;
+}
+
+.box-input {
+    width: 100%;
+    position: relative;
+    z-index: 10;
+    height: 78rpx;
+    line-height: 78rpx;
+    padding-left: 40rpx;
+}
+
+.revise {
+    color: #fff;
+    font-size: 32rpx;
+    background: #3287ff;
+    box-shadow: 0rpx 8rpx 16rpx 2rpx rgba(50,135,255,.33);
+    border-radius: 108rpx;
+    width: 610rpx;
+    height: 96rpx;
+}
+
+.btn {
+    width: 750rpx;
+    position: absolute;
+    bottom: 250rpx;
+}
