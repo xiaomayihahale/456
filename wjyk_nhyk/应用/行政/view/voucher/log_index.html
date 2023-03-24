@@ -1,0 +1,376 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>充值记录列表</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="__PUBLIC__/static/layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="__PUBLIC__/static/layuiadmin/style/admin.css" media="all">
+    <script src="__PUBLIC__/static/layuiadmin/layui/echarts.min.js"></script>
+</head>
+<style>
+  .layui-table-cell{
+      display:table-cell;
+      vertical-align: middle;
+  }
+</style>
+<body>
+
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <div class="layui-card-header">充值</div>
+                <div class="layui-card-body">
+                	<div class="demoTable layui-form" style="margin-bottom:10px">
+
+                        <div class="layui-inline">
+                            <input class="layui-input" placeholder="请输入会员名称" name="member_name"  autocomplete="off">
+                        </div>
+                        <div class="layui-inline">
+                             <input class="layui-input" placeholder="请输入代充员工名称" name="account_name"  autocomplete="off">
+                        </div>
+                        <div class="layui-inline">
+                           <select name="type" id="typeSelect" lay-verify="">
+                               <option value="">全部</option>
+				               <option value="1">普通充值</option>
+				               <option value="2">代理充值</option>
+				           </select>
+                        </div>
+
+                        <button class="layui-btn" data-type="reload">搜索</button>
+
+                    </div>
+                
+                    <table class="layui-hide" id="test-table-operate" lay-filter="test-table-operate"></table>
+                    <script type="text/html" id="test-table-operate-barDemo">
+						
+					    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+                    </script>
+                 
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-md12">
+            <div class="layui-card">
+              <div class="layui-card-header">数据概览</div>
+              
+              
+              
+              <div>
+              		<div class=" main_demoTable layui-form" style="margin-bottom:10px;float:right" >	
+		                 <div class="layui-form-item" id="eff_div">
+					        <label class="layui-form-label">范围选择</label>
+					        <div class="layui-input-inline">
+					            <input type="text" class="layui-input" name="effective" id="test5"  />
+					        </div>
+					        <button class="layui-btn" data-type="main_7_reload">最近7天</button>
+			                <button class="layui-btn" data-type="main_3_reload">最近3个月</button>
+					     </div>
+				  </div>
+				  <!-- <div style="margin-bottom:10px;float:left">
+				  		<label style="font-size: 16px;">总消费</label>
+				  		<label style="font-size: 16px;">123</label>
+				  </div> -->
+              </div>
+              
+              <div class="layui-card-body" style="margin-top:30px;">
+                
+                <div class="layui-carousel layadmin-carousel layadmin-dataview" id="main" data-anim="fade" lay-filter="LAY-index-dataview">
+					
+                </div>
+                
+              </div>
+            </div>
+          </div>
+    </div>
+    
+</div>
+
+<script src="__PUBLIC__/static/layuiadmin/layui/layui.js"></script>
+<script>
+    layui.config({
+        base: '__PUBLIC__/static/layuiadmin/' //静态资源所在路径
+    }).extend({
+        index: 'lib/index' //主入口模块
+    }).use(['index', 'table','laydate'], function(){
+        var table = layui.table
+            ,laydate = layui.laydate
+            ,admin = layui.admin;
+
+        table.render({
+            elem: '#test-table-operate'
+            ,url:"{:siteUrl('admin/recharge/recharge_log_list','','web')}&oper_id=<?= $oper_id; ?>&store_id=<?= $store_id; ?>"
+            ,cols: [[
+                {field:'money',  title: '充值金额(元)', sort: true}
+                ,{field:'only', title: '赠送金额金额(元)'}
+                ,{field:'nickname', title: '充值会员名称'}
+                ,{field:"type",title:"充值类型",templet:function(d){
+                	if(d.type == 1){
+                		return "普通充值";
+                	}else if(d.type == 2){
+                		return "代理充值员工:"+d.username;
+                	}
+                }}
+                ,{field:'createtime', title: '添加时间', sort: true }
+                ,{align:'center', toolbar: '#test-table-operate-barDemo'}
+            ]]
+            ,page: true
+        });
+        
+      //日期时间范围选择
+        laydate.render({
+            elem: '#test5'
+            ,type: 'datetime'
+            ,range: '~' //或 range: '~' 来自定义分割字符
+           	,done: function(value, date){
+           		  initEs({"type":3,"date":value,"obj":1,"oper_id":eval("<?= $oper_id; ?>"),"store_id":eval("<?= $store_id; ?>")});
+           	 }
+        });
+
+        //监听表格复选框选择
+        table.on('checkbox(test-table-operate)', function(obj){
+            console.log(obj)
+        });
+        //监听工具条
+        table.on('tool(test-table-operate)', function(obj){
+            var data = obj.data;
+            if(obj.event === 'detail'){
+            	
+            	layer.open({
+                    type:2,
+                    area: ['800px', '500px'],
+                    title:"充值详情",
+                    
+                    content:"{:siteUrl('admin/recharge/edit_recharge_log','','web')}&id="+data.id,
+                    success:function(){
+                    	
+                    }  
+                });
+            	
+            	
+            }
+        });
+        
+        table.on('toolbar(test-table-operate)', function(obj){
+       	  var checkStatus = table.checkStatus(obj.config.id);
+       	  switch(obj.event){
+       	    case 'add':
+       	    	
+       	    	
+       	    	window.location.href="{:siteUrl('admin/recharge/edit_recharge','','web')}";
+       	    break;
+       	  };
+       	});
+        
+        var $ = layui.$, active = {
+                reload: function(){
+                	var member_name = $("input[name=member_name]").val();
+                	var account_name = $("input[name=account_name]").val();
+                    var type = $('#typeSelect').val();
+                    //执行重载 --id
+                    table.reload('test-table-operate', {
+                      page: {
+                        curr: 1 //重新从第 1 页开始
+                      }
+                      ,where: {
+                    	  'member_name': member_name,
+                        'account_name': account_name,
+                        'type':type
+                      }
+                    });
+                  },
+                  main_7_reload:function(){
+                	  initEs({"type":1,"obj":1,"oper_id":eval("<?= $oper_id; ?>"),"store_id":eval("<?= $store_id; ?>")});
+                  },
+                  main_3_reload:function(){
+                	  initEs({"type":2,"obj":1,"oper_id":eval("<?= $oper_id; ?>"),"store_id":eval("<?= $store_id; ?>")});
+                  },
+                  
+            };
+
+
+        $('.main_demoTable .layui-btn').on('click', function(){
+
+            var type = $(this).data('type');
+
+            active[type] ? active[type].call(this) : '';
+
+        });
+        
+        $('.demoTable .layui-btn').on('click', function(){
+
+            var type = $(this).data('type');
+
+            active[type] ? active[type].call(this) : '';
+
+        });
+        
+        
+        
+        
+        initEs({"type":2,"obj":1,"oper_id":eval("<?= $oper_id; ?>"),"store_id":eval("<?= $store_id; ?>")});
+        var app = {};
+        var chartDom = document.getElementById('main');
+        var myChart = echarts.init(chartDom);
+        var option;
+        function initEs(data){
+        	
+        	 $.get("{:siteUrl('admin/statistics/consume_proxy','','web')}",data, function (result) {
+
+             	var posList = [
+                                'left', 'right', 'top', 'bottom',
+                                'inside',
+                                'insideTop', 'insideLeft', 'insideRight', 'insideBottom',
+                                'insideTopLeft', 'insideTopRight', 'insideBottomLeft', 'insideBottomRight'
+                            ];
+
+                            app.configParameters = {
+                                rotate: {
+                                    min: -90,
+                                    max: 90
+                                },
+                                align: {
+                                    options: {
+                                        left: 'left',
+                                        center: 'center',
+                                        right: 'right'
+                                    }
+                                },
+                                verticalAlign: {
+                                    options: {
+                                        top: 'top',
+                                        middle: 'middle',
+                                        bottom: 'bottom'
+                                    }
+                                },
+                                position: {
+                                    options: posList.reduce(function (map, pos) {
+                                        map[pos] = pos;
+                                        return map;
+                                    }, {})
+                                },
+                                distance: {
+                                    min: 0,
+                                    max: 100
+                                }
+                            };
+
+                            app.config = {
+                                rotate: 90,
+                                align: 'left',
+                                verticalAlign: 'middle',
+                                position: 'insideBottom',
+                                distance: 15,
+                                onChange: function () {
+                                    var labelOption = {
+                                        normal: {
+                                            rotate: app.config.rotate,
+                                            align: app.config.align,
+                                            verticalAlign: app.config.verticalAlign,
+                                            position: app.config.position,
+                                            distance: app.config.distance
+                                        }
+                                    };
+                                    myChart.setOption({
+                                        series: [{
+                                            label: labelOption
+                                        }, {
+                                            label: labelOption
+                                        }, {
+                                            label: labelOption
+                                        }, {
+                                            label: labelOption
+                                        }]
+                                    });
+                                }
+                            };
+
+
+                            var labelOption = {
+                                show: true,
+                                position: app.config.position,
+                                distance: app.config.distance,
+                                align: app.config.align,
+                                verticalAlign: app.config.verticalAlign,
+                                rotate: app.config.rotate,
+                                formatter: '{c}  {name|{a}}',
+                                fontSize: 16,
+                                rich: {
+                                    name: {
+                                    }
+                                }
+                            };
+
+                            var seriesTemp = [];
+                           
+                            for (key in result.data.data){
+                         	   var tempJson = {
+                         			   name:  key,
+                         			   type:'bar',
+                         			   barGap: 0,
+                                        label: labelOption,
+                                        emphasis: {
+                                            focus: 'series'
+                                        },
+                                        data:result.data.data[key]
+                         	   }
+                         	   seriesTemp.push(tempJson);
+                            }
+                            
+                            option = {
+                                tooltip: {
+                                    trigger: 'axis',
+                                    axisPointer: {
+                                        type: 'shadow'
+                                    }
+                                },
+                                legend: {
+                                    data: result.data.cateList
+                                },
+                                toolbox: {
+                                    show: true,
+                                    orient: 'vertical',
+                                    left: 'right',
+                                    top: 'center',
+                                    feature: {
+                                        mark: {show: true},
+                                        dataView: {show: true, readOnly: false},
+                                        magicType: {show: true, type: ['line', 'bar', 'stack', 'tiled']},
+                                        restore: {show: true},
+                                        saveAsImage: {show: true}
+                                    }
+                                },
+                                xAxis: [
+                                    {
+                                        type: 'category',
+                                        axisTick: {show: false},
+                                        data: result.data.dateList
+                                        
+                                    }
+                                ],
+                                yAxis: [
+                                    {
+                                        type: 'value'
+                                    }
+                                ],
+                                series: seriesTemp
+                            };
+                            option && myChart.setOption(option);
+         	    
+         	 }, 'json')
+        }
+        
+       
+
+    });
+</script>
+</body>
+<!-- <div class="layui-footer" style="position:absolute;bottom:0;text-align:center;width:100%;margin-top:30px;">
+	{include file='../addons/wjyk_nhyk/application/admin/view/index/footer.html' /}
+</div> -->
+</html>
